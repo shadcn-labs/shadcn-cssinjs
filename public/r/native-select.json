@@ -1,0 +1,28 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "native-select",
+  "title": "Native Select",
+  "description": "Native Select component styled with StyleX on Base UI primitives.",
+  "dependencies": [
+    "@stylexjs/stylex",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "stylex-tokens"
+  ],
+  "files": [
+    {
+      "path": "registry/bases/stylex/native-select/native-select.tsx",
+      "content": "import { ChevronDownIcon } from \"lucide-react\";\nimport { styles } from \"./native-select.stylex\";\n\nimport { cx, x } from \"@/lib/utils\";\n\nconst NativeSelect = ({\n  className,\n  style,\n  size = \"default\",\n  ...props\n}: Omit<React.ComponentProps<\"select\">, \"size\"> & {\n  size?: \"sm\" | \"default\";\n}) => {\n  const wrapper = x(styles.wrapper);\n  const select = x(styles.select, size === \"sm\" && styles.selectSm);\n  const icon = x(styles.icon, size === \"sm\" && styles.iconSm);\n  return (\n    <div\n      data-slot=\"native-select-wrapper\"\n      data-size={size}\n      className={cx(wrapper.className, className)}\n      style={{ ...wrapper.style, ...style }}\n    >\n      <select\n        data-slot=\"native-select\"\n        data-size={size}\n        className={select.className}\n        style={select.style}\n        {...props}\n      />\n      <ChevronDownIcon aria-hidden=\"true\" data-slot=\"native-select-icon\" {...icon} />\n    </div>\n  );\n};\n\nconst NativeSelectOption = (props: React.ComponentProps<\"option\">) => (\n  <option data-slot=\"native-select-option\" {...props} />\n);\n\nconst NativeSelectOptGroup = (props: React.ComponentProps<\"optgroup\">) => (\n  <optgroup data-slot=\"native-select-optgroup\" {...props} />\n);\n\nexport { NativeSelect, NativeSelectOptGroup, NativeSelectOption };\n",
+      "type": "registry:ui",
+      "target": "components/ui/native-select/native-select.tsx"
+    },
+    {
+      "path": "registry/bases/stylex/native-select/native-select.stylex.ts",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\nimport { colors, radius } from \"../tokens.stylex\";\n\nexport const styles = stylex.create({\n  wrapper: {\n    position: \"relative\",\n    width: \"fit-content\",\n  },\n  select: {\n    height: \"2.25rem\",\n    width: \"100%\",\n    minWidth: 0,\n    appearance: \"none\",\n    borderRadius: radius.md,\n    borderWidth: \"1px\",\n    borderStyle: \"solid\",\n    borderColor: { default: colors.input, \":focus-visible\": colors.ring },\n    backgroundColor: \"transparent\",\n    paddingLeft: \"0.75rem\",\n    paddingRight: \"2.25rem\",\n    paddingTop: \"0.5rem\",\n    paddingBottom: \"0.5rem\",\n    fontSize: \"0.875rem\",\n    lineHeight: \"1.25rem\",\n    color: colors.foreground,\n    boxShadow: {\n      default: \"0 1px 2px 0 rgb(0 0 0 / 0.05)\",\n      \":focus-visible\":\n        `0 0 0 3px color-mix(in oklab, ${colors.ring} 50%, transparent)`,\n    },\n    outline: \"none\",\n    transition: \"color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, border-color 0.15s ease-in-out\",\n    cursor: { default: \"pointer\", \":disabled\": \"not-allowed\" },\n    opacity: { default: 1, \":disabled\": 0.5 },\n  },\n  selectSm: {\n    height: \"2rem\",\n    borderRadius: radius.sm,\n    paddingLeft: \"0.625rem\",\n    paddingRight: \"1.75rem\",\n    paddingTop: \"0.25rem\",\n    paddingBottom: \"0.25rem\",\n    fontSize: \"0.75rem\",\n  },\n  icon: {\n    position: \"absolute\",\n    top: \"50%\",\n    right: \"0.875rem\",\n    transform: \"translateY(-50%)\",\n    width: \"1rem\",\n    height: \"1rem\",\n    color: colors.mutedForeground,\n    opacity: 0.5,\n    pointerEvents: \"none\",\n    userSelect: \"none\",\n  },\n  iconSm: {\n    right: \"0.625rem\",\n    width: \"0.875rem\",\n    height: \"0.875rem\",\n  },\n});\n\n",
+      "type": "registry:ui",
+      "target": "components/ui/native-select/native-select.stylex.ts"
+    }
+  ],
+  "type": "registry:ui"
+}

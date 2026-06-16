@@ -14,6 +14,8 @@
     "prepare": "lefthook install"
   },
   "dependencies": {
+    "@base-ui/react": "^1.5.0",
+    "@stylexjs/stylex": "^0.18.3",
     "@tailwindcss/postcss": "^4.2.4",
     "@vercel/analytics": "^2.0.1",
     "@web-kits/audio": "^0.1.0",
@@ -44,6 +46,9 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@babel/preset-typescript": "^7.29.7",
+    "@stylexjs/babel-plugin": "^0.18.3",
+    "@stylexjs/postcss-plugin": "0.18.3",
     "@tailwindcss/postcss": "^4.2.4",
     "@types/mdx": "^2.0.13",
     "@types/node": "^25.6.0",

@@ -52,6 +52,7 @@ const nextConfig = {
       },
     ];
   },
+  // StyleX is configured via .babelrc - Next.js will use Babel when .babelrc is present
 };
 
 const withMDX = createMDX({});

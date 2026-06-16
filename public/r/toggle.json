@@ -1,0 +1,28 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "toggle",
+  "title": "Toggle",
+  "description": "Toggle component styled with StyleX on Base UI primitives.",
+  "dependencies": [
+    "@base-ui/react",
+    "@stylexjs/stylex"
+  ],
+  "registryDependencies": [
+    "stylex-tokens"
+  ],
+  "files": [
+    {
+      "path": "registry/bases/stylex/toggle/toggle.tsx",
+      "content": "\"use client\";\n\nimport { Toggle as TogglePrimitive } from \"@base-ui/react/toggle\";\nimport type { StyleXStyles } from \"@stylexjs/stylex\";\nimport { styles } from \"./toggle.stylex\";\n\nimport { cx, x } from \"@/lib/utils\";\n\ntype ToggleVariant = \"default\" | \"outline\";\ntype ToggleSize = \"default\" | \"sm\" | \"lg\";\n\nconst variantStyles: Record<ToggleVariant, StyleXStyles> = {\n  default: styles.default,\n  outline: styles.outline,\n};\n\nconst sizeStyles: Record<ToggleSize, StyleXStyles> = {\n  default: styles.sizeDefault,\n  sm: styles.sizeSm,\n  lg: styles.sizeLg,\n};\n\nconst Toggle = ({\n  variant = \"default\",\n  size = \"default\",\n  className,\n  style,\n  ...props\n}: Omit<React.ComponentProps<typeof TogglePrimitive>, \"className\"> & {\n  variant?: ToggleVariant;\n  size?: ToggleSize;\n  className?: string;\n}) => (\n  <TogglePrimitive\n    data-slot=\"toggle\"\n    data-variant={variant}\n    data-size={size}\n    className={(state) =>\n      cx(\n        x(\n          styles.base,\n          variantStyles[variant],\n          sizeStyles[size],\n          state.pressed && styles.pressed\n        ).className,\n        className\n      )\n    }\n    style={style}\n    {...props}\n  />\n);\n\nexport { Toggle };\n",
+      "type": "registry:ui",
+      "target": "components/ui/toggle/toggle.tsx"
+    },
+    {
+      "path": "registry/bases/stylex/toggle/toggle.stylex.ts",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\nimport { colors, radius } from \"../tokens.stylex\";\n\nexport const styles = stylex.create({\n  base: {\n    display: \"inline-flex\",\n    alignItems: \"center\",\n    justifyContent: \"center\",\n    gap: \"0.5rem\",\n    whiteSpace: \"nowrap\",\n    borderRadius: radius.md,\n    fontSize: \"0.875rem\",\n    fontWeight: 500,\n    transition: \"color 0.15s ease-in-out, background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out\",\n    outline: \"none\",\n    flexShrink: 0,\n    cursor: { default: \"pointer\", \":disabled\": \"not-allowed\" },\n    pointerEvents: { default: null, \":disabled\": \"none\" },\n    opacity: { default: 1, \":disabled\": 0.5 },\n    boxShadow: {\n      default: null,\n      \":focus-visible\":\n        `0 0 0 3px color-mix(in oklab, ${colors.ring} 50%, transparent)`,\n    },\n  },\n  default: {\n    backgroundColor: { default: \"transparent\", \":hover\": colors.muted },\n    color: { default: colors.foreground, \":hover\": colors.mutedForeground },\n    borderWidth: 0,\n  },\n  outline: {\n    borderWidth: \"1px\",\n    borderStyle: \"solid\",\n    borderColor: colors.border,\n    backgroundColor: { default: \"transparent\", \":hover\": colors.accent },\n    color: { default: colors.foreground, \":hover\": colors.accentForeground },\n  },\n  pressed: {\n    backgroundColor: colors.accent,\n    color: colors.accentForeground,\n  },\n  sizeDefault: { height: \"2.25rem\", minWidth: \"2.25rem\", paddingInline: \"0.5rem\" },\n  sizeSm: { height: \"2rem\", minWidth: \"2rem\", paddingInline: \"0.375rem\" },\n  sizeLg: { height: \"2.5rem\", minWidth: \"2.5rem\", paddingInline: \"0.625rem\" },\n});\n\n",
+      "type": "registry:ui",
+      "target": "components/ui/toggle/toggle.stylex.ts"
+    }
+  ],
+  "type": "registry:ui"
+}

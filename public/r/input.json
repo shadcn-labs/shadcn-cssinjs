@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "input",
+  "title": "Input",
+  "description": "Input component styled with StyleX on Base UI primitives.",
+  "dependencies": [
+    "@stylexjs/stylex"
+  ],
+  "registryDependencies": [
+    "stylex-tokens"
+  ],
+  "files": [
+    {
+      "path": "registry/bases/stylex/input/input.tsx",
+      "content": "import { styles } from \"./input.stylex\";\n\nimport { cx, x } from \"@/lib/utils\";\n\nconst Input = ({\n  className,\n  style,\n  type,\n  ...props\n}: React.ComponentProps<\"input\">) => {\n  const p = x(styles.root);\n  return (\n    <input\n      type={type}\n      data-slot=\"input\"\n      className={cx(p.className, className)}\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nexport { Input };\n",
+      "type": "registry:ui",
+      "target": "components/ui/input/input.tsx"
+    },
+    {
+      "path": "registry/bases/stylex/input/input.stylex.ts",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\nimport { colors, radius } from \"../tokens.stylex\";\n\nexport const styles = stylex.create({\n  root: {\n    display: \"flex\",\n    height: \"2.25rem\",\n    width: \"100%\",\n    minWidth: 0,\n    borderRadius: radius.md,\n    borderWidth: \"1px\",\n    borderStyle: \"solid\",\n    borderColor: {\n      default: colors.input,\n      \":focus-visible\": colors.ring,\n    },\n    backgroundColor: \"transparent\",\n    paddingLeft: \"0.75rem\",\n    paddingRight: \"0.75rem\",\n    paddingTop: \"0.25rem\",\n    paddingBottom: \"0.25rem\",\n    fontSize: \"0.875rem\",\n    lineHeight: \"1.25rem\",\n    color: colors.foreground,\n    boxShadow: {\n      default: \"0 1px 2px 0 rgb(0 0 0 / 0.05)\",\n      \":focus-visible\":\n        `0 0 0 3px color-mix(in oklab, ${colors.ring} 50%, transparent)`,\n    },\n    outline: \"none\",\n    transition: \"color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, border-color 0.15s ease-in-out\",\n    cursor: { default: \"auto\", \":disabled\": \"not-allowed\" },\n    opacity: { default: 1, \":disabled\": 0.5 },\n    \"::placeholder\": {\n      color: colors.mutedForeground,\n    },\n    \"::selection\": {\n      backgroundColor: colors.primary,\n      color: colors.primaryForeground,\n    },\n    \"::file-selector-button\": {\n      backgroundColor: \"transparent\",\n      border: \"none\",\n      fontSize: \"0.875rem\",\n      fontWeight: 500,\n      color: colors.foreground,\n      marginRight: \"0.5rem\",\n    },\n  },\n});\n\n",
+      "type": "registry:ui",
+      "target": "components/ui/input/input.stylex.ts"
+    }
+  ],
+  "type": "registry:ui"
+}

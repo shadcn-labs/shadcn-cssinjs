@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "collapsible",
+  "title": "Collapsible",
+  "description": "Collapsible component styled with StyleX on Base UI primitives.",
+  "dependencies": [
+    "@base-ui/react",
+    "@stylexjs/stylex"
+  ],
+  "files": [
+    {
+      "path": "registry/bases/stylex/collapsible/collapsible.tsx",
+      "content": "\"use client\";\n\nimport { Collapsible as CollapsiblePrimitive } from \"@base-ui/react/collapsible\";\nimport { styles } from \"./collapsible.stylex\";\n\nimport { cx, x } from \"@/lib/utils\";\n\nconst Collapsible = (\n  props: React.ComponentProps<typeof CollapsiblePrimitive.Root>\n) => <CollapsiblePrimitive.Root data-slot=\"collapsible\" {...props} />;\n\nconst CollapsibleTrigger = ({\n  className,\n  style,\n  ...props\n}: Omit<\n  React.ComponentProps<typeof CollapsiblePrimitive.Trigger>,\n  \"className\"\n> & { className?: string }) => {\n  const p = x(styles.trigger);\n  return (\n    <CollapsiblePrimitive.Trigger\n      data-slot=\"collapsible-trigger\"\n      className={cx(p.className, className)}\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nconst CollapsibleContent = ({\n  className,\n  style,\n  ...props\n}: Omit<\n  React.ComponentProps<typeof CollapsiblePrimitive.Panel>,\n  \"className\"\n> & { className?: string }) => {\n  const p = x(styles.panel);\n  return (\n    <CollapsiblePrimitive.Panel\n      data-slot=\"collapsible-content\"\n      className={cx(p.className, className)}\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nexport { Collapsible, CollapsibleContent, CollapsibleTrigger };\n",
+      "type": "registry:ui",
+      "target": "components/ui/collapsible/collapsible.tsx"
+    },
+    {
+      "path": "registry/bases/stylex/collapsible/collapsible.stylex.ts",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nexport const styles = stylex.create({\n  trigger: {\n    display: \"inline-flex\",\n    alignItems: \"center\",\n    gap: \"0.25rem\",\n    background: \"none\",\n    borderWidth: 0,\n    padding: 0,\n    cursor: \"pointer\",\n    color: \"inherit\",\n    font: \"inherit\",\n    outline: \"none\",\n  },\n  panel: {\n    overflow: \"hidden\",\n    transition: \"height 0.2s ease-in-out\",\n  },\n});\n\n",
+      "type": "registry:ui",
+      "target": "components/ui/collapsible/collapsible.stylex.ts"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -1,0 +1,100 @@
+import * as stylex from "@stylexjs/stylex";
+import { colors, radius } from "../tokens.stylex";
+
+export const styles = stylex.create({
+  backdrop: {
+    position: "fixed",
+    inset: 0,
+    zIndex: 50,
+    backgroundColor: "color-mix(in oklab, black 80%, transparent)",
+    opacity: 1,
+    transition: "opacity 0.15s ease-in-out",
+  },
+  backdropHidden: {
+    opacity: 0,
+  },
+  popup: {
+    position: "fixed",
+    top: "50%",
+    left: "50%",
+    zIndex: 50,
+    display: "grid",
+    width: "100%",
+    gap: "1rem",
+    backgroundColor: colors.background,
+    color: colors.foreground,
+    borderWidth: "1px",
+    borderStyle: "solid",
+    borderColor: colors.border,
+    borderRadius: radius.xl,
+    padding: "1.5rem",
+    boxShadow:
+      "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+    maxWidth: { default: "calc(100% - 2rem)", "@media (min-width: 640px)": "32rem" },
+    outline: "none",
+    opacity: 1,
+    transform: "translate(-50%, -50%) scale(1)",
+    transition: "opacity 0.2s ease-in-out, transform 0.2s ease-in-out",
+  },
+  popupHidden: {
+    opacity: 0,
+    transform: "translate(-50%, -50%) scale(0.95)",
+  },
+  closeButton: {
+    position: "absolute",
+    top: "1rem",
+    right: "1rem",
+    borderRadius: radius.sm,
+    opacity: { default: 0.7, ":hover": 1 },
+    transition: "opacity 0.15s ease-in-out",
+    outline: "none",
+    borderWidth: 0,
+    background: "none",
+    cursor: "pointer",
+    padding: "0.25rem",
+    color: colors.foreground,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    boxShadow: {
+      default: null,
+      ":focus-visible":
+        `0 0 0 2px color-mix(in oklab, ${colors.ring} 50%, transparent)`,
+    },
+  },
+  header: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "0.5rem",
+    textAlign: "center",
+  },
+  footer: {
+    display: "flex",
+    flexDirection: "column-reverse",
+    gap: "0.5rem",
+  },
+  title: {
+    fontSize: "1.125rem",
+    lineHeight: 1,
+    fontWeight: 600,
+    letterSpacing: "-0.025em",
+    color: colors.foreground,
+  },
+  description: {
+    fontSize: "0.875rem",
+    lineHeight: "1.25rem",
+    color: colors.mutedForeground,
+  },
+  srOnly: {
+    position: "absolute",
+    width: "1px",
+    height: "1px",
+    padding: 0,
+    margin: "-1px",
+    overflow: "hidden",
+    clip: "rect(0, 0, 0, 0)",
+    whiteSpace: "nowrap",
+    borderWidth: 0,
+  },
+});
+

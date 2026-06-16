@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "card",
+  "title": "Card",
+  "description": "Card component styled with StyleX on Base UI primitives.",
+  "dependencies": [
+    "@stylexjs/stylex"
+  ],
+  "registryDependencies": [
+    "stylex-tokens"
+  ],
+  "files": [
+    {
+      "path": "registry/bases/stylex/card/card.tsx",
+      "content": "import type { StyleXStyles } from \"@stylexjs/stylex\";\nimport { styles } from \"./card.stylex\";\n\nimport { cx, x } from \"@/lib/utils\";\n\ntype DivProps = React.ComponentProps<\"div\">;\n\nconst makeSlot =\n  (slot: string, style: StyleXStyles) =>\n  ({ className, style: styleProp, ...props }: DivProps) => {\n    const p = x(style);\n    return (\n      <div\n        data-slot={slot}\n        className={cx(p.className, className)}\n        style={{ ...p.style, ...styleProp }}\n        {...props}\n      />\n    );\n  };\n\nconst Card = makeSlot(\"card\", styles.card);\nconst CardHeader = makeSlot(\"card-header\", styles.header);\nconst CardTitle = makeSlot(\"card-title\", styles.title);\nconst CardDescription = makeSlot(\"card-description\", styles.description);\nconst CardAction = makeSlot(\"card-action\", styles.action);\nconst CardContent = makeSlot(\"card-content\", styles.content);\nconst CardFooter = makeSlot(\"card-footer\", styles.footer);\n\nexport {\n  Card,\n  CardHeader,\n  CardFooter,\n  CardTitle,\n  CardAction,\n  CardDescription,\n  CardContent,\n};\n",
+      "type": "registry:ui",
+      "target": "components/ui/card/card.tsx"
+    },
+    {
+      "path": "registry/bases/stylex/card/card.stylex.ts",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\nimport { colors, radius } from \"../tokens.stylex\";\n\nexport const styles = stylex.create({\n  card: {\n    display: \"flex\",\n    flexDirection: \"column\",\n    gap: \"1.5rem\",\n    borderRadius: radius.xl,\n    border: `1px solid ${colors.border}`,\n    backgroundColor: colors.card,\n    color: colors.cardForeground,\n    boxShadow: \"0 1px 2px 0 rgb(0 0 0 / 0.05)\",\n    paddingTop: \"1.5rem\",\n    paddingBottom: \"1.5rem\",\n  },\n  header: {\n    display: \"grid\",\n    gridTemplateRows: \"auto auto\",\n    gridTemplateColumns: \"1fr auto\",\n    alignItems: \"start\",\n    gap: \"0.375rem\",\n    paddingLeft: \"1.5rem\",\n    paddingRight: \"1.5rem\",\n  },\n  title: {\n    lineHeight: 1,\n    fontWeight: 600,\n    letterSpacing: \"-0.025em\",\n  },\n  description: {\n    fontSize: \"0.875rem\",\n    lineHeight: \"1.25rem\",\n    color: colors.mutedForeground,\n  },\n  action: {\n    gridColumnStart: \"2\",\n    gridRowStart: \"1\",\n    gridRowEnd: \"3\",\n    alignSelf: \"start\",\n    justifySelf: \"end\",\n  },\n  content: {\n    paddingLeft: \"1.5rem\",\n    paddingRight: \"1.5rem\",\n  },\n  footer: {\n    display: \"flex\",\n    alignItems: \"center\",\n    paddingLeft: \"1.5rem\",\n    paddingRight: \"1.5rem\",\n  },\n});\n\n",
+      "type": "registry:ui",
+      "target": "components/ui/card/card.stylex.ts"
+    }
+  ],
+  "type": "registry:ui"
+}

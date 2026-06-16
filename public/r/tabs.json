@@ -1,0 +1,28 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tabs",
+  "title": "Tabs",
+  "description": "Tabs component styled with StyleX on Base UI primitives.",
+  "dependencies": [
+    "@base-ui/react",
+    "@stylexjs/stylex"
+  ],
+  "registryDependencies": [
+    "stylex-tokens"
+  ],
+  "files": [
+    {
+      "path": "registry/bases/stylex/tabs/tabs.tsx",
+      "content": "\"use client\";\n\nimport { Tabs as TabsPrimitive } from \"@base-ui/react/tabs\";\nimport { styles } from \"./tabs.stylex\";\n\nimport { cx, x } from \"@/lib/utils\";\n\nconst Tabs = ({\n  className,\n  style,\n  ...props\n}: Omit<React.ComponentProps<typeof TabsPrimitive.Root>, \"className\"> & {\n  className?: string;\n}) => {\n  const p = x(styles.root);\n  return (\n    <TabsPrimitive.Root\n      data-slot=\"tabs\"\n      className={cx(p.className, className)}\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nconst TabsList = ({\n  className,\n  style,\n  ...props\n}: Omit<React.ComponentProps<typeof TabsPrimitive.List>, \"className\"> & {\n  className?: string;\n}) => {\n  const p = x(styles.list);\n  return (\n    <TabsPrimitive.List\n      data-slot=\"tabs-list\"\n      className={cx(p.className, className)}\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nconst TabsTrigger = ({\n  className,\n  style,\n  ...props\n}: Omit<React.ComponentProps<typeof TabsPrimitive.Tab>, \"className\"> & {\n  className?: string;\n}) => (\n  <TabsPrimitive.Tab\n    data-slot=\"tabs-trigger\"\n    className={(state) =>\n      cx(\n        x(styles.trigger, state.active && styles.triggerActive).className,\n        className\n      )\n    }\n    style={style}\n    {...props}\n  />\n);\n\nconst TabsContent = ({\n  className,\n  style,\n  ...props\n}: Omit<React.ComponentProps<typeof TabsPrimitive.Panel>, \"className\"> & {\n  className?: string;\n}) => {\n  const p = x(styles.panel);\n  return (\n    <TabsPrimitive.Panel\n      data-slot=\"tabs-content\"\n      className={cx(p.className, className)}\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nexport { Tabs, TabsContent, TabsList, TabsTrigger };\n",
+      "type": "registry:ui",
+      "target": "components/ui/tabs/tabs.tsx"
+    },
+    {
+      "path": "registry/bases/stylex/tabs/tabs.stylex.ts",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\nimport { colors, radius } from \"../tokens.stylex\";\n\nexport const styles = stylex.create({\n  root: {\n    display: \"flex\",\n    flexDirection: \"column\",\n    gap: \"0.5rem\",\n  },\n  list: {\n    display: \"inline-flex\",\n    height: \"2.25rem\",\n    width: \"fit-content\",\n    alignItems: \"center\",\n    justifyContent: \"center\",\n    borderRadius: \"0.5rem\",\n    padding: \"0.25rem\",\n    backgroundColor: colors.muted,\n    color: colors.mutedForeground,\n  },\n  trigger: {\n    display: \"inline-flex\",\n    flex: 1,\n    alignItems: \"center\",\n    justifyContent: \"center\",\n    gap: \"0.375rem\",\n    whiteSpace: \"nowrap\",\n    borderRadius: radius.md,\n    borderWidth: \"1px\",\n    borderStyle: \"solid\",\n    borderColor: \"transparent\",\n    paddingInline: \"0.75rem\",\n    paddingBlock: \"0.25rem\",\n    fontSize: \"0.875rem\",\n    fontWeight: 500,\n    color: colors.foreground,\n    background: \"transparent\",\n    transition: \"color 0.15s ease-in-out, box-shadow 0.15s ease-in-out\",\n    outline: \"none\",\n    cursor: \"pointer\",\n    boxShadow: {\n      default: null,\n      \":focus-visible\":\n        `0 0 0 3px color-mix(in oklab, ${colors.ring} 50%, transparent)`,\n    },\n  },\n  triggerActive: {\n    backgroundColor: colors.background,\n    color: colors.foreground,\n    boxShadow: \"0 1px 2px 0 rgb(0 0 0 / 0.05)\",\n  },\n  panel: {\n    flex: 1,\n    outline: \"none\",\n  },\n});\n\n",
+      "type": "registry:ui",
+      "target": "components/ui/tabs/tabs.stylex.ts"
+    }
+  ],
+  "type": "registry:ui"
+}

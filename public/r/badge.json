@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "badge",
+  "title": "Badge",
+  "description": "Badge component styled with StyleX on Base UI primitives.",
+  "dependencies": [
+    "@stylexjs/stylex"
+  ],
+  "registryDependencies": [
+    "stylex-tokens"
+  ],
+  "files": [
+    {
+      "path": "registry/bases/stylex/badge/badge.tsx",
+      "content": "import type { StyleXStyles } from \"@stylexjs/stylex\";\nimport { styles } from \"./badge.stylex\";\n\nimport { cx, x } from \"@/lib/utils\";\n\ntype BadgeVariant = \"default\" | \"secondary\" | \"destructive\" | \"outline\";\n\nconst variantMap: Record<BadgeVariant, StyleXStyles> = {\n  default: styles.default,\n  secondary: styles.secondary,\n  destructive: styles.destructive,\n  outline: styles.outline,\n};\n\nconst Badge = ({\n  variant = \"default\",\n  className,\n  style,\n  ...props\n}: React.ComponentProps<\"span\"> & { variant?: BadgeVariant }) => {\n  const p = x(styles.base, variantMap[variant]);\n  return (\n    <span\n      data-slot=\"badge\"\n      data-variant={variant}\n      className={cx(p.className, className)}\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nexport { Badge };\n",
+      "type": "registry:ui",
+      "target": "components/ui/badge/badge.tsx"
+    },
+    {
+      "path": "registry/bases/stylex/badge/badge.stylex.ts",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\nimport { colors, radius } from \"../tokens.stylex\";\n\nexport const styles = stylex.create({\n  base: {\n    display: \"inline-flex\",\n    alignItems: \"center\",\n    justifyContent: \"center\",\n    borderRadius: radius.md,\n    border: \"1px solid transparent\",\n    paddingLeft: \"0.5rem\",\n    paddingRight: \"0.5rem\",\n    paddingTop: \"0.125rem\",\n    paddingBottom: \"0.125rem\",\n    fontSize: \"0.75rem\",\n    fontWeight: 600,\n    lineHeight: \"1rem\",\n    width: \"fit-content\",\n    whiteSpace: \"nowrap\",\n    flexShrink: 0,\n    gap: \"0.25rem\",\n    overflow: \"hidden\",\n    transition: \"color 0.15s ease-in-out, box-shadow 0.15s ease-in-out\",\n    outline: \"none\",\n  },\n  default: {\n    backgroundColor: colors.primary,\n    color: colors.primaryForeground,\n  },\n  secondary: {\n    backgroundColor: colors.secondary,\n    color: colors.secondaryForeground,\n  },\n  destructive: {\n    backgroundColor: colors.destructive,\n    color: colors.primaryForeground,\n  },\n  outline: {\n    color: colors.foreground,\n    borderColor: colors.border,\n  },\n});\n\n",
+      "type": "registry:ui",
+      "target": "components/ui/badge/badge.stylex.ts"
+    }
+  ],
+  "type": "registry:ui"
+}

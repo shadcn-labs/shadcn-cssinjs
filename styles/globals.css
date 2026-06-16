@@ -3,6 +3,9 @@
 
 @import "./themes.css";
 
+/* StyleX: compiled styles for registry/bases/stylex components are injected here. */
+@stylex;
+
 @custom-variant dark (&:is(.dark *));
 
 @custom-variant fixed (&:is(.layout-fixed *));
