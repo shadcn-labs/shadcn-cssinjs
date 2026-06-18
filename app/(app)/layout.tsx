@@ -5,7 +5,7 @@ import { AGENT_DOCS_DIRECTIVE_TEXT } from "@/lib/agent-discovery/directive";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="bg-background relative flex min-h-svh flex-col">
+    <div className="theme-container bg-background relative flex min-h-svh flex-col">
       <blockquote className="sr-only">{AGENT_DOCS_DIRECTIVE_TEXT}</blockquote>
       <WebMcpTools />
       <SiteHeader />

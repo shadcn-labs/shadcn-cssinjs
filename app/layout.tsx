@@ -29,6 +29,14 @@ const RootLayout = ({
                 if (localStorage.theme === 'dark' || ((!('theme' in localStorage) || localStorage.theme === 'system') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
                   document.querySelector('meta[name="theme-color"]').setAttribute('content', '${META_THEME_COLORS.dark}')
                 }
+                var themeColor = localStorage.getItem('theme-color');
+                if (themeColor) {
+                  document.documentElement.classList.add('theme-' + themeColor);
+                }
+                var themeRadius = localStorage.getItem('theme-radius');
+                if (themeRadius) {
+                  document.documentElement.style.setProperty('--radius', themeRadius);
+                }
               } catch (_) {}
             `,
         }}
