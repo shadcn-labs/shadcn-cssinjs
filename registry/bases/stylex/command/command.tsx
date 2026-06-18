@@ -1,6 +1,5 @@
 "use client";
 
-import { styles } from "./command.stylex";
 import { SearchIcon } from "lucide-react";
 import {
   createContext,
@@ -11,6 +10,7 @@ import {
 } from "react";
 
 import { cx, x } from "@/lib/utils";
+
 import {
   Dialog,
   DialogContent,
@@ -18,6 +18,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../dialog/dialog";
+import { styles } from "./command.stylex";
 
 interface CommandContextValue {
   value: string;
@@ -55,7 +56,7 @@ const Command = ({
     [onValueChangeProp]
   );
   const contextValue = useMemo(
-    () => ({ value, onValueChange }),
+    () => ({ onValueChange, value }),
     [value, onValueChange]
   );
   const p = x(styles.command);

@@ -2,9 +2,10 @@
 
 import { Accordion as AccordionPrimitive } from "@base-ui/react/accordion";
 import { ChevronDownIcon } from "lucide-react";
-import { styles } from "./accordion.stylex";
 
 import { cx, x } from "@/lib/utils";
+
+import { styles } from "./accordion.stylex";
 
 const Accordion = (
   props: React.ComponentProps<typeof AccordionPrimitive.Root>

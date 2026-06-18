@@ -1,10 +1,11 @@
 "use client";
 
-import type { StyleXStyles } from "@stylexjs/stylex";
-import { styles } from "./button.stylex";
 import { useRender } from "@base-ui/react";
+import type { StyleXStyles } from "@stylexjs/stylex";
 
 import { cx, x } from "@/lib/utils";
+
+import { styles } from "./button.stylex";
 
 type ButtonVariant =
   | "default"
@@ -18,23 +19,25 @@ type ButtonSize = "default" | "sm" | "lg" | "icon" | "icon-sm" | "icon-lg";
 const variantStyles: Record<ButtonVariant, StyleXStyles> = {
   default: styles.default,
   destructive: styles.destructive,
-  outline: styles.outline,
-  secondary: styles.secondary,
   ghost: styles.ghost,
   link: styles.link,
+  outline: styles.outline,
+  secondary: styles.secondary,
 };
 
 const sizeStyles: Record<ButtonSize, StyleXStyles> = {
   default: styles.sizeDefault,
-  sm: styles.sizeSm,
-  lg: styles.sizeLg,
   icon: styles.sizeIcon,
-  "icon-sm": styles.sizeIconSm,
   "icon-lg": styles.sizeIconLg,
+  "icon-sm": styles.sizeIconSm,
+  lg: styles.sizeLg,
+  sm: styles.sizeSm,
 };
 
-export interface ButtonProps
-  extends Omit<React.ComponentProps<"button">, "className"> {
+export interface ButtonProps extends Omit<
+  React.ComponentProps<"button">,
+  "className"
+> {
   variant?: ButtonVariant;
   size?: ButtonSize;
   className?: string;
@@ -50,17 +53,22 @@ const Button = ({
   render,
   ...props
 }: ButtonProps) => {
-  const p = x(styles.base, styles.focusable, variantStyles[variant], sizeStyles[size]);
+  const p = x(
+    styles.base,
+    styles.focusable,
+    variantStyles[variant],
+    sizeStyles[size]
+  );
   return useRender({
-    render: render ?? <button type="button" />,
     props: {
-      "data-slot": "button",
-      "data-size": size,
-      "data-variant": variant,
       className: cx(p.className, className),
+      "data-size": size,
+      "data-slot": "button",
+      "data-variant": variant,
       style: { ...p.style, ...style },
       ...props,
     },
+    render: render ?? <button type="button" />,
   });
 };
 

@@ -1,7 +1,8 @@
 import type { StyleXStyles } from "@stylexjs/stylex";
-import { styles } from "./card.stylex";
 
 import { cx, x } from "@/lib/utils";
+
+import { styles } from "./card.stylex";
 
 type DivProps = React.ComponentProps<"div">;
 

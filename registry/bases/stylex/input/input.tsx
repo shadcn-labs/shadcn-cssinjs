@@ -1,6 +1,6 @@
-import { styles } from "./input.stylex";
-
 import { cx, x } from "@/lib/utils";
+
+import { styles } from "./input.stylex";
 
 const Input = ({
   className,

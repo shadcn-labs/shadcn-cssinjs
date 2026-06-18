@@ -2,9 +2,10 @@
 
 import { ContextMenu as ContextMenuPrimitive } from "@base-ui/react/context-menu";
 import { CheckIcon, ChevronRightIcon, CircleIcon } from "lucide-react";
-import { styles } from "./context-menu.stylex";
 
 import { cx, x } from "@/lib/utils";
+
+import { styles } from "./context-menu.stylex";
 
 const hidden = (s: string | undefined) => s === "starting" || s === "ending";
 
@@ -14,7 +15,9 @@ const ContextMenu = (
 
 const ContextMenuTrigger = (
   props: React.ComponentProps<typeof ContextMenuPrimitive.Trigger>
-) => <ContextMenuPrimitive.Trigger data-slot="context-menu-trigger" {...props} />;
+) => (
+  <ContextMenuPrimitive.Trigger data-slot="context-menu-trigger" {...props} />
+);
 
 const ContextMenuGroup = (
   props: React.ComponentProps<typeof ContextMenuPrimitive.Group>
@@ -31,14 +34,19 @@ const ContextMenuRadioGroup = (
 
 const ContextMenuSub = (
   props: React.ComponentProps<typeof ContextMenuPrimitive.SubmenuRoot>
-) => <ContextMenuPrimitive.SubmenuRoot data-slot="context-menu-sub" {...props} />;
+) => (
+  <ContextMenuPrimitive.SubmenuRoot data-slot="context-menu-sub" {...props} />
+);
 
 const ContextMenuContent = ({
   className,
   style,
   children,
   ...props
-}: Omit<React.ComponentProps<typeof ContextMenuPrimitive.Popup>, "className"> & {
+}: Omit<
+  React.ComponentProps<typeof ContextMenuPrimitive.Popup>,
+  "className"
+> & {
   className?: string;
 }) => (
   <ContextMenuPrimitive.Portal>
@@ -47,8 +55,10 @@ const ContextMenuContent = ({
         data-slot="context-menu-content"
         className={(state) =>
           cx(
-            x(styles.popup, hidden(state.transitionStatus) && styles.popupHidden)
-              .className,
+            x(
+              styles.popup,
+              hidden(state.transitionStatus) && styles.popupHidden
+            ).className,
             className
           )
         }
@@ -164,7 +174,7 @@ const ContextMenuRadioItem = ({
       <span className={indicator.className} style={indicator.style}>
         <ContextMenuPrimitive.RadioItemIndicator>
           <CircleIcon
-            style={{ width: "0.5rem", height: "0.5rem", fill: "currentColor" }}
+            style={{ fill: "currentColor", height: "0.5rem", width: "0.5rem" }}
           />
         </ContextMenuPrimitive.RadioItemIndicator>
       </span>
@@ -195,7 +205,10 @@ const ContextMenuSeparator = ({
   className,
   style,
   ...props
-}: Omit<React.ComponentProps<typeof ContextMenuPrimitive.Separator>, "className"> & {
+}: Omit<
+  React.ComponentProps<typeof ContextMenuPrimitive.Separator>,
+  "className"
+> & {
   className?: string;
 }) => {
   const p = x(styles.separator);
@@ -266,7 +279,10 @@ const ContextMenuSubContent = ({
   className,
   style,
   ...props
-}: Omit<React.ComponentProps<typeof ContextMenuPrimitive.Popup>, "className"> & {
+}: Omit<
+  React.ComponentProps<typeof ContextMenuPrimitive.Popup>,
+  "className"
+> & {
   className?: string;
 }) => (
   <ContextMenuPrimitive.Portal>
@@ -275,8 +291,10 @@ const ContextMenuSubContent = ({
         data-slot="context-menu-sub-content"
         className={(state) =>
           cx(
-            x(styles.popup, hidden(state.transitionStatus) && styles.popupHidden)
-              .className,
+            x(
+              styles.popup,
+              hidden(state.transitionStatus) && styles.popupHidden
+            ).className,
             className
           )
         }

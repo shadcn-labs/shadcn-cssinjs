@@ -1,0 +1,65 @@
+---
+title: Native Select
+description: Displays a styled native select element.
+---
+
+import NativeSelectDemo from "@/examples/native-select-demo";
+
+<ComponentPreview name="native-select-demo">
+  <NativeSelectDemo />
+</ComponentPreview>
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.vercel.app/r/native-select.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>
+  Make sure [StyleX is configured](/docs/installation) and the design tokens are
+  installed.
+</Step>
+
+<Step>
+  Copy the component source into `components/ui/native-select/native-select.tsx`
+  and its styles into `components/ui/native-select/native-select.stylex.ts`.
+</Step>
+
+<ComponentSource name="native-select" title="native-select.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import {
+  NativeSelect,
+  NativeSelectOption,
+} from "@/components/ui/native-select/native-select";
+
+<NativeSelect>
+  <NativeSelectOption value="apple">Apple</NativeSelectOption>
+  <NativeSelectOption value="banana">Banana</NativeSelectOption>
+</NativeSelect>;
+```

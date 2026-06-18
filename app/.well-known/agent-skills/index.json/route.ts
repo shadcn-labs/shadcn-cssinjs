@@ -12,9 +12,9 @@ export const GET = (request: Request) => {
       skills: [
         {
           description:
-            "Install and use components from this public shadcn registry starter and documentation site.",
+            "Install and use StyleX-styled Base UI components from the shadcn-cssinjs registry and documentation site.",
           digest: siteAgentSkillDigest(),
-          name: "registry-starter",
+          name: "shadcn-cssinjs",
           type: "skill-md",
           url: `${base}${ROUTES.AGENT_SKILLS_SITE_SKILL}`,
         },

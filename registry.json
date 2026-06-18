@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
-  "name": "shadcn/registry-kit",
-  "homepage": "https://shadcn-registry-kit.vercel.app",
+  "name": "shadcn-cssinjs",
+  "homepage": "https://shadcn-cssinjs.vercel.app",
   "items": [
     {
       "name": "stylex-tokens",

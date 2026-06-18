@@ -1,0 +1,68 @@
+---
+title: Button
+description: Displays a button or a component that looks like a button.
+---
+
+import ButtonDemo from "@/examples/button-demo";
+import ButtonVariants from "@/examples/button-variants";
+
+<ComponentPreview name="button-demo">
+  <ButtonDemo />
+</ComponentPreview>
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.vercel.app/r/button.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>
+  Make sure [StyleX is configured](/docs/installation) and the design tokens are
+  installed.
+</Step>
+
+<Step>
+  Copy the component source into `components/ui/button/button.tsx` and its
+  styles into `components/ui/button/button.stylex.ts`.
+</Step>
+
+<ComponentSource name="button" title="button.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { Button } from "@/components/ui/button/button";
+
+<Button variant="outline">Button</Button>;
+```
+
+## Examples
+
+### Variants
+
+<ComponentPreview name="button-variants">
+  <ButtonVariants />
+</ComponentPreview>

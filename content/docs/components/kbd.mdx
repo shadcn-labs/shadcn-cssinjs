@@ -1,0 +1,62 @@
+---
+title: Kbd
+description: Used to display textual user input from keyboard.
+---
+
+import KbdDemo from "@/examples/kbd-demo";
+
+<ComponentPreview name="kbd-demo">
+  <KbdDemo />
+</ComponentPreview>
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.vercel.app/r/kbd.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>
+  Make sure [StyleX is configured](/docs/installation) and the design tokens are
+  installed.
+</Step>
+
+<Step>
+  Copy the component source into `components/ui/kbd/kbd.tsx` and its styles into
+  `components/ui/kbd/kbd.stylex.ts`.
+</Step>
+
+<ComponentSource name="kbd" title="kbd.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { Kbd, KbdGroup } from "@/components/ui/kbd/kbd";
+
+<KbdGroup>
+  <Kbd>⌘</Kbd>
+  <Kbd>K</Kbd>
+</KbdGroup>;
+```

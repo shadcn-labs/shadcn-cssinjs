@@ -1,9 +1,10 @@
 "use client";
 
 import { Popover as PopoverPrimitive } from "@base-ui/react/popover";
-import { styles } from "./popover.stylex";
 
 import { cx, x } from "@/lib/utils";
+
+import { styles } from "./popover.stylex";
 
 const hidden = (s: string | undefined) => s === "starting" || s === "ending";
 
@@ -49,8 +50,10 @@ const PopoverContent = ({
         data-slot="popover-content"
         className={(state) =>
           cx(
-            x(styles.popup, hidden(state.transitionStatus) && styles.popupHidden)
-              .className,
+            x(
+              styles.popup,
+              hidden(state.transitionStatus) && styles.popupHidden
+            ).className,
             className
           )
         }

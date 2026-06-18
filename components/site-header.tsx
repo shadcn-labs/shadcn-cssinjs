@@ -9,6 +9,7 @@ import { ModeSwitcher } from "@/components/mode-switcher";
 import { NavItemGithub } from "@/components/nav-item-github";
 import { SiteSettings } from "@/components/site-settings";
 import { SponsorLink } from "@/components/sponsor-link";
+import { ThemeCustomizer } from "@/components/theme-customizer";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/constants/routes";
 import { SITE } from "@/constants/site";
@@ -52,6 +53,7 @@ export const SiteHeader = () => (
           </div>
           <NavItemGithub />
           <SponsorLink />
+          <ThemeCustomizer />
           <ModeSwitcher />
           <SiteSettings />
         </div>

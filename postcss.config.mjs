@@ -7,15 +7,16 @@ const config = {
     "@stylexjs/postcss-plugin": {
       include: [
         "registry/**/*.{js,jsx,ts,tsx}",
+        "examples/**/*.{js,jsx,ts,tsx}",
         "lib/**/*.{js,jsx,ts,tsx}",
       ],
-      useCSSLayers: true,
-      styleResolution: "property-specificity",
       runtimeInjection: false,
+      styleResolution: "property-specificity",
       unstable_moduleResolution: {
-        type: "commonJS",
         rootDir: process.cwd(),
+        type: "commonJS",
       },
+      useCSSLayers: true,
     },
     "@tailwindcss/postcss": {},
   },

@@ -1,0 +1,62 @@
+---
+title: Text Flip
+description: Animated text that flips between a list of words.
+---
+
+import TextFlipDemo from "@/examples/text-flip-demo";
+
+<ComponentPreview name="text-flip-demo">
+  <TextFlipDemo />
+</ComponentPreview>
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.vercel.app/r/text-flip.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>
+  Make sure [StyleX is configured](/docs/installation) and the design tokens are
+  installed.
+</Step>
+
+<Step>
+  Copy the component source into `components/ui/text-flip/text-flip.tsx` and its
+  styles into `components/ui/text-flip/text-flip.stylex.ts`.
+</Step>
+
+<ComponentSource name="text-flip" title="text-flip.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { TextFlip } from "@/components/ui/text-flip/text-flip";
+
+<TextFlip>
+  <span>StyleX</span>
+  <span>CSS-in-JS</span>
+</TextFlip>;
+```

@@ -1,0 +1,68 @@
+---
+title: Tooltip
+description: A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.
+links:
+  doc: https://base-ui.com/react/components/tooltip
+---
+
+import TooltipDemo from "@/examples/tooltip-demo";
+
+<ComponentPreview name="tooltip-demo">
+  <TooltipDemo />
+</ComponentPreview>
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.vercel.app/r/tooltip.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>
+  Make sure [StyleX is configured](/docs/installation) and the design tokens are
+  installed.
+</Step>
+
+<Step>
+  Copy the component source into `components/ui/tooltip/tooltip.tsx` and its
+  styles into `components/ui/tooltip/tooltip.stylex.ts`.
+</Step>
+
+<ComponentSource name="tooltip" title="tooltip.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip/tooltip";
+
+<Tooltip>
+  <TooltipTrigger render={<Button variant="outline">Hover</Button>} />
+  <TooltipContent>Add to library</TooltipContent>
+</Tooltip>;
+```

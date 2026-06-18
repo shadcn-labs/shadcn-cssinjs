@@ -14,5 +14,6 @@ export default defineConfig({
     ".claude/**",
     ".web-kits/**",
     "audio/**",
+    "lib/registry-base-colors.ts",
   ],
 });

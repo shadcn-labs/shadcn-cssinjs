@@ -1,0 +1,68 @@
+---
+title: Popover
+description: Displays rich content in a portal, triggered by a button.
+links:
+  doc: https://base-ui.com/react/components/popover
+---
+
+import PopoverDemo from "@/examples/popover-demo";
+
+<ComponentPreview name="popover-demo">
+  <PopoverDemo />
+</ComponentPreview>
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.vercel.app/r/popover.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>
+  Make sure [StyleX is configured](/docs/installation) and the design tokens are
+  installed.
+</Step>
+
+<Step>
+  Copy the component source into `components/ui/popover/popover.tsx` and its
+  styles into `components/ui/popover/popover.stylex.ts`.
+</Step>
+
+<ComponentSource name="popover" title="popover.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover/popover";
+
+<Popover>
+  <PopoverTrigger render={<Button variant="outline">Open</Button>} />
+  <PopoverContent>Content</PopoverContent>
+</Popover>;
+```

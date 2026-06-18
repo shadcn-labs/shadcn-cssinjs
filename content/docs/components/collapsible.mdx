@@ -1,0 +1,68 @@
+---
+title: Collapsible
+description: An interactive component which expands/collapses a panel.
+links:
+  doc: https://base-ui.com/react/components/collapsible
+---
+
+import CollapsibleDemo from "@/examples/collapsible-demo";
+
+<ComponentPreview name="collapsible-demo">
+  <CollapsibleDemo />
+</ComponentPreview>
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.vercel.app/r/collapsible.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>
+  Make sure [StyleX is configured](/docs/installation) and the design tokens are
+  installed.
+</Step>
+
+<Step>
+  Copy the component source into `components/ui/collapsible/collapsible.tsx` and
+  its styles into `components/ui/collapsible/collapsible.stylex.ts`.
+</Step>
+
+<ComponentSource name="collapsible" title="collapsible.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible/collapsible";
+
+<Collapsible>
+  <CollapsibleTrigger>Toggle</CollapsibleTrigger>
+  <CollapsibleContent>Content</CollapsibleContent>
+</Collapsible>;
+```

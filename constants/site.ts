@@ -1,4 +1,5 @@
-export const FALLBACK_SITE_ORIGIN = "https://startercn.vercel.app" as const;
+export const FALLBACK_SITE_ORIGIN =
+  "https://shadcn-cssinjs.vercel.app" as const;
 
 const getBaseUrl = () => {
   if (process.env.NODE_ENV !== "production") {
@@ -20,19 +21,21 @@ export const SITE = {
     TWITTER: "@alaymanguy",
   },
   DESCRIPTION: {
-    LONG: "A starter kit for building and publishing your own shadcn registry components.",
-    SHORT: "Build your own shadcn registry",
+    LONG: "A shadcn registry of components styled with StyleX (CSS-in-JS) on top of Base UI primitives. Copy, paste, and own the code.",
+    SHORT: "shadcn/ui components, styled with StyleX",
   },
   KEYWORDS: [
     "shadcn",
     "shadcn registry",
+    "stylex",
+    "css-in-js",
+    "base ui",
     "component registry",
-    "shadcn components",
+    "react components",
     "next.js",
-    "tailwindcss",
     "npx shadcn add",
   ] as const,
-  NAME: "startercn",
+  NAME: "shadcn-cssinjs",
   OG_IMAGE: `${baseUrl}/og`,
   REGISTRY: baseUrl,
   URL: baseUrl,

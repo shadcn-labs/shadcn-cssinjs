@@ -1,9 +1,10 @@
 "use client";
 
 import { Tooltip as TooltipPrimitive } from "@base-ui/react/tooltip";
-import { styles } from "./tooltip.stylex";
 
 import { cx, x } from "@/lib/utils";
+
+import { styles } from "./tooltip.stylex";
 
 const hidden = (s: string | undefined) => s === "starting" || s === "ending";
 
@@ -38,7 +39,11 @@ const TooltipContent = ({
   const arrow = x(styles.arrow);
   return (
     <TooltipPrimitive.Portal>
-      <TooltipPrimitive.Positioner align={align} side={side} sideOffset={sideOffset}>
+      <TooltipPrimitive.Positioner
+        align={align}
+        side={side}
+        sideOffset={sideOffset}
+      >
         <TooltipPrimitive.Popup
           data-slot="tooltip-content"
           className={(state) =>
@@ -54,7 +59,10 @@ const TooltipContent = ({
           {...props}
         >
           {children}
-          <TooltipPrimitive.Arrow className={arrow.className} style={arrow.style} />
+          <TooltipPrimitive.Arrow
+            className={arrow.className}
+            style={arrow.style}
+          />
         </TooltipPrimitive.Popup>
       </TooltipPrimitive.Positioner>
     </TooltipPrimitive.Portal>

@@ -2,12 +2,12 @@
 
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog";
 import { XIcon } from "lucide-react";
-import { styles } from "./dialog.stylex";
 
 import { cx, x } from "@/lib/utils";
 
-const hidden = (s: string | undefined) =>
-  s === "starting" || s === "ending";
+import { styles } from "./dialog.stylex";
+
+const hidden = (s: string | undefined) => s === "starting" || s === "ending";
 
 const Dialog = (props: React.ComponentProps<typeof DialogPrimitive.Root>) => (
   <DialogPrimitive.Root data-slot="dialog" {...props} />
@@ -31,8 +31,10 @@ const DialogOverlay = (
   <DialogPrimitive.Backdrop
     data-slot="dialog-overlay"
     className={(state) =>
-      x(styles.backdrop, hidden(state.transitionStatus) && styles.backdropHidden)
-        .className
+      x(
+        styles.backdrop,
+        hidden(state.transitionStatus) && styles.backdropHidden
+      ).className
     }
     {...props}
   />
@@ -57,8 +59,10 @@ const DialogContent = ({
         data-slot="dialog-content"
         className={(state) =>
           cx(
-            x(styles.popup, hidden(state.transitionStatus) && styles.popupHidden)
-              .className,
+            x(
+              styles.popup,
+              hidden(state.transitionStatus) && styles.popupHidden
+            ).className,
             className
           )
         }

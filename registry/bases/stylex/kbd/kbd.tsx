@@ -1,6 +1,6 @@
-import { styles } from "./kbd.stylex";
-
 import { cx, x } from "@/lib/utils";
+
+import { styles } from "./kbd.stylex";
 
 const Kbd = ({ className, style, ...props }: React.ComponentProps<"kbd">) => {
   const p = x(styles.root);
@@ -14,7 +14,11 @@ const Kbd = ({ className, style, ...props }: React.ComponentProps<"kbd">) => {
   );
 };
 
-const KbdGroup = ({ className, style, ...props }: React.ComponentProps<"div">) => {
+const KbdGroup = ({
+  className,
+  style,
+  ...props
+}: React.ComponentProps<"div">) => {
   const p = x(styles.group);
   return (
     <div

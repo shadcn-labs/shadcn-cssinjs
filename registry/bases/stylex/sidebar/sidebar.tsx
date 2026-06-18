@@ -2,7 +2,6 @@
 
 import { useRender } from "@base-ui/react";
 import { PanelLeftIcon } from "lucide-react";
-import { s } from "./sidebar.stylex";
 import {
   createContext,
   useCallback,
@@ -14,6 +13,7 @@ import {
 
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cx, x } from "@/lib/utils";
+
 import { Button } from "../button/button";
 import { Input } from "../input/input";
 import { Separator } from "../separator/separator";
@@ -31,6 +31,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "../tooltip/tooltip";
+import { s } from "./sidebar.stylex";
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
@@ -84,6 +85,7 @@ const SidebarProvider = ({
       } else {
         setInternalOpen(openState);
       }
+      // oxlint-disable-next-line unicorn/no-document-cookie
       document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
     },
     [setOpenProp, open]
@@ -186,7 +188,7 @@ const Sidebar = ({
           data-sidebar="sidebar"
           data-slot="sidebar"
           side={side}
-          style={{ width: "var(--sidebar-width)", padding: 0 }}
+          style={{ padding: 0, width: "var(--sidebar-width)" }}
         >
           <SheetHeader style={{ display: "none" }}>
             <SheetTitle>Sidebar</SheetTitle>
@@ -205,20 +207,24 @@ const Sidebar = ({
 
   const collapsed = state === "collapsed";
   const offcanvas = collapsed && collapsible === "offcanvas";
-  const width = offcanvas
-    ? "0"
-    : collapsed && collapsible === "icon"
-      ? "var(--sidebar-width-icon)"
-      : "var(--sidebar-width)";
+
+  let width = "var(--sidebar-width)";
+  if (offcanvas) {
+    width = "0";
+  } else if (collapsed && collapsible === "icon") {
+    width = "var(--sidebar-width-icon)";
+  }
 
   const gap = x(s.gap);
   const container = x(s.container);
 
-  const offset = offcanvas
-    ? side === "left"
-      ? { transform: "translateX(-100%)" }
-      : { transform: "translateX(100%)" }
-    : {};
+  let offset: React.CSSProperties = {};
+  if (offcanvas) {
+    offset =
+      side === "left"
+        ? { transform: "translateX(-100%)" }
+        : { transform: "translateX(100%)" };
+  }
 
   return (
     <div
@@ -321,7 +327,11 @@ const SidebarInput = (props: React.ComponentProps<typeof Input>) => (
   <Input
     data-sidebar="input"
     data-slot="sidebar-input"
-    style={{ backgroundColor: "var(--background)", height: "2rem", width: "100%" }}
+    style={{
+      backgroundColor: "var(--background)",
+      height: "2rem",
+      width: "100%",
+    }}
     {...props}
   />
 );
@@ -345,7 +355,11 @@ const SidebarHeader = makeDiv("sidebar-header", "header", s.header);
 const SidebarFooter = makeDiv("sidebar-footer", "footer", s.footer);
 const SidebarContent = makeDiv("sidebar-content", "content", s.content);
 const SidebarGroup = makeDiv("sidebar-group", "group", s.group);
-const SidebarGroupLabel = makeDiv("sidebar-group-label", "group-label", s.groupLabel);
+const SidebarGroupLabel = makeDiv(
+  "sidebar-group-label",
+  "group-label",
+  s.groupLabel
+);
 const SidebarGroupContent = makeDiv(
   "sidebar-group-content",
   "group-content",
@@ -446,17 +460,17 @@ const SidebarMenuButton = ({
   );
 
   const element = useRender({
-    render: render ?? <button type="button" />,
     props: {
-      "data-slot": "sidebar-menu-button",
+      children,
+      className: cx(p.className, className),
+      "data-active": isActive,
       "data-sidebar": "menu-button",
       "data-size": size,
-      "data-active": isActive,
-      className: cx(p.className, className),
+      "data-slot": "sidebar-menu-button",
       style: { ...p.style, ...style },
-      children,
       ...props,
     },
+    render: render ?? <button type="button" />,
   });
 
   if (!tooltip) {
@@ -497,7 +511,11 @@ const SidebarMenuAction = ({
   );
 };
 
-const SidebarMenuBadge = makeDiv("sidebar-menu-badge", "menu-badge", s.menuBadge);
+const SidebarMenuBadge = makeDiv(
+  "sidebar-menu-badge",
+  "menu-badge",
+  s.menuBadge
+);
 
 const SidebarMenuSkeleton = ({
   className,
@@ -518,13 +536,13 @@ const SidebarMenuSkeleton = ({
       {showIcon && (
         <Skeleton
           style={{
-            width: "1rem",
-            height: "1rem",
             borderRadius: "calc(var(--radius) - 2px)",
+            height: "1rem",
+            width: "1rem",
           }}
         />
       )}
-      <Skeleton style={{ height: "1rem", maxWidth: width, flex: 1 }} />
+      <Skeleton style={{ flex: 1, height: "1rem", maxWidth: width }} />
     </div>
   );
 };
