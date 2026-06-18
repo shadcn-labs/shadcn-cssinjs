@@ -8,8 +8,8 @@
   shadcn/ui components, restyled with <a href="https://stylexjs.com">StyleX</a> on top of <a href="https://base-ui.com">Base UI</a> primitives. A copy-and-paste registry you install with <code>npx shadcn add</code> — you own the code.
   <br />
   <br />
-  <a href="https://github.com/Aniket-508/shadcn-cssinjs"><img src="https://www.shieldcn.dev/github/stars/Aniket-508/shadcn-cssinjs.svg?variant=secondary&size=xs&theme=zinc" alt="GitHub Stars" /></a>
-  <a href="https://github.com/Aniket-508/shadcn-cssinjs/actions"><img src="https://www.shieldcn.dev/github/ci/Aniket-508/shadcn-cssinjs.svg?variant=secondary&size=xs&theme=zinc" alt="CI" /></a>
+  <a href="https://github.com/shadcn-labs/shadcn-cssinjs"><img src="https://www.shieldcn.dev/github/stars/shadcn-labs/shadcn-cssinjs.svg?variant=secondary&size=xs&theme=zinc" alt="GitHub Stars" /></a>
+  <a href="https://github.com/shadcn-labs/shadcn-cssinjs/actions"><img src="https://www.shieldcn.dev/github/ci/shadcn-labs/shadcn-cssinjs.svg?variant=secondary&size=xs&theme=zinc" alt="CI" /></a>
   <a href="https://discord.com/invite/N6G36KhYK4"><img src="https://www.shieldcn.dev/discord/online-members/N6G36KhYK4.svg?variant=secondary&size=xs&theme=zinc" alt="Discord Members" /></a>
 </p>
 
