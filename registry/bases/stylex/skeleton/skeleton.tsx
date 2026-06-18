@@ -1,8 +1,12 @@
-import { styles } from "./skeleton.stylex";
-
 import { cx, x } from "@/lib/utils";
 
-const Skeleton = ({ className, style, ...props }: React.ComponentProps<"div">) => {
+import { styles } from "./skeleton.stylex";
+
+const Skeleton = ({
+  className,
+  style,
+  ...props
+}: React.ComponentProps<"div">) => {
   const p = x(styles.root);
   return (
     <div

@@ -9,7 +9,7 @@ export default function AccordionDemo() {
   return (
     <Accordion
       defaultValue={["item-1"]}
-      style={{ width: "100%", maxWidth: 400 }}
+      style={{ maxWidth: 400, width: "100%" }}
     >
       <AccordionItem value="item-1">
         <AccordionTrigger>Is it accessible?</AccordionTrigger>

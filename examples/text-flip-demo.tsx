@@ -6,11 +6,11 @@ export default function TextFlipDemo() {
   return (
     <div
       style={{
-        display: "flex",
         alignItems: "center",
-        gap: 8,
+        display: "flex",
         fontSize: 24,
         fontWeight: 600,
+        gap: 8,
       }}
     >
       <span>Styled with</span>

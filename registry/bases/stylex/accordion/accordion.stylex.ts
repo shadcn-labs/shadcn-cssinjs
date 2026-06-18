@@ -1,62 +1,61 @@
 import * as stylex from "@stylexjs/stylex";
+
 import { colors, radius } from "../tokens.stylex";
 
 export const styles = stylex.create({
-  item: {
-    borderBottomWidth: "1px",
-    borderBottomStyle: "solid",
-    borderBottomColor: colors.border,
+  chevron: {
+    color: colors.mutedForeground,
+    flexShrink: 0,
+    height: "1rem",
+    marginTop: "0.125rem",
+    pointerEvents: "none",
+    transition: "transform 0.2s ease-in-out",
+    width: "1rem",
+  },
+  chevronOpen: {
+    transform: "rotate(180deg)",
   },
   header: {
     display: "flex",
     margin: 0,
   },
-  trigger: {
-    display: "flex",
-    flex: 1,
-    alignItems: "flex-start",
-    justifyContent: "space-between",
-    gap: "1rem",
-    borderRadius: radius.md,
-    paddingTop: "1rem",
-    paddingBottom: "1rem",
-    textAlign: "left",
-    fontSize: "0.875rem",
-    fontWeight: 500,
-    transition: "all 0.15s ease-in-out",
-    outline: "none",
-    borderWidth: 0,
-    background: "none",
-    width: "100%",
-    cursor: "pointer",
-    color: colors.foreground,
-    textDecorationLine: { default: "none", ":hover": "underline" },
-    boxShadow: {
-      default: null,
-      ":focus-visible":
-        `0 0 0 3px color-mix(in oklab, ${colors.ring} 50%, transparent)`,
-    },
-  },
-  chevron: {
-    pointerEvents: "none",
-    color: colors.mutedForeground,
-    width: "1rem",
-    height: "1rem",
-    flexShrink: 0,
-    marginTop: "0.125rem",
-    transition: "transform 0.2s ease-in-out",
-  },
-  chevronOpen: {
-    transform: "rotate(180deg)",
+  item: {
+    borderBottomColor: colors.border,
+    borderBottomStyle: "solid",
+    borderBottomWidth: "1px",
   },
   panel: {
-    overflow: "hidden",
     fontSize: "0.875rem",
+    overflow: "hidden",
     transition: "height 0.2s ease-in-out",
   },
   panelInner: {
-    paddingTop: 0,
     paddingBottom: "1rem",
+    paddingTop: 0,
+  },
+  trigger: {
+    alignItems: "flex-start",
+    background: "none",
+    borderRadius: radius.md,
+    borderWidth: 0,
+    boxShadow: {
+      ":focus-visible": `0 0 0 3px color-mix(in oklab, ${colors.ring} 50%, transparent)`,
+      default: null,
+    },
+    color: colors.foreground,
+    cursor: "pointer",
+    display: "flex",
+    flex: 1,
+    fontSize: "0.875rem",
+    fontWeight: 500,
+    gap: "1rem",
+    justifyContent: "space-between",
+    outline: "none",
+    paddingBottom: "1rem",
+    paddingTop: "1rem",
+    textAlign: "left",
+    textDecorationLine: { ":hover": "underline", default: "none" },
+    transition: "all 0.15s ease-in-out",
+    width: "100%",
   },
 });
-

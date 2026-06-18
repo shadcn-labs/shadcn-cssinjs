@@ -1,6 +1,6 @@
-import { styles } from "./alert.stylex";
-
 import { cx, x } from "@/lib/utils";
+
+import { styles } from "./alert.stylex";
 
 type AlertVariant = "default" | "destructive";
 
@@ -26,7 +26,11 @@ const Alert = ({
   );
 };
 
-const AlertTitle = ({ className, style, ...props }: React.ComponentProps<"div">) => {
+const AlertTitle = ({
+  className,
+  style,
+  ...props
+}: React.ComponentProps<"div">) => {
   const p = x(styles.title);
   return (
     <div

@@ -1,6 +1,6 @@
-import { styles } from "./aspect-ratio.stylex";
-
 import { cx, x } from "@/lib/utils";
+
+import { styles } from "./aspect-ratio.stylex";
 
 const AspectRatio = ({
   ratio = 1,

@@ -1,9 +1,10 @@
 "use client";
 
 import { Tabs as TabsPrimitive } from "@base-ui/react/tabs";
-import { styles } from "./tabs.stylex";
 
 import { cx, x } from "@/lib/utils";
+
+import { styles } from "./tabs.stylex";
 
 const Tabs = ({
   className,

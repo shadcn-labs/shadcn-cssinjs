@@ -24,11 +24,12 @@ export const ActiveThemeProvider = ({
   );
 
   useEffect(() => {
-    [...document.body.classList]
-      .filter((className) => className.startsWith("theme-"))
-      .forEach((className) => {
-        document.body.classList.remove(className);
-      });
+    const themeClasses = [...document.body.classList].filter((className) =>
+      className.startsWith("theme-")
+    );
+    for (const className of themeClasses) {
+      document.body.classList.remove(className);
+    }
     document.body.classList.add(`theme-${activeTheme}`);
     if (activeTheme.endsWith("-scaled")) {
       document.body.classList.add("theme-scaled");

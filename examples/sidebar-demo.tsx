@@ -24,28 +24,28 @@ import {
 } from "@/registry/bases/stylex/sidebar/sidebar";
 
 const items = [
-  { title: "Home", icon: HomeIcon, isActive: true },
-  { title: "Inbox", icon: InboxIcon },
-  { title: "Calendar", icon: CalendarIcon },
-  { title: "Search", icon: SearchIcon },
-  { title: "Settings", icon: SettingsIcon },
+  { icon: HomeIcon, isActive: true, title: "Home" },
+  { icon: InboxIcon, title: "Inbox" },
+  { icon: CalendarIcon, title: "Calendar" },
+  { icon: SearchIcon, title: "Search" },
+  { icon: SettingsIcon, title: "Settings" },
 ];
 
 export default function SidebarDemo() {
   return (
     <SidebarProvider
       style={{
-        minHeight: 380,
-        width: "100%",
-        maxWidth: 520,
-        borderRadius: "0.5rem",
         border: "1px solid var(--border)",
+        borderRadius: "0.5rem",
+        maxWidth: 520,
+        minHeight: 380,
         overflow: "hidden",
+        width: "100%",
       }}
     >
       <Sidebar collapsible="icon">
         <SidebarHeader>
-          <span style={{ padding: "0 8px", fontWeight: 600 }}>Application</span>
+          <span style={{ fontWeight: 600, padding: "0 8px" }}>Application</span>
         </SidebarHeader>
         <SidebarContent>
           <SidebarGroup>
@@ -71,14 +71,14 @@ export default function SidebarDemo() {
       <SidebarInset>
         <div
           style={{
-            display: "flex",
             alignItems: "center",
+            display: "flex",
             gap: 8,
             padding: 12,
           }}
         >
           <SidebarTrigger />
-          <span style={{ fontSize: 14, color: "var(--muted-foreground)" }}>
+          <span style={{ color: "var(--muted-foreground)", fontSize: 14 }}>
             Toggle the sidebar
           </span>
         </div>

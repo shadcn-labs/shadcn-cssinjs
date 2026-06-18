@@ -1,9 +1,10 @@
 "use client";
 
 import { Separator as SeparatorPrimitive } from "@base-ui/react";
-import { styles } from "./separator.stylex";
 
 import { cx, x } from "@/lib/utils";
+
+import { styles } from "./separator.stylex";
 
 const Separator = ({
   className,

@@ -12,7 +12,7 @@ import { Input } from "@/registry/bases/stylex/input/input";
 
 export default function CardDemo() {
   return (
-    <Card style={{ width: "100%", maxWidth: 360 }}>
+    <Card style={{ maxWidth: 360, width: "100%" }}>
       <CardHeader>
         <CardTitle>Sign in to your account</CardTitle>
         <CardDescription>

@@ -1,15 +1,16 @@
 import type { StyleXStyles } from "@stylexjs/stylex";
-import { styles } from "./badge.stylex";
 
 import { cx, x } from "@/lib/utils";
+
+import { styles } from "./badge.stylex";
 
 type BadgeVariant = "default" | "secondary" | "destructive" | "outline";
 
 const variantMap: Record<BadgeVariant, StyleXStyles> = {
   default: styles.default,
-  secondary: styles.secondary,
   destructive: styles.destructive,
   outline: styles.outline,
+  secondary: styles.secondary,
 };
 
 const Badge = ({

@@ -1,21 +1,22 @@
 "use client";
 
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog";
-import { XIcon } from "lucide-react";
 import type { StyleXStyles } from "@stylexjs/stylex";
-import { styles } from "./sheet.stylex";
+import { XIcon } from "lucide-react";
 
 import { cx, x } from "@/lib/utils";
+
+import { styles } from "./sheet.stylex";
 
 const hidden = (s: string | undefined) => s === "starting" || s === "ending";
 
 type Side = "top" | "right" | "bottom" | "left";
 
 const sideStyle: Record<Side, [StyleXStyles, StyleXStyles]> = {
-  right: [styles.right, styles.rightHidden],
-  left: [styles.left, styles.leftHidden],
-  top: [styles.top, styles.topHidden],
   bottom: [styles.bottom, styles.bottomHidden],
+  left: [styles.left, styles.leftHidden],
+  right: [styles.right, styles.rightHidden],
+  top: [styles.top, styles.topHidden],
 };
 
 const Sheet = (props: React.ComponentProps<typeof DialogPrimitive.Root>) => (

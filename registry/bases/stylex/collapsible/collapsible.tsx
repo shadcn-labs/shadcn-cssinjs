@@ -1,9 +1,10 @@
 "use client";
 
 import { Collapsible as CollapsiblePrimitive } from "@base-ui/react/collapsible";
-import { styles } from "./collapsible.stylex";
 
 import { cx, x } from "@/lib/utils";
+
+import { styles } from "./collapsible.stylex";
 
 const Collapsible = (
   props: React.ComponentProps<typeof CollapsiblePrimitive.Root>

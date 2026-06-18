@@ -1,9 +1,4 @@
-import {
-  CalendarIcon,
-  SettingsIcon,
-  SmileIcon,
-  UserIcon,
-} from "lucide-react";
+import { CalendarIcon, SettingsIcon, SmileIcon, UserIcon } from "lucide-react";
 
 import {
   Command,
@@ -20,10 +15,10 @@ export default function CommandDemo() {
   return (
     <Command
       style={{
-        width: "100%",
-        maxWidth: 400,
-        borderRadius: "0.5rem",
         border: "1px solid var(--border)",
+        borderRadius: "0.5rem",
+        maxWidth: 400,
+        width: "100%",
       }}
     >
       <CommandInput placeholder="Type a command or search..." />

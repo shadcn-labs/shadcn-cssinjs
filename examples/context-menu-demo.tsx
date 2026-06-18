@@ -12,15 +12,15 @@ export default function ContextMenuDemo() {
     <ContextMenu>
       <ContextMenuTrigger
         style={{
-          display: "flex",
-          height: 150,
-          width: 300,
           alignItems: "center",
-          justifyContent: "center",
-          borderRadius: "0.5rem",
           border: "1px dashed var(--border)",
-          fontSize: 14,
+          borderRadius: "0.5rem",
           color: "var(--muted-foreground)",
+          display: "flex",
+          fontSize: 14,
+          height: 150,
+          justifyContent: "center",
+          width: 300,
         }}
       >
         Right click here

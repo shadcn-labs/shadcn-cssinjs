@@ -1,9 +1,10 @@
 "use client";
 
 import { Drawer as DrawerPrimitive } from "@base-ui/react/drawer";
-import { styles } from "./drawer.stylex";
 
 import { cx, x } from "@/lib/utils";
+
+import { styles } from "./drawer.stylex";
 
 const hidden = (s: string | undefined) => s === "starting" || s === "ending";
 
@@ -29,8 +30,10 @@ const DrawerOverlay = (
   <DrawerPrimitive.Backdrop
     data-slot="drawer-overlay"
     className={(state) =>
-      x(styles.backdrop, hidden(state.transitionStatus) && styles.backdropHidden)
-        .className
+      x(
+        styles.backdrop,
+        hidden(state.transitionStatus) && styles.backdropHidden
+      ).className
     }
     {...props}
   />
@@ -134,7 +137,10 @@ const DrawerDescription = ({
   className,
   style,
   ...props
-}: Omit<React.ComponentProps<typeof DrawerPrimitive.Description>, "className"> & {
+}: Omit<
+  React.ComponentProps<typeof DrawerPrimitive.Description>,
+  "className"
+> & {
   className?: string;
 }) => {
   const p = x(styles.description);

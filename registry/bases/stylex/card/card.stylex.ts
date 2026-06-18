@@ -1,54 +1,54 @@
 import * as stylex from "@stylexjs/stylex";
+
 import { colors, radius } from "../tokens.stylex";
 
 export const styles = stylex.create({
+  action: {
+    alignSelf: "start",
+    gridColumnStart: "2",
+    gridRowEnd: "3",
+    gridRowStart: "1",
+    justifySelf: "end",
+  },
   card: {
+    backgroundColor: colors.card,
+    border: `1px solid ${colors.border}`,
+    borderRadius: radius.xl,
+    boxShadow: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+    color: colors.cardForeground,
     display: "flex",
     flexDirection: "column",
     gap: "1.5rem",
-    borderRadius: radius.xl,
-    border: `1px solid ${colors.border}`,
-    backgroundColor: colors.card,
-    color: colors.cardForeground,
-    boxShadow: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
-    paddingTop: "1.5rem",
     paddingBottom: "1.5rem",
-  },
-  header: {
-    display: "grid",
-    gridTemplateRows: "auto auto",
-    gridTemplateColumns: "1fr auto",
-    alignItems: "start",
-    gap: "0.375rem",
-    paddingLeft: "1.5rem",
-    paddingRight: "1.5rem",
-  },
-  title: {
-    lineHeight: 1,
-    fontWeight: 600,
-    letterSpacing: "-0.025em",
-  },
-  description: {
-    fontSize: "0.875rem",
-    lineHeight: "1.25rem",
-    color: colors.mutedForeground,
-  },
-  action: {
-    gridColumnStart: "2",
-    gridRowStart: "1",
-    gridRowEnd: "3",
-    alignSelf: "start",
-    justifySelf: "end",
+    paddingTop: "1.5rem",
   },
   content: {
     paddingLeft: "1.5rem",
     paddingRight: "1.5rem",
   },
+  description: {
+    color: colors.mutedForeground,
+    fontSize: "0.875rem",
+    lineHeight: "1.25rem",
+  },
   footer: {
-    display: "flex",
     alignItems: "center",
+    display: "flex",
     paddingLeft: "1.5rem",
     paddingRight: "1.5rem",
   },
+  header: {
+    alignItems: "start",
+    display: "grid",
+    gap: "0.375rem",
+    gridTemplateColumns: "1fr auto",
+    gridTemplateRows: "auto auto",
+    paddingLeft: "1.5rem",
+    paddingRight: "1.5rem",
+  },
+  title: {
+    fontWeight: 600,
+    letterSpacing: "-0.025em",
+    lineHeight: 1,
+  },
 });
-

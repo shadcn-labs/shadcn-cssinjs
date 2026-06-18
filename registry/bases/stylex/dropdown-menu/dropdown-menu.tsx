@@ -2,15 +2,16 @@
 
 import { Menu as MenuPrimitive } from "@base-ui/react/menu";
 import { CheckIcon, ChevronRightIcon, CircleIcon } from "lucide-react";
-import { styles } from "./dropdown-menu.stylex";
 
 import { cx, x } from "@/lib/utils";
 
+import { styles } from "./dropdown-menu.stylex";
+
 const hidden = (s: string | undefined) => s === "starting" || s === "ending";
 
-const DropdownMenu = (props: React.ComponentProps<typeof MenuPrimitive.Root>) => (
-  <MenuPrimitive.Root data-slot="dropdown-menu" {...props} />
-);
+const DropdownMenu = (
+  props: React.ComponentProps<typeof MenuPrimitive.Root>
+) => <MenuPrimitive.Root data-slot="dropdown-menu" {...props} />;
 
 const DropdownMenuPortal = (
   props: React.ComponentProps<typeof MenuPrimitive.Portal>
@@ -26,7 +27,9 @@ const DropdownMenuGroup = (
 
 const DropdownMenuRadioGroup = (
   props: React.ComponentProps<typeof MenuPrimitive.RadioGroup>
-) => <MenuPrimitive.RadioGroup data-slot="dropdown-menu-radio-group" {...props} />;
+) => (
+  <MenuPrimitive.RadioGroup data-slot="dropdown-menu-radio-group" {...props} />
+);
 
 const DropdownMenuSub = (
   props: React.ComponentProps<typeof MenuPrimitive.SubmenuRoot>
@@ -62,8 +65,10 @@ const DropdownMenuContent = ({
         data-slot="dropdown-menu-content"
         className={(state) =>
           cx(
-            x(styles.popup, hidden(state.transitionStatus) && styles.popupHidden)
-              .className,
+            x(
+              styles.popup,
+              hidden(state.transitionStatus) && styles.popupHidden
+            ).className,
             className
           )
         }
@@ -116,7 +121,10 @@ const DropdownMenuCheckboxItem = ({
   style,
   children,
   ...props
-}: Omit<React.ComponentProps<typeof MenuPrimitive.CheckboxItem>, "className"> & {
+}: Omit<
+  React.ComponentProps<typeof MenuPrimitive.CheckboxItem>,
+  "className"
+> & {
   className?: string;
 }) => {
   const indicator = x(styles.indicatorWrap);
@@ -177,7 +185,7 @@ const DropdownMenuRadioItem = ({
       <span className={indicator.className} style={indicator.style}>
         <MenuPrimitive.RadioItemIndicator>
           <CircleIcon
-            style={{ width: "0.5rem", height: "0.5rem", fill: "currentColor" }}
+            style={{ fill: "currentColor", height: "0.5rem", width: "0.5rem" }}
           />
         </MenuPrimitive.RadioItemIndicator>
       </span>
@@ -244,7 +252,10 @@ const DropdownMenuSubTrigger = ({
   inset,
   children,
   ...props
-}: Omit<React.ComponentProps<typeof MenuPrimitive.SubmenuTrigger>, "className"> & {
+}: Omit<
+  React.ComponentProps<typeof MenuPrimitive.SubmenuTrigger>,
+  "className"
+> & {
   className?: string;
   inset?: boolean;
 }) => {
@@ -288,8 +299,10 @@ const DropdownMenuSubContent = ({
         data-slot="dropdown-menu-sub-content"
         className={(state) =>
           cx(
-            x(styles.popup, hidden(state.transitionStatus) && styles.popupHidden)
-              .className,
+            x(
+              styles.popup,
+              hidden(state.transitionStatus) && styles.popupHidden
+            ).className,
             className
           )
         }

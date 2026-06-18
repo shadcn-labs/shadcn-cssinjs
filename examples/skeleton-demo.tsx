@@ -2,13 +2,11 @@ import { Skeleton } from "@/registry/bases/stylex/skeleton/skeleton";
 
 export default function SkeletonDemo() {
   return (
-    <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-      <Skeleton
-        style={{ width: 48, height: 48, borderRadius: "9999px" }}
-      />
+    <div style={{ alignItems: "center", display: "flex", gap: 16 }}>
+      <Skeleton style={{ borderRadius: "9999px", height: 48, width: 48 }} />
       <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-        <Skeleton style={{ width: 200, height: 16 }} />
-        <Skeleton style={{ width: 160, height: 16 }} />
+        <Skeleton style={{ height: 16, width: 200 }} />
+        <Skeleton style={{ height: 16, width: 160 }} />
       </div>
     </div>
   );

@@ -34,9 +34,9 @@ const SponsorPage = async () => {
           </p>
           <p className="text-sm text-muted-foreground text-balance">
             I&apos;m not going to paywall features or gate components behind a
-            sponsorship tier. But if shadcn-cssinjs made your project better, or you
-            just like that this exists in the open, sponsoring is a nice way to
-            say so. It helps me justify spending real time on it instead of
+            sponsorship tier. But if shadcn-cssinjs made your project better, or
+            you just like that this exists in the open, sponsoring is a nice way
+            to say so. It helps me justify spending real time on it instead of
             treating it like a side-of-desk thing.
           </p>
           <p className="text-sm text-muted-foreground text-balance">

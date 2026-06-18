@@ -1,85 +1,100 @@
 import * as stylex from "@stylexjs/stylex";
+
 import { colors, radius } from "../tokens.stylex";
 
 export const styles = stylex.create({
   base: {
-    display: "inline-flex",
     alignItems: "center",
-    justifyContent: "center",
-    gap: "0.5rem",
-    whiteSpace: "nowrap",
     borderRadius: radius.md,
+    borderStyle: "solid",
+    borderWidth: 0,
+    cursor: { ":disabled": "not-allowed", default: "pointer" },
+    display: "inline-flex",
+    flexShrink: 0,
     fontSize: "0.875rem",
     fontWeight: 500,
+    gap: "0.5rem",
+    justifyContent: "center",
+    opacity: { ":disabled": 0.5, default: 1 },
+    outline: "none",
+    pointerEvents: { ":disabled": "none", default: null },
     transition:
       "color 0.15s, background-color 0.15s, box-shadow 0.15s, border-color 0.15s",
-    cursor: { default: "pointer", ":disabled": "not-allowed" },
-    outline: "none",
-    borderWidth: 0,
-    borderStyle: "solid",
-    flexShrink: 0,
-    pointerEvents: { default: null, ":disabled": "none" },
-    opacity: { default: 1, ":disabled": 0.5 },
+    whiteSpace: "nowrap",
   },
   default: {
     backgroundColor: {
-      default: colors.primary,
       ":hover": `color-mix(in oklab, ${colors.primary} 90%, transparent)`,
+      default: colors.primary,
     },
-    color: colors.primaryForeground,
     boxShadow: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+    color: colors.primaryForeground,
   },
   destructive: {
     backgroundColor: {
-      default: colors.destructive,
       ":hover": `color-mix(in oklab, ${colors.destructive} 90%, transparent)`,
+      default: colors.destructive,
     },
+    boxShadow: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
     color: colors.primaryForeground,
-    boxShadow: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
   },
-  outline: {
-    borderWidth: "1px",
-    borderColor: colors.border,
-    backgroundColor: {
-      default: colors.background,
-      ":hover": colors.accent,
+  focusable: {
+    boxShadow: {
+      ":focus-visible": `0 0 0 3px color-mix(in oklab, ${colors.ring} 50%, transparent)`,
+      default: null,
     },
-    color: { default: colors.foreground, ":hover": colors.accentForeground },
-    boxShadow: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
-  },
-  secondary: {
-    backgroundColor: {
-      default: colors.secondary,
-      ":hover": `color-mix(in oklab, ${colors.secondary} 80%, transparent)`,
-    },
-    color: colors.secondaryForeground,
-    boxShadow: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
   },
   ghost: {
-    backgroundColor: { default: "transparent", ":hover": colors.accent },
-    color: { default: colors.foreground, ":hover": colors.accentForeground },
+    backgroundColor: { ":hover": colors.accent, default: "transparent" },
+    color: { ":hover": colors.accentForeground, default: colors.foreground },
   },
   link: {
     backgroundColor: "transparent",
     color: colors.primary,
+    textDecorationLine: { ":hover": "underline", default: "none" },
     textUnderlineOffset: "4px",
-    textDecorationLine: { default: "none", ":hover": "underline" },
   },
-  focusable: {
-    boxShadow: {
-      default: null,
-      ":focus-visible": `0 0 0 3px color-mix(in oklab, ${colors.ring} 50%, transparent)`,
+  outline: {
+    backgroundColor: {
+      ":hover": colors.accent,
+      default: colors.background,
     },
+    borderColor: colors.border,
+    borderWidth: "1px",
+    boxShadow: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+    color: { ":hover": colors.accentForeground, default: colors.foreground },
+  },
+  secondary: {
+    backgroundColor: {
+      ":hover": `color-mix(in oklab, ${colors.secondary} 80%, transparent)`,
+      default: colors.secondary,
+    },
+    boxShadow: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+    color: colors.secondaryForeground,
   },
   sizeDefault: { height: "2.25rem", paddingLeft: "1rem", paddingRight: "1rem" },
+  sizeIcon: {
+    height: "2.25rem",
+    paddingLeft: 0,
+    paddingRight: 0,
+    width: "2.25rem",
+  },
+  sizeIconLg: {
+    height: "2.5rem",
+    paddingLeft: 0,
+    paddingRight: 0,
+    width: "2.5rem",
+  },
+  sizeIconSm: {
+    height: "2rem",
+    paddingLeft: 0,
+    paddingRight: 0,
+    width: "2rem",
+  },
+  sizeLg: { height: "2.5rem", paddingLeft: "2rem", paddingRight: "2rem" },
   sizeSm: {
     height: "2rem",
     paddingLeft: "0.75rem",
     paddingRight: "0.75rem",
   },
-  sizeLg: { height: "2.5rem", paddingLeft: "2rem", paddingRight: "2rem" },
-  sizeIcon: { height: "2.25rem", width: "2.25rem", paddingLeft: 0, paddingRight: 0 },
-  sizeIconSm: { height: "2rem", width: "2rem", paddingLeft: 0, paddingRight: 0 },
-  sizeIconLg: { height: "2.5rem", width: "2.5rem", paddingLeft: 0, paddingRight: 0 },
 });
-

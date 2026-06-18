@@ -4,9 +4,9 @@ export default function KbdDemo() {
   return (
     <div
       style={{
+        alignItems: "center",
         display: "flex",
         flexDirection: "column",
-        alignItems: "center",
         gap: 16,
       }}
     >

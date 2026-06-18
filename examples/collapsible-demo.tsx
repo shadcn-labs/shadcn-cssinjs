@@ -17,16 +17,16 @@ export default function CollapsibleDemo() {
         display: "flex",
         flexDirection: "column",
         gap: 8,
-        width: "100%",
         maxWidth: 350,
+        width: "100%",
       }}
     >
       <div
         style={{
-          display: "flex",
           alignItems: "center",
-          justifyContent: "space-between",
+          display: "flex",
           gap: 16,
+          justifyContent: "space-between",
         }}
       >
         <span style={{ fontSize: 14, fontWeight: 600 }}>
@@ -36,7 +36,15 @@ export default function CollapsibleDemo() {
           render={
             <Button size="icon-sm" variant="ghost">
               <ChevronsUpDownIcon />
-              <span style={{ position: "absolute", width: 1, height: 1, overflow: "hidden", clip: "rect(0 0 0 0)" }}>
+              <span
+                style={{
+                  clip: "rect(0 0 0 0)",
+                  height: 1,
+                  overflow: "hidden",
+                  position: "absolute",
+                  width: 1,
+                }}
+              >
                 Toggle
               </span>
             </Button>
@@ -45,11 +53,11 @@ export default function CollapsibleDemo() {
       </div>
       <div
         style={{
-          borderRadius: "0.5rem",
           border: "1px solid var(--border)",
-          padding: "0.75rem",
-          fontSize: 14,
+          borderRadius: "0.5rem",
           fontFamily: "var(--font-mono, monospace)",
+          fontSize: 14,
+          padding: "0.75rem",
         }}
       >
         @radix-ui/primitives
@@ -59,22 +67,22 @@ export default function CollapsibleDemo() {
       >
         <div
           style={{
-            borderRadius: "0.5rem",
             border: "1px solid var(--border)",
-            padding: "0.75rem",
-            fontSize: 14,
+            borderRadius: "0.5rem",
             fontFamily: "var(--font-mono, monospace)",
+            fontSize: 14,
+            padding: "0.75rem",
           }}
         >
           @base-ui/react
         </div>
         <div
           style={{
-            borderRadius: "0.5rem",
             border: "1px solid var(--border)",
-            padding: "0.75rem",
-            fontSize: 14,
+            borderRadius: "0.5rem",
             fontFamily: "var(--font-mono, monospace)",
+            fontSize: 14,
+            padding: "0.75rem",
           }}
         >
           @stylexjs/stylex

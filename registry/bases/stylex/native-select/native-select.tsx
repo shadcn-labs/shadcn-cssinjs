@@ -1,7 +1,8 @@
 import { ChevronDownIcon } from "lucide-react";
-import { styles } from "./native-select.stylex";
 
 import { cx, x } from "@/lib/utils";
+
+import { styles } from "./native-select.stylex";
 
 const NativeSelect = ({
   className,
@@ -28,7 +29,11 @@ const NativeSelect = ({
         style={select.style}
         {...props}
       />
-      <ChevronDownIcon aria-hidden="true" data-slot="native-select-icon" {...icon} />
+      <ChevronDownIcon
+        aria-hidden="true"
+        data-slot="native-select-icon"
+        {...icon}
+      />
     </div>
   );
 };

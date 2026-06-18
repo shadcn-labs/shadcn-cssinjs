@@ -20,8 +20,8 @@ export default function PopoverDemo() {
             </h4>
             <p
               style={{
-                fontSize: 14,
                 color: "var(--muted-foreground)",
+                fontSize: 14,
                 margin: 0,
               }}
             >

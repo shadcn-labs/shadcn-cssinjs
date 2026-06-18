@@ -21,6 +21,7 @@ export default defineConfig({
     ".claude/**",
     ".web-kits/**",
     "audio/**",
+    "lib/registry-base-colors.ts",
   ],
   jsxSingleQuote: false,
   printWidth: 80,

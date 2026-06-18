@@ -7,18 +7,20 @@ export default function SeparatorDemo() {
         <h4 style={{ fontSize: 14, fontWeight: 600, margin: 0 }}>
           shadcn-cssinjs
         </h4>
-        <p style={{ fontSize: 14, color: "var(--muted-foreground)", margin: 0 }}>
+        <p
+          style={{ color: "var(--muted-foreground)", fontSize: 14, margin: 0 }}
+        >
           StyleX-styled Base UI components.
         </p>
       </div>
       <Separator style={{ margin: "16px 0" }} />
       <div
         style={{
-          display: "flex",
-          height: 20,
           alignItems: "center",
-          gap: 16,
+          display: "flex",
           fontSize: 14,
+          gap: 16,
+          height: 20,
         }}
       >
         <span>Docs</span>

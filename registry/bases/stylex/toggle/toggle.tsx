@@ -2,9 +2,10 @@
 
 import { Toggle as TogglePrimitive } from "@base-ui/react/toggle";
 import type { StyleXStyles } from "@stylexjs/stylex";
-import { styles } from "./toggle.stylex";
 
 import { cx, x } from "@/lib/utils";
+
+import { styles } from "./toggle.stylex";
 
 type ToggleVariant = "default" | "outline";
 type ToggleSize = "default" | "sm" | "lg";
@@ -16,8 +17,8 @@ const variantStyles: Record<ToggleVariant, StyleXStyles> = {
 
 const sizeStyles: Record<ToggleSize, StyleXStyles> = {
   default: styles.sizeDefault,
-  sm: styles.sizeSm,
   lg: styles.sizeLg,
+  sm: styles.sizeSm,
 };
 
 const Toggle = ({
