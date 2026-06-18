@@ -1,4 +1,31 @@
 {
   "title": "Components",
-  "pages": ["index"]
+  "pages": [
+    "index",
+    "---Components---",
+    "accordion",
+    "alert",
+    "aspect-ratio",
+    "badge",
+    "button",
+    "card",
+    "collapsible",
+    "command",
+    "context-menu",
+    "dialog",
+    "drawer",
+    "dropdown-menu",
+    "input",
+    "kbd",
+    "native-select",
+    "popover",
+    "separator",
+    "sheet",
+    "sidebar",
+    "skeleton",
+    "tabs",
+    "text-flip",
+    "toggle",
+    "tooltip"
+  ]
 }

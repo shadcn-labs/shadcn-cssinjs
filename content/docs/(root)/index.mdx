@@ -1,45 +1,62 @@
 ---
 title: Introduction
-description: A template for building and publishing your own shadcn registry components.
+description: shadcn/ui components, restyled with StyleX on top of Base UI primitives.
 ---
 
-A **ready-to-use template** for creating and publishing custom components to the [shadcn registry](https://ui.shadcn.com/docs/registry).
+**shadcn-cssinjs** is an open [shadcn registry](https://ui.shadcn.com/docs/registry)
+where every component is styled with [StyleX](https://stylexjs.com) — atomic, build-time
+CSS-in-JS — instead of Tailwind, and built on [Base UI](https://base-ui.com) primitives
+instead of Radix.
 
-## What You Get
+The distribution model is exactly the same as shadcn/ui: you install a component with the
+`shadcn` CLI and the source code lands in your project. You own it, you read it, you edit
+it. There is no runtime library to wrestle with.
 
-- 📦 **Simple structure** - One component file + one config file
-- 📚 **Documentation site** - Powered by Fumadocs
-- 🎨 **Registry compatible** - Works with `npx shadcn add`
-- 🤖 **[Agent ready](https://www.mintlify.com/score/startercn)** - Ships with `llms.txt`, `llms-full.txt`, API catalog routes, and agent skill discovery endpoints
-- 🔊 **[Web audio feedback](https://audio.raphaelsalaja.com/)** - Built-in interaction sounds powered by `@web-kits/audio`
-- 📳 **[Web haptics](https://haptics.lochie.me/)** - Optional haptic feedback for supported devices via `web-haptics`
-- ✨ **[Motion animations](https://motion.dev/)** - Uses `motion` for animated UI states and transitions
-- 🎯 **[Animated icons](https://lucide-animated.com/)** - Includes reusable animated icons for buttons, sharing, and navigation
-- 🔄 **[View transitions](https://nextjs.org/docs/app/api-reference/config/next-config-js/viewTransition)** - Uses Next.js view transitions for smoother page changes
-- 🚀 **Deploy ready** - Deploy anywhere
+## Why StyleX + Base UI?
 
-## Tech Stack
-
-- `Next.js 16` + App Router
-- `React 19`
-- `Tailwind CSS 4`
-- `Fumadocs`
-- `motion`
-- `@web-kits/audio`
-- `web-haptics`
-- `shiki` + `rehype-pretty-code`
+- **StyleX styling** — Styles are colocated, type-safe, and compiled to atomic CSS at build time. No utility-class strings, no runtime style injection, no specificity wars.
+- **Base UI primitives** — Accessible, unstyled primitives from the team behind Radix and Floating UI. Modern API, great defaults.
+- **Token-driven theming** — Styles reference your existing CSS variables (`--background`, `--primary`, …), so light/dark theming via a `.dark` class keeps working out of the box.
+- **You own the code** — Installed with `npx shadcn add`; you get real source files, not an npm dependency.
 
 ## How It Works
 
-1. Edit your component at `registry/new-york/your-component.tsx`
-2. Update `registry.json` with your component name and details
-3. Run `pnpm registry:build`
+Each component lives in its own folder with two files:
 
-That's it. Deploy your app and users can install your component:
-
-```bash
-npx shadcn@latest add https://your-site.com/r/your-component.json
+```txt
+components/ui/
+└── button/
+    ├── button.tsx          # the Base UI + StyleX component
+    └── button.stylex.ts    # its StyleX rules (stylex.create)
 ```
+
+Styles are authored in the `.stylex.ts` file and applied in the component with a small
+`x()` helper (a thin wrapper over `stylex.props`). Shared design tokens live in
+`components/ui/tokens.stylex.ts` and are referenced by every component.
+
+```tsx title="button.tsx"
+import { styles } from "./button.stylex";
+import { x } from "@/lib/utils";
+
+export function Button({ className, ...props }) {
+  const p = x(styles.base, styles.default);
+  return <button className={p.className} style={p.style} {...props} />;
+}
+```
+
+<Callout>
+  StyleX cannot target a component's own `data-state` attributes or peer/group selectors
+  the way Tailwind can. State-based styling (open, highlighted, pressed, …) is handled with
+  Base UI's `className`-as-function API, which receives the current state.
+</Callout>
+
+## Tech Stack
+
+- `Next.js 16` + App Router and `React 19`
+- `@stylexjs/stylex` for styling (Babel transform + PostCSS plugin)
+- `@base-ui/react` for primitives
+- `Fumadocs` for these docs
+- `Tailwind CSS 4` for the docs site itself
 
 ## FAQ
 
@@ -47,33 +64,39 @@ npx shadcn@latest add https://your-site.com/r/your-component.json
 
 <AccordionItem value="faq-1">
 <AccordionTrigger>
-Why copy/paste instead of npm packages?
+Why StyleX instead of Tailwind?
 </AccordionTrigger>
 <AccordionContent>
 
-The shadcn philosophy gives you **ownership** of the code. You can customize components to your exact needs without fighting library constraints.
+StyleX gives you type-safe, colocated styles that compile to atomic CSS at build time —
+similar size benefits to Tailwind, but with real JavaScript values, no class-name strings,
+and deterministic merging. This registry exists to show what shadcn/ui looks like when it's
+built that way.
 
 </AccordionContent>
 </AccordionItem>
 
 <AccordionItem value="faq-2">
 <AccordionTrigger>
-Which frameworks are supported?
+Why Base UI instead of Radix?
 </AccordionTrigger>
 <AccordionContent>
 
-Any React framework: Next.js, Remix, Astro, Gatsby, Vite, etc.
+Base UI is the next-generation primitive library from the maintainers of Radix and Floating
+UI. It ships a `render` prop (in place of `asChild`) and a `className`-as-function API that
+pairs well with StyleX's styling model.
 
 </AccordionContent>
 </AccordionItem>
 
 <AccordionItem value="faq-3">
 <AccordionTrigger>
-Can I publish multiple components?
+Does dark mode work?
 </AccordionTrigger>
 <AccordionContent>
 
-Yes! Add more files to `registry/new-york/` and list them in `registry.json`.
+Yes. Tokens wrap your existing CSS custom properties, so toggling a `.dark` class on the
+document (e.g. via `next-themes`) flips every component, exactly like stock shadcn/ui.
 
 </AccordionContent>
 </AccordionItem>

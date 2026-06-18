@@ -7,6 +7,7 @@ const config = {
     "@stylexjs/postcss-plugin": {
       include: [
         "registry/**/*.{js,jsx,ts,tsx}",
+        "examples/**/*.{js,jsx,ts,tsx}",
         "lib/**/*.{js,jsx,ts,tsx}",
       ],
       useCSSLayers: true,

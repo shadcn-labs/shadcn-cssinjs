@@ -1,0 +1,70 @@
+---
+title: Dialog
+description: A window overlaid on either the primary window or another dialog window.
+links:
+  doc: https://base-ui.com/react/components/dialog
+---
+
+import DialogDemo from "@/examples/dialog-demo";
+
+<ComponentPreview name="dialog-demo">
+  <DialogDemo />
+</ComponentPreview>
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.vercel.app/r/dialog.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Make sure [StyleX is configured](/docs/installation) and the design tokens are installed.</Step>
+
+<Step>Copy the component source into `components/ui/dialog/dialog.tsx` and its styles into `components/ui/dialog/dialog.stylex.ts`.</Step>
+
+<ComponentSource name="dialog" title="dialog.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog/dialog";
+
+<Dialog>
+  <DialogTrigger render={<Button variant="outline">Open</Button>} />
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Title</DialogTitle>
+      <DialogDescription>Description</DialogDescription>
+    </DialogHeader>
+  </DialogContent>
+</Dialog>
+```

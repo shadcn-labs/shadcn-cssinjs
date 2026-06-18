@@ -1,0 +1,56 @@
+---
+title: Separator
+description: Visually or semantically separates content.
+links:
+  doc: https://base-ui.com/react/components/separator
+---
+
+import SeparatorDemo from "@/examples/separator-demo";
+
+<ComponentPreview name="separator-demo">
+  <SeparatorDemo />
+</ComponentPreview>
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.vercel.app/r/separator.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Make sure [StyleX is configured](/docs/installation) and the design tokens are installed.</Step>
+
+<Step>Copy the component source into `components/ui/separator/separator.tsx` and its styles into `components/ui/separator/separator.stylex.ts`.</Step>
+
+<ComponentSource name="separator" title="separator.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { Separator } from "@/components/ui/separator/separator";
+
+<Separator />
+<Separator orientation="vertical" />
+```

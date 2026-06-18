@@ -1,0 +1,65 @@
+---
+title: Context Menu
+description: Displays a menu located at the pointer, triggered by a right click.
+links:
+  doc: https://base-ui.com/react/components/context-menu
+---
+
+import ContextMenuDemo from "@/examples/context-menu-demo";
+
+<ComponentPreview name="context-menu-demo">
+  <ContextMenuDemo />
+</ComponentPreview>
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.vercel.app/r/context-menu.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Make sure [StyleX is configured](/docs/installation) and the design tokens are installed.</Step>
+
+<Step>Copy the component source into `components/ui/context-menu/context-menu.tsx` and its styles into `components/ui/context-menu/context-menu.stylex.ts`.</Step>
+
+<ComponentSource name="context-menu" title="context-menu.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuTrigger,
+} from "@/components/ui/context-menu/context-menu";
+
+<ContextMenu>
+  <ContextMenuTrigger>Right click</ContextMenuTrigger>
+  <ContextMenuContent>
+    <ContextMenuItem>Profile</ContextMenuItem>
+  </ContextMenuContent>
+</ContextMenu>
+```

@@ -1,0 +1,67 @@
+---
+title: Tabs
+description: A set of layered sections of content—known as tab panels—that are displayed one at a time.
+links:
+  doc: https://base-ui.com/react/components/tabs
+---
+
+import TabsDemo from "@/examples/tabs-demo";
+
+<ComponentPreview name="tabs-demo">
+  <TabsDemo />
+</ComponentPreview>
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.vercel.app/r/tabs.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Make sure [StyleX is configured](/docs/installation) and the design tokens are installed.</Step>
+
+<Step>Copy the component source into `components/ui/tabs/tabs.tsx` and its styles into `components/ui/tabs/tabs.stylex.ts`.</Step>
+
+<ComponentSource name="tabs" title="tabs.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs/tabs";
+
+<Tabs defaultValue="account">
+  <TabsList>
+    <TabsTrigger value="account">Account</TabsTrigger>
+    <TabsTrigger value="password">Password</TabsTrigger>
+  </TabsList>
+  <TabsContent value="account">Account</TabsContent>
+  <TabsContent value="password">Password</TabsContent>
+</Tabs>
+```

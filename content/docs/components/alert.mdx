@@ -1,0 +1,56 @@
+---
+title: Alert
+description: Displays a callout for user attention.
+---
+
+import AlertDemo from "@/examples/alert-demo";
+
+<ComponentPreview name="alert-demo">
+  <AlertDemo />
+</ComponentPreview>
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.vercel.app/r/alert.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Make sure [StyleX is configured](/docs/installation) and the design tokens are installed.</Step>
+
+<Step>Copy the component source into `components/ui/alert/alert.tsx` and its styles into `components/ui/alert/alert.stylex.ts`.</Step>
+
+<ComponentSource name="alert" title="alert.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert/alert";
+
+<Alert>
+  <AlertTitle>Heads up!</AlertTitle>
+  <AlertDescription>You can add components to your app.</AlertDescription>
+</Alert>
+```

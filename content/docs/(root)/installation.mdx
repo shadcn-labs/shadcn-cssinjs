@@ -1,103 +1,115 @@
 ---
 title: Installation
-description: How to use this template to build your own shadcn component.
+description: Set up StyleX and Base UI, then install components from the shadcn-cssinjs registry.
 ---
 
-## Building Your Component
+These components are styled with StyleX and built on Base UI. Before installing any
+component, your project needs StyleX's build pipeline configured. Do this once, then add as
+many components as you like with the `shadcn` CLI.
 
-### 1. Fork the Template
+<Callout>
+  Already using shadcn/ui? You can drop these components alongside your existing ones — they
+  reuse the same CSS variables (`--background`, `--primary`, …) for theming.
+</Callout>
 
-Click "Use this template" on [GitHub](https://github.com/mehmetpekcan/shadcn-registry-kit).
+## Set up StyleX
 
-### 2. Install Dependencies
+<Steps>
+
+<Step>Install the dependencies</Step>
 
 ```bash
-pnpm install
+pnpm add @stylexjs/stylex @base-ui/react
+pnpm add -D @stylexjs/babel-plugin @stylexjs/postcss-plugin @babel/preset-typescript
 ```
 
-### 3. Create Your Component
+<Step>Configure Babel</Step>
 
-Replace the placeholder at `registry/new-york/your-component.tsx`:
+StyleX transforms your component source with a Babel plugin. Create a `.babelrc` at the
+root of your project:
 
-```tsx
-import { forwardRef, HTMLAttributes } from "react";
-import { cn } from "@/lib/utils";
-
-export interface MyButtonProps extends HTMLAttributes<HTMLButtonElement> {
-  variant?: "default" | "outline";
-}
-
-const MyButton = forwardRef<HTMLButtonElement, MyButtonProps>(
-  ({ className, variant = "default", ...props }, ref) => {
-    return (
-      <button
-        ref={ref}
-        className={cn(
-          "rounded-md px-4 py-2 font-medium",
-          variant === "default" && "bg-primary text-primary-foreground",
-          variant === "outline" && "border border-input",
-          className
-        )}
-        {...props}
-      />
-    );
-  }
-);
-
-MyButton.displayName = "MyButton";
-
-export { MyButton };
-```
-
-### 4. Update registry.json
-
-```json
+```json title=".babelrc"
 {
-  "name": "your-name/your-registry",
-  "homepage": "https://your-site.com",
-  "items": [
-    {
-      "name": "my-button",
-      "type": "registry:ui",
-      "title": "My Button",
-      "description": "A custom button component.",
-      "files": [
-        {
-          "path": "registry/new-york/my-button.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/my-button.tsx"
-        }
-      ]
-    }
+  "presets": ["next/babel", "@babel/preset-typescript"],
+  "plugins": [
+    [
+      "@stylexjs/babel-plugin",
+      {
+        "runtimeInjection": false,
+        "styleResolution": "property-specificity",
+        "unstable_moduleResolution": { "type": "commonJS", "rootDir": "." }
+      }
+    ]
   ]
 }
 ```
 
-### 5. Build & Deploy
+<Callout type="warn">
+  Adding a `.babelrc` opts Next.js out of Turbopack/SWC for compilation. Run `next dev` and
+  `next build` without the `--turbopack` flag so the Babel pipeline (and therefore StyleX)
+  runs.
+</Callout>
 
-```bash
-pnpm registry:build
-pnpm build
+<Step>Configure PostCSS</Step>
+
+The PostCSS plugin extracts the compiled CSS. It must run **before** Tailwind, and its
+options must match `.babelrc` so the class-name hashes line up.
+
+```js title="postcss.config.mjs"
+const config = {
+  plugins: {
+    "@stylexjs/postcss-plugin": {
+      include: ["app/**/*.{js,jsx,ts,tsx}", "components/**/*.{js,jsx,ts,tsx}"],
+      useCSSLayers: true,
+      styleResolution: "property-specificity",
+      runtimeInjection: false,
+      unstable_moduleResolution: { type: "commonJS", rootDir: process.cwd() },
+    },
+    "@tailwindcss/postcss": {},
+  },
+};
+export default config;
 ```
 
-Deploy your app and your component is live!
+<Step>Add the StyleX directive</Step>
 
----
+Add `@stylex;` to your global stylesheet. The PostCSS plugin replaces it with the compiled
+component CSS.
 
-## Installing Components
+```css title="app/globals.css"
+@import "tailwindcss";
 
-To install a component from any registry built with this template:
-
-```bash
-npx shadcn@latest add https://example.com/r/my-button.json
+@stylex;
 ```
 
-Then use it:
+</Steps>
+
+## Add the design tokens
+
+Every component references a shared set of design tokens. Install them once:
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.vercel.app/r/stylex-tokens.json
+```
+
+This drops `components/ui/tokens.stylex.ts`, which maps your CSS variables to typed StyleX
+tokens. You can edit it to point at different variables or add your own.
+
+## Install a component
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.vercel.app/r/button.json
+```
+
+The component is copied into `components/ui/<name>/`. Import and use it:
 
 ```tsx
-import { MyButton } from "@/components/ui/my-button";
+import { Button } from "@/components/ui/button/button";
 
 export function Demo() {
-  return <MyButton variant="outline">Click me</MyButton>;
+  return <Button>Click me</Button>;
 }
 ```
+
+Browse the [components](/docs/components) for the full list and per-component install
+commands.

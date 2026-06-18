@@ -1,0 +1,68 @@
+---
+title: Drawer
+description: A drawer component that slides in from the edge of the screen.
+---
+
+import DrawerDemo from "@/examples/drawer-demo";
+
+<ComponentPreview name="drawer-demo">
+  <DrawerDemo />
+</ComponentPreview>
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.vercel.app/r/drawer.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Make sure [StyleX is configured](/docs/installation) and the design tokens are installed.</Step>
+
+<Step>Copy the component source into `components/ui/drawer/drawer.tsx` and its styles into `components/ui/drawer/drawer.stylex.ts`.</Step>
+
+<ComponentSource name="drawer" title="drawer.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer/drawer";
+
+<Drawer>
+  <DrawerTrigger render={<Button variant="outline">Open</Button>} />
+  <DrawerContent>
+    <DrawerHeader>
+      <DrawerTitle>Title</DrawerTitle>
+      <DrawerDescription>Description</DrawerDescription>
+    </DrawerHeader>
+  </DrawerContent>
+</Drawer>
+```
