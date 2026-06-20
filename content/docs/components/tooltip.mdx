@@ -3,9 +3,11 @@ title: Tooltip
 description: A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.
 links:
   doc: https://base-ui.com/react/components/tooltip
+  api: https://base-ui.com/react/components/tooltip#api-reference
 ---
 
 import TooltipDemo from "@/examples/tooltip-demo";
+import TooltipSides from "@/examples/tooltip-sides";
 
 <ComponentPreview name="tooltip-demo">
   <TooltipDemo />
@@ -32,15 +34,18 @@ npx shadcn@latest add https://shadcn-cssinjs.vercel.app/r/tooltip.json
 
 <Steps>
 
+<Step>Install the following dependencies:</Step>
+
+```bash
+pnpm add @base-ui/react @stylexjs/stylex
+```
+
 <Step>
   Make sure [StyleX is configured](/docs/installation) and the design tokens are
   installed.
 </Step>
 
-<Step>
-  Copy the component source into `components/ui/tooltip/tooltip.tsx` and its
-  styles into `components/ui/tooltip/tooltip.stylex.ts`.
-</Step>
+<Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource name="tooltip" title="tooltip.tsx" />
 
@@ -60,9 +65,47 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip/tooltip";
-
-<Tooltip>
-  <TooltipTrigger render={<Button variant="outline">Hover</Button>} />
-  <TooltipContent>Add to library</TooltipContent>
-</Tooltip>;
 ```
+
+```tsx
+<Tooltip>
+  <TooltipTrigger>Hover</TooltipTrigger>
+  <TooltipContent>
+    <p>Add to library</p>
+  </TooltipContent>
+</Tooltip>
+```
+
+## Composition
+
+Use the following composition to build a `Tooltip`:
+
+```txt
+Tooltip
+├── TooltipTrigger
+└── TooltipContent
+```
+
+## Examples
+
+### Side
+
+Use the `side` prop on `TooltipContent` to position the tooltip.
+
+<ComponentPreview name="tooltip-sides">
+  <TooltipSides />
+</ComponentPreview>
+
+## RTL
+
+To enable right-to-left support, see the [RTL guide](/docs/rtl). The `left` and
+`right` sides follow the text direction.
+
+<ComponentPreview direction="rtl">
+  <TooltipDemo />
+</ComponentPreview>
+
+## API Reference
+
+See the [Base UI](https://base-ui.com/react/components/tooltip#api-reference)
+documentation for the full API.

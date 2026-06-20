@@ -3,6 +3,7 @@ title: Popover
 description: Displays rich content in a portal, triggered by a button.
 links:
   doc: https://base-ui.com/react/components/popover
+  api: https://base-ui.com/react/components/popover#api-reference
 ---
 
 import PopoverDemo from "@/examples/popover-demo";
@@ -32,15 +33,18 @@ npx shadcn@latest add https://shadcn-cssinjs.vercel.app/r/popover.json
 
 <Steps>
 
+<Step>Install the following dependencies:</Step>
+
+```bash
+pnpm add @base-ui/react @stylexjs/stylex
+```
+
 <Step>
   Make sure [StyleX is configured](/docs/installation) and the design tokens are
   installed.
 </Step>
 
-<Step>
-  Copy the component source into `components/ui/popover/popover.tsx` and its
-  styles into `components/ui/popover/popover.stylex.ts`.
-</Step>
+<Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource name="popover" title="popover.tsx" />
 
@@ -60,9 +64,44 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover/popover";
-
-<Popover>
-  <PopoverTrigger render={<Button variant="outline">Open</Button>} />
-  <PopoverContent>Content</PopoverContent>
-</Popover>;
 ```
+
+```tsx
+<Popover>
+  <PopoverTrigger>Open</PopoverTrigger>
+  <PopoverContent>Place content for the popover here.</PopoverContent>
+</Popover>
+```
+
+## Composition
+
+Use the following composition to build a `Popover`:
+
+```txt
+Popover
+├── PopoverTrigger
+└── PopoverContent
+```
+
+## Examples
+
+### With Form
+
+Place a small form inside the popover.
+
+<ComponentPreview name="popover-demo">
+  <PopoverDemo />
+</ComponentPreview>
+
+## RTL
+
+To enable right-to-left support, see the [RTL guide](/docs/rtl).
+
+<ComponentPreview direction="rtl">
+  <PopoverDemo />
+</ComponentPreview>
+
+## API Reference
+
+See the [Base UI](https://base-ui.com/react/components/popover#api-reference)
+documentation for the full API.

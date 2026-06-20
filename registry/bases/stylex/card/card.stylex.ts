@@ -23,8 +23,7 @@ export const styles = stylex.create({
     paddingTop: "1.5rem",
   },
   content: {
-    paddingLeft: "1.5rem",
-    paddingRight: "1.5rem",
+    paddingInline: "1.5rem",
   },
   description: {
     color: colors.mutedForeground,
@@ -34,8 +33,7 @@ export const styles = stylex.create({
   footer: {
     alignItems: "center",
     display: "flex",
-    paddingLeft: "1.5rem",
-    paddingRight: "1.5rem",
+    paddingInline: "1.5rem",
   },
   header: {
     alignItems: "start",
@@ -43,8 +41,7 @@ export const styles = stylex.create({
     gap: "0.375rem",
     gridTemplateColumns: "1fr auto",
     gridTemplateRows: "auto auto",
-    paddingLeft: "1.5rem",
-    paddingRight: "1.5rem",
+    paddingInline: "1.5rem",
   },
   title: {
     fontWeight: 600,

@@ -269,7 +269,7 @@ const ContextMenuSubTrigger = ({
       {children}
       <ChevronRightIcon
         className={icon.className}
-        style={{ ...icon.style, marginLeft: "auto" }}
+        style={{ ...icon.style, marginInlineStart: "auto" }}
       />
     </ContextMenuPrimitive.SubmenuTrigger>
   );

@@ -1,0 +1,67 @@
+---
+title: RTL
+description: Enable right-to-left layouts for shadcn-cssinjs components.
+---
+
+Every component in shadcn-cssinjs ships with right-to-left (RTL) support. The styles are
+authored with **CSS logical properties** (`margin-inline-start`, `inset-inline-end`,
+`text-align: start`, …) instead of physical ones, so spacing, borders and alignment flip
+automatically when the text direction changes.
+
+For interactive components that render in a portal (menus, popovers, tooltips, dialogs),
+Base UI also needs to know the direction so keyboard navigation and positioning flip
+correctly. You provide it with the `dir` attribute and a `DirectionProvider`.
+
+## Set the direction
+
+Set `dir="rtl"` on an element — usually `<html>` — and wrap your app in Base UI's
+`DirectionProvider`. The `dir` attribute drives the CSS logical properties; the provider
+makes portalled content (menus, popovers) inherit the same direction.
+
+```tsx title="app/layout.tsx"
+import { DirectionProvider } from "@base-ui/react/direction-provider";
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="ar" dir="rtl">
+      <body>
+        <DirectionProvider direction="rtl">{children}</DirectionProvider>
+      </body>
+    </html>
+  );
+}
+```
+
+<Callout>
+  The `direction` passed to `DirectionProvider` should match the `dir` attribute
+  on the DOM. Keep them in sync if you let users toggle direction at runtime.
+</Callout>
+
+## Scoping to a subtree
+
+You don't have to flip the whole page. Set `dir` on any wrapper and add a
+`DirectionProvider` around the same subtree to flip just that region:
+
+```tsx
+<div dir="rtl">
+  <DirectionProvider direction="rtl">
+    <DropdownMenuDemo />
+  </DirectionProvider>
+</div>
+```
+
+## How it works
+
+- **Styling** flips through CSS logical properties. `padding-inline-start`,
+  `border-inline-start`, `inset-inline-end` and `text-align: start` resolve against the
+  nearest `dir`, so no JavaScript is involved for layout.
+- **Behavior** flips through Base UI's `DirectionProvider`. Arrow-key navigation in menus,
+  the side a submenu or popover opens toward, and slide animations all read the provided
+  direction.
+
+Throughout the component docs, the **RTL** section shows each component rendered with
+`dir="rtl"` so you can verify the result.

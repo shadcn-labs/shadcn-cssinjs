@@ -3,11 +3,18 @@ title: Accordion
 description: A vertically stacked set of interactive headings that each reveal a section of content.
 links:
   doc: https://base-ui.com/react/components/accordion
+  api: https://base-ui.com/react/components/accordion#api-reference
 ---
 
 import AccordionDemo from "@/examples/accordion-demo";
+import AccordionBasic from "@/examples/accordion-basic";
+import AccordionMultiple from "@/examples/accordion-multiple";
+import AccordionDisabled from "@/examples/accordion-disabled";
+import AccordionBorders from "@/examples/accordion-borders";
+import AccordionCard from "@/examples/accordion-card";
+import AccordionRtl from "@/examples/accordion-rtl";
 
-<ComponentPreview name="accordion-demo">
+<ComponentPreview name="accordion-demo" align="start">
   <AccordionDemo />
 </ComponentPreview>
 
@@ -32,15 +39,18 @@ npx shadcn@latest add https://shadcn-cssinjs.vercel.app/r/accordion.json
 
 <Steps>
 
+<Step>Install the following dependencies:</Step>
+
+```bash
+pnpm add @base-ui/react @stylexjs/stylex
+```
+
 <Step>
   Make sure [StyleX is configured](/docs/installation) and the design tokens are
   installed.
 </Step>
 
-<Step>
-  Copy the component source into `components/ui/accordion/accordion.tsx` and its
-  styles into `components/ui/accordion/accordion.stylex.ts`.
-</Step>
+<Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource name="accordion" title="accordion.tsx" />
 
@@ -61,11 +71,84 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion/accordion";
+```
 
-<Accordion>
+```tsx
+<Accordion defaultValue={["item-1"]}>
   <AccordionItem value="item-1">
     <AccordionTrigger>Is it accessible?</AccordionTrigger>
-    <AccordionContent>Yes. It follows the WAI-ARIA pattern.</AccordionContent>
+    <AccordionContent>
+      Yes. It adheres to the WAI-ARIA design pattern.
+    </AccordionContent>
   </AccordionItem>
-</Accordion>;
+</Accordion>
 ```
+
+## Composition
+
+Use the following composition to build an `Accordion`:
+
+```txt
+Accordion
+├── AccordionItem
+│   ├── AccordionTrigger
+│   └── AccordionContent
+└── AccordionItem
+    ├── AccordionTrigger
+    └── AccordionContent
+```
+
+## Examples
+
+### Basic
+
+A basic accordion that shows one item at a time. The first item is open by default.
+
+<ComponentPreview name="accordion-basic" align="start">
+  <AccordionBasic />
+</ComponentPreview>
+
+### Multiple
+
+Use the `multiple` prop to allow multiple items to be open at the same time.
+
+<ComponentPreview name="accordion-multiple" align="start">
+  <AccordionMultiple />
+</ComponentPreview>
+
+### Disabled
+
+Use the `disabled` prop on `AccordionItem` to disable individual items.
+
+<ComponentPreview name="accordion-disabled" align="start">
+  <AccordionDisabled />
+</ComponentPreview>
+
+### Borders
+
+Wrap the `Accordion` in a bordered, rounded container to group the items.
+
+<ComponentPreview name="accordion-borders" align="start">
+  <AccordionBorders />
+</ComponentPreview>
+
+### Card
+
+Wrap the `Accordion` in a `Card` component.
+
+<ComponentPreview name="accordion-card" align="start">
+  <AccordionCard />
+</ComponentPreview>
+
+## RTL
+
+To enable right-to-left support, see the [RTL guide](/docs/rtl).
+
+<ComponentPreview name="accordion-rtl" align="start" direction="rtl">
+  <AccordionRtl />
+</ComponentPreview>
+
+## API Reference
+
+See the [Base UI](https://base-ui.com/react/components/accordion#api-reference)
+documentation for the full API.

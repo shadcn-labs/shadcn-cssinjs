@@ -30,15 +30,18 @@ npx shadcn@latest add https://shadcn-cssinjs.vercel.app/r/card.json
 
 <Steps>
 
+<Step>Install the following dependencies:</Step>
+
+```bash
+pnpm add @stylexjs/stylex
+```
+
 <Step>
   Make sure [StyleX is configured](/docs/installation) and the design tokens are
   installed.
 </Step>
 
-<Step>
-  Copy the component source into `components/ui/card/card.tsx` and its styles
-  into `components/ui/card/card.stylex.ts`.
-</Step>
+<Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource name="card" title="card.tsx" />
 
@@ -55,19 +58,49 @@ npx shadcn@latest add https://shadcn-cssinjs.vercel.app/r/card.json
 ```tsx
 import {
   Card,
+  CardAction,
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card/card";
+```
 
+```tsx
 <Card>
   <CardHeader>
     <CardTitle>Card Title</CardTitle>
     <CardDescription>Card Description</CardDescription>
+    <CardAction>Card Action</CardAction>
   </CardHeader>
-  <CardContent>Card Content</CardContent>
-  <CardFooter>Card Footer</CardFooter>
-</Card>;
+  <CardContent>
+    <p>Card Content</p>
+  </CardContent>
+  <CardFooter>
+    <p>Card Footer</p>
+  </CardFooter>
+</Card>
 ```
+
+## Composition
+
+Use the following composition to build a `Card`:
+
+```txt
+Card
+├── CardHeader
+│   ├── CardTitle
+│   ├── CardDescription
+│   └── CardAction
+├── CardContent
+└── CardFooter
+```
+
+## RTL
+
+To enable right-to-left support, see the [RTL guide](/docs/rtl).
+
+<ComponentPreview direction="rtl">
+  <CardDemo />
+</ComponentPreview>

@@ -3,9 +3,12 @@ title: Dropdown Menu
 description: Displays a menu to the user — such as a set of actions or functions — triggered by a button.
 links:
   doc: https://base-ui.com/react/components/menu
+  api: https://base-ui.com/react/components/menu#api-reference
 ---
 
 import DropdownMenuDemo from "@/examples/dropdown-menu-demo";
+import DropdownMenuCheckboxes from "@/examples/dropdown-menu-checkboxes";
+import DropdownMenuSubmenu from "@/examples/dropdown-menu-submenu";
 
 <ComponentPreview name="dropdown-menu-demo">
   <DropdownMenuDemo />
@@ -32,15 +35,18 @@ npx shadcn@latest add https://shadcn-cssinjs.vercel.app/r/dropdown-menu.json
 
 <Steps>
 
+<Step>Install the following dependencies:</Step>
+
+```bash
+pnpm add @base-ui/react @stylexjs/stylex
+```
+
 <Step>
   Make sure [StyleX is configured](/docs/installation) and the design tokens are
   installed.
 </Step>
 
-<Step>
-  Copy the component source into `components/ui/dropdown-menu/dropdown-menu.tsx`
-  and its styles into `components/ui/dropdown-menu/dropdown-menu.stylex.ts`.
-</Step>
+<Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource name="dropdown-menu" title="dropdown-menu.tsx" />
 
@@ -63,13 +69,69 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu/dropdown-menu";
+```
 
+```tsx
 <DropdownMenu>
-  <DropdownMenuTrigger render={<Button variant="outline">Open</Button>} />
+  <DropdownMenuTrigger>Open</DropdownMenuTrigger>
   <DropdownMenuContent>
     <DropdownMenuLabel>My Account</DropdownMenuLabel>
     <DropdownMenuSeparator />
     <DropdownMenuItem>Profile</DropdownMenuItem>
+    <DropdownMenuItem>Billing</DropdownMenuItem>
   </DropdownMenuContent>
-</DropdownMenu>;
+</DropdownMenu>
 ```
+
+## Composition
+
+Use the following composition to build a `DropdownMenu`:
+
+```txt
+DropdownMenu
+├── DropdownMenuTrigger
+└── DropdownMenuContent
+    ├── DropdownMenuLabel
+    ├── DropdownMenuGroup
+    │   └── DropdownMenuItem
+    │       └── DropdownMenuShortcut
+    ├── DropdownMenuCheckboxItem
+    ├── DropdownMenuRadioGroup
+    │   └── DropdownMenuRadioItem
+    ├── DropdownMenuSeparator
+    └── DropdownMenuSub
+        ├── DropdownMenuSubTrigger
+        └── DropdownMenuSubContent
+```
+
+## Examples
+
+### Checkboxes
+
+Use `DropdownMenuCheckboxItem` for toggleable options.
+
+<ComponentPreview name="dropdown-menu-checkboxes">
+  <DropdownMenuCheckboxes />
+</ComponentPreview>
+
+### Submenu
+
+Nest a `DropdownMenuSub` to create a submenu.
+
+<ComponentPreview name="dropdown-menu-submenu">
+  <DropdownMenuSubmenu />
+</ComponentPreview>
+
+## RTL
+
+To enable right-to-left support, see the [RTL guide](/docs/rtl). Shortcuts align
+to the inline-start edge and submenus open toward the inline-start.
+
+<ComponentPreview direction="rtl">
+  <DropdownMenuDemo />
+</ComponentPreview>
+
+## API Reference
+
+See the [Base UI](https://base-ui.com/react/components/menu#api-reference)
+documentation for the full API.

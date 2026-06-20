@@ -53,7 +53,7 @@ export const styles = stylex.create({
     outline: "none",
     paddingBottom: "1rem",
     paddingTop: "1rem",
-    textAlign: "left",
+    textAlign: "start",
     textDecorationLine: { ":hover": "underline", default: "none" },
     transition: "all 0.15s ease-in-out",
     width: "100%",

@@ -3,9 +3,11 @@ title: Tabs
 description: A set of layered sections of content—known as tab panels—that are displayed one at a time.
 links:
   doc: https://base-ui.com/react/components/tabs
+  api: https://base-ui.com/react/components/tabs#api-reference
 ---
 
 import TabsDemo from "@/examples/tabs-demo";
+import TabsDisabled from "@/examples/tabs-disabled";
 
 <ComponentPreview name="tabs-demo">
   <TabsDemo />
@@ -32,15 +34,18 @@ npx shadcn@latest add https://shadcn-cssinjs.vercel.app/r/tabs.json
 
 <Steps>
 
+<Step>Install the following dependencies:</Step>
+
+```bash
+pnpm add @base-ui/react @stylexjs/stylex
+```
+
 <Step>
   Make sure [StyleX is configured](/docs/installation) and the design tokens are
   installed.
 </Step>
 
-<Step>
-  Copy the component source into `components/ui/tabs/tabs.tsx` and its styles
-  into `components/ui/tabs/tabs.stylex.ts`.
-</Step>
+<Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource name="tabs" title="tabs.tsx" />
 
@@ -61,13 +66,51 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs/tabs";
+```
 
+```tsx
 <Tabs defaultValue="account">
   <TabsList>
     <TabsTrigger value="account">Account</TabsTrigger>
     <TabsTrigger value="password">Password</TabsTrigger>
   </TabsList>
-  <TabsContent value="account">Account</TabsContent>
-  <TabsContent value="password">Password</TabsContent>
-</Tabs>;
+  <TabsContent value="account">Account settings</TabsContent>
+  <TabsContent value="password">Password settings</TabsContent>
+</Tabs>
 ```
+
+## Composition
+
+Use the following composition to build `Tabs`:
+
+```txt
+Tabs
+├── TabsList
+│   ├── TabsTrigger
+│   └── TabsTrigger
+├── TabsContent
+└── TabsContent
+```
+
+## Examples
+
+### Disabled
+
+Use the `disabled` prop on a `TabsTrigger` to disable a tab.
+
+<ComponentPreview name="tabs-disabled">
+  <TabsDisabled />
+</ComponentPreview>
+
+## RTL
+
+To enable right-to-left support, see the [RTL guide](/docs/rtl).
+
+<ComponentPreview direction="rtl">
+  <TabsDemo />
+</ComponentPreview>
+
+## API Reference
+
+See the [Base UI](https://base-ui.com/react/components/tabs#api-reference)
+documentation for the full API.

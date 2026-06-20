@@ -30,15 +30,18 @@ npx shadcn@latest add https://shadcn-cssinjs.vercel.app/r/text-flip.json
 
 <Steps>
 
+<Step>Install the following dependencies:</Step>
+
+```bash
+pnpm add motion @stylexjs/stylex
+```
+
 <Step>
   Make sure [StyleX is configured](/docs/installation) and the design tokens are
   installed.
 </Step>
 
-<Step>
-  Copy the component source into `components/ui/text-flip/text-flip.tsx` and its
-  styles into `components/ui/text-flip/text-flip.stylex.ts`.
-</Step>
+<Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource name="text-flip" title="text-flip.tsx" />
 
@@ -54,9 +57,22 @@ npx shadcn@latest add https://shadcn-cssinjs.vercel.app/r/text-flip.json
 
 ```tsx
 import { TextFlip } from "@/components/ui/text-flip/text-flip";
-
-<TextFlip>
-  <span>StyleX</span>
-  <span>CSS-in-JS</span>
-</TextFlip>;
 ```
+
+```tsx
+<TextFlip interval={1.5}>
+  <span>StyleX</span>
+  <span>atomic CSS</span>
+  <span>CSS-in-JS</span>
+</TextFlip>
+```
+
+Each child is shown in turn, flipping to the next after `interval` seconds.
+
+## RTL
+
+To enable right-to-left support, see the [RTL guide](/docs/rtl).
+
+<ComponentPreview direction="rtl">
+  <TextFlipDemo />
+</ComponentPreview>

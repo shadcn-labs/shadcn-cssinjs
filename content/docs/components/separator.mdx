@@ -3,9 +3,11 @@ title: Separator
 description: Visually or semantically separates content.
 links:
   doc: https://base-ui.com/react/components/separator
+  api: https://base-ui.com/react/components/separator#api-reference
 ---
 
 import SeparatorDemo from "@/examples/separator-demo";
+import SeparatorVertical from "@/examples/separator-vertical";
 
 <ComponentPreview name="separator-demo">
   <SeparatorDemo />
@@ -32,15 +34,18 @@ npx shadcn@latest add https://shadcn-cssinjs.vercel.app/r/separator.json
 
 <Steps>
 
+<Step>Install the following dependencies:</Step>
+
+```bash
+pnpm add @base-ui/react @stylexjs/stylex
+```
+
 <Step>
   Make sure [StyleX is configured](/docs/installation) and the design tokens are
   installed.
 </Step>
 
-<Step>
-  Copy the component source into `components/ui/separator/separator.tsx` and its
-  styles into `components/ui/separator/separator.stylex.ts`.
-</Step>
+<Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource name="separator" title="separator.tsx" />
 
@@ -56,7 +61,32 @@ npx shadcn@latest add https://shadcn-cssinjs.vercel.app/r/separator.json
 
 ```tsx
 import { Separator } from "@/components/ui/separator/separator";
+```
 
+```tsx
 <Separator />
 <Separator orientation="vertical" />
 ```
+
+## Examples
+
+### Vertical
+
+Use `orientation="vertical"` inside a flex row.
+
+<ComponentPreview name="separator-vertical">
+  <SeparatorVertical />
+</ComponentPreview>
+
+## RTL
+
+To enable right-to-left support, see the [RTL guide](/docs/rtl).
+
+<ComponentPreview direction="rtl">
+  <SeparatorVertical />
+</ComponentPreview>
+
+## API Reference
+
+See the [Base UI](https://base-ui.com/react/components/separator#api-reference)
+documentation for the full API.

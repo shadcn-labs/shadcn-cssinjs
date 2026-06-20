@@ -4,6 +4,9 @@ description: Displays a form input field or a component that looks like an input
 ---
 
 import InputDemo from "@/examples/input-demo";
+import InputLabel from "@/examples/input-label";
+import InputDisabled from "@/examples/input-disabled";
+import InputFile from "@/examples/input-file";
 
 <ComponentPreview name="input-demo">
   <InputDemo />
@@ -30,15 +33,18 @@ npx shadcn@latest add https://shadcn-cssinjs.vercel.app/r/input.json
 
 <Steps>
 
+<Step>Install the following dependencies:</Step>
+
+```bash
+pnpm add @stylexjs/stylex
+```
+
 <Step>
   Make sure [StyleX is configured](/docs/installation) and the design tokens are
   installed.
 </Step>
 
-<Step>
-  Copy the component source into `components/ui/input/input.tsx` and its styles
-  into `components/ui/input/input.stylex.ts`.
-</Step>
+<Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource name="input" title="input.tsx" />
 
@@ -54,6 +60,38 @@ npx shadcn@latest add https://shadcn-cssinjs.vercel.app/r/input.json
 
 ```tsx
 import { Input } from "@/components/ui/input/input";
-
-<Input type="email" placeholder="Email" />;
 ```
+
+```tsx
+<Input type="email" placeholder="Email" />
+```
+
+## Examples
+
+### Label
+
+Pair the input with a `label` element.
+
+<ComponentPreview name="input-label">
+  <InputLabel />
+</ComponentPreview>
+
+### Disabled
+
+<ComponentPreview name="input-disabled">
+  <InputDisabled />
+</ComponentPreview>
+
+### File
+
+<ComponentPreview name="input-file">
+  <InputFile />
+</ComponentPreview>
+
+## RTL
+
+To enable right-to-left support, see the [RTL guide](/docs/rtl).
+
+<ComponentPreview direction="rtl">
+  <InputLabel />
+</ComponentPreview>

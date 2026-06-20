@@ -4,6 +4,7 @@ description: Use to show a placeholder while content is loading.
 ---
 
 import SkeletonDemo from "@/examples/skeleton-demo";
+import SkeletonCard from "@/examples/skeleton-card";
 
 <ComponentPreview name="skeleton-demo">
   <SkeletonDemo />
@@ -30,15 +31,18 @@ npx shadcn@latest add https://shadcn-cssinjs.vercel.app/r/skeleton.json
 
 <Steps>
 
+<Step>Install the following dependencies:</Step>
+
+```bash
+pnpm add @stylexjs/stylex
+```
+
 <Step>
   Make sure [StyleX is configured](/docs/installation) and the design tokens are
   installed.
 </Step>
 
-<Step>
-  Copy the component source into `components/ui/skeleton/skeleton.tsx` and its
-  styles into `components/ui/skeleton/skeleton.stylex.ts`.
-</Step>
+<Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource name="skeleton" title="skeleton.tsx" />
 
@@ -54,6 +58,26 @@ npx shadcn@latest add https://shadcn-cssinjs.vercel.app/r/skeleton.json
 
 ```tsx
 import { Skeleton } from "@/components/ui/skeleton/skeleton";
-
-<Skeleton style={{ width: 200, height: 16 }} />;
 ```
+
+```tsx
+<Skeleton style={{ width: 200, height: 16 }} />
+```
+
+## Examples
+
+### Card
+
+Compose multiple skeletons to outline a loading card.
+
+<ComponentPreview name="skeleton-card">
+  <SkeletonCard />
+</ComponentPreview>
+
+## RTL
+
+To enable right-to-left support, see the [RTL guide](/docs/rtl).
+
+<ComponentPreview direction="rtl">
+  <SkeletonDemo />
+</ComponentPreview>

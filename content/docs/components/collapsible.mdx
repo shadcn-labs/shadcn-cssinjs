@@ -3,11 +3,13 @@ title: Collapsible
 description: An interactive component which expands/collapses a panel.
 links:
   doc: https://base-ui.com/react/components/collapsible
+  api: https://base-ui.com/react/components/collapsible#api-reference
 ---
 
 import CollapsibleDemo from "@/examples/collapsible-demo";
+import CollapsibleSettings from "@/examples/collapsible-settings";
 
-<ComponentPreview name="collapsible-demo">
+<ComponentPreview name="collapsible-demo" align="start">
   <CollapsibleDemo />
 </ComponentPreview>
 
@@ -32,15 +34,18 @@ npx shadcn@latest add https://shadcn-cssinjs.vercel.app/r/collapsible.json
 
 <Steps>
 
+<Step>Install the following dependencies:</Step>
+
+```bash
+pnpm add @base-ui/react @stylexjs/stylex
+```
+
 <Step>
   Make sure [StyleX is configured](/docs/installation) and the design tokens are
   installed.
 </Step>
 
-<Step>
-  Copy the component source into `components/ui/collapsible/collapsible.tsx` and
-  its styles into `components/ui/collapsible/collapsible.stylex.ts`.
-</Step>
+<Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource name="collapsible" title="collapsible.tsx" />
 
@@ -60,9 +65,46 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible/collapsible";
-
-<Collapsible>
-  <CollapsibleTrigger>Toggle</CollapsibleTrigger>
-  <CollapsibleContent>Content</CollapsibleContent>
-</Collapsible>;
 ```
+
+```tsx
+<Collapsible>
+  <CollapsibleTrigger>Can I use this in my project?</CollapsibleTrigger>
+  <CollapsibleContent>
+    Yes. Free to use for personal and commercial projects.
+  </CollapsibleContent>
+</Collapsible>
+```
+
+## Composition
+
+Use the following composition to build a `Collapsible`:
+
+```txt
+Collapsible
+├── CollapsibleTrigger
+└── CollapsibleContent
+```
+
+## Examples
+
+### Settings Panel
+
+Use a collapsible to progressively disclose advanced options.
+
+<ComponentPreview name="collapsible-settings" align="start">
+  <CollapsibleSettings />
+</ComponentPreview>
+
+## RTL
+
+To enable right-to-left support, see the [RTL guide](/docs/rtl).
+
+<ComponentPreview align="start" direction="rtl">
+  <CollapsibleDemo />
+</ComponentPreview>
+
+## API Reference
+
+See the [Base UI](https://base-ui.com/react/components/collapsible#api-reference)
+documentation for the full API.

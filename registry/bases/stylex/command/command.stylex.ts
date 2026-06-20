@@ -93,7 +93,7 @@ export const styles = stylex.create({
     color: colors.mutedForeground,
     fontSize: "0.75rem",
     letterSpacing: "0.05em",
-    marginLeft: "auto",
+    marginInlineStart: "auto",
   },
   srOnly: {
     borderWidth: 0,

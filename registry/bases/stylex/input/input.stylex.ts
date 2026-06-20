@@ -10,7 +10,7 @@ export const styles = stylex.create({
       color: colors.foreground,
       fontSize: "0.875rem",
       fontWeight: 500,
-      marginRight: "0.5rem",
+      marginInlineEnd: "0.5rem",
     },
     "::placeholder": {
       color: colors.mutedForeground,
@@ -41,8 +41,7 @@ export const styles = stylex.create({
     opacity: { ":disabled": 0.5, default: 1 },
     outline: "none",
     paddingBottom: "0.25rem",
-    paddingLeft: "0.75rem",
-    paddingRight: "0.75rem",
+    paddingInline: "0.75rem",
     paddingTop: "0.25rem",
     transition:
       "color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, border-color 0.15s ease-in-out",

@@ -5,6 +5,11 @@ description: Displays a button or a component that looks like a button.
 
 import ButtonDemo from "@/examples/button-demo";
 import ButtonVariants from "@/examples/button-variants";
+import ButtonSizes from "@/examples/button-sizes";
+import ButtonIcon from "@/examples/button-icon";
+import ButtonWithIcon from "@/examples/button-with-icon";
+import ButtonLink from "@/examples/button-link";
+import ButtonDisabled from "@/examples/button-disabled";
 
 <ComponentPreview name="button-demo">
   <ButtonDemo />
@@ -31,15 +36,18 @@ npx shadcn@latest add https://shadcn-cssinjs.vercel.app/r/button.json
 
 <Steps>
 
+<Step>Install the following dependencies:</Step>
+
+```bash
+pnpm add @base-ui/react @stylexjs/stylex
+```
+
 <Step>
   Make sure [StyleX is configured](/docs/installation) and the design tokens are
   installed.
 </Step>
 
-<Step>
-  Copy the component source into `components/ui/button/button.tsx` and its
-  styles into `components/ui/button/button.stylex.ts`.
-</Step>
+<Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource name="button" title="button.tsx" />
 
@@ -55,14 +63,62 @@ npx shadcn@latest add https://shadcn-cssinjs.vercel.app/r/button.json
 
 ```tsx
 import { Button } from "@/components/ui/button/button";
+```
 
-<Button variant="outline">Button</Button>;
+```tsx
+<Button variant="outline">Button</Button>
 ```
 
 ## Examples
 
 ### Variants
 
+Use the `variant` prop to change the button style.
+
 <ComponentPreview name="button-variants">
   <ButtonVariants />
+</ComponentPreview>
+
+### Size
+
+Use the `size` prop to change the button size.
+
+<ComponentPreview name="button-sizes">
+  <ButtonSizes />
+</ComponentPreview>
+
+### Link
+
+<ComponentPreview name="button-link">
+  <ButtonLink />
+</ComponentPreview>
+
+### Icon
+
+Use `size="icon"` for a square, icon-only button.
+
+<ComponentPreview name="button-icon">
+  <ButtonIcon />
+</ComponentPreview>
+
+### With Icon
+
+Place an icon before or after the label.
+
+<ComponentPreview name="button-with-icon">
+  <ButtonWithIcon />
+</ComponentPreview>
+
+### Disabled
+
+<ComponentPreview name="button-disabled">
+  <ButtonDisabled />
+</ComponentPreview>
+
+## RTL
+
+To enable right-to-left support, see the [RTL guide](/docs/rtl).
+
+<ComponentPreview direction="rtl">
+  <ButtonWithIcon />
 </ComponentPreview>

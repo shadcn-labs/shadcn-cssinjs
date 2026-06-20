@@ -6,10 +6,10 @@ export const styles = stylex.create({
   icon: {
     color: colors.mutedForeground,
     height: "1rem",
+    insetInlineEnd: "0.875rem",
     opacity: 0.5,
     pointerEvents: "none",
     position: "absolute",
-    right: "0.875rem",
     top: "50%",
     transform: "translateY(-50%)",
     userSelect: "none",
@@ -17,7 +17,7 @@ export const styles = stylex.create({
   },
   iconSm: {
     height: "0.875rem",
-    right: "0.625rem",
+    insetInlineEnd: "0.625rem",
     width: "0.875rem",
   },
   select: {
@@ -40,8 +40,8 @@ export const styles = stylex.create({
     opacity: { ":disabled": 0.5, default: 1 },
     outline: "none",
     paddingBottom: "0.5rem",
-    paddingLeft: "0.75rem",
-    paddingRight: "2.25rem",
+    paddingInlineEnd: "2.25rem",
+    paddingInlineStart: "0.75rem",
     paddingTop: "0.5rem",
     transition:
       "color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, border-color 0.15s ease-in-out",
@@ -52,8 +52,8 @@ export const styles = stylex.create({
     fontSize: "0.75rem",
     height: "2rem",
     paddingBottom: "0.25rem",
-    paddingLeft: "0.625rem",
-    paddingRight: "1.75rem",
+    paddingInlineEnd: "1.75rem",
+    paddingInlineStart: "0.625rem",
     paddingTop: "0.25rem",
   },
   wrapper: {
