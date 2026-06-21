@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "input-otp",
+  "title": "Input OTP",
+  "description": "Input OTP component styled with StyleX on Base UI primitives.",
+  "dependencies": [
+    "@base-ui/react",
+    "@stylexjs/stylex",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "stylex-tokens"
+  ],
+  "files": [
+    {
+      "path": "registry/bases/stylex/input-otp/input-otp.tsx",
+      "content": "\"use client\";\n\nimport { OTPFieldPreview as OtpField } from \"@base-ui/react/otp-field\";\nimport { MinusIcon } from \"lucide-react\";\n\nimport { cx, x } from \"@/lib/utils\";\n\nimport { styles } from \"./input-otp.stylex\";\n\nconst InputOTP = ({\n  className,\n  style,\n  ...props\n}: Omit<React.ComponentProps<typeof OtpField.Root>, \"className\"> & {\n  className?: string;\n}) => {\n  const p = x(styles.root);\n  return (\n    <OtpField.Root\n      className={cx(p.className, className)}\n      data-slot=\"input-otp\"\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nconst InputOTPGroup = ({\n  className,\n  style,\n  ...props\n}: React.ComponentProps<\"div\">) => {\n  const p = x(styles.group);\n  return (\n    <div\n      className={cx(p.className, className)}\n      data-slot=\"input-otp-group\"\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nconst InputOTPSlot = ({\n  className,\n  style,\n  ...props\n}: Omit<React.ComponentProps<typeof OtpField.Input>, \"className\"> & {\n  className?: string;\n}) => {\n  const p = x(styles.slot);\n  return (\n    <OtpField.Input\n      className={cx(p.className, className)}\n      data-slot=\"input-otp-slot\"\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nconst InputOTPSeparator = ({\n  className,\n  style,\n  ...props\n}: React.ComponentProps<\"div\">) => {\n  const p = x(styles.separator);\n  return (\n    <div\n      className={cx(p.className, className)}\n      data-slot=\"input-otp-separator\"\n      role=\"separator\"\n      style={{ ...p.style, ...style }}\n      {...props}\n    >\n      <MinusIcon size={16} />\n    </div>\n  );\n};\n\nexport { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot };\n",
+      "type": "registry:ui",
+      "target": "components/ui/input-otp/input-otp.tsx"
+    },
+    {
+      "path": "registry/bases/stylex/input-otp/input-otp.stylex.ts",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nimport { colors, radius } from \"../tokens.stylex\";\n\nexport const styles = stylex.create({\n  group: {\n    backgroundColor: colors.border,\n    borderRadius: radius.md,\n    display: \"inline-flex\",\n    gap: \"1px\",\n    overflow: \"hidden\",\n  },\n  root: {\n    alignItems: \"center\",\n    display: \"flex\",\n    gap: \"0.5rem\",\n  },\n  separator: {\n    alignItems: \"center\",\n    color: colors.mutedForeground,\n    display: \"flex\",\n  },\n  slot: {\n    backgroundColor: colors.background,\n    borderWidth: 0,\n    boxShadow: {\n      \":focus\": `inset 0 0 0 2px ${colors.ring}`,\n      default: null,\n    },\n    color: colors.foreground,\n    fontSize: \"0.875rem\",\n    height: \"2.25rem\",\n    outline: \"none\",\n    textAlign: \"center\",\n    transition: \"box-shadow 0.15s ease-in-out\",\n    width: \"2.25rem\",\n  },\n});\n",
+      "type": "registry:ui",
+      "target": "components/ui/input-otp/input-otp.stylex.ts"
+    }
+  ],
+  "type": "registry:ui"
+}

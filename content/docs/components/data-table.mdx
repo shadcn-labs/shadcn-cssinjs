@@ -1,0 +1,33 @@
+---
+title: Data Table
+description: Powerful tables and datagrids built using TanStack Table and the Table component.
+---
+
+import DataTableDemo from "@/examples/data-table-demo";
+
+<ComponentPreview name="data-table-demo">
+  <DataTableDemo />
+</ComponentPreview>
+
+The Data Table is built by composing [Table](/docs/components/table) and [TanStack Table](https://tanstack.com/table). There is no separate component
+to install — add the building blocks and compose them.
+
+## Installation
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.vercel.app/r/table.json
+```
+
+Install the extra dependency:
+
+```bash
+pnpm add @tanstack/react-table
+```
+
+## RTL
+
+To enable right-to-left support, see the [RTL guide](/docs/rtl).
+
+<ComponentPreview direction="rtl">
+  <DataTableDemo />
+</ComponentPreview>

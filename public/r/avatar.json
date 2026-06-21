@@ -1,0 +1,28 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "avatar",
+  "title": "Avatar",
+  "description": "Avatar component styled with StyleX on Base UI primitives.",
+  "dependencies": [
+    "@base-ui/react",
+    "@stylexjs/stylex"
+  ],
+  "registryDependencies": [
+    "stylex-tokens"
+  ],
+  "files": [
+    {
+      "path": "registry/bases/stylex/avatar/avatar.tsx",
+      "content": "\"use client\";\n\nimport { Avatar as AvatarPrimitive } from \"@base-ui/react/avatar\";\n\nimport { cx, x } from \"@/lib/utils\";\n\nimport { styles } from \"./avatar.stylex\";\n\nconst Avatar = ({\n  className,\n  style,\n  ...props\n}: Omit<React.ComponentProps<typeof AvatarPrimitive.Root>, \"className\"> & {\n  className?: string;\n}) => {\n  const p = x(styles.root);\n  return (\n    <AvatarPrimitive.Root\n      className={cx(p.className, className)}\n      data-slot=\"avatar\"\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nconst AvatarImage = ({\n  className,\n  style,\n  ...props\n}: Omit<React.ComponentProps<typeof AvatarPrimitive.Image>, \"className\"> & {\n  className?: string;\n}) => {\n  const p = x(styles.image);\n  return (\n    <AvatarPrimitive.Image\n      className={cx(p.className, className)}\n      data-slot=\"avatar-image\"\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nconst AvatarFallback = ({\n  className,\n  style,\n  ...props\n}: Omit<React.ComponentProps<typeof AvatarPrimitive.Fallback>, \"className\"> & {\n  className?: string;\n}) => {\n  const p = x(styles.fallback);\n  return (\n    <AvatarPrimitive.Fallback\n      className={cx(p.className, className)}\n      data-slot=\"avatar-fallback\"\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nexport { Avatar, AvatarFallback, AvatarImage };\n",
+      "type": "registry:ui",
+      "target": "components/ui/avatar/avatar.tsx"
+    },
+    {
+      "path": "registry/bases/stylex/avatar/avatar.stylex.ts",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nimport { colors } from \"../tokens.stylex\";\n\nexport const styles = stylex.create({\n  fallback: {\n    alignItems: \"center\",\n    backgroundColor: colors.muted,\n    borderRadius: \"9999px\",\n    color: colors.mutedForeground,\n    display: \"flex\",\n    fontSize: \"0.875rem\",\n    height: \"100%\",\n    justifyContent: \"center\",\n    width: \"100%\",\n  },\n  image: {\n    aspectRatio: \"1 / 1\",\n    height: \"100%\",\n    objectFit: \"cover\",\n    width: \"100%\",\n  },\n  root: {\n    borderRadius: \"9999px\",\n    display: \"flex\",\n    flexShrink: 0,\n    height: \"2.5rem\",\n    overflow: \"hidden\",\n    position: \"relative\",\n    userSelect: \"none\",\n    width: \"2.5rem\",\n  },\n});\n",
+      "type": "registry:ui",
+      "target": "components/ui/avatar/avatar.stylex.ts"
+    }
+  ],
+  "type": "registry:ui"
+}

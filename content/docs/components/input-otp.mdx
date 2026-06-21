@@ -1,0 +1,103 @@
+---
+title: Input OTP
+description: Accessible one-time password component with copy paste functionality.
+links:
+  doc: https://base-ui.com/react/components/otp-field
+  api: https://base-ui.com/react/components/otp-field#api-reference
+---
+
+import InputOTPDemo from "@/examples/input-otp-demo";
+
+<ComponentPreview name="input-otp-demo">
+  <InputOTPDemo />
+</ComponentPreview>
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.vercel.app/r/input-otp.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+pnpm add @base-ui/react @stylexjs/stylex
+```
+
+<Step>
+  Make sure [StyleX is configured](/docs/installation) and the design tokens are
+  installed.
+</Step>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="input-otp" title="input-otp.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSeparator,
+  InputOTPSlot,
+} from "@/components/ui/input-otp/input-otp";
+```
+
+```tsx
+<InputOTP length={6}>
+  <InputOTPGroup>
+    <InputOTPSlot />
+    <InputOTPSlot />
+    <InputOTPSlot />
+  </InputOTPGroup>
+</InputOTP>
+```
+
+## Composition
+
+Use the following composition to build a `Input OTP`:
+
+```txt
+InputOTP
+├── InputOTPGroup
+│   └── InputOTPSlot
+├── InputOTPSeparator
+└── InputOTPGroup
+    └── InputOTPSlot
+```
+
+## RTL
+
+To enable right-to-left support, see the [RTL guide](/docs/rtl).
+
+<ComponentPreview direction="rtl">
+  <InputOTPDemo />
+</ComponentPreview>
+
+## API Reference
+
+See the [Base UI](https://base-ui.com/react/components/otp-field#api-reference) documentation for the full API.

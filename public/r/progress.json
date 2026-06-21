@@ -1,0 +1,28 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "progress",
+  "title": "Progress",
+  "description": "Progress component styled with StyleX on Base UI primitives.",
+  "dependencies": [
+    "@base-ui/react",
+    "@stylexjs/stylex"
+  ],
+  "registryDependencies": [
+    "stylex-tokens"
+  ],
+  "files": [
+    {
+      "path": "registry/bases/stylex/progress/progress.tsx",
+      "content": "\"use client\";\n\nimport { Progress as ProgressPrimitive } from \"@base-ui/react/progress\";\n\nimport { cx, x } from \"@/lib/utils\";\n\nimport { styles } from \"./progress.stylex\";\n\nconst Progress = ({\n  className,\n  style,\n  ...props\n}: Omit<React.ComponentProps<typeof ProgressPrimitive.Root>, \"className\"> & {\n  className?: string;\n}) => (\n  <ProgressPrimitive.Root data-slot=\"progress\" style={style} {...props}>\n    <ProgressPrimitive.Track\n      className={cx(x(styles.root).className, className)}\n      data-slot=\"progress-track\"\n    >\n      <ProgressPrimitive.Indicator\n        className={x(styles.indicator).className}\n        data-slot=\"progress-indicator\"\n      />\n    </ProgressPrimitive.Track>\n  </ProgressPrimitive.Root>\n);\n\nexport { Progress };\n",
+      "type": "registry:ui",
+      "target": "components/ui/progress/progress.tsx"
+    },
+    {
+      "path": "registry/bases/stylex/progress/progress.stylex.ts",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nimport { colors } from \"../tokens.stylex\";\n\nexport const styles = stylex.create({\n  indicator: {\n    backgroundColor: colors.primary,\n    height: \"100%\",\n    transition: \"all 0.2s ease-in-out\",\n    width: \"100%\",\n  },\n  root: {\n    backgroundColor: `color-mix(in oklab, ${colors.primary} 20%, transparent)`,\n    borderRadius: \"9999px\",\n    height: \"0.5rem\",\n    overflow: \"hidden\",\n    position: \"relative\",\n    width: \"100%\",\n  },\n  track: {\n    height: \"100%\",\n    width: \"100%\",\n  },\n});\n",
+      "type": "registry:ui",
+      "target": "components/ui/progress/progress.stylex.ts"
+    }
+  ],
+  "type": "registry:ui"
+}

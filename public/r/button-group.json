@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button-group",
+  "title": "Button Group",
+  "description": "Button Group component styled with StyleX on Base UI primitives.",
+  "dependencies": [
+    "@stylexjs/stylex"
+  ],
+  "registryDependencies": [
+    "stylex-tokens"
+  ],
+  "files": [
+    {
+      "path": "registry/bases/stylex/button-group/button-group.tsx",
+      "content": "import { cx, x } from \"@/lib/utils\";\n\nimport { styles } from \"./button-group.stylex\";\n\nconst ButtonGroup = ({\n  className,\n  style,\n  orientation = \"horizontal\",\n  ...props\n}: React.ComponentProps<\"div\"> & {\n  orientation?: \"horizontal\" | \"vertical\";\n}) => {\n  const p = x(styles.group, orientation === \"vertical\" && styles.vertical);\n  return (\n    <div\n      className={cx(p.className, className)}\n      data-orientation={orientation}\n      data-slot=\"button-group\"\n      role=\"group\"\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nexport { ButtonGroup };\n",
+      "type": "registry:ui",
+      "target": "components/ui/button-group/button-group.tsx"
+    },
+    {
+      "path": "registry/bases/stylex/button-group/button-group.stylex.ts",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nimport { colors, radius } from \"../tokens.stylex\";\n\nexport const styles = stylex.create({\n  group: {\n    alignItems: \"stretch\",\n    backgroundColor: colors.border,\n    borderRadius: radius.md,\n    display: \"inline-flex\",\n    gap: \"1px\",\n    overflow: \"hidden\",\n    width: \"fit-content\",\n  },\n  vertical: {\n    flexDirection: \"column\",\n  },\n});\n",
+      "type": "registry:ui",
+      "target": "components/ui/button-group/button-group.stylex.ts"
+    }
+  ],
+  "type": "registry:ui"
+}

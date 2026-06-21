@@ -1,0 +1,28 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "toggle-group",
+  "title": "Toggle Group",
+  "description": "Toggle Group component styled with StyleX on Base UI primitives.",
+  "dependencies": [
+    "@base-ui/react",
+    "@stylexjs/stylex"
+  ],
+  "registryDependencies": [
+    "stylex-tokens"
+  ],
+  "files": [
+    {
+      "path": "registry/bases/stylex/toggle-group/toggle-group.tsx",
+      "content": "\"use client\";\n\nimport { Toggle as TogglePrimitive } from \"@base-ui/react/toggle\";\nimport { ToggleGroup as ToggleGroupPrimitive } from \"@base-ui/react/toggle-group\";\n\nimport { cx, x } from \"@/lib/utils\";\n\nimport { styles } from \"./toggle-group.stylex\";\n\nconst ToggleGroup = ({\n  className,\n  style,\n  ...props\n}: Omit<React.ComponentProps<typeof ToggleGroupPrimitive>, \"className\"> & {\n  className?: string;\n}) => {\n  const p = x(styles.group);\n  return (\n    <ToggleGroupPrimitive\n      className={cx(p.className, className)}\n      data-slot=\"toggle-group\"\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nconst ToggleGroupItem = ({\n  className,\n  style,\n  ...props\n}: Omit<React.ComponentProps<typeof TogglePrimitive>, \"className\"> & {\n  className?: string;\n}) => (\n  <TogglePrimitive\n    className={(state) =>\n      cx(\n        x(styles.item, state.pressed && styles.itemPressed).className,\n        className\n      )\n    }\n    data-slot=\"toggle-group-item\"\n    style={style}\n    {...props}\n  />\n);\n\nexport { ToggleGroup, ToggleGroupItem };\n",
+      "type": "registry:ui",
+      "target": "components/ui/toggle-group/toggle-group.tsx"
+    },
+    {
+      "path": "registry/bases/stylex/toggle-group/toggle-group.stylex.ts",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nimport { colors, radius } from \"../tokens.stylex\";\n\nexport const styles = stylex.create({\n  group: {\n    alignItems: \"center\",\n    backgroundColor: colors.muted,\n    borderRadius: radius.md,\n    display: \"inline-flex\",\n    gap: \"0.25rem\",\n    padding: \"0.25rem\",\n    width: \"fit-content\",\n  },\n  item: {\n    alignItems: \"center\",\n    backgroundColor: { \":hover\": colors.background, default: \"transparent\" },\n    borderRadius: radius.sm,\n    borderWidth: 0,\n    color: colors.foreground,\n    cursor: { \":disabled\": \"not-allowed\", default: \"pointer\" },\n    display: \"inline-flex\",\n    fontSize: \"0.875rem\",\n    fontWeight: 500,\n    gap: \"0.375rem\",\n    height: \"1.75rem\",\n    justifyContent: \"center\",\n    minWidth: \"1.75rem\",\n    opacity: { \":disabled\": 0.5, default: 1 },\n    outline: \"none\",\n    paddingInline: \"0.625rem\",\n  },\n  itemPressed: {\n    backgroundColor: colors.background,\n    boxShadow: \"0 1px 2px 0 rgb(0 0 0 / 0.05)\",\n  },\n});\n",
+      "type": "registry:ui",
+      "target": "components/ui/toggle-group/toggle-group.stylex.ts"
+    }
+  ],
+  "type": "registry:ui"
+}

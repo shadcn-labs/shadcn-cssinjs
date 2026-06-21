@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "resizable",
+  "title": "Resizable",
+  "description": "Resizable component styled with StyleX on Base UI primitives.",
+  "dependencies": [
+    "@stylexjs/stylex",
+    "lucide-react",
+    "react-resizable-panels"
+  ],
+  "registryDependencies": [
+    "stylex-tokens"
+  ],
+  "files": [
+    {
+      "path": "registry/bases/stylex/resizable/resizable.tsx",
+      "content": "\"use client\";\n\nimport { GripVerticalIcon } from \"lucide-react\";\nimport { Group, Panel, Separator } from \"react-resizable-panels\";\n\nimport { cx, x } from \"@/lib/utils\";\n\nimport { styles } from \"./resizable.stylex\";\n\nconst ResizablePanelGroup = ({\n  className,\n  style,\n  ...props\n}: React.ComponentProps<typeof Group> & { className?: string }) => {\n  const p = x(styles.group);\n  return (\n    <Group\n      className={cx(p.className, className)}\n      data-slot=\"resizable-panel-group\"\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nconst ResizablePanel = (props: React.ComponentProps<typeof Panel>) => (\n  <Panel data-slot=\"resizable-panel\" {...props} />\n);\n\nconst ResizableHandle = ({\n  withHandle,\n  className,\n  style,\n  ...props\n}: React.ComponentProps<typeof Separator> & {\n  withHandle?: boolean;\n  className?: string;\n}) => {\n  const handle = x(styles.handle);\n  const grip = x(styles.grip);\n  return (\n    <Separator\n      className={cx(handle.className, className)}\n      data-slot=\"resizable-handle\"\n      style={{ ...handle.style, ...style }}\n      {...props}\n    >\n      {withHandle && (\n        <div className={grip.className} style={grip.style}>\n          <GripVerticalIcon size={10} />\n        </div>\n      )}\n    </Separator>\n  );\n};\n\nexport { ResizableHandle, ResizablePanel, ResizablePanelGroup };\n",
+      "type": "registry:ui",
+      "target": "components/ui/resizable/resizable.tsx"
+    },
+    {
+      "path": "registry/bases/stylex/resizable/resizable.stylex.ts",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nimport { colors, radius } from \"../tokens.stylex\";\n\nexport const styles = stylex.create({\n  grip: {\n    alignItems: \"center\",\n    backgroundColor: colors.border,\n    borderRadius: radius.sm,\n    display: \"flex\",\n    height: \"1rem\",\n    justifyContent: \"center\",\n    width: \"0.75rem\",\n    zIndex: 10,\n  },\n  group: {\n    display: \"flex\",\n    height: \"100%\",\n    width: \"100%\",\n  },\n  handle: {\n    alignItems: \"center\",\n    backgroundColor: colors.border,\n    display: \"flex\",\n    flexShrink: 0,\n    justifyContent: \"center\",\n    position: \"relative\",\n    width: \"1px\",\n  },\n});\n",
+      "type": "registry:ui",
+      "target": "components/ui/resizable/resizable.stylex.ts"
+    }
+  ],
+  "type": "registry:ui"
+}

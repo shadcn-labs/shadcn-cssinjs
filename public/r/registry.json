@@ -496,6 +496,528 @@
         }
       ],
       "registryDependencies": ["stylex-tokens"]
+    },
+    {
+      "name": "alert-dialog",
+      "type": "registry:ui",
+      "title": "Alert Dialog",
+      "description": "Alert Dialog component styled with StyleX on Base UI primitives.",
+      "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
+      "files": [
+        {
+          "path": "registry/bases/stylex/alert-dialog/alert-dialog.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/alert-dialog/alert-dialog.tsx"
+        },
+        {
+          "path": "registry/bases/stylex/alert-dialog/alert-dialog.stylex.ts",
+          "type": "registry:ui",
+          "target": "components/ui/alert-dialog/alert-dialog.stylex.ts"
+        }
+      ],
+      "registryDependencies": ["stylex-tokens"]
+    },
+    {
+      "name": "avatar",
+      "type": "registry:ui",
+      "title": "Avatar",
+      "description": "Avatar component styled with StyleX on Base UI primitives.",
+      "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
+      "files": [
+        {
+          "path": "registry/bases/stylex/avatar/avatar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/avatar/avatar.tsx"
+        },
+        {
+          "path": "registry/bases/stylex/avatar/avatar.stylex.ts",
+          "type": "registry:ui",
+          "target": "components/ui/avatar/avatar.stylex.ts"
+        }
+      ],
+      "registryDependencies": ["stylex-tokens"]
+    },
+    {
+      "name": "breadcrumb",
+      "type": "registry:ui",
+      "title": "Breadcrumb",
+      "description": "Breadcrumb component styled with StyleX on Base UI primitives.",
+      "dependencies": ["@stylexjs/stylex", "lucide-react"],
+      "files": [
+        {
+          "path": "registry/bases/stylex/breadcrumb/breadcrumb.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/breadcrumb/breadcrumb.tsx"
+        },
+        {
+          "path": "registry/bases/stylex/breadcrumb/breadcrumb.stylex.ts",
+          "type": "registry:ui",
+          "target": "components/ui/breadcrumb/breadcrumb.stylex.ts"
+        }
+      ],
+      "registryDependencies": ["stylex-tokens"]
+    },
+    {
+      "name": "button-group",
+      "type": "registry:ui",
+      "title": "Button Group",
+      "description": "Button Group component styled with StyleX on Base UI primitives.",
+      "dependencies": ["@stylexjs/stylex"],
+      "files": [
+        {
+          "path": "registry/bases/stylex/button-group/button-group.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/button-group/button-group.tsx"
+        },
+        {
+          "path": "registry/bases/stylex/button-group/button-group.stylex.ts",
+          "type": "registry:ui",
+          "target": "components/ui/button-group/button-group.stylex.ts"
+        }
+      ],
+      "registryDependencies": ["stylex-tokens"]
+    },
+    {
+      "name": "calendar",
+      "type": "registry:ui",
+      "title": "Calendar",
+      "description": "Calendar component styled with StyleX on Base UI primitives.",
+      "dependencies": ["@stylexjs/stylex", "lucide-react", "react-day-picker"],
+      "files": [
+        {
+          "path": "registry/bases/stylex/calendar/calendar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/calendar/calendar.tsx"
+        },
+        {
+          "path": "registry/bases/stylex/calendar/calendar.stylex.ts",
+          "type": "registry:ui",
+          "target": "components/ui/calendar/calendar.stylex.ts"
+        }
+      ],
+      "registryDependencies": ["stylex-tokens"]
+    },
+    {
+      "name": "carousel",
+      "type": "registry:ui",
+      "title": "Carousel",
+      "description": "Carousel component styled with StyleX on Base UI primitives.",
+      "dependencies": [
+        "@stylexjs/stylex",
+        "lucide-react",
+        "embla-carousel-react"
+      ],
+      "files": [
+        {
+          "path": "registry/bases/stylex/carousel/carousel.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/carousel/carousel.tsx"
+        },
+        {
+          "path": "registry/bases/stylex/carousel/carousel.stylex.ts",
+          "type": "registry:ui",
+          "target": "components/ui/carousel/carousel.stylex.ts"
+        }
+      ],
+      "registryDependencies": ["button", "stylex-tokens"]
+    },
+    {
+      "name": "chart",
+      "type": "registry:ui",
+      "title": "Chart",
+      "description": "Chart component styled with StyleX on Base UI primitives.",
+      "dependencies": ["@stylexjs/stylex", "recharts"],
+      "files": [
+        {
+          "path": "registry/bases/stylex/chart/chart.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/chart/chart.tsx"
+        },
+        {
+          "path": "registry/bases/stylex/chart/chart.stylex.ts",
+          "type": "registry:ui",
+          "target": "components/ui/chart/chart.stylex.ts"
+        }
+      ],
+      "registryDependencies": ["stylex-tokens"]
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "Checkbox",
+      "description": "Checkbox component styled with StyleX on Base UI primitives.",
+      "dependencies": ["@base-ui/react", "@stylexjs/stylex", "lucide-react"],
+      "files": [
+        {
+          "path": "registry/bases/stylex/checkbox/checkbox.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/checkbox/checkbox.tsx"
+        },
+        {
+          "path": "registry/bases/stylex/checkbox/checkbox.stylex.ts",
+          "type": "registry:ui",
+          "target": "components/ui/checkbox/checkbox.stylex.ts"
+        }
+      ],
+      "registryDependencies": ["stylex-tokens"]
+    },
+    {
+      "name": "hover-card",
+      "type": "registry:ui",
+      "title": "Hover Card",
+      "description": "Hover Card component styled with StyleX on Base UI primitives.",
+      "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
+      "files": [
+        {
+          "path": "registry/bases/stylex/hover-card/hover-card.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/hover-card/hover-card.tsx"
+        },
+        {
+          "path": "registry/bases/stylex/hover-card/hover-card.stylex.ts",
+          "type": "registry:ui",
+          "target": "components/ui/hover-card/hover-card.stylex.ts"
+        }
+      ],
+      "registryDependencies": ["stylex-tokens"]
+    },
+    {
+      "name": "input-otp",
+      "type": "registry:ui",
+      "title": "Input OTP",
+      "description": "Input OTP component styled with StyleX on Base UI primitives.",
+      "dependencies": ["@base-ui/react", "@stylexjs/stylex", "lucide-react"],
+      "files": [
+        {
+          "path": "registry/bases/stylex/input-otp/input-otp.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/input-otp/input-otp.tsx"
+        },
+        {
+          "path": "registry/bases/stylex/input-otp/input-otp.stylex.ts",
+          "type": "registry:ui",
+          "target": "components/ui/input-otp/input-otp.stylex.ts"
+        }
+      ],
+      "registryDependencies": ["stylex-tokens"]
+    },
+    {
+      "name": "label",
+      "type": "registry:ui",
+      "title": "Label",
+      "description": "Label component styled with StyleX on Base UI primitives.",
+      "dependencies": ["@stylexjs/stylex"],
+      "files": [
+        {
+          "path": "registry/bases/stylex/label/label.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/label/label.tsx"
+        },
+        {
+          "path": "registry/bases/stylex/label/label.stylex.ts",
+          "type": "registry:ui",
+          "target": "components/ui/label/label.stylex.ts"
+        }
+      ],
+      "registryDependencies": ["stylex-tokens"]
+    },
+    {
+      "name": "menubar",
+      "type": "registry:ui",
+      "title": "Menubar",
+      "description": "Menubar component styled with StyleX on Base UI primitives.",
+      "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
+      "files": [
+        {
+          "path": "registry/bases/stylex/menubar/menubar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/menubar/menubar.tsx"
+        },
+        {
+          "path": "registry/bases/stylex/menubar/menubar.stylex.ts",
+          "type": "registry:ui",
+          "target": "components/ui/menubar/menubar.stylex.ts"
+        }
+      ],
+      "registryDependencies": ["stylex-tokens"]
+    },
+    {
+      "name": "navigation-menu",
+      "type": "registry:ui",
+      "title": "Navigation Menu",
+      "description": "Navigation Menu component styled with StyleX on Base UI primitives.",
+      "dependencies": ["@base-ui/react", "@stylexjs/stylex", "lucide-react"],
+      "files": [
+        {
+          "path": "registry/bases/stylex/navigation-menu/navigation-menu.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/navigation-menu/navigation-menu.tsx"
+        },
+        {
+          "path": "registry/bases/stylex/navigation-menu/navigation-menu.stylex.ts",
+          "type": "registry:ui",
+          "target": "components/ui/navigation-menu/navigation-menu.stylex.ts"
+        }
+      ],
+      "registryDependencies": ["stylex-tokens"]
+    },
+    {
+      "name": "pagination",
+      "type": "registry:ui",
+      "title": "Pagination",
+      "description": "Pagination component styled with StyleX on Base UI primitives.",
+      "dependencies": ["@stylexjs/stylex", "lucide-react"],
+      "files": [
+        {
+          "path": "registry/bases/stylex/pagination/pagination.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/pagination/pagination.tsx"
+        },
+        {
+          "path": "registry/bases/stylex/pagination/pagination.stylex.ts",
+          "type": "registry:ui",
+          "target": "components/ui/pagination/pagination.stylex.ts"
+        }
+      ],
+      "registryDependencies": ["stylex-tokens"]
+    },
+    {
+      "name": "progress",
+      "type": "registry:ui",
+      "title": "Progress",
+      "description": "Progress component styled with StyleX on Base UI primitives.",
+      "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
+      "files": [
+        {
+          "path": "registry/bases/stylex/progress/progress.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/progress/progress.tsx"
+        },
+        {
+          "path": "registry/bases/stylex/progress/progress.stylex.ts",
+          "type": "registry:ui",
+          "target": "components/ui/progress/progress.stylex.ts"
+        }
+      ],
+      "registryDependencies": ["stylex-tokens"]
+    },
+    {
+      "name": "radio-group",
+      "type": "registry:ui",
+      "title": "Radio Group",
+      "description": "Radio Group component styled with StyleX on Base UI primitives.",
+      "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
+      "files": [
+        {
+          "path": "registry/bases/stylex/radio-group/radio-group.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/radio-group/radio-group.tsx"
+        },
+        {
+          "path": "registry/bases/stylex/radio-group/radio-group.stylex.ts",
+          "type": "registry:ui",
+          "target": "components/ui/radio-group/radio-group.stylex.ts"
+        }
+      ],
+      "registryDependencies": ["stylex-tokens"]
+    },
+    {
+      "name": "resizable",
+      "type": "registry:ui",
+      "title": "Resizable",
+      "description": "Resizable component styled with StyleX on Base UI primitives.",
+      "dependencies": [
+        "@stylexjs/stylex",
+        "lucide-react",
+        "react-resizable-panels"
+      ],
+      "files": [
+        {
+          "path": "registry/bases/stylex/resizable/resizable.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/resizable/resizable.tsx"
+        },
+        {
+          "path": "registry/bases/stylex/resizable/resizable.stylex.ts",
+          "type": "registry:ui",
+          "target": "components/ui/resizable/resizable.stylex.ts"
+        }
+      ],
+      "registryDependencies": ["stylex-tokens"]
+    },
+    {
+      "name": "scroll-area",
+      "type": "registry:ui",
+      "title": "Scroll Area",
+      "description": "Scroll Area component styled with StyleX on Base UI primitives.",
+      "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
+      "files": [
+        {
+          "path": "registry/bases/stylex/scroll-area/scroll-area.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/scroll-area/scroll-area.tsx"
+        },
+        {
+          "path": "registry/bases/stylex/scroll-area/scroll-area.stylex.ts",
+          "type": "registry:ui",
+          "target": "components/ui/scroll-area/scroll-area.stylex.ts"
+        }
+      ],
+      "registryDependencies": ["stylex-tokens"]
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "Select component styled with StyleX on Base UI primitives.",
+      "dependencies": ["@base-ui/react", "@stylexjs/stylex", "lucide-react"],
+      "files": [
+        {
+          "path": "registry/bases/stylex/select/select.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/select/select.tsx"
+        },
+        {
+          "path": "registry/bases/stylex/select/select.stylex.ts",
+          "type": "registry:ui",
+          "target": "components/ui/select/select.stylex.ts"
+        }
+      ],
+      "registryDependencies": ["stylex-tokens"]
+    },
+    {
+      "name": "slider",
+      "type": "registry:ui",
+      "title": "Slider",
+      "description": "Slider component styled with StyleX on Base UI primitives.",
+      "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
+      "files": [
+        {
+          "path": "registry/bases/stylex/slider/slider.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/slider/slider.tsx"
+        },
+        {
+          "path": "registry/bases/stylex/slider/slider.stylex.ts",
+          "type": "registry:ui",
+          "target": "components/ui/slider/slider.stylex.ts"
+        }
+      ],
+      "registryDependencies": ["stylex-tokens"]
+    },
+    {
+      "name": "sonner",
+      "type": "registry:ui",
+      "title": "Sonner",
+      "description": "Sonner component styled with StyleX on Base UI primitives.",
+      "dependencies": ["sonner", "next-themes"],
+      "files": [
+        {
+          "path": "registry/bases/stylex/sonner/sonner.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/sonner/sonner.tsx"
+        }
+      ]
+    },
+    {
+      "name": "spinner",
+      "type": "registry:ui",
+      "title": "Spinner",
+      "description": "Spinner component styled with StyleX on Base UI primitives.",
+      "dependencies": ["@stylexjs/stylex", "lucide-react"],
+      "files": [
+        {
+          "path": "registry/bases/stylex/spinner/spinner.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/spinner/spinner.tsx"
+        },
+        {
+          "path": "registry/bases/stylex/spinner/spinner.stylex.ts",
+          "type": "registry:ui",
+          "target": "components/ui/spinner/spinner.stylex.ts"
+        }
+      ],
+      "registryDependencies": ["stylex-tokens"]
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui",
+      "title": "Switch",
+      "description": "Switch component styled with StyleX on Base UI primitives.",
+      "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
+      "files": [
+        {
+          "path": "registry/bases/stylex/switch/switch.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/switch/switch.tsx"
+        },
+        {
+          "path": "registry/bases/stylex/switch/switch.stylex.ts",
+          "type": "registry:ui",
+          "target": "components/ui/switch/switch.stylex.ts"
+        }
+      ],
+      "registryDependencies": ["stylex-tokens"]
+    },
+    {
+      "name": "table",
+      "type": "registry:ui",
+      "title": "Table",
+      "description": "Table component styled with StyleX on Base UI primitives.",
+      "dependencies": ["@stylexjs/stylex"],
+      "files": [
+        {
+          "path": "registry/bases/stylex/table/table.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/table/table.tsx"
+        },
+        {
+          "path": "registry/bases/stylex/table/table.stylex.ts",
+          "type": "registry:ui",
+          "target": "components/ui/table/table.stylex.ts"
+        }
+      ],
+      "registryDependencies": ["stylex-tokens"]
+    },
+    {
+      "name": "textarea",
+      "type": "registry:ui",
+      "title": "Textarea",
+      "description": "Textarea component styled with StyleX on Base UI primitives.",
+      "dependencies": ["@stylexjs/stylex"],
+      "files": [
+        {
+          "path": "registry/bases/stylex/textarea/textarea.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/textarea/textarea.tsx"
+        },
+        {
+          "path": "registry/bases/stylex/textarea/textarea.stylex.ts",
+          "type": "registry:ui",
+          "target": "components/ui/textarea/textarea.stylex.ts"
+        }
+      ],
+      "registryDependencies": ["stylex-tokens"]
+    },
+    {
+      "name": "toggle-group",
+      "type": "registry:ui",
+      "title": "Toggle Group",
+      "description": "Toggle Group component styled with StyleX on Base UI primitives.",
+      "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
+      "files": [
+        {
+          "path": "registry/bases/stylex/toggle-group/toggle-group.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/toggle-group/toggle-group.tsx"
+        },
+        {
+          "path": "registry/bases/stylex/toggle-group/toggle-group.stylex.ts",
+          "type": "registry:ui",
+          "target": "components/ui/toggle-group/toggle-group.stylex.ts"
+        }
+      ],
+      "registryDependencies": ["stylex-tokens"]
     }
   ]
 }

@@ -1,0 +1,28 @@
+---
+title: Combobox
+description: Autocomplete input and command palette built by composing the Popover and Command.
+---
+
+import ComboboxDemo from "@/examples/combobox-demo";
+
+<ComponentPreview name="combobox-demo">
+  <ComboboxDemo />
+</ComponentPreview>
+
+The Combobox is built by composing [Popover](/docs/components/popover) and [Command](/docs/components/command). There is no separate component
+to install — add the building blocks and compose them.
+
+## Installation
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.vercel.app/r/popover.json
+npx shadcn@latest add https://shadcn-cssinjs.vercel.app/r/command.json
+```
+
+## RTL
+
+To enable right-to-left support, see the [RTL guide](/docs/rtl).
+
+<ComponentPreview direction="rtl">
+  <ComboboxDemo />
+</ComponentPreview>

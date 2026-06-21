@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "calendar",
+  "title": "Calendar",
+  "description": "Calendar component styled with StyleX on Base UI primitives.",
+  "dependencies": [
+    "@stylexjs/stylex",
+    "lucide-react",
+    "react-day-picker"
+  ],
+  "registryDependencies": [
+    "stylex-tokens"
+  ],
+  "files": [
+    {
+      "path": "registry/bases/stylex/calendar/calendar.tsx",
+      "content": "\"use client\";\n\nimport { ChevronLeftIcon, ChevronRightIcon } from \"lucide-react\";\nimport { DayPicker } from \"react-day-picker\";\n\nimport { cx, x } from \"@/lib/utils\";\n\nimport { styles } from \"./calendar.stylex\";\n\nconst Calendar = ({\n  className,\n  classNames,\n  showOutsideDays = true,\n  ...props\n}: React.ComponentProps<typeof DayPicker>) => (\n  <DayPicker\n    className={cx(x(styles.root).className, className)}\n    classNames={{\n      caption_label: x(styles.captionLabel).className,\n      day: x(styles.day).className,\n      month: x(styles.month).className,\n      month_caption: x(styles.monthCaption).className,\n      month_grid: x(styles.grid).className,\n      months: x(styles.months).className,\n      nav: x(styles.nav).className,\n      weekday: x(styles.weekday).className,\n      ...classNames,\n    }}\n    components={{\n      Chevron: ({ orientation, ...iconProps }) =>\n        orientation === \"left\" ? (\n          <ChevronLeftIcon size={16} {...iconProps} />\n        ) : (\n          <ChevronRightIcon size={16} {...iconProps} />\n        ),\n      DayButton: ({\n        day: _day,\n        modifiers,\n        className: dbClassName,\n        ...btnProps\n      }) => (\n        <button\n          className={cx(\n            x(\n              styles.dayButton,\n              modifiers.selected && styles.daySelected,\n              modifiers.today && !modifiers.selected && styles.dayToday,\n              modifiers.outside && styles.dayOutside,\n              modifiers.disabled && styles.dayDisabled\n            ).className,\n            dbClassName\n          )}\n          type=\"button\"\n          {...btnProps}\n        />\n      ),\n      NextMonthButton: ({ className: bClassName, ...bProps }) => (\n        <button\n          className={cx(x(styles.navButton).className, bClassName)}\n          type=\"button\"\n          {...bProps}\n        />\n      ),\n      PreviousMonthButton: ({ className: bClassName, ...bProps }) => (\n        <button\n          className={cx(x(styles.navButton).className, bClassName)}\n          type=\"button\"\n          {...bProps}\n        />\n      ),\n    }}\n    showOutsideDays={showOutsideDays}\n    {...props}\n  />\n);\n\nexport { Calendar };\n",
+      "type": "registry:ui",
+      "target": "components/ui/calendar/calendar.tsx"
+    },
+    {
+      "path": "registry/bases/stylex/calendar/calendar.stylex.ts",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nimport { colors, radius } from \"../tokens.stylex\";\n\nexport const styles = stylex.create({\n  captionLabel: {\n    fontSize: \"0.875rem\",\n    fontWeight: 500,\n  },\n  day: {\n    height: \"2.25rem\",\n    padding: 0,\n    textAlign: \"center\",\n    width: \"2.25rem\",\n  },\n  dayButton: {\n    alignItems: \"center\",\n    backgroundColor: { \":hover\": colors.accent, default: \"transparent\" },\n    borderRadius: radius.md,\n    borderWidth: 0,\n    color: { \":hover\": colors.accentForeground, default: colors.foreground },\n    cursor: \"pointer\",\n    display: \"inline-flex\",\n    fontSize: \"0.875rem\",\n    height: \"2.25rem\",\n    justifyContent: \"center\",\n    outline: \"none\",\n    width: \"2.25rem\",\n  },\n  dayDisabled: {\n    cursor: \"not-allowed\",\n    opacity: 0.4,\n  },\n  dayOutside: {\n    color: colors.mutedForeground,\n    opacity: 0.5,\n  },\n  daySelected: {\n    backgroundColor: { \":hover\": colors.primary, default: colors.primary },\n    color: {\n      \":hover\": colors.primaryForeground,\n      default: colors.primaryForeground,\n    },\n  },\n  dayToday: {\n    backgroundColor: colors.accent,\n    color: colors.accentForeground,\n  },\n  grid: {\n    borderCollapse: \"collapse\",\n    marginTop: \"0.25rem\",\n    width: \"100%\",\n  },\n  month: {\n    display: \"flex\",\n    flexDirection: \"column\",\n    gap: \"1rem\",\n  },\n  monthCaption: {\n    alignItems: \"center\",\n    display: \"flex\",\n    height: \"2rem\",\n    justifyContent: \"center\",\n    position: \"relative\",\n  },\n  months: {\n    display: \"flex\",\n    flexDirection: \"column\",\n    gap: \"1rem\",\n    position: \"relative\",\n  },\n  nav: {\n    alignItems: \"center\",\n    display: \"flex\",\n    insetInline: 0,\n    justifyContent: \"space-between\",\n    position: \"absolute\",\n    top: 0,\n  },\n  navButton: {\n    alignItems: \"center\",\n    backgroundColor: { \":hover\": colors.accent, default: \"transparent\" },\n    borderRadius: radius.md,\n    borderWidth: 0,\n    color: colors.foreground,\n    cursor: \"pointer\",\n    display: \"inline-flex\",\n    height: \"1.75rem\",\n    justifyContent: \"center\",\n    opacity: { \":hover\": 1, default: 0.6 },\n    outline: \"none\",\n    width: \"1.75rem\",\n    zIndex: 10,\n  },\n  root: {\n    padding: \"0.75rem\",\n    width: \"fit-content\",\n  },\n  weekday: {\n    color: colors.mutedForeground,\n    fontSize: \"0.8rem\",\n    fontWeight: 400,\n    height: \"2.25rem\",\n    paddingBottom: \"0.25rem\",\n    width: \"2.25rem\",\n  },\n});\n",
+      "type": "registry:ui",
+      "target": "components/ui/calendar/calendar.stylex.ts"
+    }
+  ],
+  "type": "registry:ui"
+}
