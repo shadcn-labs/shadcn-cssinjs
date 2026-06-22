@@ -17,10 +17,10 @@ const frameworks = [
   "Astro",
 ] as const;
 
-export default function ComboboxBasic() {
+export default function ComboboxInvalid() {
   return (
     <Combobox items={frameworks}>
-      <ComboboxInput placeholder="Select a framework" />
+      <ComboboxInput placeholder="Select a framework" aria-invalid="true" />
       <ComboboxContent>
         <ComboboxEmpty>No items found.</ComboboxEmpty>
         <ComboboxList>

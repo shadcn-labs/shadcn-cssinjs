@@ -156,6 +156,26 @@
       ]
     },
     {
+      "name": "combobox",
+      "type": "registry:ui",
+      "title": "Combobox",
+      "description": "Combobox component styled with StyleX on Base UI primitives.",
+      "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
+      "files": [
+        {
+          "path": "registry/bases/stylex/combobox/combobox.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/combobox/combobox.tsx"
+        },
+        {
+          "path": "registry/bases/stylex/combobox/combobox.stylex.ts",
+          "type": "registry:ui",
+          "target": "components/ui/combobox/combobox.stylex.ts"
+        }
+      ],
+      "registryDependencies": ["stylex-tokens"]
+    },
+    {
       "name": "command",
       "type": "registry:ui",
       "title": "Command",

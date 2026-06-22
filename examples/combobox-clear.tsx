@@ -17,10 +17,10 @@ const frameworks = [
   "Astro",
 ] as const;
 
-export default function ComboboxBasic() {
+export default function ComboboxWithClear() {
   return (
-    <Combobox items={frameworks}>
-      <ComboboxInput placeholder="Select a framework" />
+    <Combobox items={frameworks} defaultValue={frameworks[0]}>
+      <ComboboxInput placeholder="Select a framework" showClear />
       <ComboboxContent>
         <ComboboxEmpty>No items found.</ComboboxEmpty>
         <ComboboxList>

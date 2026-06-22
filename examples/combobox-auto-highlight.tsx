@@ -17,9 +17,9 @@ const frameworks = [
   "Astro",
 ] as const;
 
-export default function ComboboxBasic() {
+export default function ComboboxAutoHighlight() {
   return (
-    <Combobox items={frameworks}>
+    <Combobox items={frameworks} autoHighlight>
       <ComboboxInput placeholder="Select a framework" />
       <ComboboxContent>
         <ComboboxEmpty>No items found.</ComboboxEmpty>
