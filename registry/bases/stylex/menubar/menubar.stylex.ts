@@ -16,6 +16,20 @@ export const styles = stylex.create({
     height: "2.25rem",
     padding: "0.25rem",
   },
+  icon: {
+    height: "1rem",
+    width: "1rem",
+  },
+  indicatorWrap: {
+    alignItems: "center",
+    display: "flex",
+    height: "0.875rem",
+    insetInlineStart: "0.5rem",
+    justifyContent: "center",
+    pointerEvents: "none",
+    position: "absolute",
+    width: "0.875rem",
+  },
   item: {
     alignItems: "center",
     backgroundColor: { ":hover": colors.accent, default: "transparent" },
@@ -32,6 +46,9 @@ export const styles = stylex.create({
     paddingBlock: "0.375rem",
     paddingInline: "0.5rem",
     userSelect: "none",
+  },
+  itemInset: {
+    paddingInlineStart: "2rem",
   },
   popup: {
     backgroundColor: colors.popover,
