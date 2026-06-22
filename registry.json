@@ -256,6 +256,86 @@
       "registryDependencies": ["stylex-tokens"]
     },
     {
+      "name": "empty",
+      "type": "registry:ui",
+      "title": "Empty",
+      "description": "Empty component styled with StyleX on Base UI primitives.",
+      "dependencies": ["@stylexjs/stylex"],
+      "files": [
+        {
+          "path": "registry/bases/stylex/empty/empty.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/empty/empty.tsx"
+        },
+        {
+          "path": "registry/bases/stylex/empty/empty.stylex.ts",
+          "type": "registry:ui",
+          "target": "components/ui/empty/empty.stylex.ts"
+        }
+      ],
+      "registryDependencies": ["stylex-tokens"]
+    },
+    {
+      "name": "field",
+      "type": "registry:ui",
+      "title": "Field",
+      "description": "Field component styled with StyleX on Base UI primitives.",
+      "dependencies": ["@stylexjs/stylex"],
+      "files": [
+        {
+          "path": "registry/bases/stylex/field/field.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/field/field.tsx"
+        },
+        {
+          "path": "registry/bases/stylex/field/field.stylex.ts",
+          "type": "registry:ui",
+          "target": "components/ui/field/field.stylex.ts"
+        }
+      ],
+      "registryDependencies": ["label", "separator", "stylex-tokens"]
+    },
+    {
+      "name": "input-group",
+      "type": "registry:ui",
+      "title": "Input Group",
+      "description": "Input Group component styled with StyleX on Base UI primitives.",
+      "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
+      "files": [
+        {
+          "path": "registry/bases/stylex/input-group/input-group.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/input-group/input-group.tsx"
+        },
+        {
+          "path": "registry/bases/stylex/input-group/input-group.stylex.ts",
+          "type": "registry:ui",
+          "target": "components/ui/input-group/input-group.stylex.ts"
+        }
+      ],
+      "registryDependencies": ["button", "stylex-tokens"]
+    },
+    {
+      "name": "item",
+      "type": "registry:ui",
+      "title": "Item",
+      "description": "Item component styled with StyleX on Base UI primitives.",
+      "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
+      "files": [
+        {
+          "path": "registry/bases/stylex/item/item.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/item/item.tsx"
+        },
+        {
+          "path": "registry/bases/stylex/item/item.stylex.ts",
+          "type": "registry:ui",
+          "target": "components/ui/item/item.stylex.ts"
+        }
+      ],
+      "registryDependencies": ["separator", "stylex-tokens"]
+    },
+    {
       "name": "input",
       "type": "registry:ui",
       "title": "Input",
@@ -548,7 +628,7 @@
       "type": "registry:ui",
       "title": "Button Group",
       "description": "Button Group component styled with StyleX on Base UI primitives.",
-      "dependencies": ["@stylexjs/stylex"],
+      "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
       "files": [
         {
           "path": "registry/bases/stylex/button-group/button-group.tsx",
@@ -561,7 +641,7 @@
           "target": "components/ui/button-group/button-group.stylex.ts"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["separator", "stylex-tokens"]
     },
     {
       "name": "calendar",

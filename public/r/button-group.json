@@ -4,21 +4,23 @@
   "title": "Button Group",
   "description": "Button Group component styled with StyleX on Base UI primitives.",
   "dependencies": [
+    "@base-ui/react",
     "@stylexjs/stylex"
   ],
   "registryDependencies": [
+    "separator",
     "stylex-tokens"
   ],
   "files": [
     {
       "path": "registry/bases/stylex/button-group/button-group.tsx",
-      "content": "import { cx, x } from \"@/lib/utils\";\n\nimport { styles } from \"./button-group.stylex\";\n\nconst ButtonGroup = ({\n  className,\n  style,\n  orientation = \"horizontal\",\n  ...props\n}: React.ComponentProps<\"div\"> & {\n  orientation?: \"horizontal\" | \"vertical\";\n}) => {\n  const p = x(styles.group, orientation === \"vertical\" && styles.vertical);\n  return (\n    <div\n      className={cx(p.className, className)}\n      data-orientation={orientation}\n      data-slot=\"button-group\"\n      role=\"group\"\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nexport { ButtonGroup };\n",
+      "content": "import { useRender } from \"@base-ui/react\";\n\nimport { cx, x } from \"@/lib/utils\";\n\nimport { Separator } from \"../separator/separator\";\nimport { styles } from \"./button-group.stylex\";\n\nconst ButtonGroup = ({\n  className,\n  style,\n  orientation = \"horizontal\",\n  ...props\n}: React.ComponentProps<\"div\"> & {\n  orientation?: \"horizontal\" | \"vertical\";\n}) => {\n  const p = x(styles.group, orientation === \"vertical\" && styles.vertical);\n  return (\n    <div\n      className={cx(p.className, className)}\n      data-orientation={orientation}\n      data-slot=\"button-group\"\n      role=\"group\"\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nconst ButtonGroupText = ({\n  className,\n  style,\n  render,\n  ...props\n}: React.ComponentProps<\"div\"> & { render?: useRender.RenderProp }) => {\n  const p = x(styles.text);\n  return useRender({\n    props: {\n      className: cx(p.className, className),\n      \"data-slot\": \"button-group-text\",\n      style: { ...p.style, ...style },\n      ...props,\n    },\n    render: render ?? <div />,\n  });\n};\n\nconst ButtonGroupSeparator = ({\n  className,\n  orientation = \"vertical\",\n  ...props\n}: React.ComponentProps<typeof Separator>) => {\n  const p = x(styles.separator);\n  return (\n    <Separator\n      className={cx(p.className, className)}\n      data-slot=\"button-group-separator\"\n      orientation={orientation}\n      {...props}\n    />\n  );\n};\n\nexport { ButtonGroup, ButtonGroupSeparator, ButtonGroupText };\n",
       "type": "registry:ui",
       "target": "components/ui/button-group/button-group.tsx"
     },
     {
       "path": "registry/bases/stylex/button-group/button-group.stylex.ts",
-      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nimport { colors, radius } from \"../tokens.stylex\";\n\nexport const styles = stylex.create({\n  group: {\n    alignItems: \"stretch\",\n    backgroundColor: colors.border,\n    borderRadius: radius.md,\n    display: \"inline-flex\",\n    gap: \"1px\",\n    overflow: \"hidden\",\n    width: \"fit-content\",\n  },\n  vertical: {\n    flexDirection: \"column\",\n  },\n});\n",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nimport { colors, radius } from \"../tokens.stylex\";\n\nexport const styles = stylex.create({\n  group: {\n    alignItems: \"stretch\",\n    backgroundColor: colors.border,\n    borderRadius: radius.md,\n    display: \"inline-flex\",\n    gap: \"1px\",\n    overflow: \"hidden\",\n    width: \"fit-content\",\n  },\n  separator: {\n    alignSelf: \"stretch\",\n    backgroundColor: colors.input,\n    margin: 0,\n  },\n  text: {\n    alignItems: \"center\",\n    backgroundColor: colors.muted,\n    border: `1px solid ${colors.border}`,\n    borderRadius: radius.md,\n    boxShadow: \"0 1px 2px 0 rgb(0 0 0 / 0.05)\",\n    display: \"flex\",\n    fontSize: \"0.875rem\",\n    fontWeight: 500,\n    gap: \"0.5rem\",\n    paddingInline: \"1rem\",\n  },\n  vertical: {\n    flexDirection: \"column\",\n  },\n});\n",
       "type": "registry:ui",
       "target": "components/ui/button-group/button-group.stylex.ts"
     }

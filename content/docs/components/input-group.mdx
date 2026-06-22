@@ -1,0 +1,240 @@
+---
+title: Input Group
+description: Group inputs with icons, text, buttons, and addons.
+---
+
+import InputGroupDemo from "@/examples/input-group-demo";
+import InputGroupInlineStart from "@/examples/input-group-inline-start";
+import InputGroupInlineEnd from "@/examples/input-group-inline-end";
+import InputGroupBlockStart from "@/examples/input-group-block-start";
+import InputGroupBlockEnd from "@/examples/input-group-block-end";
+import InputGroupIcon from "@/examples/input-group-icon";
+import InputGroupTextExample from "@/examples/input-group-text";
+import InputGroupButtonExample from "@/examples/input-group-button";
+import InputGroupKbd from "@/examples/input-group-kbd";
+import InputGroupDropdown from "@/examples/input-group-dropdown";
+import InputGroupSpinner from "@/examples/input-group-spinner";
+import InputGroupTextareaExample from "@/examples/input-group-textarea";
+import InputGroupCustom from "@/examples/input-group-custom";
+
+<ComponentPreview name="input-group-demo">
+  <InputGroupDemo />
+</ComponentPreview>
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.vercel.app/r/input-group.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+pnpm add @base-ui/react @stylexjs/stylex
+```
+
+<Step>
+  Make sure [StyleX is configured](/docs/installation) and the design tokens are
+  installed.
+</Step>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="input-group" title="input-group.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+  InputGroupText,
+  InputGroupTextarea,
+} from "@/components/ui/input-group/input-group";
+```
+
+```tsx
+<InputGroup>
+  <InputGroupInput placeholder="Search..." />
+  <InputGroupAddon>
+    <SearchIcon />
+  </InputGroupAddon>
+</InputGroup>
+```
+
+## Composition
+
+The `InputGroupAddon` component should be placed after the input. Use the
+`align` prop to position the addon.
+
+```text
+InputGroup
+├── InputGroupInput / InputGroupTextarea
+└── InputGroupAddon
+    ├── InputGroupText
+    └── InputGroupButton
+```
+
+## Align
+
+Use the `align` prop on `InputGroupAddon` to position content. For
+`InputGroupInput`, use `inline-start` or `inline-end`. For
+`InputGroupTextarea`, use `block-start` or `block-end`.
+
+### inline-start
+
+<ComponentPreview name="input-group-inline-start">
+  <InputGroupInlineStart />
+</ComponentPreview>
+
+### inline-end
+
+<ComponentPreview name="input-group-inline-end">
+  <InputGroupInlineEnd />
+</ComponentPreview>
+
+### block-start
+
+<ComponentPreview name="input-group-block-start">
+  <InputGroupBlockStart />
+</ComponentPreview>
+
+### block-end
+
+<ComponentPreview name="input-group-block-end">
+  <InputGroupBlockEnd />
+</ComponentPreview>
+
+## Examples
+
+### Icon
+
+<ComponentPreview name="input-group-icon">
+  <InputGroupIcon />
+</ComponentPreview>
+
+### Text
+
+<ComponentPreview name="input-group-text">
+  <InputGroupTextExample />
+</ComponentPreview>
+
+### Button
+
+<ComponentPreview name="input-group-button">
+  <InputGroupButtonExample />
+</ComponentPreview>
+
+### Kbd
+
+<ComponentPreview name="input-group-kbd">
+  <InputGroupKbd />
+</ComponentPreview>
+
+### Dropdown
+
+<ComponentPreview name="input-group-dropdown">
+  <InputGroupDropdown />
+</ComponentPreview>
+
+### Spinner
+
+<ComponentPreview name="input-group-spinner">
+  <InputGroupSpinner />
+</ComponentPreview>
+
+### Textarea
+
+<ComponentPreview name="input-group-textarea">
+  <InputGroupTextareaExample />
+</ComponentPreview>
+
+### Custom Input
+
+<ComponentPreview name="input-group-custom">
+  <InputGroupCustom />
+</ComponentPreview>
+
+import InputGroupRtl from "@/examples/input-group-rtl";
+
+## RTL
+
+To enable right-to-left support, see the [RTL guide](/docs/rtl).
+
+<ComponentPreview name="input-group-rtl" direction="rtl">
+  <InputGroupRtl />
+</ComponentPreview>
+
+## API Reference
+
+### InputGroup
+
+The main component that wraps inputs and addons.
+
+| Prop        | Type     | Default |
+| ----------- | -------- | ------- |
+| `className` | `string` | -       |
+
+### InputGroupAddon
+
+Displays icons, text, buttons, or other content alongside inputs. For proper
+focus navigation, place it after the input and use the `align` prop to position
+it.
+
+| Prop        | Type                                                             | Default          |
+| ----------- | ---------------------------------------------------------------- | ---------------- |
+| `align`     | `"inline-start" \| "inline-end" \| "block-start" \| "block-end"` | `"inline-start"` |
+| `className` | `string`                                                         | -                |
+
+### InputGroupButton
+
+Displays buttons within input groups.
+
+| Prop        | Type                                                                          | Default   |
+| ----------- | ----------------------------------------------------------------------------- | --------- |
+| `size`      | `"xs" \| "icon-xs" \| "sm" \| "icon-sm"`                                      | `"xs"`    |
+| `variant`   | `"default" \| "destructive" \| "outline" \| "secondary" \| "ghost" \| "link"` | `"ghost"` |
+| `className` | `string`                                                                      | -         |
+
+### InputGroupInput
+
+Replacement for `<Input />` when building input groups. Uses the unified
+`data-slot="input-group-control"` for focus state handling.
+
+| Prop        | Type     | Default |
+| ----------- | -------- | ------- |
+| `className` | `string` | -       |
+
+### InputGroupTextarea
+
+Replacement for `<Textarea />` when building input groups. Uses the unified
+`data-slot="input-group-control"` for focus state handling.
+
+| Prop        | Type     | Default |
+| ----------- | -------- | ------- |
+| `className` | `string` | -       |

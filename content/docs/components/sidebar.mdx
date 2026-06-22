@@ -112,36 +112,3 @@ To enable right-to-left support, see the [RTL guide](/docs/rtl).
 <ComponentPreview name="sidebar-rtl" direction="rtl">
   <SidebarRtl />
 </ComponentPreview>
-
-## API Reference
-
-### SidebarProvider
-
-Provides the sidebar context and handles the open/collapsed state. Wrap your layout with it.
-
-| Prop           | Type                         | Default |
-| -------------- | ---------------------------- | ------- |
-| `defaultOpen`  | `boolean`                    | `true`  |
-| `open`         | `boolean`                    | -       |
-| `onOpenChange` | `(open: boolean) => void`    | -       |
-
-### Sidebar
-
-The main sidebar container.
-
-| Prop          | Type                                   | Default      |
-| ------------- | -------------------------------------- | ------------ |
-| `side`        | `"left" \| "right"`                    | `"left"`     |
-| `variant`     | `"sidebar" \| "floating" \| "inset"`   | `"sidebar"`  |
-| `collapsible` | `"offcanvas" \| "icon" \| "none"`      | `"offcanvas"`|
-
-### useSidebar
-
-A hook to read and control the sidebar state. Must be used within a `SidebarProvider`.
-
-```tsx
-const { state, open, setOpen, openMobile, setOpenMobile, isMobile, toggleSidebar } =
-  useSidebar();
-```
-
-The sidebar is composed of many parts — `SidebarHeader`, `SidebarFooter`, `SidebarContent`, `SidebarGroup`, `SidebarMenu`, `SidebarMenuItem`, `SidebarMenuButton`, and more. Each accepts a `className` and the props of its underlying element.

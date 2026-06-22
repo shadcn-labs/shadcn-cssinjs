@@ -26,9 +26,13 @@
     "dialog",
     "drawer",
     "dropdown-menu",
+    "empty",
+    "field",
     "hover-card",
     "input",
+    "input-group",
     "input-otp",
+    "item",
     "kbd",
     "label",
     "menubar",
@@ -54,6 +58,7 @@
     "textarea",
     "toggle",
     "toggle-group",
-    "tooltip"
+    "tooltip",
+    "typography"
   ]
 }

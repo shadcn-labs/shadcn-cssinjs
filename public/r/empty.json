@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "empty",
+  "title": "Empty",
+  "description": "Empty component styled with StyleX on Base UI primitives.",
+  "dependencies": [
+    "@stylexjs/stylex"
+  ],
+  "registryDependencies": [
+    "stylex-tokens"
+  ],
+  "files": [
+    {
+      "path": "registry/bases/stylex/empty/empty.tsx",
+      "content": "import { cx, x } from \"@/lib/utils\";\n\nimport { styles } from \"./empty.stylex\";\n\nconst Empty = ({ className, style, ...props }: React.ComponentProps<\"div\">) => {\n  const p = x(styles.empty);\n  return (\n    <div\n      className={cx(p.className, className)}\n      data-slot=\"empty\"\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nconst EmptyHeader = ({\n  className,\n  style,\n  ...props\n}: React.ComponentProps<\"div\">) => {\n  const p = x(styles.header);\n  return (\n    <div\n      className={cx(p.className, className)}\n      data-slot=\"empty-header\"\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nconst EmptyMedia = ({\n  className,\n  style,\n  variant = \"default\",\n  ...props\n}: React.ComponentProps<\"div\"> & { variant?: \"default\" | \"icon\" }) => {\n  const p = x(\n    styles.mediaBase,\n    variant === \"icon\" ? styles.mediaIcon : styles.mediaDefault\n  );\n  return (\n    <div\n      className={cx(p.className, className)}\n      data-slot=\"empty-icon\"\n      data-variant={variant}\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nconst EmptyTitle = ({\n  className,\n  style,\n  ...props\n}: React.ComponentProps<\"div\">) => {\n  const p = x(styles.title);\n  return (\n    <div\n      className={cx(p.className, className)}\n      data-slot=\"empty-title\"\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nconst EmptyDescription = ({\n  className,\n  style,\n  ...props\n}: React.ComponentProps<\"p\">) => {\n  const p = x(styles.description);\n  return (\n    <p\n      className={cx(p.className, className)}\n      data-slot=\"empty-description\"\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nconst EmptyContent = ({\n  className,\n  style,\n  ...props\n}: React.ComponentProps<\"div\">) => {\n  const p = x(styles.content);\n  return (\n    <div\n      className={cx(p.className, className)}\n      data-slot=\"empty-content\"\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nexport {\n  Empty,\n  EmptyHeader,\n  EmptyTitle,\n  EmptyDescription,\n  EmptyContent,\n  EmptyMedia,\n};\n",
+      "type": "registry:ui",
+      "target": "components/ui/empty/empty.tsx"
+    },
+    {
+      "path": "registry/bases/stylex/empty/empty.stylex.ts",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nimport { colors, radius } from \"../tokens.stylex\";\n\nexport const styles = stylex.create({\n  content: {\n    alignItems: \"center\",\n    display: \"flex\",\n    flexDirection: \"column\",\n    fontSize: \"0.875rem\",\n    gap: \"1rem\",\n    maxWidth: \"24rem\",\n    minWidth: 0,\n    textWrap: \"balance\",\n    width: \"100%\",\n  },\n  description: {\n    color: colors.mutedForeground,\n    fontSize: \"0.875rem\",\n    lineHeight: 1.625,\n  },\n  empty: {\n    alignItems: \"center\",\n    border: `1px dashed ${colors.border}`,\n    borderRadius: radius.lg,\n    display: \"flex\",\n    flex: 1,\n    flexDirection: \"column\",\n    gap: \"1.5rem\",\n    justifyContent: \"center\",\n    minWidth: 0,\n    padding: { \"@media (min-width: 768px)\": \"3rem\", default: \"1.5rem\" },\n    textAlign: \"center\",\n    textWrap: \"balance\",\n  },\n  header: {\n    alignItems: \"center\",\n    display: \"flex\",\n    flexDirection: \"column\",\n    gap: \"0.5rem\",\n    maxWidth: \"24rem\",\n    textAlign: \"center\",\n  },\n  mediaBase: {\n    alignItems: \"center\",\n    display: \"flex\",\n    flexShrink: 0,\n    justifyContent: \"center\",\n    marginBottom: \"0.5rem\",\n  },\n  mediaDefault: {\n    backgroundColor: \"transparent\",\n  },\n  mediaIcon: {\n    backgroundColor: colors.muted,\n    borderRadius: radius.lg,\n    color: colors.foreground,\n    height: \"2.5rem\",\n    width: \"2.5rem\",\n  },\n  title: {\n    fontSize: \"1.125rem\",\n    fontWeight: 500,\n    letterSpacing: \"-0.025em\",\n    lineHeight: \"1.75rem\",\n  },\n});\n",
+      "type": "registry:ui",
+      "target": "components/ui/empty/empty.stylex.ts"
+    }
+  ],
+  "type": "registry:ui"
+}
