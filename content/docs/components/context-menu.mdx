@@ -101,6 +101,18 @@ ContextMenu
 
 ## Examples
 
+import ContextMenuBasic from "@/examples/context-menu-basic";
+import ContextMenuShortcuts from "@/examples/context-menu-shortcuts";
+import ContextMenuGroups from "@/examples/context-menu-groups";
+import ContextMenuIcons from "@/examples/context-menu-icons";
+import ContextMenuDestructive from "@/examples/context-menu-destructive";
+
+### Basic
+
+<ComponentPreview name="context-menu-basic">
+  <ContextMenuBasic />
+</ComponentPreview>
+
 ### Submenu
 
 Nest a `ContextMenuSub` to create a submenu.
@@ -109,12 +121,36 @@ Nest a `ContextMenuSub` to create a submenu.
   <ContextMenuSubmenu />
 </ComponentPreview>
 
+### Shortcuts
+
+<ComponentPreview name="context-menu-shortcuts">
+  <ContextMenuShortcuts />
+</ComponentPreview>
+
+### Groups
+
+<ComponentPreview name="context-menu-groups">
+  <ContextMenuGroups />
+</ComponentPreview>
+
+### Icons
+
+<ComponentPreview name="context-menu-icons">
+  <ContextMenuIcons />
+</ComponentPreview>
+
 ### Checkboxes & Radio
 
 Use `ContextMenuCheckboxItem` and `ContextMenuRadioGroup` for selectable items.
 
 <ComponentPreview name="context-menu-checkboxes">
   <ContextMenuCheckboxes />
+</ComponentPreview>
+
+### Destructive
+
+<ComponentPreview name="context-menu-destructive">
+  <ContextMenuDestructive />
 </ComponentPreview>
 
 import ContextMenuRtl from "@/examples/context-menu-rtl";
