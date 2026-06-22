@@ -107,3 +107,31 @@ To enable right-to-left support, see the [RTL guide](/docs/rtl).
 <ComponentPreview name="native-select-rtl" direction="rtl">
   <NativeSelectRtl />
 </ComponentPreview>
+
+## API Reference
+
+### NativeSelect
+
+The main select component that wraps the native HTML `select` element and accepts all of its props.
+
+| Prop        | Type     | Default |
+| ----------- | -------- | ------- |
+| `className` | `string` | -       |
+
+### NativeSelectOption
+
+Represents an individual option within the select.
+
+| Prop       | Type      | Default |
+| ---------- | --------- | ------- |
+| `value`    | `string`  | -       |
+| `disabled` | `boolean` | `false` |
+
+### NativeSelectOptGroup
+
+Groups related options together for better organization.
+
+| Prop       | Type      | Default |
+| ---------- | --------- | ------- |
+| `label`    | `string`  | -       |
+| `disabled` | `boolean` | `false` |

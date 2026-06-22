@@ -444,20 +444,6 @@
       "registryDependencies": ["stylex-tokens"]
     },
     {
-      "name": "text-flip",
-      "type": "registry:ui",
-      "title": "Text Flip",
-      "description": "Text Flip component styled with StyleX on Base UI primitives.",
-      "dependencies": ["motion"],
-      "files": [
-        {
-          "path": "registry/bases/stylex/text-flip/text-flip.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/text-flip/text-flip.tsx"
-        }
-      ]
-    },
-    {
       "name": "toggle",
       "type": "registry:ui",
       "title": "Toggle",

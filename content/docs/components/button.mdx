@@ -124,3 +124,17 @@ To enable right-to-left support, see the [RTL guide](/docs/rtl).
 <ComponentPreview name="button-rtl" direction="rtl">
   <ButtonRtl />
 </ComponentPreview>
+
+## API Reference
+
+### Button
+
+The `Button` component is a wrapper around the `button` element that adds a variety of styles and functionality.
+
+| Prop      | Type                                                                          | Default     |
+| --------- | ----------------------------------------------------------------------------- | ----------- |
+| `variant` | `"default" \| "destructive" \| "outline" \| "secondary" \| "ghost" \| "link"` | `"default"` |
+| `size`    | `"default" \| "sm" \| "lg" \| "icon" \| "icon-sm" \| "icon-lg"`                | `"default"` |
+| `render`  | `React.ReactElement`                                                          | -           |
+
+Use the `render` prop to render the button as a different element (the Base UI equivalent of `asChild`).
