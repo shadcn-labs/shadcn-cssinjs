@@ -32,6 +32,16 @@ export const styles = stylex.create({
     gap: "0.5rem",
     textAlign: { "@media (min-width: 640px)": "start", default: "center" },
   },
+  media: {
+    alignItems: "center",
+    backgroundColor: colors.muted,
+    borderRadius: "9999px",
+    display: "flex",
+    height: "2.75rem",
+    justifyContent: "center",
+    marginBottom: "0.25rem",
+    width: "2.75rem",
+  },
   popup: {
     backgroundColor: colors.background,
     borderColor: colors.border,
@@ -61,6 +71,12 @@ export const styles = stylex.create({
   popupHidden: {
     opacity: 0,
     transform: "translate(-50%, -50%) scale(0.95)",
+  },
+  popupSm: {
+    maxWidth: {
+      "@media (min-width: 640px)": "24rem",
+      default: "calc(100% - 2rem)",
+    },
   },
   title: {
     color: colors.foreground,

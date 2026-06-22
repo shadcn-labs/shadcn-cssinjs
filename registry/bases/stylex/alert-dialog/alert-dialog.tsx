@@ -22,11 +22,12 @@ const AlertDialogContent = ({
   children,
   className,
   style,
+  size = "default",
   ...props
 }: Omit<
   React.ComponentProps<typeof AlertDialogPrimitive.Popup>,
   "className"
-> & { className?: string }) => (
+> & { className?: string; size?: "default" | "sm" }) => (
   <AlertDialogPrimitive.Portal>
     <AlertDialogPrimitive.Backdrop
       className={(state) =>
@@ -40,11 +41,15 @@ const AlertDialogContent = ({
     <AlertDialogPrimitive.Popup
       className={(state) =>
         cx(
-          x(styles.popup, hidden(state.transitionStatus) && styles.popupHidden)
-            .className,
+          x(
+            styles.popup,
+            size === "sm" && styles.popupSm,
+            hidden(state.transitionStatus) && styles.popupHidden
+          ).className,
           className
         )
       }
+      data-size={size}
       data-slot="alert-dialog-content"
       style={style}
       {...props}
@@ -53,6 +58,22 @@ const AlertDialogContent = ({
     </AlertDialogPrimitive.Popup>
   </AlertDialogPrimitive.Portal>
 );
+
+const AlertDialogMedia = ({
+  className,
+  style,
+  ...props
+}: React.ComponentProps<"div">) => {
+  const p = x(styles.media);
+  return (
+    <div
+      className={cx(p.className, className)}
+      data-slot="alert-dialog-media"
+      style={{ ...p.style, ...style }}
+      {...props}
+    />
+  );
+};
 
 const AlertDialogHeader = ({
   className,
@@ -140,6 +161,7 @@ export {
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
+  AlertDialogMedia,
   AlertDialogTitle,
   AlertDialogTrigger,
 };

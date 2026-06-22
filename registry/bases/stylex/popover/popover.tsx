@@ -66,4 +66,67 @@ const PopoverContent = ({
   </PopoverPrimitive.Portal>
 );
 
-export { Popover, PopoverAnchor, PopoverContent, PopoverTrigger };
+const PopoverHeader = ({
+  className,
+  style,
+  ...props
+}: React.ComponentProps<"div">) => {
+  const p = x(styles.header);
+  return (
+    <div
+      className={cx(p.className, className)}
+      data-slot="popover-header"
+      style={{ ...p.style, ...style }}
+      {...props}
+    />
+  );
+};
+
+const PopoverTitle = ({
+  className,
+  style,
+  ...props
+}: Omit<React.ComponentProps<typeof PopoverPrimitive.Title>, "className"> & {
+  className?: string;
+}) => {
+  const p = x(styles.title);
+  return (
+    <PopoverPrimitive.Title
+      className={cx(p.className, className)}
+      data-slot="popover-title"
+      style={{ ...p.style, ...style }}
+      {...props}
+    />
+  );
+};
+
+const PopoverDescription = ({
+  className,
+  style,
+  ...props
+}: Omit<
+  React.ComponentProps<typeof PopoverPrimitive.Description>,
+  "className"
+> & {
+  className?: string;
+}) => {
+  const p = x(styles.description);
+  return (
+    <PopoverPrimitive.Description
+      className={cx(p.className, className)}
+      data-slot="popover-description"
+      style={{ ...p.style, ...style }}
+      {...props}
+    />
+  );
+};
+
+export {
+  Popover,
+  PopoverAnchor,
+  PopoverContent,
+  PopoverDescription,
+  PopoverHeader,
+  PopoverTitle,
+  PopoverTrigger,
+};

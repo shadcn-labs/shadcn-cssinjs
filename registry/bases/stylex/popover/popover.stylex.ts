@@ -3,6 +3,16 @@ import * as stylex from "@stylexjs/stylex";
 import { colors, radius } from "../tokens.stylex";
 
 export const styles = stylex.create({
+  description: {
+    color: colors.mutedForeground,
+    fontSize: "0.875rem",
+    lineHeight: "1.25rem",
+  },
+  header: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "0.375rem",
+  },
   popup: {
     backgroundColor: colors.popover,
     borderColor: colors.border,
@@ -24,5 +34,10 @@ export const styles = stylex.create({
   popupHidden: {
     opacity: 0,
     transform: "scale(0.95)",
+  },
+  title: {
+    fontSize: "0.875rem",
+    fontWeight: 600,
+    lineHeight: 1,
   },
 });

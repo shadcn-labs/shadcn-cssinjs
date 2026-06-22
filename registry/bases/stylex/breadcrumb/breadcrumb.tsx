@@ -1,3 +1,4 @@
+import { useRender } from "@base-ui/react";
 import { ChevronRightIcon, MoreHorizontalIcon } from "lucide-react";
 
 import { cx, x } from "@/lib/utils";
@@ -43,18 +44,19 @@ const BreadcrumbItem = ({
 const BreadcrumbLink = ({
   className,
   style,
+  render,
   ...props
-}: React.ComponentProps<"a">) => {
-  const p = x(styles.link);
-  return (
-    <a
-      className={cx(p.className, className)}
-      data-slot="breadcrumb-link"
-      style={{ ...p.style, ...style }}
-      {...props}
-    />
-  );
-};
+}: React.ComponentProps<"a"> & { render?: useRender.RenderProp }) =>
+  useRender({
+    props: {
+      className: cx(x(styles.link).className, className),
+      "data-slot": "breadcrumb-link",
+      style: { ...x(styles.link).style, ...style },
+      ...props,
+    },
+    // oxlint-disable-next-line anchor-has-content
+    render: render ?? <a />,
+  });
 
 const BreadcrumbPage = ({
   className,

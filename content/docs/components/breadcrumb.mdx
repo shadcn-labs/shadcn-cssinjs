@@ -94,6 +94,52 @@ Breadcrumb
     └── BreadcrumbEllipsis
 ```
 
+## Examples
+
+import BreadcrumbBasic from "@/examples/breadcrumb-basic";
+import BreadcrumbSeparatorDemo from "@/examples/breadcrumb-separator";
+import BreadcrumbDropdown from "@/examples/breadcrumb-dropdown";
+import BreadcrumbEllipsisDemo from "@/examples/breadcrumb-ellipsis";
+import BreadcrumbLinkDemo from "@/examples/breadcrumb-link";
+
+### Basic
+
+<ComponentPreview name="breadcrumb-basic">
+  <BreadcrumbBasic />
+</ComponentPreview>
+
+### Custom separator
+
+Pass children to `BreadcrumbSeparator` to use a custom separator.
+
+<ComponentPreview name="breadcrumb-separator">
+  <BreadcrumbSeparatorDemo />
+</ComponentPreview>
+
+### Dropdown
+
+Compose with a `DropdownMenu` to show a list of links.
+
+<ComponentPreview name="breadcrumb-dropdown">
+  <BreadcrumbDropdown />
+</ComponentPreview>
+
+### Collapsed
+
+Use `BreadcrumbEllipsis` to collapse a long breadcrumb.
+
+<ComponentPreview name="breadcrumb-ellipsis">
+  <BreadcrumbEllipsisDemo />
+</ComponentPreview>
+
+### Link component
+
+Use the `render` prop to render a custom link component.
+
+<ComponentPreview name="breadcrumb-link">
+  <BreadcrumbLinkDemo />
+</ComponentPreview>
+
 import BreadcrumbRtl from "@/examples/breadcrumb-rtl";
 
 ## RTL
