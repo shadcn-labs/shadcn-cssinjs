@@ -65,6 +65,52 @@ import { Calendar } from "@/components/ui/calendar/calendar";
 <Calendar mode="single" selected={date} onSelect={setDate} />
 ```
 
+## Examples
+
+import CalendarRange from "@/examples/calendar-range";
+import CalendarCaption from "@/examples/calendar-caption";
+import CalendarWithPresets from "@/examples/calendar-presets";
+import CalendarBookedDates from "@/examples/calendar-booked-dates";
+import CalendarWeekNumbers from "@/examples/calendar-week-numbers";
+
+### Range Calendar
+
+Use `mode="range"` to select a range of dates.
+
+<ComponentPreview name="calendar-range">
+  <CalendarRange />
+</ComponentPreview>
+
+### Month and Year Selector
+
+Use `captionLayout="dropdown"` to show month and year dropdowns.
+
+<ComponentPreview name="calendar-caption">
+  <CalendarCaption />
+</ComponentPreview>
+
+### Presets
+
+<ComponentPreview name="calendar-presets">
+  <CalendarWithPresets />
+</ComponentPreview>
+
+### Booked dates
+
+Use `disabled` and `modifiers` to mark booked dates.
+
+<ComponentPreview name="calendar-booked-dates">
+  <CalendarBookedDates />
+</ComponentPreview>
+
+### Week Numbers
+
+Use `showWeekNumber` to display week numbers.
+
+<ComponentPreview name="calendar-week-numbers">
+  <CalendarWeekNumbers />
+</ComponentPreview>
+
 import CalendarRtl from "@/examples/calendar-rtl";
 
 ## RTL
