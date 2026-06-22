@@ -1,45 +1,37 @@
-import { DirectionProvider } from "@base-ui/react/direction-provider";
 import type { ReactNode } from "react";
 
+import { ComponentPreviewTabs } from "@/components/component-preview-tabs";
 import { ComponentSource } from "@/components/component-source";
-import { cn } from "@/lib/utils";
 
 export const ComponentPreview = ({
   name,
-  src,
-  title,
   children,
   className,
+  previewClassName,
   align = "center",
-  direction,
+  direction = "ltr",
+  hideCode = false,
 }: {
   name?: string;
-  src?: string;
-  title?: string;
   children?: ReactNode;
   className?: string;
+  previewClassName?: string;
   align?: "center" | "start" | "end";
   direction?: "ltr" | "rtl";
+  hideCode?: boolean;
 }) => (
-  <div className="group relative my-4 flex flex-col gap-2">
-    <div className="relative rounded-lg border bg-background">
-      <div
-        className={cn(
-          "preview flex min-h-[350px] w-full justify-center p-10",
-          align === "center" && "items-center",
-          align === "start" && "items-start",
-          align === "end" && "items-end",
-          className
-        )}
-        dir={direction}
-      >
-        {direction === "rtl" ? (
-          <DirectionProvider direction="rtl">{children}</DirectionProvider>
-        ) : (
-          children
-        )}
-      </div>
-    </div>
-    {(name || src) && <ComponentSource name={name} src={src} title={title} />}
-  </div>
+  <ComponentPreviewTabs
+    align={align}
+    className={className}
+    component={children}
+    direction={direction}
+    hideCode={hideCode || !name}
+    previewClassName={previewClassName}
+    source={name ? <ComponentSource collapsible={false} name={name} /> : null}
+    sourcePreview={
+      name ? (
+        <ComponentSource collapsible={false} maxLines={6} name={name} />
+      ) : null
+    }
+  />
 );

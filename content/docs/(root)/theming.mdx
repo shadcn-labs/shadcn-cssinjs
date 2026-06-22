@@ -1,0 +1,88 @@
+---
+title: Theming
+description: Theme the StyleX components with CSS variables, exactly like shadcn/ui.
+---
+
+Every component in this registry is themed with **CSS variables** — the same
+`--background`, `--primary`, `--ring` … tokens that shadcn/ui uses. Nothing is
+hard-coded. If you already have a shadcn/ui theme, these components adopt it with
+zero changes.
+
+## How it works
+
+StyleX rules never reference raw colors. Instead each component reads from a shared
+token file that maps your CSS variables into typed StyleX tokens:
+
+```ts title="components/ui/tokens.stylex.ts"
+import * as stylex from "@stylexjs/stylex";
+
+export const colors = stylex.defineVars({
+  background: "var(--background)",
+  foreground: "var(--foreground)",
+  primary: "var(--primary)",
+  primaryForeground: "var(--primary-foreground)",
+  border: "var(--border)",
+  ring: "var(--ring)",
+  // …
+});
+```
+
+Because the tokens resolve to `var(--…)`, the actual values are whatever your
+stylesheet defines. Change the variable, and every component updates.
+
+## Defining the variables
+
+Define your light and dark palettes in your global stylesheet. Dark mode is driven by
+a `.dark` class on the document (e.g. via `next-themes`), exactly like stock shadcn/ui.
+
+```css title="app/globals.css"
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --border: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --radius: 0.625rem;
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --border: oklch(1 0 0 / 10%);
+  --ring: oklch(0.556 0 0);
+}
+```
+
+<Callout>
+  Copy the full variable set from the [shadcn/ui theming
+  docs](https://ui.shadcn.com/docs/theming) — this registry uses the identical
+  variable names, so any shadcn/ui theme, generator, or `tweakcn` export works
+  as-is.
+</Callout>
+
+## Radius
+
+Components read `--radius` for their corner rounding. Set it once and the whole set
+scales:
+
+```css
+:root {
+  --radius: 0.5rem; /* try 0rem for sharp, 1rem for round */
+}
+```
+
+## Adding your own tokens
+
+`tokens.stylex.ts` is yours after install — add tokens for any extra variables you
+use, then reference them from a component's `.stylex.ts` file:
+
+```ts
+import { colors } from "@/components/ui/tokens.stylex";
+
+export const styles = stylex.create({
+  base: { backgroundColor: colors.primary, color: colors.primaryForeground },
+});
+```

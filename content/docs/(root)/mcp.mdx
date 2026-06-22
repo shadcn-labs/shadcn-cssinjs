@@ -1,0 +1,75 @@
+---
+title: MCP Server
+description: Install components from this registry with your AI coding agent via the shadcn MCP server.
+---
+
+The [shadcn MCP server](https://ui.shadcn.com/docs/mcp) lets AI coding agents browse
+and install registry items for you. Point it at this registry and you can say
+_"add the button and dialog components"_ and the agent runs the install.
+
+## Configure the registry
+
+Add this registry to your project's `components.json` under `registries`:
+
+```json title="components.json"
+{
+  "registries": {
+    "@shadcn-cssinjs": "https://shadcn-cssinjs.vercel.app/r/{name}.json"
+  }
+}
+```
+
+## Add the MCP server
+
+<Tabs defaultValue="claude">
+
+<TabsList>
+  <TabsTrigger value="claude">Claude Code</TabsTrigger>
+  <TabsTrigger value="cursor">Cursor</TabsTrigger>
+</TabsList>
+
+<TabsContent value="claude">
+
+Run the shadcn MCP init command, or add the server manually:
+
+```bash
+npx shadcn@latest mcp init --client claude
+```
+
+</TabsContent>
+
+<TabsContent value="cursor">
+
+Add the server to `.cursor/mcp.json`:
+
+```json title=".cursor/mcp.json"
+{
+  "mcpServers": {
+    "shadcn": {
+      "command": "npx",
+      "args": ["-y", "shadcn@latest", "mcp"]
+    }
+  }
+}
+```
+
+</TabsContent>
+
+</Tabs>
+
+## Use it
+
+Once configured, prompt your agent naturally:
+
+```txt
+Show me the components available in the @shadcn-cssinjs registry.
+Add the dialog and dropdown-menu components to my project.
+```
+
+The agent reads each item's JSON, installs npm dependencies, and writes the source
+into `components/ui/` — the same result as running the CLI yourself.
+
+<Callout>
+  The MCP server uses the registry config in `components.json`. Make sure the
+  `@shadcn-cssinjs` entry above is present before starting your agent.
+</Callout>

@@ -1,0 +1,39 @@
+---
+title: Changelog
+description: Notable changes to the shadcn-cssinjs registry.
+---
+
+## June 2026
+
+### Full shadcn/ui parity
+
+The registry now mirrors the complete shadcn/ui component set — **51 components**.
+New additions:
+
+- **Overlays & menus** — `alert-dialog`, `hover-card`, `menubar`,
+  `navigation-menu`, `select`.
+- **Forms** — `checkbox`, `radio-group`, `switch`, `slider`, `toggle-group`,
+  `label`, `textarea`, `input-otp`.
+- **Data & layout** — `avatar`, `breadcrumb`, `button-group`, `pagination`,
+  `progress`, `scroll-area`, `table`, `spinner`.
+- **Heavy-dependency components** — `calendar` (react-day-picker), `carousel`
+  (embla), `chart` (recharts), `resizable` (react-resizable-panels), `sonner`.
+- **Compositions** — `date-picker`, `combobox`, and `data-table` docs showing how
+  to assemble the primitives.
+
+### RTL support
+
+Every component now uses logical CSS properties and Base UI's `DirectionProvider`,
+so they flip correctly in right-to-left layouts. See the [RTL guide](/docs/rtl) and
+the RTL preview on each component page.
+
+### Docs parity
+
+Component pages were rebuilt to mirror the shadcn/ui base docs: live preview with
+inline source, CLI/Manual installation tabs, usage, composition, RTL, and an API
+reference link.
+
+## Earlier
+
+- Initial release: StyleX + Base UI port of the core shadcn/ui components, shared
+  `stylex-tokens`, and the theme customizer.

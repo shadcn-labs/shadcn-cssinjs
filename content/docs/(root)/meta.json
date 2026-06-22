@@ -1,4 +1,12 @@
 {
   "title": "Get Started",
-  "pages": ["index", "[Installation](/docs/installation)", "[RTL](/docs/rtl)"]
+  "pages": [
+    "index",
+    "[Installation](/docs/installation)",
+    "[Theming](/docs/theming)",
+    "[RTL](/docs/rtl)",
+    "[Registry](/docs/registry)",
+    "[MCP Server](/docs/mcp)",
+    "[Changelog](/docs/changelog)"
+  ]
 }
