@@ -36,10 +36,12 @@ const SheetContent = ({
   style,
   children,
   side = "right",
+  showCloseButton = true,
   ...props
 }: Omit<React.ComponentProps<typeof DialogPrimitive.Popup>, "className"> & {
   className?: string;
   side?: Side;
+  showCloseButton?: boolean;
 }) => {
   const close = x(styles.closeButton);
   const sr = x(styles.srOnly);
@@ -68,16 +70,18 @@ const SheetContent = ({
         {...props}
       >
         {children}
-        <DialogPrimitive.Close
-          data-slot="sheet-close"
-          className={close.className}
-          style={close.style}
-        >
-          <XIcon size={16} />
-          <span className={sr.className} style={sr.style}>
-            Close
-          </span>
-        </DialogPrimitive.Close>
+        {showCloseButton && (
+          <DialogPrimitive.Close
+            className={close.className}
+            data-slot="sheet-close"
+            style={close.style}
+          >
+            <XIcon size={16} />
+            <span className={sr.className} style={sr.style}>
+              Close
+            </span>
+          </DialogPrimitive.Close>
+        )}
       </DialogPrimitive.Popup>
     </DialogPrimitive.Portal>
   );

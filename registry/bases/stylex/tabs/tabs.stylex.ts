@@ -14,6 +14,16 @@ export const styles = stylex.create({
     padding: "0.25rem",
     width: "fit-content",
   },
+  listLine: {
+    alignItems: "center",
+    borderBottom: `1px solid ${colors.border}`,
+    color: colors.mutedForeground,
+    display: "inline-flex",
+    gap: "0.25rem",
+    justifyContent: "center",
+    padding: 0,
+    width: "fit-content",
+  },
   panel: {
     flex: 1,
     outline: "none",
@@ -51,6 +61,17 @@ export const styles = stylex.create({
   triggerActive: {
     backgroundColor: colors.background,
     boxShadow: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+    color: colors.foreground,
+  },
+  triggerLine: {
+    borderBottom: "2px solid transparent",
+    borderRadius: 0,
+    borderWidth: 0,
+    flex: "0 0 auto",
+    marginBottom: "-1px",
+  },
+  triggerLineActive: {
+    borderBottomColor: colors.foreground,
     color: colors.foreground,
   },
 });

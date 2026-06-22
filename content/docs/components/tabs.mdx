@@ -94,12 +94,38 @@ Tabs
 
 ## Examples
 
+import TabsLine from "@/examples/tabs-line";
+import TabsVertical from "@/examples/tabs-vertical";
+import TabsIcons from "@/examples/tabs-icons";
+
+### Line
+
+Use `variant="line"` on `TabsList` for an underlined tab style.
+
+<ComponentPreview name="tabs-line">
+  <TabsLine />
+</ComponentPreview>
+
+### Vertical
+
+Use `orientation="vertical"` on `Tabs` to stack the tabs vertically.
+
+<ComponentPreview name="tabs-vertical">
+  <TabsVertical />
+</ComponentPreview>
+
 ### Disabled
 
 Use the `disabled` prop on a `TabsTrigger` to disable a tab.
 
 <ComponentPreview name="tabs-disabled">
   <TabsDisabled />
+</ComponentPreview>
+
+### Icons
+
+<ComponentPreview name="tabs-icons">
+  <TabsIcons />
 </ComponentPreview>
 
 import TabsRtl from "@/examples/tabs-rtl";

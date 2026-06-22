@@ -64,14 +64,16 @@ const SelectContent = ({
   style,
   children,
   sideOffset = 4,
+  alignItemWithTrigger = false,
   ...props
 }: Omit<React.ComponentProps<typeof SelectPrimitive.Popup>, "className"> & {
   className?: string;
   sideOffset?: number;
+  alignItemWithTrigger?: boolean;
 }) => (
   <SelectPrimitive.Portal>
     <SelectPrimitive.Positioner
-      alignItemWithTrigger={false}
+      alignItemWithTrigger={alignItemWithTrigger}
       side="bottom"
       sideOffset={sideOffset}
     >
