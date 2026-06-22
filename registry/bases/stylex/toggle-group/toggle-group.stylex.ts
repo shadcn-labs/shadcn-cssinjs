@@ -12,6 +12,12 @@ export const styles = stylex.create({
     padding: "0.25rem",
     width: "fit-content",
   },
+  groupOutline: {
+    alignItems: "center",
+    display: "inline-flex",
+    gap: "0.25rem",
+    width: "fit-content",
+  },
   item: {
     alignItems: "center",
     backgroundColor: { ":hover": colors.background, default: "transparent" },
