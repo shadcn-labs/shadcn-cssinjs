@@ -26,6 +26,10 @@ export const styles = stylex.create({
   rootChecked: {
     backgroundColor: colors.primary,
   },
+  rootSm: {
+    height: "1rem",
+    width: "1.65rem",
+  },
   thumb: {
     backgroundColor: colors.background,
     borderRadius: "9999px",
@@ -38,5 +42,12 @@ export const styles = stylex.create({
   },
   thumbChecked: {
     transform: "translateX(0.925rem)",
+  },
+  thumbSm: {
+    height: "0.75rem",
+    width: "0.75rem",
+  },
+  thumbSmChecked: {
+    transform: "translateX(0.775rem)",
   },
 });
