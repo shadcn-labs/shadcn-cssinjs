@@ -20,7 +20,32 @@ const makeSlot =
     );
   };
 
-const Card = makeSlot("card", styles.card);
+const Card = ({
+  className,
+  style,
+  size = "default",
+  ...props
+}: DivProps & { size?: "default" | "sm" }) => {
+  const p = x(styles.card);
+  return (
+    <div
+      className={cx(p.className, className)}
+      data-size={size}
+      data-slot="card"
+      style={
+        size === "sm"
+          ? ({
+              "--card-spacing": "0.75rem",
+              ...p.style,
+              ...style,
+            } as React.CSSProperties)
+          : { ...p.style, ...style }
+      }
+      {...props}
+    />
+  );
+};
+
 const CardHeader = makeSlot("card-header", styles.header);
 const CardTitle = makeSlot("card-title", styles.title);
 const CardDescription = makeSlot("card-description", styles.description);

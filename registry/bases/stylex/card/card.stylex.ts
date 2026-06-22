@@ -18,12 +18,12 @@ export const styles = stylex.create({
     color: colors.cardForeground,
     display: "flex",
     flexDirection: "column",
-    gap: "1.5rem",
-    paddingBottom: "1.5rem",
-    paddingTop: "1.5rem",
+    gap: "var(--card-spacing, 1.5rem)",
+    paddingBottom: "var(--card-spacing, 1.5rem)",
+    paddingTop: "var(--card-spacing, 1.5rem)",
   },
   content: {
-    paddingInline: "1.5rem",
+    paddingInline: "var(--card-spacing, 1.5rem)",
   },
   description: {
     color: colors.mutedForeground,
@@ -33,7 +33,7 @@ export const styles = stylex.create({
   footer: {
     alignItems: "center",
     display: "flex",
-    paddingInline: "1.5rem",
+    paddingInline: "var(--card-spacing, 1.5rem)",
   },
   header: {
     alignItems: "start",
@@ -41,7 +41,7 @@ export const styles = stylex.create({
     gap: "0.375rem",
     gridTemplateColumns: "1fr auto",
     gridTemplateRows: "auto auto",
-    paddingInline: "1.5rem",
+    paddingInline: "var(--card-spacing, 1.5rem)",
   },
   title: {
     fontWeight: 600,
