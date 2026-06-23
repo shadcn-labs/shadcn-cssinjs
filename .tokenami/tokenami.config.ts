@@ -25,13 +25,13 @@ export default createConfig({
     sm: "@media (min-width: 640px)",
   },
   selectors: {
+    // Native pseudo-classes / elements
     hover: "&:hover",
     focus: "&:focus",
     "focus-visible": "&:focus-visible",
     "focus-within": "&:focus-within",
     active: "&:active",
     disabled: "&:disabled",
-    checked: "&:checked",
     "placeholder-shown": "&:placeholder-shown",
     "first-child": "&:first-child",
     "last-child": "&:last-child",
@@ -39,13 +39,14 @@ export default createConfig({
     after: "&::after",
     placeholder: "&::placeholder",
     selection: "&::selection",
-    // Base UI state attributes (Tokenami, unlike StyleX, supports them).
+    "file-selector-button": "&::file-selector-button",
+    // Base UI state data-attributes (Tokenami, unlike StyleX, supports them).
     open: "&[data-open]",
     closed: "&[data-closed]",
     "panel-open": "&[data-panel-open]",
     highlighted: "&[data-highlighted]",
     selected: "&[data-selected]",
-    checked_attr: "&[data-checked]",
+    checked: "&[data-checked]",
     unchecked: "&[data-unchecked]",
     pressed: "&[data-pressed]",
     "data-active": "&[data-active]",
