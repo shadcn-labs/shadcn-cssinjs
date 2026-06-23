@@ -3,6 +3,12 @@
 
 @import "./themes.css";
 
+/* Tokenami: compiled styles for registry/bases/tokenami components. Generated
+   by `pnpm tokenami:build` (scans the tokenami registry + examples). Tokenami
+   manages its own `@layer tkb/tkc` cascade, so it's imported without an outer
+   layer. */
+@import "./tokenami.css";
+
 /* StyleX: compiled styles for registry/bases/stylex components are injected here. */
 @stylex;
 

@@ -15,6 +15,7 @@ export default defineConfig({
   extends: [ultracite],
   ignorePatterns: [
     "public/r/**",
+    "styles/tokenami.css",
     ".agents/**",
     ".cursor/**",
     ".changeset/**",
