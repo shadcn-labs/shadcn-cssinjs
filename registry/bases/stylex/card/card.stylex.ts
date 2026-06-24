@@ -39,7 +39,11 @@ export const styles = stylex.create({
     alignItems: "start",
     display: "grid",
     gap: "0.375rem",
-    gridTemplateColumns: "1fr auto",
+    gridAutoRows: "min-content",
+    gridTemplateColumns: {
+      default: "1fr",
+      ":has([data-slot=card-action])": "1fr auto",
+    },
     gridTemplateRows: "auto auto",
     paddingInline: "var(--card-spacing, 1.5rem)",
   },

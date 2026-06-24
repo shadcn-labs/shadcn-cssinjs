@@ -9,7 +9,7 @@ const Label = ({
 }: React.ComponentProps<"label"> & { className?: string }) => {
   const p = x(styles.root);
   return (
-    // biome-ignore lint/a11y/noLabelWithoutControl: htmlFor/children supplied by consumer
+    // oxlint-disable-next-line label-has-associated-control -- htmlFor/children supplied by consumer
     <label
       className={cx(p.className, className)}
       data-slot="label"
