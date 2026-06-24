@@ -45,3 +45,5 @@ next-env.d.ts
 .contentlayer
 .content-collections
 .source
+# Panda CSS (generated runtime)
+styled-system

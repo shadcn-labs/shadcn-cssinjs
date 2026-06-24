@@ -15,6 +15,8 @@ export default defineConfig({
   extends: [ultracite],
   ignorePatterns: [
     "public/r/**",
+    "styles/panda.css",
+    "styled-system/**",
     ".agents/**",
     ".cursor/**",
     ".changeset/**",
