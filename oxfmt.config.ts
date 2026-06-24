@@ -21,6 +21,8 @@ export default defineConfig({
     "**/.source/**",
     "**/dist/**",
     "**/public/r/**",
+    "**/styled-system/**",
+    "apps/www/styles/panda.css",
     ".agents/**",
     ".cursor/**",
     ".changeset/**",
