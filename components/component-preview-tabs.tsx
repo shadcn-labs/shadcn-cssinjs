@@ -6,6 +6,8 @@ import Link from "next/link";
 import { useState } from "react";
 import type { ReactNode } from "react";
 
+import { BASE_LABELS, useComponentBase } from "@/components/base-provider";
+import type { ComponentBase } from "@/components/base-provider";
 import {
   LanguageProvider,
   LanguageSelector,
@@ -13,6 +15,7 @@ import {
   useTranslation,
 } from "@/components/language-selector";
 import type { Translations } from "@/components/language-selector";
+import { TokenamiExample } from "@/components/tokenami-example";
 import { Button } from "@/components/ui/button";
 import {
   Popover,
@@ -27,6 +30,34 @@ const directionTranslations: Translations<Record<string, never>> = {
   en: { dir: "ltr", values: {} },
   he: { dir: "rtl", values: {} },
 };
+
+const BASES: ComponentBase[] = ["stylex", "tokenami"];
+
+const BaseToggle = ({
+  base,
+  onBaseChange,
+}: {
+  base: ComponentBase;
+  onBaseChange: (base: ComponentBase) => void;
+}) => (
+  <div className="bg-muted text-muted-foreground inline-flex h-7 items-center rounded-md p-0.5">
+    {BASES.map((value) => (
+      <button
+        className={cn(
+          "inline-flex h-6 items-center rounded-sm px-2 text-xs font-medium transition-colors",
+          base === value
+            ? "bg-background text-foreground shadow-sm"
+            : "hover:text-foreground"
+        )}
+        key={value}
+        onClick={() => onBaseChange(value)}
+        type="button"
+      >
+        {BASE_LABELS[value]}
+      </button>
+    ))}
+  </div>
+);
 
 const RtlLanguageSelector = () => {
   const context = useLanguageContext();
@@ -82,7 +113,11 @@ export const ComponentPreviewTabs = ({
   component,
   source,
   sourcePreview,
+  tokenamiSource,
+  tokenamiSourcePreview,
   direction = "ltr",
+  name,
+  hasTokenami = false,
 }: {
   className?: string;
   previewClassName?: string;
@@ -91,9 +126,25 @@ export const ComponentPreviewTabs = ({
   component: ReactNode;
   source: ReactNode;
   sourcePreview?: ReactNode;
+  tokenamiSource?: ReactNode;
+  tokenamiSourcePreview?: ReactNode;
   direction?: "ltr" | "rtl";
+  name?: string;
+  hasTokenami?: boolean;
 }) => {
   const [isCodeVisible, setIsCodeVisible] = useState(false);
+  const { base, setBase } = useComponentBase();
+
+  const effectiveBase: ComponentBase = hasTokenami ? base : "stylex";
+  const previewContent =
+    effectiveBase === "tokenami" && name ? (
+      <TokenamiExample name={name} />
+    ) : (
+      component
+    );
+  const codeSource = effectiveBase === "tokenami" ? tokenamiSource : source;
+  const codeSourcePreview =
+    effectiveBase === "tokenami" ? tokenamiSourcePreview : sourcePreview;
 
   return (
     <div
@@ -105,8 +156,9 @@ export const ComponentPreviewTabs = ({
     >
       {direction === "rtl" ? (
         <LanguageProvider defaultLanguage="ar">
-          <div className="flex h-14 items-center border-b px-4">
+          <div className="flex h-14 items-center gap-2 border-b px-4">
             <RtlLanguageSelector />
+            {hasTokenami && <BaseToggle base={base} onBaseChange={setBase} />}
             <Popover>
               <PopoverTrigger asChild>
                 <Button
@@ -139,11 +191,16 @@ export const ComponentPreviewTabs = ({
             </Popover>
           </div>
           <PreviewWrapper align={align} previewClassName={previewClassName}>
-            <DirectionWrapper>{component}</DirectionWrapper>
+            <DirectionWrapper>{previewContent}</DirectionWrapper>
           </PreviewWrapper>
         </LanguageProvider>
       ) : (
         <div dir="ltr">
+          {hasTokenami && (
+            <div className="flex h-14 items-center border-b px-4">
+              <BaseToggle base={base} onBaseChange={setBase} />
+            </div>
+          )}
           <div
             className={cn(
               "preview relative flex min-h-[350px] w-full justify-center p-10",
@@ -153,7 +210,7 @@ export const ComponentPreviewTabs = ({
               previewClassName
             )}
           >
-            {component}
+            {previewContent}
           </div>
         </div>
       )}
@@ -181,11 +238,11 @@ export const ComponentPreviewTabs = ({
                   </span>
                 </div>
               )}
-              {source}
+              {codeSource}
             </>
           ) : (
             <div className="relative">
-              {sourcePreview}
+              {codeSourcePreview}
               <div className="absolute inset-0 flex items-center justify-center pb-4">
                 <div
                   className="absolute inset-0"
