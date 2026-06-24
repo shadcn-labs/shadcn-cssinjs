@@ -32,20 +32,23 @@ export const NotificationSettings = () => (
       <CardDescription>Choose what you want to hear about.</CardDescription>
     </CardHeader>
     <CardContent className="flex flex-col gap-4">
-      {SETTINGS.map((setting) => (
-        <label
-          className="flex items-start justify-between gap-4"
-          key={setting.title}
-        >
-          <div className="flex flex-col gap-0.5">
-            <span className="text-sm font-medium">{setting.title}</span>
-            <span className="text-muted-foreground text-sm">
-              {setting.description}
-            </span>
+      {SETTINGS.map((setting) => {
+        const id = setting.title.toLowerCase().replaceAll(" ", "-");
+        return (
+          <div
+            className="flex items-start justify-between gap-4"
+            key={setting.title}
+          >
+            <label className="flex flex-col gap-0.5" htmlFor={id}>
+              <span className="text-sm font-medium">{setting.title}</span>
+              <span className="text-muted-foreground text-sm">
+                {setting.description}
+              </span>
+            </label>
+            <Switch defaultChecked={setting.enabled} id={id} />
           </div>
-          <Switch defaultChecked={setting.enabled} />
-        </label>
-      ))}
+        );
+      })}
     </CardContent>
   </Card>
 );

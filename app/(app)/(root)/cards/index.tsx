@@ -10,29 +10,27 @@ import { UIElements } from "./ui-elements";
 
 export const CardsDemo = () => (
   <div
-    className="bg-muted dark:bg-background relative flex w-full max-w-none flex-col overflow-hidden p-6 pb-0! [--gap:--spacing(6)] lg:p-10 lg:[--gap:--spacing(8)]"
+    className="bg-muted dark:bg-background relative flex w-full max-w-none flex-col gap-(--gap) overflow-hidden p-12 pb-0! [--gap:--spacing(8)] lg:p-6 lg:[--gap:--spacing(6)]"
     data-slot="demo"
   >
-    <div className="relative z-10 mx-auto grid w-full max-w-[1600px] gap-(--gap) md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 [&_[data-slot=card]]:w-full">
-      <div className="flex flex-col gap-(--gap)">
+    <div className="relative z-10 mx-auto grid w-full gap-(--gap) md:max-w-2xl md:grid-cols-2 lg:max-w-[1200px] lg:grid-cols-3 [&_[data-slot=card]]:w-full">
+      <div className="flex flex-col items-start gap-(--gap)">
         <UIElements />
+        <SidebarNav />
         <SavingsTargets />
       </div>
       <div className="hidden flex-col gap-(--gap) md:flex">
         <Payments />
         <NotificationSettings />
+        <AccountAccess />
       </div>
       <div className="hidden flex-col gap-(--gap) lg:flex">
         <AnalyticsCard />
-        <AccountAccess />
-      </div>
-      <div className="hidden flex-col gap-(--gap) xl:flex">
         <CalendarCard />
         <TransferFunds />
-        <SidebarNav />
       </div>
     </div>
-    <div className="from-background via-muted to-transparent dark:via-background/80 pointer-events-none absolute inset-x-0 top-0 z-1 h-32 bg-linear-to-b" />
-    <div className="from-background via-muted/80 dark:via-background/80 pointer-events-none absolute inset-x-0 bottom-0 z-20 h-48 bg-linear-to-t to-transparent lg:h-64" />
+    <div className="from-background via-muted dark:hidden pointer-events-none absolute inset-x-0 top-0 z-1 h-120 bg-linear-to-b to-transparent" />
+    <div className="from-background via-muted/80 dark:via-background/80 pointer-events-none absolute inset-x-0 bottom-0 z-20 h-48 bg-linear-to-t to-transparent lg:h-80 xl:h-64" />
   </div>
 );
