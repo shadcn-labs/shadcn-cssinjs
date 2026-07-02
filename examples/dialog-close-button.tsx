@@ -29,7 +29,7 @@ export default function DialogCloseButton() {
               Link
             </Label>
             <Input
-              defaultValue="https://shadcn-cssinjs.vercel.app/docs/installation"
+              defaultValue="https://shadcn-cssinjs.com/docs/installation"
               id="link"
               readOnly
             />
