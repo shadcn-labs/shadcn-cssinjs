@@ -43,12 +43,12 @@ pnpm registry:build
 
 ## Scripts
 
-| Command | Description |
-| --- | --- |
-| `pnpm dev` | Start the docs/dev server |
-| `pnpm build` | Build the registry and the site for production |
+| Command               | Description                                    |
+| --------------------- | ---------------------------------------------- |
+| `pnpm dev`            | Start the docs/dev server                      |
+| `pnpm build`          | Build the registry and the site for production |
 | `pnpm registry:build` | Rebuild the component registry into `public/r` |
-| `pnpm typecheck` | Run TypeScript with no emit |
+| `pnpm typecheck`      | Run TypeScript with no emit                    |
 
 ## Built With
 
