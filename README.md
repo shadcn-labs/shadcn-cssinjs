@@ -18,7 +18,7 @@ Built on top of [@base-ui/react](https://base-ui.com) (headless primitives) and 
 
 ## Documentation
 
-Visit https://shadcn-cssinjs.vercel.app/docs to view the documentation.
+Visit https://shadcn-cssinjs.com/docs to view the documentation.
 
 ## Development
 
