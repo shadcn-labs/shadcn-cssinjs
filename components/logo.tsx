@@ -8,25 +8,19 @@ export const LogoMark = ({
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     fill="none"
-    stroke="currentColor"
+    stroke="#ffd400"
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
     className={cn("size-4", className)}
     {...props}
   >
-    <path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z" />
-    <path d="M12 22V12" />
-    <polyline points="3.29 7 12 12 20.71 7" />
-    <path d="m7.5 4.27 9 5.15" />
+    <path d="m17.74 11.93-5.81 5.81m4.65-12.21L5.53 16.58" />
   </svg>
 );
 
-export const getLogoMarkSVG = (color: string) => `
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/>
-    <path d="M12 22V12"/>
-    <polyline points="3.29 7 12 12 20.71 7"/>
-    <path d="m7.5 4.27 9 5.15"/>
+export const getLogoMarkSVG = () => `
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#ffd400" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m17.74 11.93-5.81 5.81m4.65-12.21L5.53 16.58" />
   </svg>
 `;

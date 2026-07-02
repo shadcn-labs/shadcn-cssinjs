@@ -1,7 +1,6 @@
 "use client";
 
 import { DownloadIcon } from "lucide-react";
-import { useTheme } from "next-themes";
 import { useCallback } from "react";
 import { toast } from "sonner";
 
@@ -19,12 +18,9 @@ export const BrandContextMenu = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const { resolvedTheme } = useTheme();
   const { copyToClipboard } = useCopyToClipboard();
 
-  const logoMarkSvgString = getLogoMarkSVG(
-    resolvedTheme === "light" ? "#000" : "#fff"
-  );
+  const logoMarkSvgString = getLogoMarkSVG();
 
   const handleCopy = useCallback(() => {
     copyToClipboard(logoMarkSvgString);

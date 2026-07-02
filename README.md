@@ -14,6 +14,8 @@ Accessible and customizable components that you can copy and paste into your app
 
 Built on top of [@base-ui/react](https://base-ui.com) (headless primitives) and styled with [@stylexjs/stylex](https://stylexjs.com).
 
+![hero](public/opengraph-image.png)
+
 ## Documentation
 
 Visit https://shadcn-cssinjs.vercel.app/docs to view the documentation.
