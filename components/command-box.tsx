@@ -97,6 +97,8 @@ export const CommandBox = ({ className }: { className?: string }) => {
             >
               {registryItemNames}
             </TextFlip>
+
+            <span>.json</span>
           </code>
         </pre>
       </Tabs>
@@ -111,7 +113,7 @@ export const CommandBox = ({ className }: { className?: string }) => {
       <CopyButton
         className="absolute top-2 right-2 z-10 size-7 opacity-70 hover:opacity-100 focus-visible:opacity-100"
         value={() =>
-          `${pmCommands[packageManager]} shadcn@latest add ${SITE.REGISTRY}/${currentItemRef.current}`
+          `${pmCommands[packageManager]} shadcn@latest add ${SITE.REGISTRY}/r/${currentItemRef.current}.json`
         }
         event="copy_npm_command"
       />
