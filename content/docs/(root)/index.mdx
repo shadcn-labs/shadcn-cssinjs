@@ -1,105 +1,74 @@
 ---
 title: Introduction
-description: shadcn/ui components, restyled with StyleX on top of Base UI primitives.
+description: Copy-paste UI components for React. Styled with StyleX on Base UI, works with the shadcn CLI.
 ---
 
-**shadcn-cssinjs** is an open [shadcn registry](https://ui.shadcn.com/docs/registry)
-where every component is styled with [StyleX](https://stylexjs.com) — atomic, build-time
-CSS-in-JS — instead of Tailwind, and built on [Base UI](https://base-ui.com) primitives
-instead of Radix.
+import { ZapIcon } from "lucide-react";
+import { SunMoonIcon } from "lucide-react";
+import { LayoutGridIcon } from "lucide-react";
+import { Code2Icon } from "lucide-react";
+import { ClipboardCopyIcon } from "lucide-react";
+import { BlocksIcon } from "lucide-react";
 
-The distribution model is exactly the same as shadcn/ui: you install a component with the
-`shadcn` CLI and the source code lands in your project. You own it, you read it, you edit
-it. There is no runtime library to wrestle with.
+**shadcn-cssinjs** provides beautifully designed, accessible, and customizable UI
+components. Styled with [StyleX](https://stylexjs.com) on top of
+[Base UI](https://base-ui.com) primitives, and designed to work seamlessly with the
+[shadcn CLI](https://ui.shadcn.com).
 
-## Why StyleX + Base UI?
+## Philosophy
 
-- **StyleX styling** — Styles are colocated, type-safe, and compiled to atomic CSS at build time. No utility-class strings, no runtime style injection, no specificity wars.
-- **Base UI primitives** — Accessible, unstyled primitives from the team behind Radix and Floating UI. Modern API, great defaults.
-- **Token-driven theming** — Styles reference your existing CSS variables (`--background`, `--primary`, …), so light/dark theming via a `.dark` class keeps working out of the box.
-- **You own the code** — Installed with `npx shadcn add`; you get real source files, not an npm dependency.
+shadcn-cssinjs follows the shadcn model for CSS-in-JS: copy-paste components you can own,
+with zero lock-in and sensible defaults that work immediately.
 
-## How It Works
+Most shadcn setups assume Tailwind. That works well — until your team wants colocated,
+type-safe styles that compile to atomic CSS at build time. shadcn-cssinjs takes a
+different approach. It keeps the familiar component API, styles with StyleX instead of
+utility classes, and builds on Base UI so you can drop down to the primitives whenever you
+need more control.
 
-Each component lives in its own folder with two files:
+The goal is simple: make StyleX-styled components feel like the rest of your stack —
+composable, themeable, accessible, and easy to customize.
 
-```txt
-components/ui/
-└── button/
-    ├── button.tsx          # the Base UI + StyleX component
-    └── button.stylex.ts    # its StyleX rules (stylex.create)
-```
+## Why shadcn-cssinjs?
 
-Styles are authored in the `.stylex.ts` file and applied in the component with a small
-`x()` helper (a thin wrapper over `stylex.props`). Shared design tokens live in
-`components/ui/tokens.stylex.ts` and are referenced by every component.
+Most CSS-in-JS component setups are either too opinionated or too scattered.
+shadcn-cssinjs is built for teams that want to ship quickly without giving up control:
 
-```tsx title="button.tsx"
-import { styles } from "./button.stylex";
-import { x } from "@/lib/utils";
+- **Own Your Code:** Copy the components into your project and customize everything.
+- **Start Fast:** Run one command and get production-ready defaults with StyleX and Base UI.
+- **Scale Safely:** Stay close to StyleX and Base UI primitives, then drop to raw APIs when needed.
 
-export function Button({ className, ...props }) {
-  const p = x(styles.base, styles.default);
-  return <button className={p.className} style={p.style} {...props} />;
-}
-```
+## Features
 
-<Callout>
-  StyleX cannot target a component's own `data-state` attributes or peer/group
-  selectors the way Tailwind can. State-based styling (open, highlighted,
-  pressed, …) is handled with Base UI's `className`-as-function API, which
-  receives the current state.
-</Callout>
-
-## Tech Stack
-
-- `Next.js 16` + App Router and `React 19`
-- `@stylexjs/stylex` for styling (Babel transform + PostCSS plugin)
-- `@base-ui/react` for primitives
-- `Fumadocs` for these docs
-- `Tailwind CSS 4` for the docs site itself
-
-## FAQ
-
-<Accordion type="multiple">
-
-<AccordionItem value="faq-1">
-<AccordionTrigger>
-Why StyleX instead of Tailwind?
-</AccordionTrigger>
-<AccordionContent>
-
-StyleX gives you type-safe, colocated styles that compile to atomic CSS at build time —
-similar size benefits to Tailwind, but with real JavaScript values, no class-name strings,
-and deterministic merging. This registry exists to show what shadcn/ui looks like when it's
-built that way.
-
-</AccordionContent>
-</AccordionItem>
-
-<AccordionItem value="faq-2">
-<AccordionTrigger>
-Why Base UI instead of Radix?
-</AccordionTrigger>
-<AccordionContent>
-
-Base UI is the next-generation primitive library from the maintainers of Radix and Floating
-UI. It ships a `render` prop (in place of `asChild`) and a `className`-as-function API that
-pairs well with StyleX's styling model.
-
-</AccordionContent>
-</AccordionItem>
-
-<AccordionItem value="faq-3">
-<AccordionTrigger>
-Does dark mode work?
-</AccordionTrigger>
-<AccordionContent>
-
-Yes. Tokens wrap your existing CSS custom properties, so toggling a `.dark` class on the
-document (e.g. via `next-themes`) flips every component, exactly like stock shadcn/ui.
-
-</AccordionContent>
-</AccordionItem>
-
-</Accordion>
+<div className="not-prose grid gap-4 sm:grid-cols-2 mt-4">
+  <FeatureCard
+    icon={ZapIcon}
+    title="Zero Config"
+    description="Works out of the box with sensible defaults. No boilerplate needed."
+  />
+  <FeatureCard
+    icon={SunMoonIcon}
+    title="Theme Aware"
+    description="Automatically adapts to your CSS variables and light/dark theme."
+  />
+  <FeatureCard
+    icon={LayoutGridIcon}
+    title="Composable"
+    description="Build complex UIs with simple, declarative components."
+  />
+  <FeatureCard
+    icon={Code2Icon}
+    title="TypeScript"
+    description="Full type safety with comprehensive TypeScript support."
+  />
+  <FeatureCard
+    icon={ClipboardCopyIcon}
+    title="Copy & Paste"
+    description="Own your code. No runtime dependencies, just install into your project."
+  />
+  <FeatureCard
+    icon={BlocksIcon}
+    title="shadcn Compatible"
+    description="Uses the same registry format — add components with npx shadcn add."
+  />
+</div>
