@@ -1,0 +1,33 @@
+---
+title: Message
+description: Compose message layouts with avatars, headers, content, and footers.
+---
+
+## Installation
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/message.json
+```
+
+## Usage
+
+```tsx
+import {
+  Message,
+  MessageAvatar,
+  MessageContent,
+  MessageFooter,
+  MessageHeader,
+} from "@/components/ui/message/message";
+```
+
+```tsx
+<Message align="start">
+  <MessageAvatar>{/* Avatar */}</MessageAvatar>
+  <MessageContent>
+    <MessageHeader>Assistant</MessageHeader>
+    Message content
+    <MessageFooter>Just now</MessageFooter>
+  </MessageContent>
+</Message>
+```
