@@ -1,0 +1,49 @@
+{
+  "skill_name": "tailwind-to-stylex",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "This project uses StyleX (it's already wired into the Vite build). Can you migrate src/PriceCard.tsx off Tailwind and onto StyleX? I want it to render identically.",
+      "expected_output": "PriceCard.tsx rewritten with `import * as stylex from '@stylexjs/stylex'`, a module-level `stylex.create({...})`, and every element using `{...stylex.props(...)}` instead of className. Responsive widths become @media (min-width) conditions with a default; hover/focus-visible/disabled on the button become value-level conditions with a required default; text-sm/text-3xl keep BOTH font-size and line-height. No className or Tailwind classes remain.",
+      "files": ["evals/files/price-card"],
+      "expectations": [
+        "Adds `import * as stylex from '@stylexjs/stylex'` and defines styles via `stylex.create` at module scope (not inside the component)",
+        "Every element uses `{...stylex.props(...)}`; no `className` or Tailwind utility strings remain",
+        "The responsive width (w-full md:w-1/2 lg:w-1/3) becomes a `width` object with `default: '100%'` and `@media (min-width: 768px)` / `@media (min-width: 1024px)` keys",
+        "Button hover/focus-visible/disabled become value-level conditions on backgroundColor with a `default` key present",
+        "text-sm and text-3xl each produce BOTH fontSize and lineHeight (the line-height declaration is not dropped)",
+        "Multi-value shorthands are avoided: border is split into borderWidth/borderStyle/borderColor rather than a single `border` string",
+        "Rendered result is behavior-preserving (same colors, spacing, radii, shadow as the Tailwind original)"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Please convert src/Button.tsx to StyleX. It uses cn() from ./lib/utils with variant logic and a passed-in className, and it renders a Spinner component. Keep the same override behavior for callers.",
+      "expected_output": "Button.tsx using stylex.create + stylex.props. The cn() call becomes stylex.props(styles.base, variant === 'primary' ? styles.primary : styles.secondary, loading && styles.loading, <caller override last>). Because callers passed className, the public API should switch to a `style` prop (StyleX passes styles, not classes) kept LAST in the merge so callers can still win. The Spinner (capitalized component) is NOT given stylex.props directly on the JSX tag — instead the spin style is passed via its style prop and Spinner spreads stylex.props on its <svg>. animate-spin becomes a stylex.keyframes animation.",
+      "files": ["evals/files/button"],
+      "expectations": [
+        "The cn(...) call is replaced by stylex.props(...) with the same last-wins ordering",
+        "Variant selection (primary/secondary) is expressed as a conditional style argument (ternary) inside stylex.props",
+        "The `loading && ...` conditional class becomes a `loading && styles.x` argument (conditional style)",
+        "A caller-supplied override (previously className) is kept as the LAST argument to stylex.props so callers can still override, and the prop is switched from className to a StyleX style prop",
+        "The Spinner component does NOT receive `{...stylex.props(...)}` spread onto the <Spinner> tag; instead its style is forwarded and Spinner applies stylex.props on its own <svg> host element",
+        "animate-spin is implemented via stylex.keyframes referenced by animationName (not left as a Tailwind class)",
+        "No Tailwind class strings or cn import remain in Button.tsx for the migrated element"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Migrate src/Navbar.tsx to StyleX. Heads up: the project uses class-based dark mode (darkMode: 'class' in tailwind.config.ts). Convert what maps cleanly and tell me about anything that doesn't.",
+      "expected_output": "Navbar.tsx converted to stylex.create/stylex.props. space-x-6 is restructured to `gap` on the flex parent (not faked as margins on * + *). The arbitrary value px-[18px] becomes paddingInline: '18px'. group + group-hover:opacity-100 is flagged as not expressible on the styled child (StyleX can't target ancestor state) and handled via React state or a shared variable, with a note. Class-based dark: is flagged: it can't be an ancestor-selector condition, so it's handled via defineVars + createTheme (or noted as needing that), NOT silently dropped. The summary explicitly lists space-x, group-hover, and dark: handling.",
+      "files": ["evals/files/navbar"],
+      "expectations": [
+        "space-x-6 is converted to `gap` on the flex container, not to `> * + *` margins",
+        "The arbitrary value px-[18px] becomes paddingInline: '18px' (read straight from the class)",
+        "group-hover:opacity-100 is NOT invented as a normal condition; it is flagged as ancestor-state styling StyleX can't express, with a concrete alternative (React state or a shared CSS variable)",
+        "Class-based dark: is handled via StyleX theming (defineVars/createTheme) or explicitly flagged as requiring it — it is NOT mapped to prefers-color-scheme media (the project uses class strategy) and NOT silently dropped",
+        "text-sm and text-lg keep both fontSize and lineHeight",
+        "The final summary explicitly calls out space-x, group-hover, and dark-mode handling so the user can review the design-affecting decisions"
+      ]
+    }
+  ]
+}
