@@ -17,3 +17,11 @@ export const LINK = {
   X: "https://x.com/alaymanguy",
   X_SHADCN_LABS: "https://x.com/shadcnlabs",
 } as const;
+
+const STORAGE_URL =
+  "https://yffrvzi8zwbljfuj.public.blob.vercel-storage.com/shadcn-cssinjs";
+
+export const ASSETS = {
+  CHAD: `${STORAGE_URL}/chad.png`,
+  ZOOMER: `${STORAGE_URL}/zoomer.png`,
+} as const;
