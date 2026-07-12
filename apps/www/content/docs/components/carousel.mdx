@@ -1,0 +1,135 @@
+---
+title: Carousel
+description: A carousel with motion and swipe built using Embla.
+links:
+  doc: https://www.embla-carousel.com
+---
+
+import CarouselDemo from "@/examples/carousel-demo";
+
+<ComponentPreview name="carousel-demo">
+  <CarouselDemo />
+</ComponentPreview>
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/carousel.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+pnpm add embla-carousel-react @stylexjs/stylex
+```
+
+<Step>
+  Make sure [StyleX is configured](/docs/installation) and the design tokens are
+  installed.
+</Step>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="carousel" title="carousel.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel/carousel";
+```
+
+```tsx
+<Carousel>
+  <CarouselContent>
+    <CarouselItem>1</CarouselItem>
+    <CarouselItem>2</CarouselItem>
+  </CarouselContent>
+  <CarouselPrevious />
+  <CarouselNext />
+</Carousel>
+```
+
+## Composition
+
+Use the following composition to build a `Carousel`:
+
+```txt
+Carousel
+├── CarouselContent
+│   └── CarouselItem
+├── CarouselPrevious
+└── CarouselNext
+```
+
+## Examples
+
+import CarouselSize from "@/examples/carousel-size";
+import CarouselSpacing from "@/examples/carousel-spacing";
+import CarouselOrientation from "@/examples/carousel-orientation";
+
+### Sizes
+
+Use `basis` utilities on `CarouselItem` to show multiple items.
+
+<ComponentPreview name="carousel-size">
+  <CarouselSize />
+</ComponentPreview>
+
+### Spacing
+
+Use padding/negative margin utilities to adjust spacing between items.
+
+<ComponentPreview name="carousel-spacing">
+  <CarouselSpacing />
+</ComponentPreview>
+
+### Orientation
+
+Use `orientation="vertical"` for a vertical carousel.
+
+<ComponentPreview name="carousel-orientation">
+  <CarouselOrientation />
+</ComponentPreview>
+
+import CarouselRtl from "@/examples/carousel-rtl";
+
+## RTL
+
+To enable right-to-left support, see the [RTL guide](/docs/rtl).
+
+<ComponentPreview name="carousel-rtl" direction="rtl">
+  <CarouselRtl />
+</ComponentPreview>
+
+## API Reference
+
+See the [Embla Carousel docs](https://www.embla-carousel.com/api/) for more information on props and plugins.

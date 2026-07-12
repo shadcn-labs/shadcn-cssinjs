@@ -7,13 +7,19 @@ import vitest from "ultracite/oxlint/vitest";
 export default defineConfig({
   extends: [core, react, next, vitest],
   ignorePatterns: [
-    "public/r/**",
+    ".next/**",
+    ".source/**",
+    "dist/**",
+    "**/.next/**",
+    "**/.source/**",
+    "**/dist/**",
+    "**/public/r/**",
     ".agents/**",
     ".cursor/**",
     ".changeset/**",
     ".claude/**",
-    ".web-kits/**",
-    "audio/**",
-    "lib/registry-base-colors.ts",
+    "**/.web-kits/**",
+    "**/audio/**",
+    "**/lib/registry-base-colors.ts",
   ],
 });

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "aspect-ratio",
+  "title": "Aspect Ratio",
+  "description": "Aspect Ratio component styled with StyleX on Base UI primitives.",
+  "dependencies": [
+    "@stylexjs/stylex"
+  ],
+  "files": [
+    {
+      "path": "registry/bases/stylex/aspect-ratio/aspect-ratio.tsx",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nimport { styles } from \"./aspect-ratio.stylex\";\n\nconst AspectRatio = ({\n  ratio = 1,\n  className,\n  style,\n  children,\n  ...props\n}: React.ComponentProps<\"div\"> & { ratio?: number }) => {\n  const p = stylex.props(styles.root);\n  return (\n    <div\n      data-slot=\"aspect-ratio\"\n      className={[p.className, className].filter(Boolean).join(\" \") || undefined}\n      style={{ ...p.style, aspectRatio: String(ratio), ...style }}\n      {...props}\n    >\n      {children}\n    </div>\n  );\n};\n\nexport { AspectRatio };\n",
+      "type": "registry:ui",
+      "target": "components/ui/aspect-ratio/aspect-ratio.tsx"
+    },
+    {
+      "path": "registry/bases/stylex/aspect-ratio/aspect-ratio.stylex.ts",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nexport const styles = stylex.create({\n  root: {\n    position: \"relative\",\n    width: \"100%\",\n  },\n});\n",
+      "type": "registry:ui",
+      "target": "components/ui/aspect-ratio/aspect-ratio.stylex.ts"
+    }
+  ],
+  "type": "registry:ui"
+}

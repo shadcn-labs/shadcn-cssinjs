@@ -1,0 +1,107 @@
+---
+title: Aspect Ratio
+description: Displays content within a desired ratio.
+---
+
+import AspectRatioDemo from "@/examples/aspect-ratio-demo";
+import AspectRatioSquare from "@/examples/aspect-ratio-square";
+import AspectRatioPortrait from "@/examples/aspect-ratio-portrait";
+
+<ComponentPreview name="aspect-ratio-demo">
+  <AspectRatioDemo />
+</ComponentPreview>
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/aspect-ratio.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+pnpm add @stylexjs/stylex
+```
+
+<Step>
+  Make sure [StyleX is configured](/docs/installation) and the design tokens are
+  installed.
+</Step>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="aspect-ratio" title="aspect-ratio.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { AspectRatio } from "@/components/ui/aspect-ratio/aspect-ratio";
+```
+
+```tsx
+<AspectRatio ratio={16 / 9}>
+  <img src="..." alt="Image" />
+</AspectRatio>
+```
+
+## Examples
+
+### Square
+
+Use `ratio={1}` for a square.
+
+<ComponentPreview name="aspect-ratio-square">
+  <AspectRatioSquare />
+</ComponentPreview>
+
+### Portrait
+
+Use a ratio below `1` for a portrait orientation.
+
+<ComponentPreview name="aspect-ratio-portrait">
+  <AspectRatioPortrait />
+</ComponentPreview>
+
+import AspectRatioRtl from "@/examples/aspect-ratio-rtl";
+
+## RTL
+
+To enable right-to-left support, see the [RTL guide](/docs/rtl).
+
+<ComponentPreview name="aspect-ratio-rtl" direction="rtl">
+  <AspectRatioRtl />
+</ComponentPreview>
+
+## API Reference
+
+### AspectRatio
+
+The `AspectRatio` component displays content within a desired ratio.
+
+| Prop        | Type     | Default | Required |
+| ----------- | -------- | ------- | -------- |
+| `ratio`     | `number` | `1`     | No       |
+| `className` | `string` | -       | No       |

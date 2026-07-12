@@ -1,0 +1,131 @@
+---
+title: Collapsible
+description: An interactive component which expands/collapses a panel.
+links:
+  doc: https://base-ui.com/react/components/collapsible
+  api: https://base-ui.com/react/components/collapsible#api-reference
+---
+
+import CollapsibleDemo from "@/examples/collapsible-demo";
+import CollapsibleSettings from "@/examples/collapsible-settings";
+
+<ComponentPreview name="collapsible-demo" align="start">
+  <CollapsibleDemo />
+</ComponentPreview>
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/collapsible.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+pnpm add @base-ui/react @stylexjs/stylex
+```
+
+<Step>
+  Make sure [StyleX is configured](/docs/installation) and the design tokens are
+  installed.
+</Step>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="collapsible" title="collapsible.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible/collapsible";
+```
+
+```tsx
+<Collapsible>
+  <CollapsibleTrigger>Can I use this in my project?</CollapsibleTrigger>
+  <CollapsibleContent>
+    Yes. Free to use for personal and commercial projects.
+  </CollapsibleContent>
+</Collapsible>
+```
+
+## Composition
+
+Use the following composition to build a `Collapsible`:
+
+```txt
+Collapsible
+├── CollapsibleTrigger
+└── CollapsibleContent
+```
+
+## Examples
+
+import CollapsibleBasic from "@/examples/collapsible-basic";
+import CollapsibleFileTree from "@/examples/collapsible-file-tree";
+
+### Basic
+
+A basic collapsible inside a card.
+
+<ComponentPreview name="collapsible-basic" align="start">
+  <CollapsibleBasic />
+</ComponentPreview>
+
+### Settings Panel
+
+Use a collapsible to progressively disclose advanced options.
+
+<ComponentPreview name="collapsible-settings" align="start">
+  <CollapsibleSettings />
+</ComponentPreview>
+
+### File Tree
+
+Compose nested collapsibles to build a file tree.
+
+<ComponentPreview name="collapsible-file-tree" align="start">
+  <CollapsibleFileTree />
+</ComponentPreview>
+
+import CollapsibleRtl from "@/examples/collapsible-rtl";
+
+## RTL
+
+To enable right-to-left support, see the [RTL guide](/docs/rtl).
+
+<ComponentPreview name="collapsible-rtl" direction="rtl">
+  <CollapsibleRtl />
+</ComponentPreview>
+
+## API Reference
+
+See the [Base UI](https://base-ui.com/react/components/collapsible#api-reference)
+documentation for the full API.

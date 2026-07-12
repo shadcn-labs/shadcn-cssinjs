@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "checkbox",
+  "title": "Checkbox",
+  "description": "Checkbox component styled with StyleX on Base UI primitives.",
+  "dependencies": [
+    "@base-ui/react",
+    "@stylexjs/stylex",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "stylex-tokens"
+  ],
+  "files": [
+    {
+      "path": "registry/bases/stylex/checkbox/checkbox.tsx",
+      "content": "\"use client\";\n\nimport { Checkbox as CheckboxPrimitive } from \"@base-ui/react/checkbox\";\nimport { CheckIcon } from \"lucide-react\";\n\n\nimport { styles } from \"./checkbox.stylex\";\nimport * as stylex from \"@stylexjs/stylex\";\n\nconst Checkbox = ({\n  className,\n  style,\n  ...props\n}: Omit<React.ComponentProps<typeof CheckboxPrimitive.Root>, \"className\"> & {\n  className?: string;\n}) => (\n  <CheckboxPrimitive.Root\n    className={(state) =>\n      [\n        stylex.props(styles.root, state.checked && styles.rootChecked).className,\n        className\n      ].filter(Boolean).join(\" \") || undefined\n    }\n    data-slot=\"checkbox\"\n    style={style}\n    {...props}\n  >\n    <CheckboxPrimitive.Indicator\n      className={stylex.props(styles.indicator).className}\n      data-slot=\"checkbox-indicator\"\n    >\n      <CheckIcon size={14} />\n    </CheckboxPrimitive.Indicator>\n  </CheckboxPrimitive.Root>\n);\n\nexport { Checkbox };\n",
+      "type": "registry:ui",
+      "target": "components/ui/checkbox/checkbox.tsx"
+    },
+    {
+      "path": "registry/bases/stylex/checkbox/checkbox.stylex.ts",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nimport { colors, radius } from \"../tokens.stylex\";\n\nexport const styles = stylex.create({\n  indicator: {\n    alignItems: \"center\",\n    color: colors.primaryForeground,\n    display: \"flex\",\n    height: \"100%\",\n    justifyContent: \"center\",\n    width: \"100%\",\n  },\n  root: {\n    alignItems: \"center\",\n    backgroundColor: colors.background,\n    borderColor: colors.input,\n    borderRadius: radius.sm,\n    borderStyle: \"solid\",\n    borderWidth: \"1px\",\n    boxShadow: {\n      \":focus-visible\": `0 0 0 3px color-mix(in oklab, ${colors.ring} 50%, transparent)`,\n      default: \"0 1px 2px 0 rgb(0 0 0 / 0.05)\",\n    },\n    cursor: { \":disabled\": \"not-allowed\", default: \"pointer\" },\n    display: \"inline-flex\",\n    flexShrink: 0,\n    height: \"1rem\",\n    justifyContent: \"center\",\n    opacity: { \":disabled\": 0.5, default: 1 },\n    outline: \"none\",\n    padding: 0,\n    transition: \"background-color 0.15s, border-color 0.15s, box-shadow 0.15s\",\n    width: \"1rem\",\n  },\n  rootChecked: {\n    backgroundColor: colors.primary,\n    borderColor: colors.primary,\n  },\n});\n",
+      "type": "registry:ui",
+      "target": "components/ui/checkbox/checkbox.stylex.ts"
+    }
+  ],
+  "type": "registry:ui"
+}

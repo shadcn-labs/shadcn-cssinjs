@@ -1,0 +1,67 @@
+import type { StyleXStyles } from "@stylexjs/stylex";
+import * as stylex from "@stylexjs/stylex";
+
+import { styles } from "./card.stylex";
+
+type DivProps = React.ComponentProps<"div">;
+
+const makeSlot =
+  (slot: string, style: StyleXStyles) =>
+  ({ className, style: styleProp, ...props }: DivProps) => {
+    const p = stylex.props(style);
+    return (
+      <div
+        data-slot={slot}
+        className={
+          [p.className, className].filter(Boolean).join(" ") || undefined
+        }
+        style={{ ...p.style, ...styleProp }}
+        {...props}
+      />
+    );
+  };
+
+const Card = ({
+  className,
+  style,
+  size = "default",
+  ...props
+}: DivProps & { size?: "default" | "sm" }) => {
+  const p = stylex.props(styles.card);
+  return (
+    <div
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
+      data-size={size}
+      data-slot="card"
+      style={
+        size === "sm"
+          ? ({
+              "--card-spacing": "0.75rem",
+              ...p.style,
+              ...style,
+            } as React.CSSProperties)
+          : { ...p.style, ...style }
+      }
+      {...props}
+    />
+  );
+};
+
+const CardHeader = makeSlot("card-header", styles.header);
+const CardTitle = makeSlot("card-title", styles.title);
+const CardDescription = makeSlot("card-description", styles.description);
+const CardAction = makeSlot("card-action", styles.action);
+const CardContent = makeSlot("card-content", styles.content);
+const CardFooter = makeSlot("card-footer", styles.footer);
+
+export {
+  Card,
+  CardHeader,
+  CardFooter,
+  CardTitle,
+  CardAction,
+  CardDescription,
+  CardContent,
+};
