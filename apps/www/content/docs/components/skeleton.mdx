@@ -1,0 +1,114 @@
+---
+title: Skeleton
+description: Use to show a placeholder while content is loading.
+---
+
+import SkeletonDemo from "@/examples/skeleton-demo";
+import SkeletonCard from "@/examples/skeleton-card";
+
+<ComponentPreview name="skeleton-demo">
+  <SkeletonDemo />
+</ComponentPreview>
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/skeleton.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+pnpm add @stylexjs/stylex
+```
+
+<Step>
+  Make sure [StyleX is configured](/docs/installation) and the design tokens are
+  installed.
+</Step>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="skeleton" title="skeleton.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { Skeleton } from "@/components/ui/skeleton/skeleton";
+```
+
+```tsx
+<Skeleton style={{ width: 200, height: 16 }} />
+```
+
+## Examples
+
+import SkeletonAvatar from "@/examples/skeleton-avatar";
+import SkeletonText from "@/examples/skeleton-text";
+import SkeletonForm from "@/examples/skeleton-form";
+import SkeletonTable from "@/examples/skeleton-table";
+
+### Avatar
+
+<ComponentPreview name="skeleton-avatar">
+  <SkeletonAvatar />
+</ComponentPreview>
+
+### Card
+
+Compose multiple skeletons to outline a loading card.
+
+<ComponentPreview name="skeleton-card">
+  <SkeletonCard />
+</ComponentPreview>
+
+### Text
+
+<ComponentPreview name="skeleton-text">
+  <SkeletonText />
+</ComponentPreview>
+
+### Form
+
+<ComponentPreview name="skeleton-form">
+  <SkeletonForm />
+</ComponentPreview>
+
+### Table
+
+<ComponentPreview name="skeleton-table">
+  <SkeletonTable />
+</ComponentPreview>
+
+import SkeletonRtl from "@/examples/skeleton-rtl";
+
+## RTL
+
+To enable right-to-left support, see the [RTL guide](/docs/rtl).
+
+<ComponentPreview name="skeleton-rtl" direction="rtl">
+  <SkeletonRtl />
+</ComponentPreview>

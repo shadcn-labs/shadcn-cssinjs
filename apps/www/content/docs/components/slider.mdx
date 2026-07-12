@@ -1,0 +1,119 @@
+---
+title: Slider
+description: An input where the user selects a value from within a given range.
+links:
+  doc: https://base-ui.com/react/components/slider
+  api: https://base-ui.com/react/components/slider#api-reference
+---
+
+import SliderDemo from "@/examples/slider-demo";
+
+<ComponentPreview name="slider-demo">
+  <SliderDemo />
+</ComponentPreview>
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/slider.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+pnpm add @base-ui/react @stylexjs/stylex
+```
+
+<Step>
+  Make sure [StyleX is configured](/docs/installation) and the design tokens are
+  installed.
+</Step>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="slider" title="slider.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { Slider } from "@/components/ui/slider/slider";
+```
+
+```tsx
+<Slider defaultValue={50} max={100} step={1} />
+```
+
+## Examples
+
+import SliderRange from "@/examples/slider-range";
+import SliderMultiple from "@/examples/slider-multiple";
+import SliderVertical from "@/examples/slider-vertical";
+import SliderControlled from "@/examples/slider-controlled";
+import SliderDisabled from "@/examples/slider-disabled";
+
+### Range
+
+<ComponentPreview name="slider-range">
+  <SliderRange />
+</ComponentPreview>
+
+### Multiple Thumbs
+
+<ComponentPreview name="slider-multiple">
+  <SliderMultiple />
+</ComponentPreview>
+
+### Vertical
+
+<ComponentPreview name="slider-vertical">
+  <SliderVertical />
+</ComponentPreview>
+
+### Controlled
+
+<ComponentPreview name="slider-controlled">
+  <SliderControlled />
+</ComponentPreview>
+
+### Disabled
+
+<ComponentPreview name="slider-disabled">
+  <SliderDisabled />
+</ComponentPreview>
+
+import SliderRtl from "@/examples/slider-rtl";
+
+## RTL
+
+To enable right-to-left support, see the [RTL guide](/docs/rtl).
+
+<ComponentPreview name="slider-rtl" direction="rtl">
+  <SliderRtl />
+</ComponentPreview>
+
+## API Reference
+
+See the [Base UI](https://base-ui.com/react/components/slider#api-reference) documentation for the full API.

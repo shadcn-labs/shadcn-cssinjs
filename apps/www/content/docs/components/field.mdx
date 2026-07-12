@@ -1,0 +1,270 @@
+---
+title: Field
+description: Compose accessible form fields with labels, descriptions, and validation.
+---
+
+import FieldDemo from "@/examples/field-demo";
+import FieldInput from "@/examples/field-input";
+import FieldTextarea from "@/examples/field-textarea";
+import FieldSelect from "@/examples/field-select";
+import FieldSlider from "@/examples/field-slider";
+import FieldFieldset from "@/examples/field-fieldset";
+import FieldCheckbox from "@/examples/field-checkbox";
+import FieldRadio from "@/examples/field-radio";
+import FieldSwitch from "@/examples/field-switch";
+import FieldChoiceCard from "@/examples/field-choice-card";
+import FieldGroupExample from "@/examples/field-group";
+import FieldResponsive from "@/examples/field-responsive";
+
+<ComponentPreview name="field-demo">
+  <FieldDemo />
+</ComponentPreview>
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/field.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+pnpm add @stylexjs/stylex
+```
+
+<Step>
+  Make sure [StyleX is configured](/docs/installation) and the design tokens are
+  installed.
+</Step>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="field" title="field.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import {
+  Field,
+  FieldContent,
+  FieldDescription,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+  FieldLegend,
+  FieldSeparator,
+  FieldSet,
+  FieldTitle,
+} from "@/components/ui/field/field";
+```
+
+```tsx
+<Field>
+  <FieldLabel htmlFor="email">Email</FieldLabel>
+  <Input id="email" type="email" />
+  <FieldDescription>We never share your email.</FieldDescription>
+</Field>
+```
+
+## Composition
+
+```text
+FieldSet
+├── FieldLegend
+├── FieldDescription
+└── FieldGroup
+    └── Field
+        ├── FieldLabel
+        ├── (control)
+        └── FieldDescription
+```
+
+## Examples
+
+### Input
+
+<ComponentPreview name="field-input">
+  <FieldInput />
+</ComponentPreview>
+
+### Textarea
+
+<ComponentPreview name="field-textarea">
+  <FieldTextarea />
+</ComponentPreview>
+
+### Select
+
+<ComponentPreview name="field-select">
+  <FieldSelect />
+</ComponentPreview>
+
+### Slider
+
+<ComponentPreview name="field-slider">
+  <FieldSlider />
+</ComponentPreview>
+
+### Fieldset
+
+<ComponentPreview name="field-fieldset">
+  <FieldFieldset />
+</ComponentPreview>
+
+### Checkbox
+
+<ComponentPreview name="field-checkbox">
+  <FieldCheckbox />
+</ComponentPreview>
+
+### Radio
+
+<ComponentPreview name="field-radio">
+  <FieldRadio />
+</ComponentPreview>
+
+### Switch
+
+<ComponentPreview name="field-switch">
+  <FieldSwitch />
+</ComponentPreview>
+
+### Choice Card
+
+<ComponentPreview name="field-choice-card">
+  <FieldChoiceCard />
+</ComponentPreview>
+
+### Field Group
+
+<ComponentPreview name="field-group">
+  <FieldGroupExample />
+</ComponentPreview>
+
+## Responsive Layout
+
+Use `orientation="responsive"` to stack the label and control on small screens
+and place them side by side on larger screens.
+
+<ComponentPreview name="field-responsive">
+  <FieldResponsive />
+</ComponentPreview>
+
+import FieldRtl from "@/examples/field-rtl";
+
+## RTL
+
+To enable right-to-left support, see the [RTL guide](/docs/rtl).
+
+<ComponentPreview name="field-rtl" direction="rtl">
+  <FieldRtl />
+</ComponentPreview>
+
+## API Reference
+
+### FieldSet
+
+Container that renders a semantic `fieldset` with spacing presets.
+
+| Prop        | Type     | Default |
+| ----------- | -------- | ------- |
+| `className` | `string` | -       |
+
+### FieldLegend
+
+Legend element for a `FieldSet`. Switch to the `label` variant to align with label sizing.
+
+| Prop        | Type                  | Default    |
+| ----------- | --------------------- | ---------- |
+| `variant`   | `"legend" \| "label"` | `"legend"` |
+| `className` | `string`              | -          |
+
+### FieldGroup
+
+Layout wrapper that stacks `Field` components.
+
+| Prop        | Type     | Default |
+| ----------- | -------- | ------- |
+| `className` | `string` | -       |
+
+### Field
+
+The core wrapper for a single field. Provides orientation control and spacing.
+
+| Prop          | Type                                         | Default      |
+| ------------- | -------------------------------------------- | ------------ |
+| `orientation` | `"vertical" \| "horizontal" \| "responsive"` | `"vertical"` |
+| `className`   | `string`                                     | -            |
+
+### FieldContent
+
+Flex column that groups the control and descriptions when the label sits beside the control.
+
+| Prop        | Type     | Default |
+| ----------- | -------- | ------- |
+| `className` | `string` | -       |
+
+### FieldLabel
+
+Label styled for both direct inputs and nested `Field` children.
+
+| Prop        | Type     | Default |
+| ----------- | -------- | ------- |
+| `className` | `string` | -       |
+
+### FieldTitle
+
+Renders a title with label styling inside `FieldContent`.
+
+| Prop        | Type     | Default |
+| ----------- | -------- | ------- |
+| `className` | `string` | -       |
+
+### FieldDescription
+
+Helper text slot that automatically balances long lines in horizontal layouts.
+
+| Prop        | Type     | Default |
+| ----------- | -------- | ------- |
+| `className` | `string` | -       |
+
+### FieldSeparator
+
+A separator between fields, with optional content rendered in the middle.
+
+| Prop        | Type              | Default |
+| ----------- | ----------------- | ------- |
+| `children`  | `React.ReactNode` | -       |
+| `className` | `string`          | -       |
+
+### FieldError
+
+Displays validation errors. Pass `children` or an `errors` array.
+
+| Prop       | Type                                       | Default |
+| ---------- | ------------------------------------------ | ------- |
+| `errors`   | `Array<{ message?: string } \| undefined>` | -       |
+| `children` | `React.ReactNode`                          | -       |

@@ -1,0 +1,164 @@
+---
+title: Avatar
+description: An image element with a fallback for representing the user.
+links:
+  doc: https://base-ui.com/react/components/avatar
+  api: https://base-ui.com/react/components/avatar#api-reference
+---
+
+import AvatarDemo from "@/examples/avatar-demo";
+
+<ComponentPreview name="avatar-demo">
+  <AvatarDemo />
+</ComponentPreview>
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/avatar.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+pnpm add @base-ui/react @stylexjs/stylex
+```
+
+<Step>
+  Make sure [StyleX is configured](/docs/installation) and the design tokens are
+  installed.
+</Step>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="avatar" title="avatar.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar/avatar";
+```
+
+```tsx
+<Avatar>
+  <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+  <AvatarFallback>CN</AvatarFallback>
+</Avatar>
+```
+
+## Composition
+
+Use the following composition to build a `Avatar`:
+
+```txt
+Avatar
+├── AvatarImage
+└── AvatarFallback
+```
+
+## Examples
+
+import AvatarWithBadge from "@/examples/avatar-badge";
+import AvatarBadgeIcon from "@/examples/avatar-badge-icon";
+import AvatarGroupExample from "@/examples/avatar-group";
+import AvatarGroupCountExample from "@/examples/avatar-group-count";
+import AvatarGroupCountIcon from "@/examples/avatar-group-count-icon";
+import AvatarSizeExample from "@/examples/avatar-size";
+import AvatarDropdown from "@/examples/avatar-dropdown";
+
+### Basic
+
+<ComponentPreview name="avatar-demo">
+  <AvatarDemo />
+</ComponentPreview>
+
+### Badge
+
+Use `AvatarBadge` to display a status indicator.
+
+<ComponentPreview name="avatar-badge">
+  <AvatarWithBadge />
+</ComponentPreview>
+
+### Badge with Icon
+
+<ComponentPreview name="avatar-badge-icon">
+  <AvatarBadgeIcon />
+</ComponentPreview>
+
+### Avatar Group
+
+Use `AvatarGroup` to display overlapping avatars.
+
+<ComponentPreview name="avatar-group">
+  <AvatarGroupExample />
+</ComponentPreview>
+
+### Avatar Group Count
+
+Use `AvatarGroupCount` to display a count of additional members.
+
+<ComponentPreview name="avatar-group-count">
+  <AvatarGroupCountExample />
+</ComponentPreview>
+
+### Avatar Group with Icon
+
+<ComponentPreview name="avatar-group-count-icon">
+  <AvatarGroupCountIcon />
+</ComponentPreview>
+
+### Sizes
+
+Use the `size` prop to change the avatar size.
+
+<ComponentPreview name="avatar-size">
+  <AvatarSizeExample />
+</ComponentPreview>
+
+### Dropdown
+
+<ComponentPreview name="avatar-dropdown">
+  <AvatarDropdown />
+</ComponentPreview>
+
+import AvatarRtl from "@/examples/avatar-rtl";
+
+## RTL
+
+To enable right-to-left support, see the [RTL guide](/docs/rtl).
+
+<ComponentPreview name="avatar-rtl" direction="rtl">
+  <AvatarRtl />
+</ComponentPreview>
+
+## API Reference
+
+See the [Base UI](https://base-ui.com/react/components/avatar#api-reference) documentation for the full API.

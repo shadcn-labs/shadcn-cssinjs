@@ -1,0 +1,119 @@
+---
+title: Switch
+description: A control that allows the user to toggle between checked and not checked.
+links:
+  doc: https://base-ui.com/react/components/switch
+  api: https://base-ui.com/react/components/switch#api-reference
+---
+
+import SwitchDemo from "@/examples/switch-demo";
+
+<ComponentPreview name="switch-demo">
+  <SwitchDemo />
+</ComponentPreview>
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/switch.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+pnpm add @base-ui/react @stylexjs/stylex
+```
+
+<Step>
+  Make sure [StyleX is configured](/docs/installation) and the design tokens are
+  installed.
+</Step>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="switch" title="switch.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { Switch } from "@/components/ui/switch/switch";
+```
+
+```tsx
+<Switch defaultChecked />
+```
+
+## Examples
+
+import SwitchDescription from "@/examples/switch-description";
+import SwitchChoiceCard from "@/examples/switch-choice-card";
+import SwitchDisabled from "@/examples/switch-disabled";
+import SwitchInvalid from "@/examples/switch-invalid";
+import SwitchSizes from "@/examples/switch-sizes";
+
+### Description
+
+<ComponentPreview name="switch-description">
+  <SwitchDescription />
+</ComponentPreview>
+
+### Choice Card
+
+<ComponentPreview name="switch-choice-card">
+  <SwitchChoiceCard />
+</ComponentPreview>
+
+### Disabled
+
+<ComponentPreview name="switch-disabled">
+  <SwitchDisabled />
+</ComponentPreview>
+
+### Invalid
+
+<ComponentPreview name="switch-invalid">
+  <SwitchInvalid />
+</ComponentPreview>
+
+### Size
+
+<ComponentPreview name="switch-sizes">
+  <SwitchSizes />
+</ComponentPreview>
+
+import SwitchRtl from "@/examples/switch-rtl";
+
+## RTL
+
+To enable right-to-left support, see the [RTL guide](/docs/rtl).
+
+<ComponentPreview name="switch-rtl" direction="rtl">
+  <SwitchRtl />
+</ComponentPreview>
+
+## API Reference
+
+See the [Base UI](https://base-ui.com/react/components/switch#api-reference) documentation for the full API.

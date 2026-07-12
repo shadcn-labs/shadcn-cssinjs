@@ -1,0 +1,74 @@
+---
+title: Introduction
+description: Copy-paste UI components for React. Styled with StyleX on Base UI, works with the shadcn CLI.
+---
+
+import { ZapIcon } from "lucide-react";
+import { SunMoonIcon } from "lucide-react";
+import { LayoutGridIcon } from "lucide-react";
+import { Code2Icon } from "lucide-react";
+import { ClipboardCopyIcon } from "lucide-react";
+import { BlocksIcon } from "lucide-react";
+
+**shadcn-cssinjs** provides beautifully designed, accessible, and customizable UI
+components. Styled with [StyleX](https://stylexjs.com) on top of
+[Base UI](https://base-ui.com) primitives, and designed to work seamlessly with the
+[shadcn CLI](https://ui.shadcn.com).
+
+## Philosophy
+
+shadcn-cssinjs follows the shadcn model for CSS-in-JS: copy-paste components you can own,
+with zero lock-in and sensible defaults that work immediately.
+
+Most shadcn setups assume Tailwind. That works well — until your team wants colocated,
+type-safe styles that compile to atomic CSS at build time. shadcn-cssinjs takes a
+different approach. It keeps the familiar component API, styles with StyleX instead of
+utility classes, and builds on Base UI so you can drop down to the primitives whenever you
+need more control.
+
+The goal is simple: make StyleX-styled components feel like the rest of your stack —
+composable, themeable, accessible, and easy to customize.
+
+## Why shadcn-cssinjs?
+
+Most CSS-in-JS component setups are either too opinionated or too scattered.
+shadcn-cssinjs is built for teams that want to ship quickly without giving up control:
+
+- **Own Your Code:** Copy the components into your project and customize everything.
+- **Start Fast:** Run one command and get production-ready defaults with StyleX and Base UI.
+- **Scale Safely:** Stay close to StyleX and Base UI primitives, then drop to raw APIs when needed.
+
+## Features
+
+<div className="not-prose grid gap-4 sm:grid-cols-2 mt-4">
+  <FeatureCard
+    icon={ZapIcon}
+    title="Zero Config"
+    description="Works out of the box with sensible defaults. No boilerplate needed."
+  />
+  <FeatureCard
+    icon={SunMoonIcon}
+    title="Theme Aware"
+    description="Automatically adapts to your CSS variables and light/dark theme."
+  />
+  <FeatureCard
+    icon={LayoutGridIcon}
+    title="Composable"
+    description="Build complex UIs with simple, declarative components."
+  />
+  <FeatureCard
+    icon={Code2Icon}
+    title="TypeScript"
+    description="Full type safety with comprehensive TypeScript support."
+  />
+  <FeatureCard
+    icon={ClipboardCopyIcon}
+    title="Copy & Paste"
+    description="Own your code. No runtime dependencies, just install into your project."
+  />
+  <FeatureCard
+    icon={BlocksIcon}
+    title="shadcn Compatible"
+    description="Uses the same registry format — add components with npx shadcn add."
+  />
+</div>
