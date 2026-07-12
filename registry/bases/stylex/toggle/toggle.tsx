@@ -2,8 +2,7 @@
 
 import { Toggle as TogglePrimitive } from "@base-ui/react/toggle";
 import type { StyleXStyles } from "@stylexjs/stylex";
-
-import { cx, x } from "@/lib/utils";
+import * as stylex from "@stylexjs/stylex";
 
 import { styles } from "./toggle.stylex";
 
@@ -37,15 +36,17 @@ const Toggle = ({
     data-variant={variant}
     data-size={size}
     className={(state) =>
-      cx(
-        x(
+      [
+        stylex.props(
           styles.base,
           variantStyles[variant],
           sizeStyles[size],
           state.pressed && styles.pressed
         ).className,
-        className
-      )
+        className,
+      ]
+        .filter(Boolean)
+        .join(" ") || undefined
     }
     style={style}
     {...props}

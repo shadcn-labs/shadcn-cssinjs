@@ -1,9 +1,8 @@
 "use client";
 
 import { Select as SelectPrimitive } from "@base-ui/react/select";
+import * as stylex from "@stylexjs/stylex";
 import { CheckIcon, ChevronDownIcon } from "lucide-react";
-
-import { cx, x } from "@/lib/utils";
 
 import { styles } from "./select.stylex";
 
@@ -24,10 +23,12 @@ const SelectValue = ({
 }: Omit<React.ComponentProps<typeof SelectPrimitive.Value>, "className"> & {
   className?: string;
 }) => {
-  const p = x(styles.value);
+  const p = stylex.props(styles.value);
   return (
     <SelectPrimitive.Value
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="select-value"
       style={{ ...p.style, ...style }}
       {...props}
@@ -43,16 +44,18 @@ const SelectTrigger = ({
 }: Omit<React.ComponentProps<typeof SelectPrimitive.Trigger>, "className"> & {
   className?: string;
 }) => {
-  const p = x(styles.trigger);
+  const p = stylex.props(styles.trigger);
   return (
     <SelectPrimitive.Trigger
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="select-trigger"
       style={{ ...p.style, ...style }}
       {...props}
     >
       {children}
-      <SelectPrimitive.Icon className={x(styles.icon).className}>
+      <SelectPrimitive.Icon className={stylex.props(styles.icon).className}>
         <ChevronDownIcon size={16} />
       </SelectPrimitive.Icon>
     </SelectPrimitive.Trigger>
@@ -79,13 +82,15 @@ const SelectContent = ({
     >
       <SelectPrimitive.Popup
         className={(state) =>
-          cx(
-            x(
+          [
+            stylex.props(
               styles.popup,
               hidden(state.transitionStatus) && styles.popupHidden
             ).className,
-            className
-          )
+            className,
+          ]
+            .filter(Boolean)
+            .join(" ") || undefined
         }
         data-slot="select-content"
         style={style}
@@ -107,10 +112,12 @@ const SelectLabel = ({
 > & {
   className?: string;
 }) => {
-  const p = x(styles.groupLabel);
+  const p = stylex.props(styles.groupLabel);
   return (
     <SelectPrimitive.GroupLabel
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="select-label"
       style={{ ...p.style, ...style }}
       {...props}
@@ -127,14 +134,18 @@ const SelectItem = ({
   className?: string;
 }) => (
   <SelectPrimitive.Item
-    className={cx(x(styles.item).className, className)}
+    className={
+      [stylex.props(styles.item).className, className]
+        .filter(Boolean)
+        .join(" ") || undefined
+    }
     data-slot="select-item"
     style={style}
     {...props}
   >
     <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
     <SelectPrimitive.ItemIndicator
-      className={x(styles.itemIndicator).className}
+      className={stylex.props(styles.itemIndicator).className}
     >
       <CheckIcon size={16} />
     </SelectPrimitive.ItemIndicator>
@@ -148,10 +159,12 @@ const SelectSeparator = ({
 }: Omit<React.ComponentProps<typeof SelectPrimitive.Separator>, "className"> & {
   className?: string;
 }) => {
-  const p = x(styles.separator);
+  const p = stylex.props(styles.separator);
   return (
     <SelectPrimitive.Separator
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="select-separator"
       style={{ ...p.style, ...style }}
       {...props}

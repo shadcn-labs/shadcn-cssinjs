@@ -2,9 +2,8 @@
 
 import { Toggle as TogglePrimitive } from "@base-ui/react/toggle";
 import { ToggleGroup as ToggleGroupPrimitive } from "@base-ui/react/toggle-group";
+import * as stylex from "@stylexjs/stylex";
 import { createContext, useContext } from "react";
-
-import { cx, x } from "@/lib/utils";
 
 import { styles as toggleStyles } from "../toggle/toggle.stylex";
 import { styles } from "./toggle-group.stylex";
@@ -38,12 +37,14 @@ const ToggleGroup = ({
   spacing?: number;
 }) => {
   const outline = variant === "outline";
-  const p = x(outline ? styles.groupOutline : styles.group);
+  const p = stylex.props(outline ? styles.groupOutline : styles.group);
   const gap = spacing === undefined ? undefined : `${spacing * 0.25}rem`;
   return (
     <ToggleGroupContext.Provider value={{ size, variant }}>
       <ToggleGroupPrimitive
-        className={cx(p.className, className)}
+        className={
+          [p.className, className].filter(Boolean).join(" ") || undefined
+        }
         data-slot="toggle-group"
         data-variant={variant}
         orientation={orientation}
@@ -71,19 +72,24 @@ const ToggleGroupItem = ({
     <TogglePrimitive
       className={(state) =>
         variant === "outline"
-          ? cx(
-              x(
+          ? [
+              stylex.props(
                 toggleStyles.base,
                 toggleStyles.outline,
                 sizeStyles[size],
                 state.pressed && toggleStyles.pressed
               ).className,
-              className
-            )
-          : cx(
-              x(styles.item, state.pressed && styles.itemPressed).className,
-              className
-            )
+              className,
+            ]
+              .filter(Boolean)
+              .join(" ") || undefined
+          : [
+              stylex.props(styles.item, state.pressed && styles.itemPressed)
+                .className,
+              className,
+            ]
+              .filter(Boolean)
+              .join(" ") || undefined
       }
       data-slot="toggle-group-item"
       style={style}

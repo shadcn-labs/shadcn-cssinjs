@@ -1,9 +1,8 @@
 "use client";
 
 import type { StyleXStyles } from "@stylexjs/stylex";
+import * as stylex from "@stylexjs/stylex";
 import { useMemo } from "react";
-
-import { cx, x } from "@/lib/utils";
 
 import { Label } from "../label/label";
 import { Separator } from "../separator/separator";
@@ -22,10 +21,12 @@ const FieldSet = ({
   style,
   ...props
 }: React.ComponentProps<"fieldset">) => {
-  const p = x(styles.set);
+  const p = stylex.props(styles.set);
   return (
     <fieldset
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="field-set"
       style={{ ...p.style, ...style }}
       {...props}
@@ -39,13 +40,15 @@ const FieldLegend = ({
   variant = "legend",
   ...props
 }: React.ComponentProps<"legend"> & { variant?: "legend" | "label" }) => {
-  const p = x(
+  const p = stylex.props(
     styles.legend,
     variant === "label" ? styles.legendLabel : styles.legendLegend
   );
   return (
     <legend
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="field-legend"
       data-variant={variant}
       style={{ ...p.style, ...style }}
@@ -59,10 +62,12 @@ const FieldGroup = ({
   style,
   ...props
 }: React.ComponentProps<"div">) => {
-  const p = x(styles.group);
+  const p = stylex.props(styles.group);
   return (
     <div
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="field-group"
       style={{ ...p.style, ...style }}
       {...props}
@@ -76,10 +81,12 @@ const Field = ({
   orientation = "vertical",
   ...props
 }: React.ComponentProps<"div"> & { orientation?: FieldOrientation }) => {
-  const p = x(styles.fieldBase, orientationStyles[orientation]);
+  const p = stylex.props(styles.fieldBase, orientationStyles[orientation]);
   return (
     <div
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-orientation={orientation}
       data-slot="field"
       role="group"
@@ -94,10 +101,12 @@ const FieldContent = ({
   style,
   ...props
 }: React.ComponentProps<"div">) => {
-  const p = x(styles.content);
+  const p = stylex.props(styles.content);
   return (
     <div
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="field-content"
       style={{ ...p.style, ...style }}
       {...props}
@@ -109,10 +118,12 @@ const FieldLabel = ({
   className,
   ...props
 }: React.ComponentProps<typeof Label>) => {
-  const p = x(styles.label);
+  const p = stylex.props(styles.label);
   return (
     <Label
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="field-label"
       {...props}
     />
@@ -124,10 +135,12 @@ const FieldTitle = ({
   style,
   ...props
 }: React.ComponentProps<"div">) => {
-  const p = x(styles.title);
+  const p = stylex.props(styles.title);
   return (
     <div
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="field-label"
       style={{ ...p.style, ...style }}
       {...props}
@@ -140,10 +153,12 @@ const FieldDescription = ({
   style,
   ...props
 }: React.ComponentProps<"p">) => {
-  const p = x(styles.description);
+  const p = stylex.props(styles.description);
   return (
     <p
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="field-description"
       style={{ ...p.style, ...style }}
       {...props}
@@ -157,12 +172,14 @@ const FieldSeparator = ({
   style,
   ...props
 }: React.ComponentProps<"div">) => {
-  const p = x(styles.separator);
-  const line = x(styles.separatorLine);
-  const content = x(styles.separatorContent);
+  const p = stylex.props(styles.separator);
+  const line = stylex.props(styles.separatorLine);
+  const content = stylex.props(styles.separatorContent);
   return (
     <div
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-content={Boolean(children)}
       data-slot="field-separator"
       style={{ ...p.style, ...style }}
@@ -217,10 +234,12 @@ const FieldError = ({
     return null;
   }
 
-  const p = x(styles.error);
+  const p = stylex.props(styles.error);
   return (
     <div
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="field-error"
       role="alert"
       style={{ ...p.style, ...style }}

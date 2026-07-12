@@ -1,10 +1,9 @@
 "use client";
 
 import { Combobox as ComboboxPrimitive } from "@base-ui/react/combobox";
+import * as stylex from "@stylexjs/stylex";
 import { CheckIcon, ChevronsUpDownIcon, XIcon } from "lucide-react";
 import { useRef } from "react";
-
-import { cx, x } from "@/lib/utils";
 
 import { styles } from "./combobox.stylex";
 
@@ -22,10 +21,12 @@ const ComboboxTrigger = ({
 }: Omit<React.ComponentProps<typeof ComboboxPrimitive.Trigger>, "className"> & {
   className?: string;
 }) => {
-  const p = x(styles.trigger);
+  const p = stylex.props(styles.trigger);
   return (
     <ComboboxPrimitive.Trigger
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="combobox-trigger"
       style={{ ...p.style, ...style }}
       {...props}
@@ -43,10 +44,12 @@ const ComboboxClear = ({
 }: Omit<React.ComponentProps<typeof ComboboxPrimitive.Clear>, "className"> & {
   className?: string;
 }) => {
-  const p = x(styles.clear);
+  const p = stylex.props(styles.clear);
   return (
     <ComboboxPrimitive.Clear
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="combobox-clear"
       style={{ ...p.style, ...style }}
       {...props}
@@ -67,12 +70,14 @@ const ComboboxInput = ({
   showTrigger?: boolean;
   showClear?: boolean;
 }) => {
-  const wrap = x(styles.inputWrap);
-  const input = x(styles.input);
+  const wrap = stylex.props(styles.inputWrap);
+  const input = stylex.props(styles.input);
   return (
     <div className={wrap.className} style={wrap.style}>
       <ComboboxPrimitive.Input
-        className={cx(input.className, className)}
+        className={
+          [input.className, className].filter(Boolean).join(" ") || undefined
+        }
         data-slot="combobox-input"
         style={{ ...input.style, ...style }}
         {...props}
@@ -90,10 +95,12 @@ const ComboboxChips = ({
 }: Omit<React.ComponentProps<typeof ComboboxPrimitive.Chips>, "className"> & {
   className?: string;
 }) => {
-  const p = x(styles.chips);
+  const p = stylex.props(styles.chips);
   return (
     <ComboboxPrimitive.Chips
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="combobox-chips"
       style={{ ...p.style, ...style }}
       {...props}
@@ -111,11 +118,13 @@ const ComboboxChip = ({
   className?: string;
   showRemove?: boolean;
 }) => {
-  const p = x(styles.chip);
-  const remove = x(styles.chipRemove);
+  const p = stylex.props(styles.chip);
+  const remove = stylex.props(styles.chipRemove);
   return (
     <ComboboxPrimitive.Chip
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="combobox-chip"
       style={{ ...p.style, ...style }}
       {...props}
@@ -141,10 +150,12 @@ const ComboboxChipsInput = ({
 }: Omit<React.ComponentProps<typeof ComboboxPrimitive.Input>, "className"> & {
   className?: string;
 }) => {
-  const p = x(styles.chipsInput);
+  const p = stylex.props(styles.chipsInput);
   return (
     <ComboboxPrimitive.Input
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="combobox-chips-input"
       style={{ ...p.style, ...style }}
       {...props}
@@ -177,15 +188,17 @@ const ComboboxContent = ({
     >
       <ComboboxPrimitive.Popup
         className={(state) =>
-          cx(
-            x(
+          [
+            stylex.props(
               styles.content,
               (state.transitionStatus === "starting" ||
                 state.transitionStatus === "ending") &&
                 styles.contentHidden
             ).className,
-            className
-          )
+            className,
+          ]
+            .filter(Boolean)
+            .join(" ") || undefined
         }
         data-slot="combobox-content"
         style={style}
@@ -202,10 +215,12 @@ const ComboboxList = ({
 }: Omit<React.ComponentProps<typeof ComboboxPrimitive.List>, "className"> & {
   className?: string;
 }) => {
-  const p = x(styles.list);
+  const p = stylex.props(styles.list);
   return (
     <ComboboxPrimitive.List
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="combobox-list"
       style={{ ...p.style, ...style }}
       {...props}
@@ -221,14 +236,17 @@ const ComboboxItem = ({
 }: Omit<React.ComponentProps<typeof ComboboxPrimitive.Item>, "className"> & {
   className?: string;
 }) => {
-  const indicator = x(styles.itemIndicator);
+  const indicator = stylex.props(styles.itemIndicator);
   return (
     <ComboboxPrimitive.Item
       className={(state) =>
-        cx(
-          x(styles.item, state.highlighted && styles.itemHighlighted).className,
-          className
-        )
+        [
+          stylex.props(styles.item, state.highlighted && styles.itemHighlighted)
+            .className,
+          className,
+        ]
+          .filter(Boolean)
+          .join(" ") || undefined
       }
       data-slot="combobox-item"
       style={style}
@@ -282,10 +300,12 @@ const ComboboxGroupLabel = ({
 > & {
   className?: string;
 }) => {
-  const p = x(styles.groupLabel);
+  const p = stylex.props(styles.groupLabel);
   return (
     <ComboboxPrimitive.GroupLabel
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="combobox-group-label"
       style={{ ...p.style, ...style }}
       {...props}
@@ -300,10 +320,12 @@ const ComboboxEmpty = ({
 }: Omit<React.ComponentProps<typeof ComboboxPrimitive.Empty>, "className"> & {
   className?: string;
 }) => {
-  const p = x(styles.empty);
+  const p = stylex.props(styles.empty);
   return (
     <ComboboxPrimitive.Empty
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="combobox-empty"
       style={{ ...p.style, ...style }}
       {...props}

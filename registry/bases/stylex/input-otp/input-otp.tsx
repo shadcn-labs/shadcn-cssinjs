@@ -1,9 +1,8 @@
 "use client";
 
 import { OTPFieldPreview as OtpField } from "@base-ui/react/otp-field";
+import * as stylex from "@stylexjs/stylex";
 import { MinusIcon } from "lucide-react";
-
-import { cx, x } from "@/lib/utils";
 
 import { styles } from "./input-otp.stylex";
 
@@ -14,10 +13,12 @@ const InputOTP = ({
 }: Omit<React.ComponentProps<typeof OtpField.Root>, "className"> & {
   className?: string;
 }) => {
-  const p = x(styles.root);
+  const p = stylex.props(styles.root);
   return (
     <OtpField.Root
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="input-otp"
       style={{ ...p.style, ...style }}
       {...props}
@@ -30,10 +31,12 @@ const InputOTPGroup = ({
   style,
   ...props
 }: React.ComponentProps<"div">) => {
-  const p = x(styles.group);
+  const p = stylex.props(styles.group);
   return (
     <div
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="input-otp-group"
       style={{ ...p.style, ...style }}
       {...props}
@@ -48,10 +51,12 @@ const InputOTPSlot = ({
 }: Omit<React.ComponentProps<typeof OtpField.Input>, "className"> & {
   className?: string;
 }) => {
-  const p = x(styles.slot);
+  const p = stylex.props(styles.slot);
   return (
     <OtpField.Input
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="input-otp-slot"
       style={{ ...p.style, ...style }}
       {...props}
@@ -64,10 +69,12 @@ const InputOTPSeparator = ({
   style,
   ...props
 }: React.ComponentProps<"div">) => {
-  const p = x(styles.separator);
+  const p = stylex.props(styles.separator);
   return (
     <div
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="input-otp-separator"
       role="separator"
       style={{ ...p.style, ...style }}

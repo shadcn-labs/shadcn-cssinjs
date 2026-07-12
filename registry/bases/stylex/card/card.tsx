@@ -1,6 +1,5 @@
 import type { StyleXStyles } from "@stylexjs/stylex";
-
-import { cx, x } from "@/lib/utils";
+import * as stylex from "@stylexjs/stylex";
 
 import { styles } from "./card.stylex";
 
@@ -9,11 +8,13 @@ type DivProps = React.ComponentProps<"div">;
 const makeSlot =
   (slot: string, style: StyleXStyles) =>
   ({ className, style: styleProp, ...props }: DivProps) => {
-    const p = x(style);
+    const p = stylex.props(style);
     return (
       <div
         data-slot={slot}
-        className={cx(p.className, className)}
+        className={
+          [p.className, className].filter(Boolean).join(" ") || undefined
+        }
         style={{ ...p.style, ...styleProp }}
         {...props}
       />
@@ -26,10 +27,12 @@ const Card = ({
   size = "default",
   ...props
 }: DivProps & { size?: "default" | "sm" }) => {
-  const p = x(styles.card);
+  const p = stylex.props(styles.card);
   return (
     <div
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-size={size}
       data-slot="card"
       style={

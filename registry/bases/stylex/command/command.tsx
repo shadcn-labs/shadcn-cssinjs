@@ -1,5 +1,6 @@
 "use client";
 
+import * as stylex from "@stylexjs/stylex";
 import { SearchIcon } from "lucide-react";
 import {
   createContext,
@@ -8,8 +9,6 @@ import {
   useMemo,
   useState,
 } from "react";
-
-import { cx, x } from "@/lib/utils";
 
 import {
   Dialog,
@@ -59,13 +58,15 @@ const Command = ({
     () => ({ onValueChange, value }),
     [value, onValueChange]
   );
-  const p = x(styles.command);
+  const p = stylex.props(styles.command);
   return (
     <CommandContext.Provider value={contextValue}>
       <div
         data-slot="command"
         role="combobox"
-        className={cx(p.className, className)}
+        className={
+          [p.className, className].filter(Boolean).join(" ") || undefined
+        }
         style={{ ...p.style, ...style }}
         {...props}
       >
@@ -87,7 +88,7 @@ const CommandDialog = ({
   showCloseButton?: boolean;
   children?: React.ReactNode;
 }) => {
-  const sr = x(styles.srOnly);
+  const sr = stylex.props(styles.srOnly);
   return (
     <Dialog {...props}>
       <DialogHeader className={sr.className}>
@@ -113,9 +114,9 @@ const CommandInput = ({
 }: Omit<React.ComponentProps<"input">, "onChange"> & {
   onValueChange?: (value: string) => void;
 }) => {
-  const wrapper = x(styles.inputWrapper);
-  const icon = x(styles.inputIcon);
-  const input = x(styles.input);
+  const wrapper = stylex.props(styles.inputWrapper);
+  const icon = stylex.props(styles.inputIcon);
+  const input = stylex.props(styles.input);
   const { value: ctxValue, onValueChange: ctxChange } = useCommandContext();
   return (
     <div
@@ -126,7 +127,9 @@ const CommandInput = ({
       <SearchIcon className={icon.className} style={icon.style} />
       <input
         data-slot="command-input"
-        className={cx(input.className, className)}
+        className={
+          [input.className, className].filter(Boolean).join(" ") || undefined
+        }
         style={{ ...input.style, ...style }}
         value={value ?? ctxValue}
         onChange={(e) => {
@@ -144,12 +147,14 @@ const CommandList = ({
   style,
   ...props
 }: React.ComponentProps<"div">) => {
-  const p = x(styles.list);
+  const p = stylex.props(styles.list);
   return (
     <div
       data-slot="command-list"
       role="listbox"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />
@@ -161,11 +166,13 @@ const CommandEmpty = ({
   style,
   ...props
 }: React.ComponentProps<"div">) => {
-  const p = x(styles.empty);
+  const p = stylex.props(styles.empty);
   return (
     <div
       data-slot="command-empty"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />
@@ -179,13 +186,15 @@ const CommandGroup = ({
   children,
   ...props
 }: React.ComponentProps<"div"> & { heading?: string }) => {
-  const p = x(styles.group);
-  const head = x(styles.groupHeading);
+  const p = stylex.props(styles.group);
+  const head = stylex.props(styles.groupHeading);
   return (
     <div
       data-slot="command-group"
       role="group"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     >
@@ -204,12 +213,14 @@ const CommandSeparator = ({
   style,
   ...props
 }: React.ComponentProps<"div">) => {
-  const p = x(styles.separator);
+  const p = stylex.props(styles.separator);
   return (
     <div
       data-slot="command-separator"
       role="separator"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />
@@ -228,12 +239,14 @@ const CommandItem = ({
   keywords?: string[];
   value?: string;
 }) => {
-  const p = x(styles.item);
+  const p = stylex.props(styles.item);
   return (
     <div
       data-slot="command-item"
       role="option"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       onClick={() => onSelect?.(value ?? (children as string))}
       {...props}
@@ -248,11 +261,13 @@ const CommandShortcut = ({
   style,
   ...props
 }: React.ComponentProps<"span">) => {
-  const p = x(styles.shortcut);
+  const p = stylex.props(styles.shortcut);
   return (
     <span
       data-slot="command-shortcut"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />

@@ -1,8 +1,7 @@
 "use client";
 
 import { Drawer as DrawerPrimitive } from "@base-ui/react/drawer";
-
-import { cx, x } from "@/lib/utils";
+import * as stylex from "@stylexjs/stylex";
 
 import { styles } from "./drawer.stylex";
 
@@ -30,7 +29,7 @@ const DrawerOverlay = (
   <DrawerPrimitive.Backdrop
     data-slot="drawer-overlay"
     className={(state) =>
-      x(
+      stylex.props(
         styles.backdrop,
         hidden(state.transitionStatus) && styles.backdropHidden
       ).className
@@ -44,12 +43,14 @@ const DrawerHandle = ({
   style,
   ...props
 }: React.ComponentProps<"div">) => {
-  const p = x(styles.handle);
+  const p = stylex.props(styles.handle);
   return (
     <div
       aria-hidden="true"
       data-slot="drawer-handle"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />
@@ -66,13 +67,15 @@ const DrawerContent = ({
   className?: string;
   showHandle?: boolean;
 }) => {
-  const p = x(styles.popup);
+  const p = stylex.props(styles.popup);
   return (
     <DrawerPrimitive.Portal>
       <DrawerOverlay />
       <DrawerPrimitive.Popup
         data-slot="drawer-content"
-        className={cx(p.className, className)}
+        className={
+          [p.className, className].filter(Boolean).join(" ") || undefined
+        }
         style={{ ...p.style, ...style }}
         {...props}
       >
@@ -88,11 +91,13 @@ const DrawerHeader = ({
   style,
   ...props
 }: React.ComponentProps<"div">) => {
-  const p = x(styles.header);
+  const p = stylex.props(styles.header);
   return (
     <div
       data-slot="drawer-header"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />
@@ -104,11 +109,13 @@ const DrawerFooter = ({
   style,
   ...props
 }: React.ComponentProps<"div">) => {
-  const p = x(styles.footer);
+  const p = stylex.props(styles.footer);
   return (
     <div
       data-slot="drawer-footer"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />
@@ -122,11 +129,13 @@ const DrawerTitle = ({
 }: Omit<React.ComponentProps<typeof DrawerPrimitive.Title>, "className"> & {
   className?: string;
 }) => {
-  const p = x(styles.title);
+  const p = stylex.props(styles.title);
   return (
     <DrawerPrimitive.Title
       data-slot="drawer-title"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />
@@ -143,11 +152,13 @@ const DrawerDescription = ({
 > & {
   className?: string;
 }) => {
-  const p = x(styles.description);
+  const p = stylex.props(styles.description);
   return (
     <DrawerPrimitive.Description
       data-slot="drawer-description"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />

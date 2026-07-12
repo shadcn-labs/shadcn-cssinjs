@@ -1,4 +1,4 @@
-import { cx, x } from "@/lib/utils";
+import * as stylex from "@stylexjs/stylex";
 
 import { styles } from "./table.stylex";
 
@@ -7,8 +7,8 @@ const Table = ({
   style,
   ...props
 }: React.ComponentProps<"table">) => {
-  const wrapper = x(styles.wrapper);
-  const p = x(styles.root);
+  const wrapper = stylex.props(styles.wrapper);
+  const p = stylex.props(styles.root);
   return (
     <div
       className={wrapper.className}
@@ -16,7 +16,9 @@ const Table = ({
       style={wrapper.style}
     >
       <table
-        className={cx(p.className, className)}
+        className={
+          [p.className, className].filter(Boolean).join(" ") || undefined
+        }
         data-slot="table"
         style={{ ...p.style, ...style }}
         {...props}
@@ -38,10 +40,12 @@ const TableFooter = ({
   style,
   ...props
 }: React.ComponentProps<"tfoot">) => {
-  const p = x(styles.footer);
+  const p = stylex.props(styles.footer);
   return (
     <tfoot
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="table-footer"
       style={{ ...p.style, ...style }}
       {...props}
@@ -54,10 +58,12 @@ const TableRow = ({
   style,
   ...props
 }: React.ComponentProps<"tr">) => {
-  const p = x(styles.row);
+  const p = stylex.props(styles.row);
   return (
     <tr
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="table-row"
       style={{ ...p.style, ...style }}
       {...props}
@@ -70,10 +76,12 @@ const TableHead = ({
   style,
   ...props
 }: React.ComponentProps<"th">) => {
-  const p = x(styles.head);
+  const p = stylex.props(styles.head);
   return (
     <th
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="table-head"
       style={{ ...p.style, ...style }}
       {...props}
@@ -86,10 +94,12 @@ const TableCell = ({
   style,
   ...props
 }: React.ComponentProps<"td">) => {
-  const p = x(styles.cell);
+  const p = stylex.props(styles.cell);
   return (
     <td
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="table-cell"
       style={{ ...p.style, ...style }}
       {...props}
@@ -102,10 +112,12 @@ const TableCaption = ({
   style,
   ...props
 }: React.ComponentProps<"caption">) => {
-  const p = x(styles.caption);
+  const p = stylex.props(styles.caption);
   return (
     <caption
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="table-caption"
       style={{ ...p.style, ...style }}
       {...props}

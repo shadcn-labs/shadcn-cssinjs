@@ -1,8 +1,7 @@
 "use client";
 
 import { Popover as PopoverPrimitive } from "@base-ui/react/popover";
-
-import { cx, x } from "@/lib/utils";
+import * as stylex from "@stylexjs/stylex";
 
 import { styles } from "./popover.stylex";
 
@@ -49,13 +48,15 @@ const PopoverContent = ({
       <PopoverPrimitive.Popup
         data-slot="popover-content"
         className={(state) =>
-          cx(
-            x(
+          [
+            stylex.props(
               styles.popup,
               hidden(state.transitionStatus) && styles.popupHidden
             ).className,
-            className
-          )
+            className,
+          ]
+            .filter(Boolean)
+            .join(" ") || undefined
         }
         style={style}
         {...props}
@@ -71,10 +72,12 @@ const PopoverHeader = ({
   style,
   ...props
 }: React.ComponentProps<"div">) => {
-  const p = x(styles.header);
+  const p = stylex.props(styles.header);
   return (
     <div
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="popover-header"
       style={{ ...p.style, ...style }}
       {...props}
@@ -89,10 +92,12 @@ const PopoverTitle = ({
 }: Omit<React.ComponentProps<typeof PopoverPrimitive.Title>, "className"> & {
   className?: string;
 }) => {
-  const p = x(styles.title);
+  const p = stylex.props(styles.title);
   return (
     <PopoverPrimitive.Title
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="popover-title"
       style={{ ...p.style, ...style }}
       {...props}
@@ -110,10 +115,12 @@ const PopoverDescription = ({
 > & {
   className?: string;
 }) => {
-  const p = x(styles.description);
+  const p = stylex.props(styles.description);
   return (
     <PopoverPrimitive.Description
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="popover-description"
       style={{ ...p.style, ...style }}
       {...props}

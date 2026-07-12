@@ -1,9 +1,8 @@
 "use client";
 
 import { Tabs as TabsPrimitive } from "@base-ui/react/tabs";
+import * as stylex from "@stylexjs/stylex";
 import { createContext, useContext } from "react";
-
-import { cx, x } from "@/lib/utils";
 
 import { styles } from "./tabs.stylex";
 
@@ -16,11 +15,13 @@ const Tabs = ({
 }: Omit<React.ComponentProps<typeof TabsPrimitive.Root>, "className"> & {
   className?: string;
 }) => {
-  const p = x(styles.root);
+  const p = stylex.props(styles.root);
   return (
     <TabsPrimitive.Root
       data-slot="tabs"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />
@@ -36,11 +37,13 @@ const TabsList = ({
   className?: string;
   variant?: "default" | "line";
 }) => {
-  const p = x(variant === "line" ? styles.listLine : styles.list);
+  const p = stylex.props(variant === "line" ? styles.listLine : styles.list);
   return (
     <TabsListContext.Provider value={variant}>
       <TabsPrimitive.List
-        className={cx(p.className, className)}
+        className={
+          [p.className, className].filter(Boolean).join(" ") || undefined
+        }
         data-slot="tabs-list"
         data-variant={variant}
         style={{ ...p.style, ...style }}
@@ -63,14 +66,16 @@ const TabsTrigger = ({
   return (
     <TabsPrimitive.Tab
       className={(state) =>
-        cx(
-          x(
+        [
+          stylex.props(
             styles.trigger,
             line && styles.triggerLine,
             state.active && activeStyle
           ).className,
-          className
-        )
+          className,
+        ]
+          .filter(Boolean)
+          .join(" ") || undefined
       }
       data-slot="tabs-trigger"
       style={style}
@@ -86,11 +91,13 @@ const TabsContent = ({
 }: Omit<React.ComponentProps<typeof TabsPrimitive.Panel>, "className"> & {
   className?: string;
 }) => {
-  const p = x(styles.panel);
+  const p = stylex.props(styles.panel);
   return (
     <TabsPrimitive.Panel
       data-slot="tabs-content"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />

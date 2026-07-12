@@ -1,4 +1,4 @@
-import { cx, x } from "@/lib/utils";
+import * as stylex from "@stylexjs/stylex";
 
 import { styles } from "./aspect-ratio.stylex";
 
@@ -9,11 +9,13 @@ const AspectRatio = ({
   children,
   ...props
 }: React.ComponentProps<"div"> & { ratio?: number }) => {
-  const p = x(styles.root);
+  const p = stylex.props(styles.root);
   return (
     <div
       data-slot="aspect-ratio"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, aspectRatio: String(ratio), ...style }}
       {...props}
     >

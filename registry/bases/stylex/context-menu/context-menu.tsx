@@ -1,9 +1,8 @@
 "use client";
 
 import { ContextMenu as ContextMenuPrimitive } from "@base-ui/react/context-menu";
+import * as stylex from "@stylexjs/stylex";
 import { CheckIcon, ChevronRightIcon, CircleIcon } from "lucide-react";
-
-import { cx, x } from "@/lib/utils";
 
 import { styles } from "./context-menu.stylex";
 
@@ -54,13 +53,15 @@ const ContextMenuContent = ({
       <ContextMenuPrimitive.Popup
         data-slot="context-menu-content"
         className={(state) =>
-          cx(
-            x(
+          [
+            stylex.props(
               styles.popup,
               hidden(state.transitionStatus) && styles.popupHidden
             ).className,
-            className
-          )
+            className,
+          ]
+            .filter(Boolean)
+            .join(" ") || undefined
         }
         style={style}
         {...props}
@@ -87,8 +88,8 @@ const ContextMenuItem = ({
     data-inset={inset ? "" : undefined}
     data-variant={variant}
     className={(state) =>
-      cx(
-        x(
+      [
+        stylex.props(
           styles.item,
           inset && styles.itemInset,
           variant === "destructive" && styles.itemDestructive,
@@ -98,8 +99,10 @@ const ContextMenuItem = ({
               : styles.itemHighlighted),
           state.disabled && styles.itemDisabled
         ).className,
-        className
-      )
+        className,
+      ]
+        .filter(Boolean)
+        .join(" ") || undefined
     }
     style={style}
     {...props}
@@ -115,21 +118,23 @@ const ContextMenuCheckboxItem = ({
   React.ComponentProps<typeof ContextMenuPrimitive.CheckboxItem>,
   "className"
 > & { className?: string }) => {
-  const indicator = x(styles.indicatorWrap);
-  const icon = x(styles.icon);
+  const indicator = stylex.props(styles.indicatorWrap);
+  const icon = stylex.props(styles.icon);
   return (
     <ContextMenuPrimitive.CheckboxItem
       data-slot="context-menu-checkbox-item"
       className={(state) =>
-        cx(
-          x(
+        [
+          stylex.props(
             styles.item,
             styles.itemIndented,
             state.highlighted && styles.itemHighlighted,
             state.disabled && styles.itemDisabled
           ).className,
-          className
-        )
+          className,
+        ]
+          .filter(Boolean)
+          .join(" ") || undefined
       }
       style={style}
       {...props}
@@ -153,20 +158,22 @@ const ContextMenuRadioItem = ({
   React.ComponentProps<typeof ContextMenuPrimitive.RadioItem>,
   "className"
 > & { className?: string }) => {
-  const indicator = x(styles.indicatorWrap);
+  const indicator = stylex.props(styles.indicatorWrap);
   return (
     <ContextMenuPrimitive.RadioItem
       data-slot="context-menu-radio-item"
       className={(state) =>
-        cx(
-          x(
+        [
+          stylex.props(
             styles.item,
             styles.itemIndented,
             state.highlighted && styles.itemHighlighted,
             state.disabled && styles.itemDisabled
           ).className,
-          className
-        )
+          className,
+        ]
+          .filter(Boolean)
+          .join(" ") || undefined
       }
       style={style}
       {...props}
@@ -189,12 +196,14 @@ const ContextMenuLabel = ({
   inset,
   ...props
 }: React.ComponentProps<"div"> & { inset?: boolean }) => {
-  const p = x(styles.label, inset && styles.labelInset);
+  const p = stylex.props(styles.label, inset && styles.labelInset);
   return (
     <div
       data-slot="context-menu-label"
       data-inset={inset ? "" : undefined}
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />
@@ -211,11 +220,13 @@ const ContextMenuSeparator = ({
 > & {
   className?: string;
 }) => {
-  const p = x(styles.separator);
+  const p = stylex.props(styles.separator);
   return (
     <ContextMenuPrimitive.Separator
       data-slot="context-menu-separator"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />
@@ -227,11 +238,13 @@ const ContextMenuShortcut = ({
   style,
   ...props
 }: React.ComponentProps<"span">) => {
-  const p = x(styles.shortcut);
+  const p = stylex.props(styles.shortcut);
   return (
     <span
       data-slot="context-menu-shortcut"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />
@@ -248,20 +261,22 @@ const ContextMenuSubTrigger = ({
   React.ComponentProps<typeof ContextMenuPrimitive.SubmenuTrigger>,
   "className"
 > & { className?: string; inset?: boolean }) => {
-  const icon = x(styles.icon);
+  const icon = stylex.props(styles.icon);
   return (
     <ContextMenuPrimitive.SubmenuTrigger
       data-slot="context-menu-sub-trigger"
       data-inset={inset ? "" : undefined}
       className={(state) =>
-        cx(
-          x(
+        [
+          stylex.props(
             styles.item,
             inset && styles.itemInset,
             state.highlighted && styles.itemHighlighted
           ).className,
-          className
-        )
+          className,
+        ]
+          .filter(Boolean)
+          .join(" ") || undefined
       }
       style={style}
       {...props}
@@ -290,13 +305,15 @@ const ContextMenuSubContent = ({
       <ContextMenuPrimitive.Popup
         data-slot="context-menu-sub-content"
         className={(state) =>
-          cx(
-            x(
+          [
+            stylex.props(
               styles.popup,
               hidden(state.transitionStatus) && styles.popupHidden
             ).className,
-            className
-          )
+            className,
+          ]
+            .filter(Boolean)
+            .join(" ") || undefined
         }
         style={style}
         {...props}

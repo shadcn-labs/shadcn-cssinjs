@@ -1,7 +1,6 @@
 import { useRender } from "@base-ui/react";
+import * as stylex from "@stylexjs/stylex";
 import { ChevronRightIcon, MoreHorizontalIcon } from "lucide-react";
-
-import { cx, x } from "@/lib/utils";
 
 import { styles } from "./breadcrumb.stylex";
 
@@ -14,10 +13,12 @@ const BreadcrumbList = ({
   style,
   ...props
 }: React.ComponentProps<"ol">) => {
-  const p = x(styles.list);
+  const p = stylex.props(styles.list);
   return (
     <ol
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="breadcrumb-list"
       style={{ ...p.style, ...style }}
       {...props}
@@ -30,10 +31,12 @@ const BreadcrumbItem = ({
   style,
   ...props
 }: React.ComponentProps<"li">) => {
-  const p = x(styles.item);
+  const p = stylex.props(styles.item);
   return (
     <li
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="breadcrumb-item"
       style={{ ...p.style, ...style }}
       {...props}
@@ -49,9 +52,12 @@ const BreadcrumbLink = ({
 }: React.ComponentProps<"a"> & { render?: useRender.RenderProp }) =>
   useRender({
     props: {
-      className: cx(x(styles.link).className, className),
+      className:
+        [stylex.props(styles.link).className, className]
+          .filter(Boolean)
+          .join(" ") || undefined,
       "data-slot": "breadcrumb-link",
-      style: { ...x(styles.link).style, ...style },
+      style: { ...stylex.props(styles.link).style, ...style },
       ...props,
     },
     // oxlint-disable-next-line anchor-has-content
@@ -63,11 +69,13 @@ const BreadcrumbPage = ({
   style,
   ...props
 }: React.ComponentProps<"span">) => {
-  const p = x(styles.page);
+  const p = stylex.props(styles.page);
   return (
     <span
       aria-current="page"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="breadcrumb-page"
       role="link"
       style={{ ...p.style, ...style }}
@@ -82,11 +90,13 @@ const BreadcrumbSeparator = ({
   children,
   ...props
 }: React.ComponentProps<"li">) => {
-  const p = x(styles.separator);
+  const p = stylex.props(styles.separator);
   return (
     <li
       aria-hidden="true"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="breadcrumb-separator"
       role="presentation"
       style={{ ...p.style, ...style }}
@@ -102,11 +112,13 @@ const BreadcrumbEllipsis = ({
   style,
   ...props
 }: React.ComponentProps<"span">) => {
-  const p = x(styles.ellipsis);
+  const p = stylex.props(styles.ellipsis);
   return (
     <span
       aria-hidden="true"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="breadcrumb-ellipsis"
       role="presentation"
       style={{ ...p.style, ...style }}

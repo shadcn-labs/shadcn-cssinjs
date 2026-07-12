@@ -1,9 +1,8 @@
 "use client";
 
 import { Menu as MenuPrimitive } from "@base-ui/react/menu";
+import * as stylex from "@stylexjs/stylex";
 import { CheckIcon, ChevronRightIcon, CircleIcon } from "lucide-react";
-
-import { cx, x } from "@/lib/utils";
 
 import { styles } from "./dropdown-menu.stylex";
 
@@ -64,13 +63,15 @@ const DropdownMenuContent = ({
       <MenuPrimitive.Popup
         data-slot="dropdown-menu-content"
         className={(state) =>
-          cx(
-            x(
+          [
+            stylex.props(
               styles.popup,
               hidden(state.transitionStatus) && styles.popupHidden
             ).className,
-            className
-          )
+            className,
+          ]
+            .filter(Boolean)
+            .join(" ") || undefined
         }
         style={style}
         {...props}
@@ -97,8 +98,8 @@ const DropdownMenuItem = ({
     data-inset={inset ? "" : undefined}
     data-variant={variant}
     className={(state) =>
-      cx(
-        x(
+      [
+        stylex.props(
           styles.item,
           inset && styles.itemInset,
           variant === "destructive" && styles.itemDestructive,
@@ -108,8 +109,10 @@ const DropdownMenuItem = ({
               : styles.itemHighlighted),
           state.disabled && styles.itemDisabled
         ).className,
-        className
-      )
+        className,
+      ]
+        .filter(Boolean)
+        .join(" ") || undefined
     }
     style={style}
     {...props}
@@ -127,21 +130,23 @@ const DropdownMenuCheckboxItem = ({
 > & {
   className?: string;
 }) => {
-  const indicator = x(styles.indicatorWrap);
-  const icon = x(styles.icon);
+  const indicator = stylex.props(styles.indicatorWrap);
+  const icon = stylex.props(styles.icon);
   return (
     <MenuPrimitive.CheckboxItem
       data-slot="dropdown-menu-checkbox-item"
       className={(state) =>
-        cx(
-          x(
+        [
+          stylex.props(
             styles.item,
             styles.itemIndented,
             state.highlighted && styles.itemHighlighted,
             state.disabled && styles.itemDisabled
           ).className,
-          className
-        )
+          className,
+        ]
+          .filter(Boolean)
+          .join(" ") || undefined
       }
       style={style}
       {...props}
@@ -164,20 +169,22 @@ const DropdownMenuRadioItem = ({
 }: Omit<React.ComponentProps<typeof MenuPrimitive.RadioItem>, "className"> & {
   className?: string;
 }) => {
-  const indicator = x(styles.indicatorWrap);
+  const indicator = stylex.props(styles.indicatorWrap);
   return (
     <MenuPrimitive.RadioItem
       data-slot="dropdown-menu-radio-item"
       className={(state) =>
-        cx(
-          x(
+        [
+          stylex.props(
             styles.item,
             styles.itemIndented,
             state.highlighted && styles.itemHighlighted,
             state.disabled && styles.itemDisabled
           ).className,
-          className
-        )
+          className,
+        ]
+          .filter(Boolean)
+          .join(" ") || undefined
       }
       style={style}
       {...props}
@@ -200,12 +207,14 @@ const DropdownMenuLabel = ({
   inset,
   ...props
 }: React.ComponentProps<"div"> & { inset?: boolean }) => {
-  const p = x(styles.label, inset && styles.labelInset);
+  const p = stylex.props(styles.label, inset && styles.labelInset);
   return (
     <div
       data-slot="dropdown-menu-label"
       data-inset={inset ? "" : undefined}
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />
@@ -219,11 +228,13 @@ const DropdownMenuSeparator = ({
 }: Omit<React.ComponentProps<typeof MenuPrimitive.Separator>, "className"> & {
   className?: string;
 }) => {
-  const p = x(styles.separator);
+  const p = stylex.props(styles.separator);
   return (
     <MenuPrimitive.Separator
       data-slot="dropdown-menu-separator"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />
@@ -235,11 +246,13 @@ const DropdownMenuShortcut = ({
   style,
   ...props
 }: React.ComponentProps<"span">) => {
-  const p = x(styles.shortcut);
+  const p = stylex.props(styles.shortcut);
   return (
     <span
       data-slot="dropdown-menu-shortcut"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />
@@ -259,20 +272,22 @@ const DropdownMenuSubTrigger = ({
   className?: string;
   inset?: boolean;
 }) => {
-  const icon = x(styles.icon);
+  const icon = stylex.props(styles.icon);
   return (
     <MenuPrimitive.SubmenuTrigger
       data-slot="dropdown-menu-sub-trigger"
       data-inset={inset ? "" : undefined}
       className={(state) =>
-        cx(
-          x(
+        [
+          stylex.props(
             styles.item,
             inset && styles.itemInset,
             state.highlighted && styles.itemHighlighted
           ).className,
-          className
-        )
+          className,
+        ]
+          .filter(Boolean)
+          .join(" ") || undefined
       }
       style={style}
       {...props}
@@ -298,13 +313,15 @@ const DropdownMenuSubContent = ({
       <MenuPrimitive.Popup
         data-slot="dropdown-menu-sub-content"
         className={(state) =>
-          cx(
-            x(
+          [
+            stylex.props(
               styles.popup,
               hidden(state.transitionStatus) && styles.popupHidden
             ).className,
-            className
-          )
+            className,
+          ]
+            .filter(Boolean)
+            .join(" ") || undefined
         }
         style={style}
         {...props}

@@ -1,9 +1,8 @@
 "use client";
 
+import * as stylex from "@stylexjs/stylex";
 import { GripVerticalIcon } from "lucide-react";
 import { Group, Panel, Separator } from "react-resizable-panels";
-
-import { cx, x } from "@/lib/utils";
 
 import { styles } from "./resizable.stylex";
 
@@ -12,10 +11,12 @@ const ResizablePanelGroup = ({
   style,
   ...props
 }: React.ComponentProps<typeof Group> & { className?: string }) => {
-  const p = x(styles.group);
+  const p = stylex.props(styles.group);
   return (
     <Group
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="resizable-panel-group"
       style={{ ...p.style, ...style }}
       {...props}
@@ -36,11 +37,13 @@ const ResizableHandle = ({
   withHandle?: boolean;
   className?: string;
 }) => {
-  const handle = x(styles.handle);
-  const grip = x(styles.grip);
+  const handle = stylex.props(styles.handle);
+  const grip = stylex.props(styles.grip);
   return (
     <Separator
-      className={cx(handle.className, className)}
+      className={
+        [handle.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="resizable-handle"
       style={{ ...handle.style, ...style }}
       {...props}

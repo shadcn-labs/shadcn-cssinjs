@@ -1,8 +1,7 @@
 "use client";
 
 import type { StyleXStyles } from "@stylexjs/stylex";
-
-import { cx, x } from "@/lib/utils";
+import * as stylex from "@stylexjs/stylex";
 
 import { Button } from "../button/button";
 import type { ButtonProps } from "../button/button";
@@ -26,10 +25,12 @@ const InputGroup = ({
   style,
   ...props
 }: React.ComponentProps<"div">) => {
-  const p = x(styles.root);
+  const p = stylex.props(styles.root);
   return (
     <div
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="input-group"
       role="group"
       style={{ ...p.style, ...style }}
@@ -44,11 +45,13 @@ const InputGroupAddon = ({
   align = "inline-start",
   ...props
 }: React.ComponentProps<"div"> & { align?: InputGroupAlign }) => {
-  const p = x(styles.addonBase, alignStyles[align]);
+  const p = stylex.props(styles.addonBase, alignStyles[align]);
   return (
     // oxlint-disable-next-line click-events-have-key-events no-static-element-interactions
     <div
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-align={align}
       data-slot="input-group-addon"
       onClick={(e) => {
@@ -81,10 +84,12 @@ const InputGroupButton = ({
   size = "xs",
   ...props
 }: Omit<ButtonProps, "size"> & { size?: InputGroupButtonSize }) => {
-  const p = x(styles.button);
+  const p = stylex.props(styles.button);
   return (
     <Button
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-size={size}
       size={buttonSizeMap[size]}
       style={{ ...p.style, ...style }}
@@ -100,10 +105,12 @@ const InputGroupText = ({
   style,
   ...props
 }: React.ComponentProps<"span">) => {
-  const p = x(styles.text);
+  const p = stylex.props(styles.text);
   return (
     <span
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />
@@ -115,10 +122,12 @@ const InputGroupInput = ({
   style,
   ...props
 }: React.ComponentProps<"input">) => {
-  const p = x(styles.control);
+  const p = stylex.props(styles.control);
   return (
     <input
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="input-group-control"
       style={{ ...p.style, ...style }}
       {...props}
@@ -131,10 +140,12 @@ const InputGroupTextarea = ({
   style,
   ...props
 }: React.ComponentProps<"textarea">) => {
-  const p = x(styles.control, styles.textarea);
+  const p = stylex.props(styles.control, styles.textarea);
   return (
     <textarea
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="input-group-control"
       style={{ ...p.style, ...style }}
       {...props}

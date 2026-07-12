@@ -12,7 +12,7 @@
   "files": [
     {
       "path": "registry/bases/stylex/label/label.tsx",
-      "content": "import { cx, x } from \"@/lib/utils\";\n\nimport { styles } from \"./label.stylex\";\n\nconst Label = ({\n  className,\n  style,\n  ...props\n}: React.ComponentProps<\"label\"> & { className?: string }) => {\n  const p = x(styles.root);\n  return (\n    // biome-ignore lint/a11y/noLabelWithoutControl: htmlFor/children supplied by consumer\n    <label\n      className={cx(p.className, className)}\n      data-slot=\"label\"\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nexport { Label };\n",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nimport { styles } from \"./label.stylex\";\n\nconst Label = ({\n  className,\n  style,\n  ...props\n}: React.ComponentProps<\"label\"> & { className?: string }) => {\n  const p = stylex.props(styles.root);\n  return (\n    // biome-ignore lint/a11y/noLabelWithoutControl: htmlFor/children supplied by consumer\n    <label\n      className={[p.className, className].filter(Boolean).join(\" \") || undefined}\n      data-slot=\"label\"\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nexport { Label };\n",
       "type": "registry:ui",
       "target": "components/ui/label/label.tsx"
     },

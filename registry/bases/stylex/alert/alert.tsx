@@ -1,8 +1,6 @@
 import * as stylex from "@stylexjs/stylex";
 import { Children, isValidElement } from "react";
 
-import { cx, x } from "@/lib/utils";
-
 import { styles } from "./alert.stylex";
 
 type AlertVariant = "default" | "destructive";
@@ -35,7 +33,7 @@ const Alert = ({
   ...props
 }: React.ComponentProps<"div"> & { variant?: AlertVariant }) => {
   const icon = hasIcon(children);
-  const p = x(
+  const p = stylex.props(
     styles.base,
     stylex.defaultMarker(),
     variant === "destructive" ? styles.destructive : styles.default,
@@ -46,7 +44,9 @@ const Alert = ({
       data-slot="alert"
       data-variant={variant}
       role="alert"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     >
@@ -60,11 +60,13 @@ const AlertTitle = ({
   style,
   ...props
 }: React.ComponentProps<"div">) => {
-  const p = x(styles.title, styles.titleWithIcon);
+  const p = stylex.props(styles.title, styles.titleWithIcon);
   return (
     <div
       data-slot="alert-title"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />
@@ -76,11 +78,13 @@ const AlertDescription = ({
   style,
   ...props
 }: React.ComponentProps<"div">) => {
-  const p = x(styles.description, styles.descriptionWithIcon);
+  const p = stylex.props(styles.description, styles.descriptionWithIcon);
   return (
     <div
       data-slot="alert-description"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />
@@ -92,11 +96,13 @@ const AlertAction = ({
   style,
   ...props
 }: React.ComponentProps<"div">) => {
-  const p = x(styles.action);
+  const p = stylex.props(styles.action);
   return (
     <div
       data-slot="alert-action"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />

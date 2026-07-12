@@ -1,10 +1,9 @@
+import * as stylex from "@stylexjs/stylex";
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
   MoreHorizontalIcon,
 } from "lucide-react";
-
-import { cx, x } from "@/lib/utils";
 
 import { styles } from "./pagination.stylex";
 
@@ -13,11 +12,13 @@ const Pagination = ({
   style,
   ...props
 }: React.ComponentProps<"nav">) => {
-  const p = x(styles.root);
+  const p = stylex.props(styles.root);
   return (
     <nav
       aria-label="pagination"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="pagination"
       style={{ ...p.style, ...style }}
       {...props}
@@ -30,10 +31,12 @@ const PaginationContent = ({
   style,
   ...props
 }: React.ComponentProps<"ul">) => {
-  const p = x(styles.content);
+  const p = stylex.props(styles.content);
   return (
     <ul
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="pagination-content"
       style={{ ...p.style, ...style }}
       {...props}
@@ -51,11 +54,13 @@ const PaginationLink = ({
   isActive,
   ...props
 }: React.ComponentProps<"a"> & { isActive?: boolean }) => {
-  const p = x(styles.link, isActive && styles.linkActive);
+  const p = stylex.props(styles.link, isActive && styles.linkActive);
   return (
     <a
       aria-current={isActive ? "page" : undefined}
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-active={isActive}
       data-slot="pagination-link"
       style={{ ...p.style, ...style }}
@@ -89,11 +94,13 @@ const PaginationEllipsis = ({
   style,
   ...props
 }: React.ComponentProps<"span">) => {
-  const p = x(styles.ellipsis);
+  const p = stylex.props(styles.ellipsis);
   return (
     <span
       aria-hidden="true"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="pagination-ellipsis"
       style={{ ...p.style, ...style }}
       {...props}

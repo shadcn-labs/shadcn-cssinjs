@@ -1,6 +1,5 @@
+import * as stylex from "@stylexjs/stylex";
 import { ChevronDownIcon } from "lucide-react";
-
-import { cx, x } from "@/lib/utils";
 
 import { styles } from "./native-select.stylex";
 
@@ -12,14 +11,16 @@ const NativeSelect = ({
 }: Omit<React.ComponentProps<"select">, "size"> & {
   size?: "sm" | "default";
 }) => {
-  const wrapper = x(styles.wrapper);
-  const select = x(styles.select, size === "sm" && styles.selectSm);
-  const icon = x(styles.icon, size === "sm" && styles.iconSm);
+  const wrapper = stylex.props(styles.wrapper);
+  const select = stylex.props(styles.select, size === "sm" && styles.selectSm);
+  const icon = stylex.props(styles.icon, size === "sm" && styles.iconSm);
   return (
     <div
       data-slot="native-select-wrapper"
       data-size={size}
-      className={cx(wrapper.className, className)}
+      className={
+        [wrapper.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...wrapper.style, ...style }}
     >
       <select

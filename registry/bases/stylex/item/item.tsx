@@ -1,7 +1,6 @@
 import { useRender } from "@base-ui/react";
 import type { StyleXStyles } from "@stylexjs/stylex";
-
-import { cx, x } from "@/lib/utils";
+import * as stylex from "@stylexjs/stylex";
 
 import { Separator } from "../separator/separator";
 import { styles } from "./item.stylex";
@@ -32,10 +31,12 @@ const ItemGroup = ({
   style,
   ...props
 }: React.ComponentProps<"div">) => {
-  const p = x(styles.group);
+  const p = stylex.props(styles.group);
   return (
     <div
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="item-group"
       role="list"
       style={{ ...p.style, ...style }}
@@ -48,10 +49,12 @@ const ItemSeparator = ({
   className,
   ...props
 }: React.ComponentProps<typeof Separator>) => {
-  const p = x(styles.separator);
+  const p = stylex.props(styles.separator);
   return (
     <Separator
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="item-separator"
       orientation="horizontal"
       {...props}
@@ -71,10 +74,11 @@ const Item = ({
   size?: ItemSize;
   render?: useRender.RenderProp;
 }) => {
-  const p = x(styles.base, variantStyles[variant], sizeStyles[size]);
+  const p = stylex.props(styles.base, variantStyles[variant], sizeStyles[size]);
   return useRender({
     props: {
-      className: cx(p.className, className),
+      className:
+        [p.className, className].filter(Boolean).join(" ") || undefined,
       "data-size": size,
       "data-slot": "item",
       "data-variant": variant,
@@ -93,10 +97,12 @@ const ItemMedia = ({
 }: React.ComponentProps<"div"> & {
   variant?: "default" | "icon" | "image";
 }) => {
-  const p = x(styles.mediaBase, mediaVariantStyles[variant]);
+  const p = stylex.props(styles.mediaBase, mediaVariantStyles[variant]);
   return (
     <div
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="item-media"
       data-variant={variant}
       style={{ ...p.style, ...style }}
@@ -110,10 +116,12 @@ const ItemContent = ({
   style,
   ...props
 }: React.ComponentProps<"div">) => {
-  const p = x(styles.content);
+  const p = stylex.props(styles.content);
   return (
     <div
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="item-content"
       style={{ ...p.style, ...style }}
       {...props}
@@ -126,10 +134,12 @@ const ItemTitle = ({
   style,
   ...props
 }: React.ComponentProps<"div">) => {
-  const p = x(styles.title);
+  const p = stylex.props(styles.title);
   return (
     <div
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="item-title"
       style={{ ...p.style, ...style }}
       {...props}
@@ -142,10 +152,12 @@ const ItemDescription = ({
   style,
   ...props
 }: React.ComponentProps<"p">) => {
-  const p = x(styles.description);
+  const p = stylex.props(styles.description);
   return (
     <p
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="item-description"
       style={{ ...p.style, ...style }}
       {...props}
@@ -158,10 +170,12 @@ const ItemActions = ({
   style,
   ...props
 }: React.ComponentProps<"div">) => {
-  const p = x(styles.actions);
+  const p = stylex.props(styles.actions);
   return (
     <div
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="item-actions"
       style={{ ...p.style, ...style }}
       {...props}
@@ -174,10 +188,12 @@ const ItemHeader = ({
   style,
   ...props
 }: React.ComponentProps<"div">) => {
-  const p = x(styles.header);
+  const p = stylex.props(styles.header);
   return (
     <div
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="item-header"
       style={{ ...p.style, ...style }}
       {...props}
@@ -190,10 +206,12 @@ const ItemFooter = ({
   style,
   ...props
 }: React.ComponentProps<"div">) => {
-  const p = x(styles.footer);
+  const p = stylex.props(styles.footer);
   return (
     <div
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="item-footer"
       style={{ ...p.style, ...style }}
       {...props}

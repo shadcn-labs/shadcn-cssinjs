@@ -1,6 +1,5 @@
 import { useRender } from "@base-ui/react";
-
-import { cx, x } from "@/lib/utils";
+import * as stylex from "@stylexjs/stylex";
 
 import { Separator } from "../separator/separator";
 import { styles } from "./button-group.stylex";
@@ -13,10 +12,15 @@ const ButtonGroup = ({
 }: React.ComponentProps<"div"> & {
   orientation?: "horizontal" | "vertical";
 }) => {
-  const p = x(styles.group, orientation === "vertical" && styles.vertical);
+  const p = stylex.props(
+    styles.group,
+    orientation === "vertical" && styles.vertical
+  );
   return (
     <div
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-orientation={orientation}
       data-slot="button-group"
       role="group"
@@ -32,10 +36,11 @@ const ButtonGroupText = ({
   render,
   ...props
 }: React.ComponentProps<"div"> & { render?: useRender.RenderProp }) => {
-  const p = x(styles.text);
+  const p = stylex.props(styles.text);
   return useRender({
     props: {
-      className: cx(p.className, className),
+      className:
+        [p.className, className].filter(Boolean).join(" ") || undefined,
       "data-slot": "button-group-text",
       style: { ...p.style, ...style },
       ...props,
@@ -49,10 +54,12 @@ const ButtonGroupSeparator = ({
   orientation = "vertical",
   ...props
 }: React.ComponentProps<typeof Separator>) => {
-  const p = x(styles.separator);
+  const p = stylex.props(styles.separator);
   return (
     <Separator
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="button-group-separator"
       orientation={orientation}
       {...props}

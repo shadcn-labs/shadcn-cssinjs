@@ -1,10 +1,9 @@
 "use client";
 
 import { Avatar as AvatarPrimitive } from "@base-ui/react/avatar";
+import * as stylex from "@stylexjs/stylex";
 import type { StyleXStyles } from "@stylexjs/stylex";
 import { Children, cloneElement, isValidElement } from "react";
-
-import { cx, x } from "@/lib/utils";
 
 import { styles } from "./avatar.stylex";
 
@@ -25,10 +24,12 @@ const Avatar = ({
   className?: string;
   size?: AvatarSize;
 }) => {
-  const p = x(styles.root, sizeStyles[size]);
+  const p = stylex.props(styles.root, sizeStyles[size]);
   return (
     <AvatarPrimitive.Root
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-size={size}
       data-slot="avatar"
       style={{ ...p.style, ...style }}
@@ -44,10 +45,12 @@ const AvatarImage = ({
 }: Omit<React.ComponentProps<typeof AvatarPrimitive.Image>, "className"> & {
   className?: string;
 }) => {
-  const p = x(styles.image);
+  const p = stylex.props(styles.image);
   return (
     <AvatarPrimitive.Image
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="avatar-image"
       style={{ ...p.style, ...style }}
       {...props}
@@ -62,10 +65,12 @@ const AvatarFallback = ({
 }: Omit<React.ComponentProps<typeof AvatarPrimitive.Fallback>, "className"> & {
   className?: string;
 }) => {
-  const p = x(styles.fallback);
+  const p = stylex.props(styles.fallback);
   return (
     <AvatarPrimitive.Fallback
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="avatar-fallback"
       style={{ ...p.style, ...style }}
       {...props}
@@ -78,10 +83,12 @@ const AvatarBadge = ({
   style,
   ...props
 }: React.ComponentProps<"span">) => {
-  const p = x(styles.badge);
+  const p = stylex.props(styles.badge);
   return (
     <span
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="avatar-badge"
       style={{ ...p.style, ...style }}
       {...props}
@@ -95,10 +102,12 @@ const AvatarGroup = ({
   children,
   ...props
 }: React.ComponentProps<"div">) => {
-  const p = x(styles.group);
+  const p = stylex.props(styles.group);
   return (
     <div
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="avatar-group"
       style={{ ...p.style, ...style }}
       {...props}
@@ -123,10 +132,12 @@ const AvatarGroupCount = ({
   style,
   ...props
 }: React.ComponentProps<"div">) => {
-  const p = x(styles.groupCount);
+  const p = stylex.props(styles.groupCount);
   return (
     <div
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="avatar-group-count"
       style={{ marginInlineStart: "-0.5rem", ...p.style, ...style }}
       {...props}

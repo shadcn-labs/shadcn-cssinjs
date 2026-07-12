@@ -1,6 +1,5 @@
+import * as stylex from "@stylexjs/stylex";
 import type { StyleXStyles } from "@stylexjs/stylex";
-
-import { cx, x } from "@/lib/utils";
 
 import { styles } from "./badge.stylex";
 
@@ -19,12 +18,14 @@ const Badge = ({
   style,
   ...props
 }: React.ComponentProps<"span"> & { variant?: BadgeVariant }) => {
-  const p = x(styles.base, variantMap[variant]);
+  const p = stylex.props(styles.base, variantMap[variant]);
   return (
     <span
       data-slot="badge"
       data-variant={variant}
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />

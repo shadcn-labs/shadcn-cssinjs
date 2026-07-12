@@ -1,5 +1,6 @@
 "use client";
 
+import * as stylex from "@stylexjs/stylex";
 import useEmblaCarousel from "embla-carousel-react";
 import type { UseEmblaCarouselType } from "embla-carousel-react";
 import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
@@ -10,8 +11,6 @@ import {
   useEffect,
   useState,
 } from "react";
-
-import { cx, x } from "@/lib/utils";
 
 import { Button } from "../button/button";
 import { styles } from "./carousel.stylex";
@@ -94,7 +93,7 @@ const Carousel = ({
     };
   }, [api, onSelect]);
 
-  const root = x(styles.root);
+  const root = stylex.props(styles.root);
 
   return (
     <CarouselContext.Provider
@@ -110,7 +109,9 @@ const Carousel = ({
     >
       <div
         aria-roledescription="carousel"
-        className={cx(root.className, className)}
+        className={
+          [root.className, className].filter(Boolean).join(" ") || undefined
+        }
         data-slot="carousel"
         role="region"
         style={{ ...root.style, ...style }}
@@ -128,8 +129,8 @@ const CarouselContent = ({
   ...props
 }: React.ComponentProps<"div">) => {
   const { carouselRef, orientation } = useCarousel();
-  const viewport = x(styles.viewport);
-  const content = x(
+  const viewport = stylex.props(styles.viewport);
+  const content = stylex.props(
     orientation === "horizontal"
       ? styles.contentHorizontal
       : styles.contentVertical
@@ -142,7 +143,9 @@ const CarouselContent = ({
       style={viewport.style}
     >
       <div
-        className={cx(content.className, className)}
+        className={
+          [content.className, className].filter(Boolean).join(" ") || undefined
+        }
         data-slot="carousel-content"
         style={{ ...content.style, ...style }}
         {...props}
@@ -157,13 +160,15 @@ const CarouselItem = ({
   ...props
 }: React.ComponentProps<"div">) => {
   const { orientation } = useCarousel();
-  const p = x(
+  const p = stylex.props(
     orientation === "horizontal" ? styles.itemHorizontal : styles.itemVertical
   );
   return (
     <div
       aria-roledescription="slide"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="carousel-item"
       role="group"
       style={{ ...p.style, ...style }}
@@ -178,13 +183,15 @@ const CarouselPrevious = ({
   ...props
 }: React.ComponentProps<typeof Button>) => {
   const { orientation, scrollPrev, canScrollPrev } = useCarousel();
-  const p = x(
+  const p = stylex.props(
     orientation === "horizontal" ? styles.prevHorizontal : styles.prevVertical
   );
   return (
     <Button
       aria-label="Previous slide"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       disabled={!canScrollPrev}
       onClick={scrollPrev}
       size="icon"
@@ -203,13 +210,15 @@ const CarouselNext = ({
   ...props
 }: React.ComponentProps<typeof Button>) => {
   const { orientation, scrollNext, canScrollNext } = useCarousel();
-  const p = x(
+  const p = stylex.props(
     orientation === "horizontal" ? styles.nextHorizontal : styles.nextVertical
   );
   return (
     <Button
       aria-label="Next slide"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       disabled={!canScrollNext}
       onClick={scrollNext}
       size="icon"

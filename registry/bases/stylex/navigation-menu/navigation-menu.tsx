@@ -1,9 +1,8 @@
 "use client";
 
 import { NavigationMenu as NavigationMenuPrimitive } from "@base-ui/react/navigation-menu";
+import * as stylex from "@stylexjs/stylex";
 import { ChevronDownIcon } from "lucide-react";
-
-import { cx, x } from "@/lib/utils";
 
 import { styles } from "./navigation-menu.stylex";
 
@@ -20,10 +19,12 @@ const NavigationMenu = ({
 > & {
   className?: string;
 }) => {
-  const root = x(styles.root);
+  const root = stylex.props(styles.root);
   return (
     <NavigationMenuPrimitive.Root
-      className={cx(root.className, className)}
+      className={
+        [root.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="navigation-menu"
       style={{ ...root.style, ...style }}
       {...props}
@@ -33,7 +34,7 @@ const NavigationMenu = ({
         <NavigationMenuPrimitive.Positioner sideOffset={6}>
           <NavigationMenuPrimitive.Popup
             className={(state) =>
-              x(
+              stylex.props(
                 styles.popup,
                 hidden(state.transitionStatus) && styles.popupHidden
               ).className
@@ -41,7 +42,7 @@ const NavigationMenu = ({
             data-slot="navigation-menu-popup"
           >
             <NavigationMenuPrimitive.Viewport
-              className={x(styles.viewport).className}
+              className={stylex.props(styles.viewport).className}
               data-slot="navigation-menu-viewport"
             />
           </NavigationMenuPrimitive.Popup>
@@ -61,10 +62,12 @@ const NavigationMenuList = ({
 > & {
   className?: string;
 }) => {
-  const p = x(styles.list);
+  const p = stylex.props(styles.list);
   return (
     <NavigationMenuPrimitive.List
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="navigation-menu-list"
       style={{ ...p.style, ...style }}
       {...props}
@@ -87,16 +90,20 @@ const NavigationMenuTrigger = ({
   React.ComponentProps<typeof NavigationMenuPrimitive.Trigger>,
   "className"
 > & { className?: string }) => {
-  const p = x(styles.trigger);
+  const p = stylex.props(styles.trigger);
   return (
     <NavigationMenuPrimitive.Trigger
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="navigation-menu-trigger"
       style={{ ...p.style, ...style }}
       {...props}
     >
       {children}
-      <NavigationMenuPrimitive.Icon className={x(styles.icon).className}>
+      <NavigationMenuPrimitive.Icon
+        className={stylex.props(styles.icon).className}
+      >
         <ChevronDownIcon size={12} />
       </NavigationMenuPrimitive.Icon>
     </NavigationMenuPrimitive.Trigger>
@@ -111,10 +118,12 @@ const NavigationMenuContent = ({
   React.ComponentProps<typeof NavigationMenuPrimitive.Content>,
   "className"
 > & { className?: string }) => {
-  const p = x(styles.content);
+  const p = stylex.props(styles.content);
   return (
     <NavigationMenuPrimitive.Content
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="navigation-menu-content"
       style={{ ...p.style, ...style }}
       {...props}
@@ -132,10 +141,12 @@ const NavigationMenuLink = ({
 > & {
   className?: string;
 }) => {
-  const p = x(styles.link);
+  const p = stylex.props(styles.link);
   return (
     <NavigationMenuPrimitive.Link
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="navigation-menu-link"
       style={{ ...p.style, ...style }}
       {...props}

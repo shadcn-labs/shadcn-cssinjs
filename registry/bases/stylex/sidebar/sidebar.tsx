@@ -1,6 +1,8 @@
 "use client";
 
 import { useRender } from "@base-ui/react";
+import type { StyleXStyles } from "@stylexjs/stylex";
+import * as stylex from "@stylexjs/stylex";
 import { PanelLeftIcon } from "lucide-react";
 import {
   createContext,
@@ -12,7 +14,6 @@ import {
 } from "react";
 
 import { useIsMobile } from "@/hooks/use-mobile";
-import { cx, x } from "@/lib/utils";
 
 import { Button } from "../button/button";
 import { Input } from "../input/input";
@@ -126,14 +127,16 @@ const SidebarProvider = ({
     [state, open, openMobile, setOpen, isMobile, toggleSidebar]
   );
 
-  const p = x(s.wrapper);
+  const p = stylex.props(s.wrapper);
 
   return (
     <SidebarContext.Provider value={contextValue}>
       <TooltipProvider delay={0}>
         <div
           data-slot="sidebar-wrapper"
-          className={cx(p.className, className)}
+          className={
+            [p.className, className].filter(Boolean).join(" ") || undefined
+          }
           style={
             {
               "--sidebar-width": SIDEBAR_WIDTH,
@@ -165,13 +168,15 @@ const Sidebar = ({
   collapsible?: "offcanvas" | "icon" | "none";
 }) => {
   const { isMobile, state, openMobile, setOpenMobile } = useSidebar();
-  const inner = x(s.inner);
+  const inner = stylex.props(s.inner);
 
   if (collapsible === "none") {
     return (
       <div
         data-slot="sidebar"
-        className={cx(inner.className, className)}
+        className={
+          [inner.className, className].filter(Boolean).join(" ") || undefined
+        }
         style={{ ...inner.style, width: "var(--sidebar-width)", ...style }}
         {...props}
       >
@@ -215,8 +220,8 @@ const Sidebar = ({
     width = "var(--sidebar-width-icon)";
   }
 
-  const gap = x(s.gap);
-  const container = x(s.container);
+  const gap = stylex.props(s.gap);
+  const container = stylex.props(s.container);
 
   let offset: React.CSSProperties = {};
   if (offcanvas) {
@@ -240,7 +245,10 @@ const Sidebar = ({
         style={{ ...gap.style, width }}
       />
       <div
-        className={cx(container.className, className)}
+        className={
+          [container.className, className].filter(Boolean).join(" ") ||
+          undefined
+        }
         data-slot="sidebar-container"
         style={{
           ...container.style,
@@ -290,7 +298,7 @@ const SidebarTrigger = ({
 
 const SidebarRail = (props: React.ComponentProps<"button">) => {
   const { toggleSidebar } = useSidebar();
-  const p = x(s.rail);
+  const p = stylex.props(s.rail);
   return (
     <button
       aria-label="Toggle Sidebar"
@@ -312,11 +320,13 @@ const SidebarInset = ({
   style,
   ...props
 }: React.ComponentProps<"main">) => {
-  const p = x(s.inset);
+  const p = stylex.props(s.inset);
   return (
     <main
       data-slot="sidebar-inset"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />
@@ -337,14 +347,16 @@ const SidebarInput = (props: React.ComponentProps<typeof Input>) => (
 );
 
 const makeDiv =
-  (slot: string, sidebar: string, style: Parameters<typeof x>[0]) =>
+  (slot: string, sidebar: string, style: StyleXStyles) =>
   ({ className, style: styleProp, ...props }: React.ComponentProps<"div">) => {
-    const p = x(style);
+    const p = stylex.props(style);
     return (
       <div
         data-sidebar={sidebar}
         data-slot={slot}
-        className={cx(p.className, className)}
+        className={
+          [p.className, className].filter(Boolean).join(" ") || undefined
+        }
         style={{ ...p.style, ...styleProp }}
         {...props}
       />
@@ -371,12 +383,14 @@ const SidebarSeparator = ({
   style,
   ...props
 }: React.ComponentProps<typeof Separator>) => {
-  const p = x(s.separator);
+  const p = stylex.props(s.separator);
   return (
     <Separator
       data-sidebar="separator"
       data-slot="sidebar-separator"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />
@@ -388,13 +402,15 @@ const SidebarGroupAction = ({
   style,
   ...props
 }: React.ComponentProps<"button">) => {
-  const p = x(s.menuAction);
+  const p = stylex.props(s.menuAction);
   return (
     <button
       type="button"
       data-sidebar="group-action"
       data-slot="sidebar-group-action"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />
@@ -406,12 +422,14 @@ const SidebarMenu = ({
   style,
   ...props
 }: React.ComponentProps<"ul">) => {
-  const p = x(s.menu);
+  const p = stylex.props(s.menu);
   return (
     <ul
       data-sidebar="menu"
       data-slot="sidebar-menu"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />
@@ -423,12 +441,14 @@ const SidebarMenuItem = ({
   style,
   ...props
 }: React.ComponentProps<"li">) => {
-  const p = x(s.menuItem);
+  const p = stylex.props(s.menuItem);
   return (
     <li
       data-sidebar="menu-item"
       data-slot="sidebar-menu-item"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />
@@ -452,7 +472,7 @@ const SidebarMenuButton = ({
   render?: useRender.RenderProp;
 }) => {
   const { isMobile, state } = useSidebar();
-  const p = x(
+  const p = stylex.props(
     s.menuButton,
     size === "sm" && s.menuButtonSm,
     size === "lg" && s.menuButtonLg,
@@ -462,7 +482,8 @@ const SidebarMenuButton = ({
   const element = useRender({
     props: {
       children,
-      className: cx(p.className, className),
+      className:
+        [p.className, className].filter(Boolean).join(" ") || undefined,
       "data-active": isActive,
       "data-sidebar": "menu-button",
       "data-size": size,
@@ -498,13 +519,15 @@ const SidebarMenuAction = ({
   style,
   ...props
 }: React.ComponentProps<"button">) => {
-  const p = x(s.menuAction);
+  const p = stylex.props(s.menuAction);
   return (
     <button
       type="button"
       data-sidebar="menu-action"
       data-slot="sidebar-menu-action"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />
@@ -524,12 +547,14 @@ const SidebarMenuSkeleton = ({
   ...props
 }: React.ComponentProps<"div"> & { showIcon?: boolean }) => {
   const width = useMemo(() => `${Math.floor(Math.random() * 40) + 50}%`, []);
-  const p = x(s.menuSkeleton);
+  const p = stylex.props(s.menuSkeleton);
   return (
     <div
       data-sidebar="menu-skeleton"
       data-slot="sidebar-menu-skeleton"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     >
@@ -552,12 +577,14 @@ const SidebarMenuSub = ({
   style,
   ...props
 }: React.ComponentProps<"ul">) => {
-  const p = x(s.menuSub);
+  const p = stylex.props(s.menuSub);
   return (
     <ul
       data-sidebar="menu-sub"
       data-slot="sidebar-menu-sub"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />
@@ -569,12 +596,14 @@ const SidebarMenuSubItem = ({
   style,
   ...props
 }: React.ComponentProps<"li">) => {
-  const p = x(s.menuSubItem);
+  const p = stylex.props(s.menuSubItem);
   return (
     <li
       data-sidebar="menu-sub-item"
       data-slot="sidebar-menu-sub-item"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />
@@ -591,14 +620,16 @@ const SidebarMenuSubButton = ({
   size?: "sm" | "md";
   isActive?: boolean;
 }) => {
-  const p = x(s.menuSubButton, isActive && s.menuSubButtonActive);
+  const p = stylex.props(s.menuSubButton, isActive && s.menuSubButtonActive);
   return (
     <a
       data-active={isActive}
       data-sidebar="menu-sub-button"
       data-size={size}
       data-slot="sidebar-menu-sub-button"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />

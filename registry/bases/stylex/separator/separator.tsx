@@ -1,8 +1,7 @@
 "use client";
 
 import { Separator as SeparatorPrimitive } from "@base-ui/react";
-
-import { cx, x } from "@/lib/utils";
+import * as stylex from "@stylexjs/stylex";
 
 import { styles } from "./separator.stylex";
 
@@ -14,7 +13,7 @@ const Separator = ({
 }: Omit<React.ComponentProps<typeof SeparatorPrimitive>, "className"> & {
   className?: string;
 }) => {
-  const p = x(
+  const p = stylex.props(
     styles.root,
     orientation === "vertical" ? styles.vertical : styles.horizontal
   );
@@ -22,7 +21,9 @@ const Separator = ({
     <SeparatorPrimitive
       data-slot="separator"
       orientation={orientation}
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />

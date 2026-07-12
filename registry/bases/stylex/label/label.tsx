@@ -1,4 +1,4 @@
-import { cx, x } from "@/lib/utils";
+import * as stylex from "@stylexjs/stylex";
 
 import { styles } from "./label.stylex";
 
@@ -7,11 +7,13 @@ const Label = ({
   style,
   ...props
 }: React.ComponentProps<"label"> & { className?: string }) => {
-  const p = x(styles.root);
+  const p = stylex.props(styles.root);
   return (
     // biome-ignore lint/a11y/noLabelWithoutControl: htmlFor/children supplied by consumer
     <label
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="label"
       style={{ ...p.style, ...style }}
       {...props}

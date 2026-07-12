@@ -2,8 +2,7 @@
 
 import { Radio as RadioPrimitive } from "@base-ui/react/radio";
 import { RadioGroup as RadioGroupPrimitive } from "@base-ui/react/radio-group";
-
-import { cx, x } from "@/lib/utils";
+import * as stylex from "@stylexjs/stylex";
 
 import { styles } from "./radio-group.stylex";
 
@@ -14,10 +13,12 @@ const RadioGroup = ({
 }: Omit<React.ComponentProps<typeof RadioGroupPrimitive>, "className"> & {
   className?: string;
 }) => {
-  const p = x(styles.group);
+  const p = stylex.props(styles.group);
   return (
     <RadioGroupPrimitive
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="radio-group"
       style={{ ...p.style, ...style }}
       {...props}
@@ -34,17 +35,20 @@ const RadioGroupItem = ({
 }) => (
   <RadioPrimitive.Root
     className={(state) =>
-      cx(
-        x(styles.item, state.checked && styles.itemChecked).className,
-        className
-      )
+      [
+        stylex.props(styles.item, state.checked && styles.itemChecked)
+          .className,
+        className,
+      ]
+        .filter(Boolean)
+        .join(" ") || undefined
     }
     data-slot="radio-group-item"
     style={style}
     {...props}
   >
     <RadioPrimitive.Indicator
-      className={x(styles.indicator).className}
+      className={stylex.props(styles.indicator).className}
       data-slot="radio-group-indicator"
     />
   </RadioPrimitive.Root>

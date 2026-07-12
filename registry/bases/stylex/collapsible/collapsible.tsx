@@ -1,8 +1,7 @@
 "use client";
 
 import { Collapsible as CollapsiblePrimitive } from "@base-ui/react/collapsible";
-
-import { cx, x } from "@/lib/utils";
+import * as stylex from "@stylexjs/stylex";
 
 import { styles } from "./collapsible.stylex";
 
@@ -18,11 +17,13 @@ const CollapsibleTrigger = ({
   React.ComponentProps<typeof CollapsiblePrimitive.Trigger>,
   "className"
 > & { className?: string }) => {
-  const p = x(styles.trigger);
+  const p = stylex.props(styles.trigger);
   return (
     <CollapsiblePrimitive.Trigger
       data-slot="collapsible-trigger"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />
@@ -37,11 +38,13 @@ const CollapsibleContent = ({
   React.ComponentProps<typeof CollapsiblePrimitive.Panel>,
   "className"
 > & { className?: string }) => {
-  const p = x(styles.panel);
+  const p = stylex.props(styles.panel);
   return (
     <CollapsiblePrimitive.Panel
       data-slot="collapsible-content"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />

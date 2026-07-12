@@ -2,9 +2,8 @@
 
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog";
 import type { StyleXStyles } from "@stylexjs/stylex";
+import * as stylex from "@stylexjs/stylex";
 import { XIcon } from "lucide-react";
-
-import { cx, x } from "@/lib/utils";
 
 import { styles } from "./sheet.stylex";
 
@@ -43,15 +42,15 @@ const SheetContent = ({
   side?: Side;
   showCloseButton?: boolean;
 }) => {
-  const close = x(styles.closeButton);
-  const sr = x(styles.srOnly);
+  const close = stylex.props(styles.closeButton);
+  const sr = stylex.props(styles.srOnly);
   const [base, off] = sideStyle[side];
   return (
     <DialogPrimitive.Portal>
       <DialogPrimitive.Backdrop
         data-slot="sheet-overlay"
         className={(state) =>
-          x(
+          stylex.props(
             styles.backdrop,
             hidden(state.transitionStatus) && styles.backdropHidden
           ).className
@@ -60,11 +59,16 @@ const SheetContent = ({
       <DialogPrimitive.Popup
         data-slot="sheet-content"
         className={(state) =>
-          cx(
-            x(styles.content, base, hidden(state.transitionStatus) && off)
-              .className,
-            className
-          )
+          [
+            stylex.props(
+              styles.content,
+              base,
+              hidden(state.transitionStatus) && off
+            ).className,
+            className,
+          ]
+            .filter(Boolean)
+            .join(" ") || undefined
         }
         style={style}
         {...props}
@@ -92,11 +96,13 @@ const SheetHeader = ({
   style,
   ...props
 }: React.ComponentProps<"div">) => {
-  const p = x(styles.header);
+  const p = stylex.props(styles.header);
   return (
     <div
       data-slot="sheet-header"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />
@@ -108,11 +114,13 @@ const SheetFooter = ({
   style,
   ...props
 }: React.ComponentProps<"div">) => {
-  const p = x(styles.footer);
+  const p = stylex.props(styles.footer);
   return (
     <div
       data-slot="sheet-footer"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />
@@ -126,11 +134,13 @@ const SheetTitle = ({
 }: Omit<React.ComponentProps<typeof DialogPrimitive.Title>, "className"> & {
   className?: string;
 }) => {
-  const p = x(styles.title);
+  const p = stylex.props(styles.title);
   return (
     <DialogPrimitive.Title
       data-slot="sheet-title"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />
@@ -145,11 +155,13 @@ const SheetDescription = ({
   React.ComponentProps<typeof DialogPrimitive.Description>,
   "className"
 > & { className?: string }) => {
-  const p = x(styles.description);
+  const p = stylex.props(styles.description);
   return (
     <DialogPrimitive.Description
       data-slot="sheet-description"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />

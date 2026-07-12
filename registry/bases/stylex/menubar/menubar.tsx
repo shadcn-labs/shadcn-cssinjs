@@ -2,9 +2,8 @@
 
 import { Menu as MenuPrimitive } from "@base-ui/react/menu";
 import { Menubar as MenubarPrimitive } from "@base-ui/react/menubar";
+import * as stylex from "@stylexjs/stylex";
 import { CheckIcon, ChevronRightIcon, CircleIcon } from "lucide-react";
-
-import { cx, x } from "@/lib/utils";
 
 import { styles } from "./menubar.stylex";
 
@@ -17,10 +16,12 @@ const Menubar = ({
 }: Omit<React.ComponentProps<typeof MenubarPrimitive>, "className"> & {
   className?: string;
 }) => {
-  const p = x(styles.bar);
+  const p = stylex.props(styles.bar);
   return (
     <MenubarPrimitive
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="menubar"
       style={{ ...p.style, ...style }}
       {...props}
@@ -39,10 +40,12 @@ const MenubarTrigger = ({
 }: Omit<React.ComponentProps<typeof MenuPrimitive.Trigger>, "className"> & {
   className?: string;
 }) => {
-  const p = x(styles.trigger);
+  const p = stylex.props(styles.trigger);
   return (
     <MenuPrimitive.Trigger
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="menubar-trigger"
       style={{ ...p.style, ...style }}
       {...props}
@@ -70,13 +73,15 @@ const MenubarContent = ({
     >
       <MenuPrimitive.Popup
         className={(state) =>
-          cx(
-            x(
+          [
+            stylex.props(
               styles.popup,
               hidden(state.transitionStatus) && styles.popupHidden
             ).className,
-            className
-          )
+            className,
+          ]
+            .filter(Boolean)
+            .join(" ") || undefined
         }
         data-slot="menubar-content"
         style={style}
@@ -97,10 +102,12 @@ const MenubarItem = ({
   className?: string;
   inset?: boolean;
 }) => {
-  const p = x(styles.item, inset && styles.itemInset);
+  const p = stylex.props(styles.item, inset && styles.itemInset);
   return (
     <MenuPrimitive.Item
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-inset={inset ? "" : undefined}
       data-slot="menubar-item"
       style={{ ...p.style, ...style }}
@@ -120,12 +127,14 @@ const MenubarCheckboxItem = ({
 > & {
   className?: string;
 }) => {
-  const p = x(styles.item, styles.itemInset);
-  const indicator = x(styles.indicatorWrap);
-  const icon = x(styles.icon);
+  const p = stylex.props(styles.item, styles.itemInset);
+  const indicator = stylex.props(styles.indicatorWrap);
+  const icon = stylex.props(styles.icon);
   return (
     <MenuPrimitive.CheckboxItem
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="menubar-checkbox-item"
       style={{ position: "relative", ...p.style, ...style }}
       {...props}
@@ -152,11 +161,13 @@ const MenubarRadioItem = ({
 }: Omit<React.ComponentProps<typeof MenuPrimitive.RadioItem>, "className"> & {
   className?: string;
 }) => {
-  const p = x(styles.item, styles.itemInset);
-  const indicator = x(styles.indicatorWrap);
+  const p = stylex.props(styles.item, styles.itemInset);
+  const indicator = stylex.props(styles.indicatorWrap);
   return (
     <MenuPrimitive.RadioItem
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="menubar-radio-item"
       style={{ position: "relative", ...p.style, ...style }}
       {...props}
@@ -190,11 +201,13 @@ const MenubarSubTrigger = ({
   className?: string;
   inset?: boolean;
 }) => {
-  const p = x(styles.item, inset && styles.itemInset);
-  const icon = x(styles.icon);
+  const p = stylex.props(styles.item, inset && styles.itemInset);
+  const icon = stylex.props(styles.icon);
   return (
     <MenuPrimitive.SubmenuTrigger
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="menubar-sub-trigger"
       style={{ ...p.style, ...style }}
       {...props}
@@ -220,13 +233,15 @@ const MenubarSubContent = ({
     <MenuPrimitive.Positioner align="start" side="right" sideOffset={2}>
       <MenuPrimitive.Popup
         className={(state) =>
-          cx(
-            x(
+          [
+            stylex.props(
               styles.popup,
               hidden(state.transitionStatus) && styles.popupHidden
             ).className,
-            className
-          )
+            className,
+          ]
+            .filter(Boolean)
+            .join(" ") || undefined
         }
         data-slot="menubar-sub-content"
         style={style}
@@ -245,10 +260,12 @@ const MenubarSeparator = ({
 }: Omit<React.ComponentProps<typeof MenuPrimitive.Separator>, "className"> & {
   className?: string;
 }) => {
-  const p = x(styles.separator);
+  const p = stylex.props(styles.separator);
   return (
     <MenuPrimitive.Separator
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="menubar-separator"
       style={{ ...p.style, ...style }}
       {...props}
@@ -261,10 +278,12 @@ const MenubarShortcut = ({
   style,
   ...props
 }: React.ComponentProps<"span">) => {
-  const p = x(styles.shortcut);
+  const p = stylex.props(styles.shortcut);
   return (
     <span
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="menubar-shortcut"
       style={{ ...p.style, ...style }}
       {...props}

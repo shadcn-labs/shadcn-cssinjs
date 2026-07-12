@@ -1,9 +1,8 @@
 "use client";
 
 import { Checkbox as CheckboxPrimitive } from "@base-ui/react/checkbox";
+import * as stylex from "@stylexjs/stylex";
 import { CheckIcon } from "lucide-react";
-
-import { cx, x } from "@/lib/utils";
 
 import { styles } from "./checkbox.stylex";
 
@@ -16,17 +15,20 @@ const Checkbox = ({
 }) => (
   <CheckboxPrimitive.Root
     className={(state) =>
-      cx(
-        x(styles.root, state.checked && styles.rootChecked).className,
-        className
-      )
+      [
+        stylex.props(styles.root, state.checked && styles.rootChecked)
+          .className,
+        className,
+      ]
+        .filter(Boolean)
+        .join(" ") || undefined
     }
     data-slot="checkbox"
     style={style}
     {...props}
   >
     <CheckboxPrimitive.Indicator
-      className={x(styles.indicator).className}
+      className={stylex.props(styles.indicator).className}
       data-slot="checkbox-indicator"
     >
       <CheckIcon size={14} />

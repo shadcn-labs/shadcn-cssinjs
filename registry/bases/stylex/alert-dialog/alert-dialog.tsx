@@ -1,8 +1,7 @@
 "use client";
 
 import { AlertDialog as AlertDialogPrimitive } from "@base-ui/react/alert-dialog";
-
-import { cx, x } from "@/lib/utils";
+import * as stylex from "@stylexjs/stylex";
 
 import { styles } from "./alert-dialog.stylex";
 
@@ -31,7 +30,7 @@ const AlertDialogContent = ({
   <AlertDialogPrimitive.Portal>
     <AlertDialogPrimitive.Backdrop
       className={(state) =>
-        x(
+        stylex.props(
           styles.backdrop,
           hidden(state.transitionStatus) && styles.backdropHidden
         ).className
@@ -40,14 +39,16 @@ const AlertDialogContent = ({
     />
     <AlertDialogPrimitive.Popup
       className={(state) =>
-        cx(
-          x(
+        [
+          stylex.props(
             styles.popup,
             size === "sm" && styles.popupSm,
             hidden(state.transitionStatus) && styles.popupHidden
           ).className,
-          className
-        )
+          className,
+        ]
+          .filter(Boolean)
+          .join(" ") || undefined
       }
       data-size={size}
       data-slot="alert-dialog-content"
@@ -64,10 +65,12 @@ const AlertDialogMedia = ({
   style,
   ...props
 }: React.ComponentProps<"div">) => {
-  const p = x(styles.media);
+  const p = stylex.props(styles.media);
   return (
     <div
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="alert-dialog-media"
       style={{ ...p.style, ...style }}
       {...props}
@@ -80,10 +83,12 @@ const AlertDialogHeader = ({
   style,
   ...props
 }: React.ComponentProps<"div">) => {
-  const p = x(styles.header);
+  const p = stylex.props(styles.header);
   return (
     <div
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="alert-dialog-header"
       style={{ ...p.style, ...style }}
       {...props}
@@ -96,10 +101,12 @@ const AlertDialogFooter = ({
   style,
   ...props
 }: React.ComponentProps<"div">) => {
-  const p = x(styles.footer);
+  const p = stylex.props(styles.footer);
   return (
     <div
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="alert-dialog-footer"
       style={{ ...p.style, ...style }}
       {...props}
@@ -115,10 +122,12 @@ const AlertDialogTitle = ({
   React.ComponentProps<typeof AlertDialogPrimitive.Title>,
   "className"
 > & { className?: string }) => {
-  const p = x(styles.title);
+  const p = stylex.props(styles.title);
   return (
     <AlertDialogPrimitive.Title
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="alert-dialog-title"
       style={{ ...p.style, ...style }}
       {...props}
@@ -134,10 +143,12 @@ const AlertDialogDescription = ({
   React.ComponentProps<typeof AlertDialogPrimitive.Description>,
   "className"
 > & { className?: string }) => {
-  const p = x(styles.description);
+  const p = stylex.props(styles.description);
   return (
     <AlertDialogPrimitive.Description
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="alert-dialog-description"
       style={{ ...p.style, ...style }}
       {...props}

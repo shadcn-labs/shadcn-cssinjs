@@ -1,9 +1,8 @@
 "use client";
 
+import * as stylex from "@stylexjs/stylex";
 import { createContext, useContext, useId } from "react";
 import * as RechartsPrimitive from "recharts";
-
-import { cx, x } from "@/lib/utils";
 
 import { styles } from "./chart.stylex";
 
@@ -50,11 +49,14 @@ const ChartContainer = ({
       .filter(([, item]) => item.color)
       .map(([key, item]) => [`--color-${key}`, item.color])
   );
-  const container = x(styles.container);
+  const container = stylex.props(styles.container);
   return (
     <ChartContext.Provider value={{ config }}>
       <div
-        className={cx(container.className, className)}
+        className={
+          [container.className, className].filter(Boolean).join(" ") ||
+          undefined
+        }
         data-chart={chartId}
         data-slot="chart"
         style={{ ...container.style, ...cssVars, ...style }}
@@ -90,25 +92,29 @@ const ChartTooltipContent = ({
   if (!(active && payload?.length)) {
     return null;
   }
-  const tooltip = x(styles.tooltip);
+  const tooltip = stylex.props(styles.tooltip);
   return (
     <div className={tooltip.className} style={tooltip.style}>
       {label !== undefined && (
-        <div className={x(styles.tooltipLabel).className}>{label}</div>
+        <div className={stylex.props(styles.tooltipLabel).className}>
+          {label}
+        </div>
       )}
       {payload.map((item) => {
         const key = String(item.dataKey ?? item.name);
         const itemConfig = config[key];
         return (
-          <div className={x(styles.item).className} key={key}>
-            <span className={x(styles.itemLabel).className}>
+          <div className={stylex.props(styles.item).className} key={key}>
+            <span className={stylex.props(styles.itemLabel).className}>
               <span
-                className={x(styles.indicator).className}
+                className={stylex.props(styles.indicator).className}
                 style={{ backgroundColor: item.color }}
               />
               {itemConfig?.label ?? item.name}
             </span>
-            <span className={x(styles.itemValue).className}>{item.value}</span>
+            <span className={stylex.props(styles.itemValue).className}>
+              {item.value}
+            </span>
           </div>
         );
       })}
@@ -130,13 +136,13 @@ const ChartLegendContent = ({ payload }: { payload?: LegendPayloadItem[] }) => {
     return null;
   }
   return (
-    <div className={x(styles.legend).className}>
+    <div className={stylex.props(styles.legend).className}>
       {payload.map((item) => {
         const key = String(item.dataKey ?? item.value);
         return (
-          <div className={x(styles.legendItem).className} key={key}>
+          <div className={stylex.props(styles.legendItem).className} key={key}>
             <span
-              className={x(styles.indicator).className}
+              className={stylex.props(styles.indicator).className}
               style={{ backgroundColor: item.color }}
             />
             {config[key]?.label ?? item.value}

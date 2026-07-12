@@ -13,7 +13,7 @@
   "files": [
     {
       "path": "registry/bases/stylex/separator/separator.tsx",
-      "content": "\"use client\";\n\nimport { Separator as SeparatorPrimitive } from \"@base-ui/react\";\n\nimport { cx, x } from \"@/lib/utils\";\n\nimport { styles } from \"./separator.stylex\";\n\nconst Separator = ({\n  className,\n  style,\n  orientation = \"horizontal\",\n  ...props\n}: Omit<React.ComponentProps<typeof SeparatorPrimitive>, \"className\"> & {\n  className?: string;\n}) => {\n  const p = x(\n    styles.root,\n    orientation === \"vertical\" ? styles.vertical : styles.horizontal\n  );\n  return (\n    <SeparatorPrimitive\n      data-slot=\"separator\"\n      orientation={orientation}\n      className={cx(p.className, className)}\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nexport { Separator };\n",
+      "content": "\"use client\";\n\nimport { Separator as SeparatorPrimitive } from \"@base-ui/react\";\n\nimport * as stylex from \"@stylexjs/stylex\";\n\nimport { styles } from \"./separator.stylex\";\n\nconst Separator = ({\n  className,\n  style,\n  orientation = \"horizontal\",\n  ...props\n}: Omit<React.ComponentProps<typeof SeparatorPrimitive>, \"className\"> & {\n  className?: string;\n}) => {\n  const p = stylex.props(\n    styles.root,\n    orientation === \"vertical\" ? styles.vertical : styles.horizontal\n  );\n  return (\n    <SeparatorPrimitive\n      data-slot=\"separator\"\n      orientation={orientation}\n      className={[p.className, className].filter(Boolean).join(\" \") || undefined}\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nexport { Separator };\n",
       "type": "registry:ui",
       "target": "components/ui/separator/separator.tsx"
     },

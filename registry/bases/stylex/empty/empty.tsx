@@ -1,12 +1,14 @@
-import { cx, x } from "@/lib/utils";
+import * as stylex from "@stylexjs/stylex";
 
 import { styles } from "./empty.stylex";
 
 const Empty = ({ className, style, ...props }: React.ComponentProps<"div">) => {
-  const p = x(styles.empty);
+  const p = stylex.props(styles.empty);
   return (
     <div
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="empty"
       style={{ ...p.style, ...style }}
       {...props}
@@ -19,10 +21,12 @@ const EmptyHeader = ({
   style,
   ...props
 }: React.ComponentProps<"div">) => {
-  const p = x(styles.header);
+  const p = stylex.props(styles.header);
   return (
     <div
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="empty-header"
       style={{ ...p.style, ...style }}
       {...props}
@@ -36,13 +40,15 @@ const EmptyMedia = ({
   variant = "default",
   ...props
 }: React.ComponentProps<"div"> & { variant?: "default" | "icon" }) => {
-  const p = x(
+  const p = stylex.props(
     styles.mediaBase,
     variant === "icon" ? styles.mediaIcon : styles.mediaDefault
   );
   return (
     <div
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="empty-icon"
       data-variant={variant}
       style={{ ...p.style, ...style }}
@@ -56,10 +62,12 @@ const EmptyTitle = ({
   style,
   ...props
 }: React.ComponentProps<"div">) => {
-  const p = x(styles.title);
+  const p = stylex.props(styles.title);
   return (
     <div
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="empty-title"
       style={{ ...p.style, ...style }}
       {...props}
@@ -72,10 +80,12 @@ const EmptyDescription = ({
   style,
   ...props
 }: React.ComponentProps<"p">) => {
-  const p = x(styles.description);
+  const p = stylex.props(styles.description);
   return (
     <p
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="empty-description"
       style={{ ...p.style, ...style }}
       {...props}
@@ -88,10 +98,12 @@ const EmptyContent = ({
   style,
   ...props
 }: React.ComponentProps<"div">) => {
-  const p = x(styles.content);
+  const p = stylex.props(styles.content);
   return (
     <div
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="empty-content"
       style={{ ...p.style, ...style }}
       {...props}

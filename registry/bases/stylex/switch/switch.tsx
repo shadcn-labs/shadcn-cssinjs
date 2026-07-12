@@ -1,8 +1,7 @@
 "use client";
 
 import { Switch as SwitchPrimitive } from "@base-ui/react/switch";
-
-import { cx, x } from "@/lib/utils";
+import * as stylex from "@stylexjs/stylex";
 
 import { styles } from "./switch.stylex";
 
@@ -19,14 +18,16 @@ const Switch = ({
   return (
     <SwitchPrimitive.Root
       className={(state) =>
-        cx(
-          x(
+        [
+          stylex.props(
             styles.root,
             sm && styles.rootSm,
             state.checked && styles.rootChecked
           ).className,
-          className
-        )
+          className,
+        ]
+          .filter(Boolean)
+          .join(" ") || undefined
       }
       data-size={size}
       data-slot="switch"
@@ -36,7 +37,7 @@ const Switch = ({
       <SwitchPrimitive.Thumb
         className={(state) => {
           const checkedThumb = sm ? styles.thumbSmChecked : styles.thumbChecked;
-          return x(
+          return stylex.props(
             styles.thumb,
             sm && styles.thumbSm,
             state.checked && checkedThumb

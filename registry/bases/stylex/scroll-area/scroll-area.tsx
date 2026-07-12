@@ -1,8 +1,7 @@
 "use client";
 
 import { ScrollArea as ScrollAreaPrimitive } from "@base-ui/react/scroll-area";
-
-import { cx, x } from "@/lib/utils";
+import * as stylex from "@stylexjs/stylex";
 
 import { styles } from "./scroll-area.stylex";
 
@@ -14,27 +13,29 @@ const ScrollArea = ({
 }: Omit<React.ComponentProps<typeof ScrollAreaPrimitive.Root>, "className"> & {
   className?: string;
 }) => {
-  const root = x(styles.root);
+  const root = stylex.props(styles.root);
   return (
     <ScrollAreaPrimitive.Root
-      className={cx(root.className, className)}
+      className={
+        [root.className, className].filter(Boolean).join(" ") || undefined
+      }
       data-slot="scroll-area"
       style={{ ...root.style, ...style }}
       {...props}
     >
       <ScrollAreaPrimitive.Viewport
-        className={x(styles.viewport).className}
+        className={stylex.props(styles.viewport).className}
         data-slot="scroll-area-viewport"
       >
         {children}
       </ScrollAreaPrimitive.Viewport>
       <ScrollAreaPrimitive.Scrollbar
-        className={x(styles.scrollbar).className}
+        className={stylex.props(styles.scrollbar).className}
         data-slot="scroll-area-scrollbar"
         orientation="vertical"
       >
         <ScrollAreaPrimitive.Thumb
-          className={x(styles.thumb).className}
+          className={stylex.props(styles.thumb).className}
           data-slot="scroll-area-thumb"
         />
       </ScrollAreaPrimitive.Scrollbar>

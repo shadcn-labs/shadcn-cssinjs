@@ -1,9 +1,8 @@
 "use client";
 
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog";
+import * as stylex from "@stylexjs/stylex";
 import { XIcon } from "lucide-react";
-
-import { cx, x } from "@/lib/utils";
 
 import { styles } from "./dialog.stylex";
 
@@ -31,7 +30,7 @@ const DialogOverlay = (
   <DialogPrimitive.Backdrop
     data-slot="dialog-overlay"
     className={(state) =>
-      x(
+      stylex.props(
         styles.backdrop,
         hidden(state.transitionStatus) && styles.backdropHidden
       ).className
@@ -50,21 +49,23 @@ const DialogContent = ({
   className?: string;
   showCloseButton?: boolean;
 }) => {
-  const close = x(styles.closeButton);
-  const sr = x(styles.srOnly);
+  const close = stylex.props(styles.closeButton);
+  const sr = stylex.props(styles.srOnly);
   return (
     <DialogPrimitive.Portal>
       <DialogOverlay />
       <DialogPrimitive.Popup
         data-slot="dialog-content"
         className={(state) =>
-          cx(
-            x(
+          [
+            stylex.props(
               styles.popup,
               hidden(state.transitionStatus) && styles.popupHidden
             ).className,
-            className
-          )
+            className,
+          ]
+            .filter(Boolean)
+            .join(" ") || undefined
         }
         style={style}
         {...props}
@@ -92,11 +93,13 @@ const DialogHeader = ({
   style,
   ...props
 }: React.ComponentProps<"div">) => {
-  const p = x(styles.header);
+  const p = stylex.props(styles.header);
   return (
     <div
       data-slot="dialog-header"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />
@@ -108,11 +111,13 @@ const DialogFooter = ({
   style,
   ...props
 }: React.ComponentProps<"div">) => {
-  const p = x(styles.footer);
+  const p = stylex.props(styles.footer);
   return (
     <div
       data-slot="dialog-footer"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />
@@ -126,11 +131,13 @@ const DialogTitle = ({
 }: Omit<React.ComponentProps<typeof DialogPrimitive.Title>, "className"> & {
   className?: string;
 }) => {
-  const p = x(styles.title);
+  const p = stylex.props(styles.title);
   return (
     <DialogPrimitive.Title
       data-slot="dialog-title"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />
@@ -145,11 +152,13 @@ const DialogDescription = ({
   React.ComponentProps<typeof DialogPrimitive.Description>,
   "className"
 > & { className?: string }) => {
-  const p = x(styles.description);
+  const p = stylex.props(styles.description);
   return (
     <DialogPrimitive.Description
       data-slot="dialog-description"
-      className={cx(p.className, className)}
+      className={
+        [p.className, className].filter(Boolean).join(" ") || undefined
+      }
       style={{ ...p.style, ...style }}
       {...props}
     />
