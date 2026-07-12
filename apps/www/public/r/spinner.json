@@ -13,7 +13,7 @@
   "files": [
     {
       "path": "registry/bases/stylex/spinner/spinner.tsx",
-      "content": "import { Loader2Icon } from \"lucide-react\";\n\nimport * as stylex from \"@stylexjs/stylex\";\n\nimport { styles } from \"./spinner.stylex\";\n\nconst Spinner = ({\n  className,\n  style,\n  ...props\n}: React.ComponentProps<typeof Loader2Icon> & { className?: string }) => {\n  const p = stylex.props(styles.root);\n  return (\n    <Loader2Icon\n      aria-label=\"Loading\"\n      className={[p.className, className].filter(Boolean).join(\" \") || undefined}\n      data-slot=\"spinner\"\n      role=\"status\"\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nexport { Spinner };\n",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\nimport { Loader2Icon } from \"lucide-react\";\n\nimport { styles } from \"./spinner.stylex\";\n\nconst Spinner = ({\n  className,\n  style,\n  ...props\n}: React.ComponentProps<typeof Loader2Icon> & { className?: string }) => {\n  const p = stylex.props(styles.root);\n  return (\n    <Loader2Icon\n      aria-label=\"Loading\"\n      className={\n        [p.className, className].filter(Boolean).join(\" \") || undefined\n      }\n      data-slot=\"spinner\"\n      role=\"status\"\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nexport { Spinner };\n",
       "type": "registry:ui",
       "target": "components/ui/spinner/spinner.tsx"
     },

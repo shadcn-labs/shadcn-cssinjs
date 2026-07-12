@@ -1,10 +1,10 @@
 ---
 title: Registry
-description: How this registry is structured and how to consume it with the shadcn CLI.
+description: How this registry is structured and how to consume it with the shadcn-cssinjs CLI.
 ---
 
 This project is a [shadcn registry](https://ui.shadcn.com/docs/registry) — a
-collection of components distributed as source code over HTTP. The `shadcn` CLI reads
+collection of components distributed as source code over HTTP. The `shadcn-cssinjs` CLI reads
 a JSON descriptor for each item and copies the files straight into your project.
 
 ## Installing an item
@@ -12,7 +12,7 @@ a JSON descriptor for each item and copies the files straight into your project.
 Point the CLI at any item's JSON URL:
 
 ```bash
-npx shadcn@latest add https://shadcn-cssinjs.com/r/button.json
+pnpm dlx shadcn-cssinjs@latest add button
 ```
 
 The CLI resolves dependencies, installs npm packages, and writes the files to

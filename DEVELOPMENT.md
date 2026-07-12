@@ -19,7 +19,7 @@ pnpm dev
 
 ## Building the registry
 
-After editing components, rebuild the registry into `public/r`:
+After editing components, rebuild the registry into `apps/www/public/r`:
 
 ```bash
 pnpm registry:build
@@ -28,17 +28,15 @@ pnpm registry:build
 ## Project Structure
 
 ```
-├── registry/
-│   └── bases/
-│       └── stylex/
-│           ├── tokens.stylex.ts      # shared design tokens (defineVars)
-│           └── <name>/               # one folder per component
-│               ├── <name>.tsx        # Base UI + StyleX component
-│               └── <name>.stylex.ts  # its StyleX rules
-├── registry.json                     # registry manifest
-├── content/docs/                     # documentation (MDX)
-├── app/                              # Next.js docs app
-└── public/r/                         # built registry files (auto-generated)
+├── apps/
+│   └── www/
+│       ├── registry/                 # component sources by CSS-in-JS base
+│       ├── registry.json             # registry manifest
+│       ├── content/docs/             # documentation (MDX)
+│       ├── app/                      # Next.js docs app
+│       └── public/r/                 # built registry files (auto-generated)
+└── packages/
+    └── shadcn/                       # shadcn-compatible CSS-in-JS CLI
 ```
 
 ## Scripts
@@ -47,7 +45,8 @@ pnpm registry:build
 | --------------------- | ---------------------------------------------- |
 | `pnpm dev`            | Start the docs/dev server                      |
 | `pnpm build`          | Build the registry and the site for production |
-| `pnpm registry:build` | Rebuild the component registry into `public/r` |
+| `pnpm registry:build` | Rebuild the registry into `apps/www/public/r`  |
+| `pnpm cli:build`      | Build the CLI package                         |
 | `pnpm typecheck`      | Run TypeScript with no emit                    |
 
 ## Built With

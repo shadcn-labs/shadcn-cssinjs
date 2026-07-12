@@ -17,7 +17,10 @@
     "registry:build": "pnpm --filter=www registry:build",
     "typecheck": "turbo run typecheck",
     "www:build": "pnpm --filter=www build",
-    "www:dev": "pnpm --filter=www dev"
+    "www:dev": "pnpm --filter=www dev",
+    "cli:build": "pnpm --filter=shadcn-cssinjs build",
+    "cli:dev": "pnpm --filter=shadcn-cssinjs dev",
+    "cli": "pnpm --filter=shadcn-cssinjs start:dev"
   },
   "packageManager": "pnpm@10.28.2",
   "devDependencies": {

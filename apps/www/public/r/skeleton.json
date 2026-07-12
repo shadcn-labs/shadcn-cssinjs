@@ -12,7 +12,7 @@
   "files": [
     {
       "path": "registry/bases/stylex/skeleton/skeleton.tsx",
-      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nimport { styles } from \"./skeleton.stylex\";\n\nconst Skeleton = ({\n  className,\n  style,\n  ...props\n}: React.ComponentProps<\"div\">) => {\n  const p = stylex.props(styles.root);\n  return (\n    <div\n      data-slot=\"skeleton\"\n      className={[p.className, className].filter(Boolean).join(\" \") || undefined}\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nexport { Skeleton };\n",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nimport { styles } from \"./skeleton.stylex\";\n\nconst Skeleton = ({\n  className,\n  style,\n  ...props\n}: React.ComponentProps<\"div\">) => {\n  const p = stylex.props(styles.root);\n  return (\n    <div\n      data-slot=\"skeleton\"\n      className={\n        [p.className, className].filter(Boolean).join(\" \") || undefined\n      }\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nexport { Skeleton };\n",
       "type": "registry:ui",
       "target": "components/ui/skeleton/skeleton.tsx"
     },

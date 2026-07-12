@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="public/favicon.svg" alt="shadcn-cssinjs logo" height="96" />
+  <img src="apps/www/public/favicon.svg" alt="shadcn-cssinjs logo" height="96" />
 </p>
 
 <h1 align="center">shadcn-cssinjs</h1>
@@ -14,7 +14,18 @@ Accessible and customizable components that you can copy and paste into your app
 
 Built on top of [@base-ui/react](https://base-ui.com) (headless primitives) and styled with [@stylexjs/stylex](https://stylexjs.com).
 
-![hero](public/opengraph-image.png)
+![hero](apps/www/public/opengraph-image.png)
+
+## CLI
+
+The monorepo includes a shadcn-compatible CLI package with `init`, `add`,
+`search`, `view`, `docs`, `info`, registry build, and MCP commands. The StyleX
+adapter configures existing or new Next.js and Vite React projects automatically.
+
+```bash
+pnpm dlx shadcn-cssinjs@latest init
+pnpm dlx shadcn-cssinjs@latest add button
+```
 
 ## Documentation
 

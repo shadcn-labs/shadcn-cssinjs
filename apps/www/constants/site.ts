@@ -32,7 +32,7 @@ export const SITE = {
     "component registry",
     "react components",
     "next.js",
-    "npx shadcn add",
+    "shadcn-cssinjs add",
   ] as const,
   NAME: "shadcn-cssinjs",
   OG_IMAGE: `${baseUrl}/og`,

@@ -1,4 +1,8 @@
-import { transformIcons, transformMenu, transformRender } from "shadcn/utils";
+import {
+  transformIcons,
+  transformMenu,
+  transformRender,
+} from "shadcn-cssinjs/utils";
 import { Project, ScriptKind } from "ts-morph";
 import type { SourceFile } from "ts-morph";
 

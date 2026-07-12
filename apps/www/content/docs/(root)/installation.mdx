@@ -3,9 +3,9 @@ title: Installation
 description: Set up StyleX and Base UI, then install components from the shadcn-cssinjs registry.
 ---
 
-These components are styled with StyleX and built on Base UI. Before installing any
-component, your project needs StyleX's build pipeline configured. Do this once, then add as
-many components as you like with the `shadcn` CLI.
+These components are styled with StyleX and built on Base UI. The
+`shadcn-cssinjs` CLI configures the StyleX build pipeline and then installs the
+same source-owned component files you would expect from shadcn/ui.
 
 <Callout>
   Already using shadcn/ui? You can drop these components alongside your existing
@@ -13,93 +13,44 @@ many components as you like with the `shadcn` CLI.
   theming.
 </Callout>
 
-## Set up StyleX
+## Initialize your project
 
 <Steps>
 
-<Step>Install the dependencies</Step>
+<Step>Run the CLI</Step>
 
 ```bash
-pnpm add @stylexjs/stylex @base-ui/react
-pnpm add -D @stylexjs/babel-plugin @stylexjs/postcss-plugin @babel/preset-typescript
+pnpm dlx shadcn-cssinjs@latest init
 ```
 
-<Step>Configure Babel</Step>
+The CLI detects Next.js or Vite, installs the current official StyleX packages,
+configures the appropriate bundler plugin, creates the import alias when needed,
+adds the theme variables, and writes `components.json`.
 
-StyleX transforms your component source with a Babel plugin. Create a `.babelrc` at the
-root of your project:
+For a new application, pass a directory name and choose a template:
 
-```json title=".babelrc"
-{
-  "presets": ["next/babel", "@babel/preset-typescript"],
-  "plugins": [
-    [
-      "@stylexjs/babel-plugin",
-      {
-        "runtimeInjection": false,
-        "styleResolution": "property-specificity",
-        "unstable_moduleResolution": { "type": "commonJS", "rootDir": "." }
-      }
-    ]
-  ]
-}
+```bash
+pnpm dlx shadcn-cssinjs@latest init --name my-app --template next
 ```
 
-<Callout type="warn">
-  Adding a `.babelrc` opts Next.js out of Turbopack/SWC for compilation. Run
-  `next dev` and `next build` without the `--turbopack` flag so the Babel
-  pipeline (and therefore StyleX) runs.
-</Callout>
+Use `--template vite` for a Vite React app. Existing applications are detected
+automatically, so the template flag is not required there.
 
-<Step>Configure PostCSS</Step>
+<Step>Add a component</Step>
 
-The PostCSS plugin extracts the compiled CSS. It must run **before** Tailwind, and its
-options must match `.babelrc` so the class-name hashes line up.
-
-```js title="postcss.config.mjs"
-const config = {
-  plugins: {
-    "@stylexjs/postcss-plugin": {
-      include: ["app/**/*.{js,jsx,ts,tsx}", "components/**/*.{js,jsx,ts,tsx}"],
-      useCSSLayers: true,
-      styleResolution: "property-specificity",
-      runtimeInjection: false,
-      unstable_moduleResolution: { type: "commonJS", rootDir: process.cwd() },
-    },
-    "@tailwindcss/postcss": {},
-  },
-};
-export default config;
+```bash
+pnpm dlx shadcn-cssinjs@latest add button
 ```
 
-<Step>Add the StyleX directive</Step>
-
-Add `@stylex;` to your global stylesheet. The PostCSS plugin replaces it with the compiled
-component CSS.
-
-```css title="app/globals.css"
-@import "tailwindcss";
-
-@stylex;
-```
+The shared StyleX tokens are installed automatically the first time you
+initialize or add a component.
 
 </Steps>
-
-## Add the design tokens
-
-Every component references a shared set of design tokens. Install them once:
-
-```bash
-npx shadcn@latest add https://shadcn-cssinjs.com/r/stylex-tokens.json
-```
-
-This drops `components/ui/tokens.stylex.ts`, which maps your CSS variables to typed StyleX
-tokens. You can edit it to point at different variables or add your own.
 
 ## Install a component
 
 ```bash
-npx shadcn@latest add https://shadcn-cssinjs.com/r/button.json
+pnpm dlx shadcn-cssinjs@latest add button
 ```
 
 The component is copied into `components/ui/<name>/`. Import and use it:
