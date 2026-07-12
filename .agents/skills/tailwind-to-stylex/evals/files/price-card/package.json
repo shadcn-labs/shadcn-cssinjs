@@ -1,0 +1,17 @@
+{
+  "name": "price-card-fixture",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "dependencies": {
+    "@stylexjs/stylex": "^0.11.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@stylexjs/babel-plugin": "^0.11.1",
+    "vite": "^5.4.0",
+    "vite-plugin-stylex": "^0.14.0",
+    "typescript": "^5.5.0"
+  }
+}

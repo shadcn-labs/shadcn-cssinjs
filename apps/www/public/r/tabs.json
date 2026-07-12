@@ -1,0 +1,28 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tabs",
+  "title": "Tabs",
+  "description": "Tabs component styled with StyleX on Base UI primitives.",
+  "dependencies": [
+    "@base-ui/react",
+    "@stylexjs/stylex"
+  ],
+  "registryDependencies": [
+    "stylex-tokens"
+  ],
+  "files": [
+    {
+      "path": "registry/bases/stylex/tabs/tabs.tsx",
+      "content": "\"use client\";\n\nimport { Tabs as TabsPrimitive } from \"@base-ui/react/tabs\";\nimport { createContext, useContext } from \"react\";\n\nimport * as stylex from \"@stylexjs/stylex\";\n\nimport { styles } from \"./tabs.stylex\";\n\nconst TabsListContext = createContext<\"default\" | \"line\">(\"default\");\n\nconst Tabs = ({\n  className,\n  style,\n  ...props\n}: Omit<React.ComponentProps<typeof TabsPrimitive.Root>, \"className\"> & {\n  className?: string;\n}) => {\n  const p = stylex.props(styles.root);\n  return (\n    <TabsPrimitive.Root\n      data-slot=\"tabs\"\n      className={[p.className, className].filter(Boolean).join(\" \") || undefined}\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nconst TabsList = ({\n  className,\n  style,\n  variant = \"default\",\n  ...props\n}: Omit<React.ComponentProps<typeof TabsPrimitive.List>, \"className\"> & {\n  className?: string;\n  variant?: \"default\" | \"line\";\n}) => {\n  const p = stylex.props(variant === \"line\" ? styles.listLine : styles.list);\n  return (\n    <TabsListContext.Provider value={variant}>\n      <TabsPrimitive.List\n        className={[p.className, className].filter(Boolean).join(\" \") || undefined}\n        data-slot=\"tabs-list\"\n        data-variant={variant}\n        style={{ ...p.style, ...style }}\n        {...props}\n      />\n    </TabsListContext.Provider>\n  );\n};\n\nconst TabsTrigger = ({\n  className,\n  style,\n  ...props\n}: Omit<React.ComponentProps<typeof TabsPrimitive.Tab>, \"className\"> & {\n  className?: string;\n}) => {\n  const variant = useContext(TabsListContext);\n  const line = variant === \"line\";\n  const activeStyle = line ? styles.triggerLineActive : styles.triggerActive;\n  return (\n    <TabsPrimitive.Tab\n      className={(state) =>\n        [stylex.props(styles.trigger, line && styles.triggerLine, state.active && activeStyle).className, className].filter(Boolean).join(\" \") || undefined\n      }\n      data-slot=\"tabs-trigger\"\n      style={style}\n      {...props}\n    />\n  );\n};\n\nconst TabsContent = ({\n  className,\n  style,\n  ...props\n}: Omit<React.ComponentProps<typeof TabsPrimitive.Panel>, \"className\"> & {\n  className?: string;\n}) => {\n  const p = stylex.props(styles.panel);\n  return (\n    <TabsPrimitive.Panel\n      data-slot=\"tabs-content\"\n      className={[p.className, className].filter(Boolean).join(\" \") || undefined}\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nexport { Tabs, TabsContent, TabsList, TabsTrigger };\n",
+      "type": "registry:ui",
+      "target": "components/ui/tabs/tabs.tsx"
+    },
+    {
+      "path": "registry/bases/stylex/tabs/tabs.stylex.ts",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nimport { colors, radius } from \"../tokens.stylex\";\n\nexport const styles = stylex.create({\n  list: {\n    alignItems: \"center\",\n    backgroundColor: colors.muted,\n    borderRadius: \"0.5rem\",\n    color: colors.mutedForeground,\n    display: \"inline-flex\",\n    height: \"2.25rem\",\n    justifyContent: \"center\",\n    padding: \"0.25rem\",\n    width: \"fit-content\",\n  },\n  listLine: {\n    alignItems: \"center\",\n    borderBottom: `1px solid ${colors.border}`,\n    color: colors.mutedForeground,\n    display: \"inline-flex\",\n    gap: \"0.25rem\",\n    justifyContent: \"center\",\n    padding: 0,\n    width: \"fit-content\",\n  },\n  panel: {\n    flex: 1,\n    outline: \"none\",\n  },\n  root: {\n    display: \"flex\",\n    flexDirection: \"column\",\n    gap: \"0.5rem\",\n  },\n  trigger: {\n    alignItems: \"center\",\n    background: \"transparent\",\n    borderColor: \"transparent\",\n    borderRadius: radius.md,\n    borderStyle: \"solid\",\n    borderWidth: \"1px\",\n    boxShadow: {\n      \":focus-visible\": `0 0 0 3px color-mix(in oklab, ${colors.ring} 50%, transparent)`,\n      default: null,\n    },\n    color: colors.foreground,\n    cursor: \"pointer\",\n    display: \"inline-flex\",\n    flex: 1,\n    fontSize: \"0.875rem\",\n    fontWeight: 500,\n    gap: \"0.375rem\",\n    justifyContent: \"center\",\n    outline: \"none\",\n    paddingBlock: \"0.25rem\",\n    paddingInline: \"0.75rem\",\n    transition: \"color 0.15s ease-in-out, box-shadow 0.15s ease-in-out\",\n    whiteSpace: \"nowrap\",\n  },\n  triggerActive: {\n    backgroundColor: colors.background,\n    boxShadow: \"0 1px 2px 0 rgb(0 0 0 / 0.05)\",\n    color: colors.foreground,\n  },\n  triggerLine: {\n    borderBottom: \"2px solid transparent\",\n    borderRadius: 0,\n    borderWidth: 0,\n    flex: \"0 0 auto\",\n    marginBottom: \"-1px\",\n  },\n  triggerLineActive: {\n    borderBottomColor: colors.foreground,\n    color: colors.foreground,\n  },\n});\n",
+      "type": "registry:ui",
+      "target": "components/ui/tabs/tabs.stylex.ts"
+    }
+  ],
+  "type": "registry:ui"
+}

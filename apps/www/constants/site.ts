@@ -1,0 +1,50 @@
+export const FALLBACK_SITE_ORIGIN = "https://shadcn-cssinjs.com" as const;
+
+const getBaseUrl = () => {
+  if (process.env.NODE_ENV !== "production") {
+    return "http://localhost:3000";
+  }
+
+  if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
+    return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
+  }
+
+  return process.env.SITE_URL ?? FALLBACK_SITE_ORIGIN;
+};
+
+const baseUrl = getBaseUrl();
+
+export const SITE = {
+  AUTHOR: {
+    NAME: "Aniket Pawar",
+    TWITTER: "@alaymanguy",
+  },
+  DESCRIPTION: {
+    LONG: "A shadcn registry of components styled with StyleX (CSS-in-JS) on top of Base UI primitives. Copy, paste, and own the code.",
+    SHORT: "shadcn/ui components, styled with StyleX",
+  },
+  KEYWORDS: [
+    "shadcn",
+    "shadcn registry",
+    "stylex",
+    "css-in-js",
+    "base ui",
+    "component registry",
+    "react components",
+    "next.js",
+    "npx shadcn add",
+  ] as const,
+  NAME: "shadcn-cssinjs",
+  OG_IMAGE: `${baseUrl}/og`,
+  REGISTRY: baseUrl,
+  URL: baseUrl,
+};
+
+export const META_THEME_COLORS = {
+  dark: "#09090b",
+  light: "#ffffff",
+};
+
+export const UTM_PARAMS = {
+  utm_source: new URL(baseUrl).hostname,
+};

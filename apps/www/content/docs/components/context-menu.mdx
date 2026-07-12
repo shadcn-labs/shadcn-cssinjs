@@ -1,0 +1,169 @@
+---
+title: Context Menu
+description: Displays a menu located at the pointer, triggered by a right click.
+links:
+  doc: https://base-ui.com/react/components/context-menu
+  api: https://base-ui.com/react/components/context-menu#api-reference
+---
+
+import ContextMenuDemo from "@/examples/context-menu-demo";
+import ContextMenuSubmenu from "@/examples/context-menu-submenu";
+import ContextMenuCheckboxes from "@/examples/context-menu-checkboxes";
+
+<ComponentPreview name="context-menu-demo">
+  <ContextMenuDemo />
+</ComponentPreview>
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/context-menu.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+pnpm add @base-ui/react @stylexjs/stylex
+```
+
+<Step>
+  Make sure [StyleX is configured](/docs/installation) and the design tokens are
+  installed.
+</Step>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="context-menu" title="context-menu.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuTrigger,
+} from "@/components/ui/context-menu/context-menu";
+```
+
+```tsx
+<ContextMenu>
+  <ContextMenuTrigger>Right click</ContextMenuTrigger>
+  <ContextMenuContent>
+    <ContextMenuItem>Profile</ContextMenuItem>
+    <ContextMenuItem>Billing</ContextMenuItem>
+  </ContextMenuContent>
+</ContextMenu>
+```
+
+## Composition
+
+Use the following composition to build a `ContextMenu`:
+
+```txt
+ContextMenu
+├── ContextMenuTrigger
+└── ContextMenuContent
+    ├── ContextMenuLabel
+    ├── ContextMenuItem
+    │   └── ContextMenuShortcut
+    ├── ContextMenuCheckboxItem
+    ├── ContextMenuRadioGroup
+    │   └── ContextMenuRadioItem
+    ├── ContextMenuSeparator
+    └── ContextMenuSub
+        ├── ContextMenuSubTrigger
+        └── ContextMenuSubContent
+```
+
+## Examples
+
+import ContextMenuBasic from "@/examples/context-menu-basic";
+import ContextMenuShortcuts from "@/examples/context-menu-shortcuts";
+import ContextMenuGroups from "@/examples/context-menu-groups";
+import ContextMenuIcons from "@/examples/context-menu-icons";
+import ContextMenuDestructive from "@/examples/context-menu-destructive";
+
+### Basic
+
+<ComponentPreview name="context-menu-basic">
+  <ContextMenuBasic />
+</ComponentPreview>
+
+### Submenu
+
+Nest a `ContextMenuSub` to create a submenu.
+
+<ComponentPreview name="context-menu-submenu">
+  <ContextMenuSubmenu />
+</ComponentPreview>
+
+### Shortcuts
+
+<ComponentPreview name="context-menu-shortcuts">
+  <ContextMenuShortcuts />
+</ComponentPreview>
+
+### Groups
+
+<ComponentPreview name="context-menu-groups">
+  <ContextMenuGroups />
+</ComponentPreview>
+
+### Icons
+
+<ComponentPreview name="context-menu-icons">
+  <ContextMenuIcons />
+</ComponentPreview>
+
+### Checkboxes & Radio
+
+Use `ContextMenuCheckboxItem` and `ContextMenuRadioGroup` for selectable items.
+
+<ComponentPreview name="context-menu-checkboxes">
+  <ContextMenuCheckboxes />
+</ComponentPreview>
+
+### Destructive
+
+<ComponentPreview name="context-menu-destructive">
+  <ContextMenuDestructive />
+</ComponentPreview>
+
+import ContextMenuRtl from "@/examples/context-menu-rtl";
+
+## RTL
+
+To enable right-to-left support, see the [RTL guide](/docs/rtl).
+
+<ComponentPreview name="context-menu-rtl" direction="rtl">
+  <ContextMenuRtl />
+</ComponentPreview>
+
+## API Reference
+
+See the [Base UI](https://base-ui.com/react/components/context-menu#api-reference)
+documentation for the full API.

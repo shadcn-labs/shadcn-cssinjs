@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "kbd",
+  "title": "Kbd",
+  "description": "Kbd component styled with StyleX on Base UI primitives.",
+  "dependencies": [
+    "@stylexjs/stylex"
+  ],
+  "registryDependencies": [
+    "stylex-tokens"
+  ],
+  "files": [
+    {
+      "path": "registry/bases/stylex/kbd/kbd.tsx",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nimport { styles } from \"./kbd.stylex\";\n\nconst Kbd = ({ className, style, ...props }: React.ComponentProps<\"kbd\">) => {\n  const p = stylex.props(styles.root);\n  return (\n    <kbd\n      data-slot=\"kbd\"\n      className={[p.className, className].filter(Boolean).join(\" \") || undefined}\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nconst KbdGroup = ({\n  className,\n  style,\n  ...props\n}: React.ComponentProps<\"div\">) => {\n  const p = stylex.props(styles.group);\n  return (\n    <div\n      data-slot=\"kbd-group\"\n      className={[p.className, className].filter(Boolean).join(\" \") || undefined}\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nexport { Kbd, KbdGroup };\n",
+      "type": "registry:ui",
+      "target": "components/ui/kbd/kbd.tsx"
+    },
+    {
+      "path": "registry/bases/stylex/kbd/kbd.stylex.ts",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nimport { colors, radius } from \"../tokens.stylex\";\n\nexport const styles = stylex.create({\n  group: {\n    alignItems: \"center\",\n    display: \"inline-flex\",\n    gap: \"0.25rem\",\n  },\n  root: {\n    alignItems: \"center\",\n    backgroundColor: \"color-mix(in oklab, currentColor 5%, transparent)\",\n    borderRadius: radius.sm,\n    boxShadow:\n      \"inset 0 -1px 2px 0 color-mix(in oklab, currentColor 10%, transparent)\",\n    color: colors.mutedForeground,\n    display: \"inline-flex\",\n    fontFamily: \"var(--font-sans)\",\n    fontSize: \"0.75rem\",\n    fontWeight: 400,\n    gap: \"0.25rem\",\n    height: \"1.25rem\",\n    justifyContent: \"center\",\n    lineHeight: \"1rem\",\n    minWidth: \"1.25rem\",\n    paddingInline: \"0.25rem\",\n    pointerEvents: \"none\",\n    userSelect: \"none\",\n    width: \"fit-content\",\n  },\n});\n",
+      "type": "registry:ui",
+      "target": "components/ui/kbd/kbd.stylex.ts"
+    }
+  ],
+  "type": "registry:ui"
+}

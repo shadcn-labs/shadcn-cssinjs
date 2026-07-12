@@ -1,0 +1,129 @@
+---
+title: Table
+description: A responsive table component.
+---
+
+import TableDemo from "@/examples/table-demo";
+
+<ComponentPreview name="table-demo">
+  <TableDemo />
+</ComponentPreview>
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/table.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+pnpm add @stylexjs/stylex
+```
+
+<Step>
+  Make sure [StyleX is configured](/docs/installation) and the design tokens are
+  installed.
+</Step>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="table" title="table.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table/table";
+```
+
+```tsx
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Name</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell>Aniket</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+```
+
+## Composition
+
+Use the following composition to build a `Table`:
+
+```txt
+Table
+├── TableHeader
+│   └── TableRow
+│       └── TableHead
+├── TableBody
+│   └── TableRow
+│       └── TableCell
+├── TableFooter
+└── TableCaption
+```
+
+## Examples
+
+import TableFooterExample from "@/examples/table-footer";
+import TableActions from "@/examples/table-actions";
+
+### Footer
+
+Use the `TableFooter` component to add a footer to the table.
+
+<ComponentPreview name="table-footer">
+  <TableFooterExample />
+</ComponentPreview>
+
+### Actions
+
+A table showing actions for each row using a `DropdownMenu` component.
+
+<ComponentPreview name="table-actions">
+  <TableActions />
+</ComponentPreview>
+
+import TableRtl from "@/examples/table-rtl";
+
+## RTL
+
+To enable right-to-left support, see the [RTL guide](/docs/rtl).
+
+<ComponentPreview name="table-rtl" direction="rtl">
+  <TableRtl />
+</ComponentPreview>

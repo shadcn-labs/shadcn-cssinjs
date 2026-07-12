@@ -1,0 +1,118 @@
+---
+title: Resizable
+description: Accessible resizable panel groups and layouts with keyboard support.
+---
+
+import ResizableDemo from "@/examples/resizable-demo";
+
+<ComponentPreview name="resizable-demo">
+  <ResizableDemo />
+</ComponentPreview>
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/resizable.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+pnpm add react-resizable-panels @stylexjs/stylex
+```
+
+<Step>
+  Make sure [StyleX is configured](/docs/installation) and the design tokens are
+  installed.
+</Step>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="resizable" title="resizable.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from "@/components/ui/resizable/resizable";
+```
+
+```tsx
+<ResizablePanelGroup orientation="horizontal">
+  <ResizablePanel>One</ResizablePanel>
+  <ResizableHandle />
+  <ResizablePanel>Two</ResizablePanel>
+</ResizablePanelGroup>
+```
+
+## Composition
+
+Use the following composition to build a `Resizable`:
+
+```txt
+ResizablePanelGroup
+├── ResizablePanel
+├── ResizableHandle
+└── ResizablePanel
+```
+
+## Examples
+
+import ResizableVertical from "@/examples/resizable-vertical";
+import ResizableHandleDemo from "@/examples/resizable-handle";
+
+### Vertical
+
+Use `orientation="vertical"` to stack the panels vertically.
+
+<ComponentPreview name="resizable-vertical">
+  <ResizableVertical />
+</ComponentPreview>
+
+### Handle
+
+Use the `withHandle` prop to show a visible drag handle.
+
+<ComponentPreview name="resizable-handle">
+  <ResizableHandleDemo />
+</ComponentPreview>
+
+import ResizableRtl from "@/examples/resizable-rtl";
+
+## RTL
+
+To enable right-to-left support, see the [RTL guide](/docs/rtl).
+
+<ComponentPreview name="resizable-rtl" direction="rtl">
+  <ResizableRtl />
+</ComponentPreview>
+
+## API Reference
+
+See the [react-resizable-panels](https://github.com/bvaughn/react-resizable-panels) documentation for the full API reference.
