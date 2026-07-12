@@ -1,0 +1,28 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "hover-card",
+  "title": "Hover Card",
+  "description": "Hover Card component styled with StyleX on Base UI primitives.",
+  "dependencies": [
+    "@base-ui/react",
+    "@stylexjs/stylex"
+  ],
+  "registryDependencies": [
+    "stylex-tokens"
+  ],
+  "files": [
+    {
+      "path": "registry/bases/stylex/hover-card/hover-card.tsx",
+      "content": "\"use client\";\n\nimport { PreviewCard as PreviewCardPrimitive } from \"@base-ui/react/preview-card\";\n\nimport * as stylex from \"@stylexjs/stylex\";\n\nimport { styles } from \"./hover-card.stylex\";\n\nconst hidden = (s: string | undefined) => s === \"starting\" || s === \"ending\";\n\nconst HoverCard = (\n  props: React.ComponentProps<typeof PreviewCardPrimitive.Root>\n) => <PreviewCardPrimitive.Root data-slot=\"hover-card\" {...props} />;\n\nconst HoverCardTrigger = (\n  props: React.ComponentProps<typeof PreviewCardPrimitive.Trigger>\n) => <PreviewCardPrimitive.Trigger data-slot=\"hover-card-trigger\" {...props} />;\n\nconst HoverCardContent = ({\n  className,\n  style,\n  sideOffset = 4,\n  align = \"center\",\n  side = \"bottom\",\n  children,\n  ...props\n}: Omit<\n  React.ComponentProps<typeof PreviewCardPrimitive.Popup>,\n  \"className\"\n> & {\n  className?: string;\n  align?: \"start\" | \"center\" | \"end\";\n  side?: \"top\" | \"bottom\" | \"left\" | \"right\";\n  sideOffset?: number;\n}) => (\n  <PreviewCardPrimitive.Portal>\n    <PreviewCardPrimitive.Positioner\n      align={align}\n      side={side}\n      sideOffset={sideOffset}\n    >\n      <PreviewCardPrimitive.Popup\n        className={(state) =>\n          [stylex.props(\n            styles.popup,\n            hidden(state.transitionStatus) && styles.popupHidden\n          ).className, className].filter(Boolean).join(\" \") || undefined\n        }\n        data-slot=\"hover-card-content\"\n        style={style}\n        {...props}\n      >\n        {children}\n      </PreviewCardPrimitive.Popup>\n    </PreviewCardPrimitive.Positioner>\n  </PreviewCardPrimitive.Portal>\n);\n\nexport { HoverCard, HoverCardContent, HoverCardTrigger };\n",
+      "type": "registry:ui",
+      "target": "components/ui/hover-card/hover-card.tsx"
+    },
+    {
+      "path": "registry/bases/stylex/hover-card/hover-card.stylex.ts",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nimport { colors, radius } from \"../tokens.stylex\";\n\nexport const styles = stylex.create({\n  popup: {\n    backgroundColor: colors.popover,\n    borderColor: colors.border,\n    borderRadius: radius.md,\n    borderStyle: \"solid\",\n    borderWidth: \"1px\",\n    boxShadow:\n      \"0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)\",\n    color: colors.popoverForeground,\n    fontSize: \"0.875rem\",\n    opacity: 1,\n    outline: \"none\",\n    padding: \"1rem\",\n    transform: \"scale(1)\",\n    transformOrigin: \"var(--transform-origin)\",\n    transition: \"opacity 0.15s ease-in-out, transform 0.15s ease-in-out\",\n    width: \"16rem\",\n    zIndex: 50,\n  },\n  popupHidden: {\n    opacity: 0,\n    transform: \"scale(0.95)\",\n  },\n});\n",
+      "type": "registry:ui",
+      "target": "components/ui/hover-card/hover-card.stylex.ts"
+    }
+  ],
+  "type": "registry:ui"
+}

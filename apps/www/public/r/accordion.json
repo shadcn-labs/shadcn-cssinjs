@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "accordion",
+  "title": "Accordion",
+  "description": "Accordion component styled with StyleX on Base UI primitives.",
+  "dependencies": [
+    "@base-ui/react",
+    "@stylexjs/stylex",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "stylex-tokens"
+  ],
+  "files": [
+    {
+      "path": "registry/bases/stylex/accordion/accordion.tsx",
+      "content": "\"use client\";\n\nimport { Accordion as AccordionPrimitive } from \"@base-ui/react/accordion\";\nimport { ChevronDownIcon, ChevronUpIcon } from \"lucide-react\";\n\nimport * as stylex from \"@stylexjs/stylex\";\n\nimport { styles } from \"./accordion.stylex\";\n\nconst Accordion = (\n  props: React.ComponentProps<typeof AccordionPrimitive.Root>\n) => <AccordionPrimitive.Root data-slot=\"accordion\" {...props} />;\n\nconst AccordionItem = ({\n  className,\n  style,\n  ...props\n}: Omit<React.ComponentProps<typeof AccordionPrimitive.Item>, \"className\"> & {\n  className?: string;\n}) => {\n  const p = stylex.props(styles.item);\n  return (\n    <AccordionPrimitive.Item\n      data-slot=\"accordion-item\"\n      className={[p.className, className].filter(Boolean).join(\" \") || undefined}\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nconst AccordionTrigger = ({\n  className,\n  style,\n  children,\n  ...props\n}: Omit<\n  React.ComponentProps<typeof AccordionPrimitive.Trigger>,\n  \"className\"\n> & { className?: string }) => {\n  const header = stylex.props(styles.header);\n  const trigger = stylex.props(styles.trigger);\n  return (\n    <AccordionPrimitive.Header\n      className={header.className}\n      style={header.style}\n    >\n      <AccordionPrimitive.Trigger\n        data-slot=\"accordion-trigger\"\n        className={[trigger.className, className].filter(Boolean).join(\" \") || undefined}\n        style={{ ...trigger.style, ...style }}\n        render={(renderProps, state) => (\n          <button type=\"button\" {...renderProps}>\n            {children}\n            <ChevronDownIcon\n              {...stylex.props(styles.chevronDown, state.open && styles.chevronDownOpen)}\n            />\n            <ChevronUpIcon\n              {...stylex.props(styles.chevronUp, state.open && styles.chevronUpOpen)}\n            />\n          </button>\n        )}\n        {...props}\n      />\n    </AccordionPrimitive.Header>\n  );\n};\n\nconst AccordionContent = ({\n  className,\n  style,\n  children,\n  ...props\n}: Omit<React.ComponentProps<typeof AccordionPrimitive.Panel>, \"className\"> & {\n  className?: string;\n}) => {\n  const p = stylex.props(styles.panel);\n  return (\n    <AccordionPrimitive.Panel\n      data-slot=\"accordion-content\"\n      className={[p.className, className].filter(Boolean).join(\" \") || undefined}\n      style={{ ...p.style, ...style }}\n      {...props}\n    >\n      {children}\n    </AccordionPrimitive.Panel>\n  );\n};\n\nexport { Accordion, AccordionContent, AccordionItem, AccordionTrigger };\n",
+      "type": "registry:ui",
+      "target": "components/ui/accordion/accordion.tsx"
+    },
+    {
+      "path": "registry/bases/stylex/accordion/accordion.stylex.ts",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nimport { colors, radius } from \"../tokens.stylex\";\n\nexport const styles = stylex.create({\n  chevronDown: {\n    color: colors.mutedForeground,\n    flexShrink: 0,\n    height: \"1rem\",\n    pointerEvents: \"none\",\n    transition: \"transform 0.2s ease-in-out\",\n    width: \"1rem\",\n  },\n  chevronDownOpen: {\n    display: \"none\",\n  },\n  chevronUp: {\n    color: colors.mutedForeground,\n    display: \"none\",\n    flexShrink: 0,\n    height: \"1rem\",\n    pointerEvents: \"none\",\n    transition: \"transform 0.2s ease-in-out\",\n    width: \"1rem\",\n  },\n  chevronUpOpen: {\n    display: \"block\",\n  },\n  header: {\n    display: \"flex\",\n    margin: 0,\n  },\n  item: {\n    \":last-child\": {\n      borderBottomColor: \"transparent\",\n    },\n    borderBottomColor: colors.border,\n    borderBottomStyle: \"solid\",\n    borderBottomWidth: \"1px\",\n  },\n  panel: {\n    fontSize: \"0.875rem\",\n    overflow: \"hidden\",\n    paddingBottom: \"0.625rem\",\n    paddingTop: 0,\n  },\n  trigger: {\n    \":focus-visible\": {\n      borderColor: colors.ring,\n      boxShadow: `0 0 0 3px color-mix(in oklab, ${colors.ring} 50%, transparent)`,\n    },\n    alignItems: \"flex-start\",\n    background: \"none\",\n    borderRadius: radius.md,\n    borderWidth: \"1px\",\n    color: colors.foreground,\n    cursor: {\n      \":disabled\": \"not-allowed\",\n      default: \"pointer\",\n    },\n    display: \"flex\",\n    flex: 1,\n    fontSize: \"0.875rem\",\n    fontWeight: 500,\n    gap: \"1rem\",\n    justifyContent: \"space-between\",\n    opacity: { \":disabled\": 0.5, default: 1 },\n    outline: \"none\",\n    paddingBottom: \"0.625rem\",\n    paddingTop: \"0.625rem\",\n    pointerEvents: { \":disabled\": \"none\", default: null },\n    textAlign: \"start\",\n    textDecorationLine: { \":hover\": \"underline\", default: \"none\" },\n    transition: \"all 0.15s ease-in-out\",\n    width: \"100%\",\n  },\n});\n",
+      "type": "registry:ui",
+      "target": "components/ui/accordion/accordion.stylex.ts"
+    }
+  ],
+  "type": "registry:ui"
+}

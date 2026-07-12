@@ -6,6 +6,12 @@
       "sourceType": "github",
       "skillPath": "skills/launch-shadcn-registry/SKILL.md",
       "computedHash": "17a0c8751bac286ce315bcfdec7c9a6b500883d048e40bc61ae75844491f7783"
+    },
+    "tailwind-to-stylex": {
+      "source": "shadcn-labs/skills",
+      "sourceType": "github",
+      "skillPath": "skills/tailwind-to-stylex/SKILL.md",
+      "computedHash": "a97a3ab7c4d6b2f6cf8e17620adb2cdaad3108714c34e258b8bb147ea5799591"
     }
   }
 }

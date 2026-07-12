@@ -1,0 +1,28 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tooltip",
+  "title": "Tooltip",
+  "description": "Tooltip component styled with StyleX on Base UI primitives.",
+  "dependencies": [
+    "@base-ui/react",
+    "@stylexjs/stylex"
+  ],
+  "registryDependencies": [
+    "stylex-tokens"
+  ],
+  "files": [
+    {
+      "path": "registry/bases/stylex/tooltip/tooltip.tsx",
+      "content": "\"use client\";\n\nimport { Tooltip as TooltipPrimitive } from \"@base-ui/react/tooltip\";\n\nimport * as stylex from \"@stylexjs/stylex\";\n\nimport { styles } from \"./tooltip.stylex\";\n\nconst hidden = (s: string | undefined) => s === \"starting\" || s === \"ending\";\n\nconst TooltipProvider = (\n  props: React.ComponentProps<typeof TooltipPrimitive.Provider>\n) => <TooltipPrimitive.Provider data-slot=\"tooltip-provider\" {...props} />;\n\nconst Tooltip = (props: React.ComponentProps<typeof TooltipPrimitive.Root>) => (\n  <TooltipProvider>\n    <TooltipPrimitive.Root data-slot=\"tooltip\" {...props} />\n  </TooltipProvider>\n);\n\nconst TooltipTrigger = (\n  props: React.ComponentProps<typeof TooltipPrimitive.Trigger>\n) => <TooltipPrimitive.Trigger data-slot=\"tooltip-trigger\" {...props} />;\n\nconst TooltipContent = ({\n  className,\n  style,\n  sideOffset = 4,\n  side = \"top\",\n  align = \"center\",\n  children,\n  ...props\n}: Omit<React.ComponentProps<typeof TooltipPrimitive.Popup>, \"className\"> & {\n  className?: string;\n  sideOffset?: number;\n  side?: \"top\" | \"bottom\" | \"left\" | \"right\";\n  align?: \"start\" | \"center\" | \"end\";\n}) => {\n  const arrow = stylex.props(styles.arrow);\n  return (\n    <TooltipPrimitive.Portal>\n      <TooltipPrimitive.Positioner\n        align={align}\n        side={side}\n        sideOffset={sideOffset}\n      >\n        <TooltipPrimitive.Popup\n          data-slot=\"tooltip-content\"\n          className={(state) =>\n            [stylex.props(\n              styles.popup,\n              hidden(state.transitionStatus) && styles.popupHidden\n            ).className,\n              className\n            ].filter(Boolean).join(\" \") || undefined\n          }\n          style={style}\n          {...props}\n        >\n          {children}\n          <TooltipPrimitive.Arrow\n            className={arrow.className}\n            style={arrow.style}\n          />\n        </TooltipPrimitive.Popup>\n      </TooltipPrimitive.Positioner>\n    </TooltipPrimitive.Portal>\n  );\n};\n\nexport { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger };\n",
+      "type": "registry:ui",
+      "target": "components/ui/tooltip/tooltip.tsx"
+    },
+    {
+      "path": "registry/bases/stylex/tooltip/tooltip.stylex.ts",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nimport { colors, radius } from \"../tokens.stylex\";\n\nexport const styles = stylex.create({\n  arrow: {\n    backgroundColor: colors.primary,\n    borderRadius: \"2px\",\n    height: \"0.625rem\",\n    transform: \"rotate(45deg)\",\n    width: \"0.625rem\",\n    zIndex: 50,\n  },\n  popup: {\n    backgroundColor: colors.primary,\n    borderRadius: radius.md,\n    boxShadow: \"0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)\",\n    color: colors.primaryForeground,\n    fontSize: \"0.75rem\",\n    lineHeight: \"1rem\",\n    maxWidth: \"20rem\",\n    opacity: 1,\n    outline: \"none\",\n    paddingBottom: \"0.375rem\",\n    paddingInline: \"0.75rem\",\n    paddingTop: \"0.375rem\",\n    textAlign: \"center\",\n    textWrap: \"balance\",\n    transform: \"scale(1)\",\n    transformOrigin: \"var(--transform-origin)\",\n    transition: \"opacity 0.15s ease-in-out, transform 0.15s ease-in-out\",\n    width: \"fit-content\",\n    zIndex: 50,\n  },\n  popupHidden: {\n    opacity: 0,\n    transform: \"scale(0.95)\",\n  },\n});\n",
+      "type": "registry:ui",
+      "target": "components/ui/tooltip/tooltip.stylex.ts"
+    }
+  ],
+  "type": "registry:ui"
+}
