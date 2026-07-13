@@ -18,6 +18,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.5,
       url: `${SITE.URL}${ROUTES.SPONSOR}`,
     },
+    ...[
+      ROUTES.BLOCKS,
+      ROUTES.CHARTS,
+      ROUTES.COLORS,
+      ROUTES.CREATE,
+      ROUTES.TYPESET,
+    ].map((route) => ({
+      changeFrequency: "weekly" as const,
+      lastModified: new Date(),
+      priority: 0.8,
+      url: `${SITE.URL}${route}`,
+    })),
   ];
 
   const docPages: MetadataRoute.Sitemap = source.getPages().map((page) => ({
