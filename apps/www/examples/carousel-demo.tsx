@@ -4,7 +4,7 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/registry/bases/stylex/carousel/carousel";
+} from "@/registry/bases/stylex/ui/carousel";
 
 export default function CarouselDemo() {
   return (

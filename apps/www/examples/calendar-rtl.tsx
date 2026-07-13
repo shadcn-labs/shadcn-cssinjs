@@ -5,7 +5,7 @@ import { arSA, he } from "react-day-picker/locale";
 
 import { useTranslation } from "@/components/language-selector";
 import type { Translations } from "@/components/language-selector";
-import { Calendar } from "@/registry/bases/stylex/calendar/calendar";
+import { Calendar } from "@/registry/bases/stylex/ui/calendar";
 
 const translations: Translations = {
   ar: {

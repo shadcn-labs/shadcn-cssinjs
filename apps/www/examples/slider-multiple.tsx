@@ -1,4 +1,4 @@
-import { Slider } from "@/registry/bases/stylex/slider/slider";
+import { Slider } from "@/registry/bases/stylex/ui/slider";
 
 export default function SliderMultiple() {
   return (

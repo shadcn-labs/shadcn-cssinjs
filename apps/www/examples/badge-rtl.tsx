@@ -5,7 +5,7 @@ import * as React from "react";
 
 import { useTranslation } from "@/components/language-selector";
 import type { Translations } from "@/components/language-selector";
-import { Badge } from "@/registry/bases/stylex/badge/badge";
+import { Badge } from "@/registry/bases/stylex/ui/badge";
 
 const translations: Translations = {
   ar: {

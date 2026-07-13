@@ -1,4 +1,4 @@
-import { Checkbox } from "@/registry/bases/stylex/checkbox/checkbox";
+import { Checkbox } from "@/registry/bases/stylex/ui/checkbox";
 
 export default function CheckboxDemo() {
   return (

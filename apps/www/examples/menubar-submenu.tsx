@@ -9,7 +9,7 @@ import {
   MenubarSubContent,
   MenubarSubTrigger,
   MenubarTrigger,
-} from "@/registry/bases/stylex/menubar/menubar";
+} from "@/registry/bases/stylex/ui/menubar";
 
 export default function MenubarSubmenu() {
   return (

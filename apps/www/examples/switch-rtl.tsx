@@ -2,7 +2,7 @@
 
 import { useTranslation } from "@/components/language-selector";
 import type { Translations } from "@/components/language-selector";
-import { Switch } from "@/registry/bases/stylex/switch/switch";
+import { Switch } from "@/registry/bases/stylex/ui/switch";
 
 const translations: Translations = {
   ar: { dir: "rtl", values: { label: "وضع الطيران" } },

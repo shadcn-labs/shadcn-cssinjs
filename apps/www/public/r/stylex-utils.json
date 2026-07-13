@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "stylex-utils",
+  "title": "StyleX Utilities",
+  "description": "Utilities for composing custom class names with StyleX.",
+  "dependencies": [
+    "@stylexjs/stylex"
+  ],
+  "files": [
+    {
+      "path": "registry/bases/stylex/lib/utils.stylex.ts",
+      "content": "import type { StyleXStyles } from \"@stylexjs/stylex\";\n\nexport const customClassName = (className: string | undefined) =>\n  className ? ({ [className]: className, $$css: true } as StyleXStyles) : null;\n",
+      "type": "registry:lib",
+      "target": "lib/utils.stylex.ts"
+    }
+  ],
+  "type": "registry:lib"
+}

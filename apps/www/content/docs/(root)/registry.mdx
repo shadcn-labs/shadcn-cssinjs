@@ -30,17 +30,12 @@ Each item is declared in `registry.json` and built into a static JSON file under
   "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
   "files": [
     {
-      "path": "registry/bases/stylex/button/button.tsx",
+      "path": "registry/bases/stylex/ui/button.tsx",
       "type": "registry:ui",
-      "target": "components/ui/button/button.tsx"
-    },
-    {
-      "path": "registry/bases/stylex/button/button.stylex.ts",
-      "type": "registry:ui",
-      "target": "components/ui/button/button.stylex.ts"
+      "target": "components/ui/button.tsx"
     }
   ],
-  "registryDependencies": ["stylex-tokens"]
+  "registryDependencies": ["stylex-tokens", "stylex-utils"]
 }
 ```
 

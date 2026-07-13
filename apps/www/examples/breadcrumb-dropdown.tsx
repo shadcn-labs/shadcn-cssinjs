@@ -7,14 +7,14 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/registry/bases/stylex/breadcrumb/breadcrumb";
+} from "@/registry/bases/stylex/ui/breadcrumb";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/registry/bases/stylex/dropdown-menu/dropdown-menu";
+} from "@/registry/bases/stylex/ui/dropdown-menu";
 
 export default function BreadcrumbDropdown() {
   return (

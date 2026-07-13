@@ -6,8 +6,8 @@ import {
   Field,
   FieldDescription,
   FieldTitle,
-} from "@/registry/bases/stylex/field/field";
-import { Slider } from "@/registry/bases/stylex/slider/slider";
+} from "@/registry/bases/stylex/ui/field";
+import { Slider } from "@/registry/bases/stylex/ui/slider";
 
 export default function FieldSlider() {
   const [value, setValue] = useState<number[]>([200, 800]);

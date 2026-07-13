@@ -1,9 +1,9 @@
-import { Button } from "@/registry/bases/stylex/button/button";
+import { Button } from "@/registry/bases/stylex/ui/button";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/registry/bases/stylex/popover/popover";
+} from "@/registry/bases/stylex/ui/popover";
 
 export default function PopoverAlignments() {
   return (

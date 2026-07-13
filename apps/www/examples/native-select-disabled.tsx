@@ -1,7 +1,7 @@
 import {
   NativeSelect,
   NativeSelectOption,
-} from "@/registry/bases/stylex/native-select/native-select";
+} from "@/registry/bases/stylex/ui/native-select";
 
 export default function NativeSelectDisabled() {
   return (

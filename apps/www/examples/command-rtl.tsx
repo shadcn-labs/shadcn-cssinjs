@@ -13,7 +13,7 @@ import {
   CommandList,
   CommandSeparator,
   CommandShortcut,
-} from "@/registry/bases/stylex/command/command";
+} from "@/registry/bases/stylex/ui/command";
 
 const translations: Translations = {
   ar: {

@@ -9,7 +9,7 @@ import {
   Alert,
   AlertDescription,
   AlertTitle,
-} from "@/registry/bases/stylex/alert/alert";
+} from "@/registry/bases/stylex/ui/alert";
 
 const translations: Translations = {
   ar: {

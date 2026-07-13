@@ -15,8 +15,8 @@ import * as React from "react";
 
 import { useTranslation } from "@/components/language-selector";
 import type { Translations } from "@/components/language-selector";
-import { ButtonGroup } from "@/registry/bases/stylex/button-group/button-group";
-import { Button } from "@/registry/bases/stylex/button/button";
+import { Button } from "@/registry/bases/stylex/ui/button";
+import { ButtonGroup } from "@/registry/bases/stylex/ui/button-group";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -29,7 +29,7 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "@/registry/bases/stylex/dropdown-menu/dropdown-menu";
+} from "@/registry/bases/stylex/ui/dropdown-menu";
 
 const translations: Translations = {
   ar: {

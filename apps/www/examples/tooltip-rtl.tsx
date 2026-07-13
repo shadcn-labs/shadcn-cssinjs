@@ -2,12 +2,12 @@
 
 import { useTranslation } from "@/components/language-selector";
 import type { Translations } from "@/components/language-selector";
-import { Button } from "@/registry/bases/stylex/button/button";
+import { Button } from "@/registry/bases/stylex/ui/button";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/registry/bases/stylex/tooltip/tooltip";
+} from "@/registry/bases/stylex/ui/tooltip";
 
 const translations: Translations = {
   ar: {

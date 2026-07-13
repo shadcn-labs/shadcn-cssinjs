@@ -7,7 +7,7 @@ import type { Translations } from "@/components/language-selector";
 import {
   NativeSelect,
   NativeSelectOption,
-} from "@/registry/bases/stylex/native-select/native-select";
+} from "@/registry/bases/stylex/ui/native-select";
 
 const translations: Translations = {
   ar: {

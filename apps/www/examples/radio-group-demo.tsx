@@ -1,7 +1,7 @@
 import {
   RadioGroup,
   RadioGroupItem,
-} from "@/registry/bases/stylex/radio-group/radio-group";
+} from "@/registry/bases/stylex/ui/radio-group";
 
 export default function RadioGroupDemo() {
   return (

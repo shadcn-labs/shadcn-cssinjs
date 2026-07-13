@@ -2,7 +2,7 @@
 
 import { useTranslation } from "@/components/language-selector";
 import type { Translations } from "@/components/language-selector";
-import { Button } from "@/registry/bases/stylex/button/button";
+import { Button } from "@/registry/bases/stylex/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -12,8 +12,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/registry/bases/stylex/dialog/dialog";
-import { Input } from "@/registry/bases/stylex/input/input";
+} from "@/registry/bases/stylex/ui/dialog";
+import { Input } from "@/registry/bases/stylex/ui/input";
 
 const translations: Translations = {
   ar: {

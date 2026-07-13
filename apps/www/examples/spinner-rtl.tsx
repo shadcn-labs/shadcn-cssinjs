@@ -2,8 +2,8 @@
 
 import { useTranslation } from "@/components/language-selector";
 import type { Translations } from "@/components/language-selector";
-import { Button } from "@/registry/bases/stylex/button/button";
-import { Spinner } from "@/registry/bases/stylex/spinner/spinner";
+import { Button } from "@/registry/bases/stylex/ui/button";
+import { Spinner } from "@/registry/bases/stylex/ui/spinner";
 
 const translations: Translations = {
   ar: { dir: "rtl", values: { wait: "يرجى الانتظار" } },

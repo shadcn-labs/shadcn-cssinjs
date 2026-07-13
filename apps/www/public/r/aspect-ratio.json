@@ -6,18 +6,16 @@
   "dependencies": [
     "@stylexjs/stylex"
   ],
+  "registryDependencies": [
+    "stylex-tokens",
+    "stylex-utils"
+  ],
   "files": [
     {
-      "path": "registry/bases/stylex/aspect-ratio/aspect-ratio.tsx",
-      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nimport { styles } from \"./aspect-ratio.stylex\";\n\nconst AspectRatio = ({\n  ratio = 1,\n  className,\n  style,\n  children,\n  ...props\n}: React.ComponentProps<\"div\"> & { ratio?: number }) => {\n  const p = stylex.props(styles.root);\n  return (\n    <div\n      data-slot=\"aspect-ratio\"\n      className={[p.className, className].filter(Boolean).join(\" \") || undefined}\n      style={{ ...p.style, aspectRatio: String(ratio), ...style }}\n      {...props}\n    >\n      {children}\n    </div>\n  );\n};\n\nexport { AspectRatio };\n",
+      "path": "registry/bases/stylex/ui/aspect-ratio.tsx",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\nimport type { StyleXStyles } from \"@stylexjs/stylex\";\n\nimport { customClassName } from \"@/lib/utils.stylex\";\n\nconst styles = stylex.create({\n  root: {\n    position: \"relative\",\n    width: \"100%\",\n  },\n});\n\nconst AspectRatio = ({\n  ratio = 1,\n  className,\n  style,\n  children,\n  ...props\n}: React.ComponentProps<\"div\"> & { ratio?: number }) => (\n  <div\n    data-slot=\"aspect-ratio\"\n    {...stylex.props(\n      styles.root,\n      customClassName(className),\n      { aspectRatio: String(ratio) } as StyleXStyles,\n      style as StyleXStyles\n    )}\n    {...props}\n  >\n    {children}\n  </div>\n);\n\nexport { AspectRatio };\n",
       "type": "registry:ui",
-      "target": "components/ui/aspect-ratio/aspect-ratio.tsx"
-    },
-    {
-      "path": "registry/bases/stylex/aspect-ratio/aspect-ratio.stylex.ts",
-      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nexport const styles = stylex.create({\n  root: {\n    position: \"relative\",\n    width: \"100%\",\n  },\n});\n",
-      "type": "registry:ui",
-      "target": "components/ui/aspect-ratio/aspect-ratio.stylex.ts"
+      "target": "components/ui/aspect-ratio.tsx"
     }
   ],
   "type": "registry:ui"

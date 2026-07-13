@@ -1,5 +1,5 @@
-import { Button } from "@/registry/bases/stylex/button/button";
-import { Kbd } from "@/registry/bases/stylex/kbd/kbd";
+import { Button } from "@/registry/bases/stylex/ui/button";
+import { Kbd } from "@/registry/bases/stylex/ui/kbd";
 
 export default function KbdButton() {
   return (

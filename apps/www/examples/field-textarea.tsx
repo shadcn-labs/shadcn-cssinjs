@@ -4,8 +4,8 @@ import {
   FieldGroup,
   FieldLabel,
   FieldSet,
-} from "@/registry/bases/stylex/field/field";
-import { Textarea } from "@/registry/bases/stylex/textarea/textarea";
+} from "@/registry/bases/stylex/ui/field";
+import { Textarea } from "@/registry/bases/stylex/ui/textarea";
 
 export default function FieldTextarea() {
   return (

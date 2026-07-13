@@ -2,8 +2,8 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from "@/registry/bases/stylex/avatar/avatar";
-import { Button } from "@/registry/bases/stylex/button/button";
+} from "@/registry/bases/stylex/ui/avatar";
+import { Button } from "@/registry/bases/stylex/ui/button";
 import {
   Empty,
   EmptyContent,
@@ -11,7 +11,7 @@ import {
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
-} from "@/registry/bases/stylex/empty/empty";
+} from "@/registry/bases/stylex/ui/empty";
 
 export default function EmptyAvatar() {
   return (

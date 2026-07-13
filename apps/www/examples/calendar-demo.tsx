@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { Calendar } from "@/registry/bases/stylex/calendar/calendar";
+import { Calendar } from "@/registry/bases/stylex/ui/calendar";
 
 export default function CalendarDemo() {
   const [date, setDate] = useState<Date | undefined>(new Date());

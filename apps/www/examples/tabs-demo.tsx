@@ -3,7 +3,7 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@/registry/bases/stylex/tabs/tabs";
+} from "@/registry/bases/stylex/ui/tabs";
 
 export default function TabsDemo() {
   return (

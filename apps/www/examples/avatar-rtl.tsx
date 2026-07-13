@@ -6,7 +6,7 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from "@/registry/bases/stylex/avatar/avatar";
+} from "@/registry/bases/stylex/ui/avatar";
 
 const translations: Translations = {
   ar: { dir: "rtl", values: {} },
