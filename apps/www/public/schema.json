@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shadcn-cssinjs.com/schema.json",
+  "title": "shadcn-cssinjs configuration",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["engine", "style", "rsc", "tsx", "tailwind", "aliases"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "engine": {
+      "type": "string",
+      "enum": ["stylex", "tokenami", "panda"],
+      "description": "The styling engine. Only StyleX is currently enabled."
+    },
+    "style": { "type": "string", "const": "stylex" },
+    "rsc": { "type": "boolean" },
+    "tsx": { "type": "boolean" },
+    "tailwind": {
+      "type": "object",
+      "description": "Compatibility field used for the global CSS path by shadcn registry tooling.",
+      "required": ["css", "baseColor", "cssVariables"],
+      "properties": {
+        "config": { "type": "string" },
+        "css": { "type": "string" },
+        "baseColor": { "type": "string" },
+        "cssVariables": { "type": "boolean" },
+        "prefix": { "type": "string" }
+      }
+    },
+    "iconLibrary": { "type": "string" },
+    "rtl": { "type": "boolean" },
+    "aliases": {
+      "type": "object",
+      "required": ["components", "utils"],
+      "properties": {
+        "components": { "type": "string" },
+        "utils": { "type": "string" },
+        "ui": { "type": "string" },
+        "lib": { "type": "string" },
+        "hooks": { "type": "string" }
+      }
+    },
+    "registries": { "type": "object" }
+  }
+}

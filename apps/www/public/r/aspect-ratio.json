@@ -9,7 +9,7 @@
   "files": [
     {
       "path": "registry/bases/stylex/aspect-ratio/aspect-ratio.tsx",
-      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nimport { styles } from \"./aspect-ratio.stylex\";\n\nconst AspectRatio = ({\n  ratio = 1,\n  className,\n  style,\n  children,\n  ...props\n}: React.ComponentProps<\"div\"> & { ratio?: number }) => {\n  const p = stylex.props(styles.root);\n  return (\n    <div\n      data-slot=\"aspect-ratio\"\n      className={[p.className, className].filter(Boolean).join(\" \") || undefined}\n      style={{ ...p.style, aspectRatio: String(ratio), ...style }}\n      {...props}\n    >\n      {children}\n    </div>\n  );\n};\n\nexport { AspectRatio };\n",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nimport { styles } from \"./aspect-ratio.stylex\";\n\nconst AspectRatio = ({\n  ratio = 1,\n  className,\n  style,\n  children,\n  ...props\n}: React.ComponentProps<\"div\"> & { ratio?: number }) => {\n  const p = stylex.props(styles.root);\n  return (\n    <div\n      data-slot=\"aspect-ratio\"\n      className={\n        [p.className, className].filter(Boolean).join(\" \") || undefined\n      }\n      style={{ ...p.style, aspectRatio: String(ratio), ...style }}\n      {...props}\n    >\n      {children}\n    </div>\n  );\n};\n\nexport { AspectRatio };\n",
       "type": "registry:ui",
       "target": "components/ui/aspect-ratio/aspect-ratio.tsx"
     },

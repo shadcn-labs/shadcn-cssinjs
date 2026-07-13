@@ -12,7 +12,7 @@
   "files": [
     {
       "path": "registry/bases/stylex/input/input.tsx",
-      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nimport { styles } from \"./input.stylex\";\n\nconst Input = ({\n  className,\n  style,\n  type,\n  ...props\n}: React.ComponentProps<\"input\">) => {\n  const p = stylex.props(styles.root);\n  return (\n    <input\n      type={type}\n      data-slot=\"input\"\n      className={[p.className, className].filter(Boolean).join(\" \") || undefined}\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nexport { Input };\n",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nimport { styles } from \"./input.stylex\";\n\nconst Input = ({\n  className,\n  style,\n  type,\n  ...props\n}: React.ComponentProps<\"input\">) => {\n  const p = stylex.props(styles.root);\n  return (\n    <input\n      type={type}\n      data-slot=\"input\"\n      className={\n        [p.className, className].filter(Boolean).join(\" \") || undefined\n      }\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nexport { Input };\n",
       "type": "registry:ui",
       "target": "components/ui/input/input.tsx"
     },

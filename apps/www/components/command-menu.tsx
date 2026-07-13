@@ -50,6 +50,13 @@ type DocUrlKind =
 const GROUP_HEADING_CLS =
   "!p-0 [&_[cmdk-group-heading]]:scroll-mt-16 [&_[cmdk-group-heading]]:!p-3 [&_[cmdk-group-heading]]:!pb-1";
 
+const packageRunners = {
+  bun: "bunx --bun",
+  npm: "npx",
+  pnpm: "pnpm dlx",
+  yarn: "yarn",
+} as const;
+
 const parseDocPageUrl = (url: string): DocUrlKind => {
   const parts = url.split("/").filter(Boolean);
   const themesIdx = parts.indexOf("themes");
@@ -211,13 +218,13 @@ export const CommandMenu = ({
       const parsed = parseDocPageUrl(item.url);
       if (parsed.kind === "theme") {
         setCopyPayload(
-          `${packageManager} dlx shadcn@latest add ${SITE.REGISTRY}/theme-${parsed.slug}`
+          `${packageRunners[packageManager]} shadcn-cssinjs@latest add ${SITE.REGISTRY}/r/theme-${parsed.slug}.json`
         );
         return;
       }
       if (parsed.kind === "component" || parsed.kind === "template") {
         setCopyPayload(
-          `${packageManager} dlx shadcn@latest add ${SITE.REGISTRY}/${parsed.slug}`
+          `${packageRunners[packageManager]} shadcn-cssinjs@latest add ${parsed.slug}`
         );
         return;
       }
@@ -229,7 +236,9 @@ export const CommandMenu = ({
   const handleBlockHighlight = useCallback(
     (block: { name: string; description: string; categories: string[] }) => {
       setShowGoToPage(true);
-      setCopyPayload(`${packageManager} dlx shadcn@latest add ${block.name}`);
+      setCopyPayload(
+        `${packageRunners[packageManager]} shadcn-cssinjs@latest add ${block.name}`
+      );
     },
     [packageManager]
   );
@@ -303,7 +312,7 @@ export const CommandMenu = ({
       if (
         e.key === "c" &&
         (e.metaKey || e.ctrlKey) &&
-        copyPayload.includes("shadcn@latest")
+        copyPayload.includes("shadcn-cssinjs@latest")
       ) {
         runCommand(() => {
           copyFeedback();

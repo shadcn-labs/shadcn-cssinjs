@@ -12,7 +12,7 @@
   "files": [
     {
       "path": "registry/bases/stylex/textarea/textarea.tsx",
-      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nimport { styles } from \"./textarea.stylex\";\n\nconst Textarea = ({\n  className,\n  style,\n  ...props\n}: React.ComponentProps<\"textarea\"> & { className?: string }) => {\n  const p = stylex.props(styles.root);\n  return (\n    <textarea\n      className={[p.className, className].filter(Boolean).join(\" \") || undefined}\n      data-slot=\"textarea\"\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nexport { Textarea };\n",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nimport { styles } from \"./textarea.stylex\";\n\nconst Textarea = ({\n  className,\n  style,\n  ...props\n}: React.ComponentProps<\"textarea\"> & { className?: string }) => {\n  const p = stylex.props(styles.root);\n  return (\n    <textarea\n      className={\n        [p.className, className].filter(Boolean).join(\" \") || undefined\n      }\n      data-slot=\"textarea\"\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nexport { Textarea };\n",
       "type": "registry:ui",
       "target": "components/ui/textarea/textarea.tsx"
     },

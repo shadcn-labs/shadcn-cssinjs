@@ -1,3 +1,4 @@
+import { webpack as stylexWebpack } from "@stylexjs/unplugin";
 import { createMDX } from "fumadocs-mdx/next";
 import { createJiti } from "jiti";
 
@@ -52,9 +53,30 @@ const nextConfig = {
       },
     ];
   },
-  // StyleX is configured via .babelrc - Next.js will use Babel when .babelrc is present
 };
 
 const withMDX = createMDX({});
 
-export default withMDX(nextConfig);
+// shadcn-cssinjs StyleX integration
+const withStyleX = (config = {}) => ({
+  ...config,
+  webpack(webpackConfig, options) {
+    const configured =
+      typeof config.webpack === "function"
+        ? (config.webpack(webpackConfig, options) ?? webpackConfig)
+        : webpackConfig;
+    configured.plugins ??= [];
+    configured.plugins.push(
+      stylexWebpack({
+        genConditionalClasses: true,
+        runtimeInjection: false,
+        styleResolution: "property-specificity",
+        unstable_moduleResolution: { rootDir: ".", type: "commonJS" },
+        useCSSLayers: true,
+      })
+    );
+    return configured;
+  },
+});
+
+export default withStyleX(withMDX(nextConfig));

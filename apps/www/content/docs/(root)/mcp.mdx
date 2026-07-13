@@ -30,10 +30,10 @@ Add this registry to your project's `components.json` under `registries`:
 
 <TabsContent value="claude">
 
-Run the shadcn MCP init command, or add the server manually:
+Run the shadcn-cssinjs MCP init command, or add the server manually:
 
 ```bash
-npx shadcn@latest mcp init --client claude
+pnpm dlx shadcn-cssinjs@latest mcp init --client claude
 ```
 
 </TabsContent>
@@ -45,9 +45,9 @@ Add the server to `.cursor/mcp.json`:
 ```json title=".cursor/mcp.json"
 {
   "mcpServers": {
-    "shadcn": {
+    "shadcn-cssinjs": {
       "command": "npx",
-      "args": ["-y", "shadcn@latest", "mcp"]
+      "args": ["-y", "shadcn-cssinjs@latest", "mcp"]
     }
   }
 }
