@@ -16,17 +16,6 @@ Built on top of [@base-ui/react](https://base-ui.com) (headless primitives) and 
 
 ![hero](apps/www/public/opengraph-image.png)
 
-## CLI
-
-The monorepo includes a shadcn-compatible CLI package with `init`, `add`,
-`search`, `view`, `docs`, `info`, registry build, and MCP commands. The StyleX
-adapter configures existing or new Next.js and Vite React projects automatically.
-
-```bash
-pnpm dlx shadcn-cssinjs@latest init
-pnpm dlx shadcn-cssinjs@latest add button
-```
-
 ## Documentation
 
 Visit https://shadcn-cssinjs.com/docs to view the documentation.
