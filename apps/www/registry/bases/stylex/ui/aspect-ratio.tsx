@@ -3,6 +3,17 @@ import type { StyleXStyles } from "@stylexjs/stylex";
 
 import { customClassName } from "@/registry/bases/stylex/lib/utils.stylex";
 
+// Move this to a shared module
+type StyleXComponentProps<El extends keyof JSX.IntrinsicElements> = React.ComponentProps<El> & {
+  /** @deprecated Prefer passing in StyleX styles with the `sx` prop */
+  className?: React.ComponentProps<El>["className"],
+  /** @deprecated Prefer passing in StyleX styles with the `sx` prop */
+  style?: React.ComponentProps<El>["style"],
+
+  sx?: StyleXStyle,
+};
+
+
 const styles = stylex.create({
   root: (aspectRatio: number) => {
     position: "relative",
@@ -17,7 +28,7 @@ const AspectRatio = ({
   style,
   children,
   ...props
-}: React.ComponentProps<"div"> & { ratio?: number }) => (
+}: StyleXComponentProps<"div"> & { ratio?: number }) => (
   <div
     data-slot="aspect-ratio"
     {...stylex.props(
