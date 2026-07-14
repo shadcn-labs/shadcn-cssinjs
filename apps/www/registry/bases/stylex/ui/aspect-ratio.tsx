@@ -15,11 +15,11 @@ type StyleXComponentProps<El extends keyof JSX.IntrinsicElements> = React.Compon
 
 
 const styles = stylex.create({
-  root: (aspectRatio: number) => {
+  root: (aspectRatio: number) => ({
     position: "relative",
     width: "100%",
     aspectRatio
-  },
+  }),
 });
 
 const AspectRatio = ({
