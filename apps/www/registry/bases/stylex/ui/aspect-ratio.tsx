@@ -4,9 +4,10 @@ import type { StyleXStyles } from "@stylexjs/stylex";
 import { customClassName } from "@/registry/bases/stylex/lib/utils.stylex";
 
 const styles = stylex.create({
-  root: {
+  root: (aspectRatio: number) => {
     position: "relative",
     width: "100%",
+    aspectRatio
   },
 });
 
@@ -20,9 +21,8 @@ const AspectRatio = ({
   <div
     data-slot="aspect-ratio"
     {...stylex.props(
-      styles.root,
+      styles.root(ratio),
       customClassName(className),
-      { aspectRatio: String(ratio) } as StyleXStyles,
       style as StyleXStyles
     )}
     {...props}
