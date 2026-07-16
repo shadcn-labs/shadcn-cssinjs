@@ -5,6 +5,8 @@ import { PageTransition } from "@/components/page-transition";
 import { ROUTES } from "@/constants/routes";
 import { BreadcrumbJsonLd } from "@/seo/json-ld";
 
+import { CardsDemo } from "./cards";
+
 export const dynamic = "force-static";
 export const revalidate = false;
 
@@ -25,6 +27,10 @@ export default function IndexPage() {
 
             <HomeCtas className="mt-4" />
           </div>
+        </section>
+
+        <section className="border-t">
+          <CardsDemo />
         </section>
       </PageTransition>
     </>
