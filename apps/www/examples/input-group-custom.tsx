@@ -3,7 +3,7 @@ import {
   InputGroupAddon,
   InputGroupButton,
   InputGroupTextarea,
-} from "@/registry/bases/stylex/input-group/input-group";
+} from "@/registry/bases/stylex/ui/input-group";
 
 export default function InputGroupCustom() {
   return (

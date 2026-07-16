@@ -1,6 +1,6 @@
 import * as stylex from "@stylexjs/stylex";
 
-import { colors, radius } from "../tokens.stylex";
+import { colors, radius } from "@/registry/bases/stylex/lib/tokens.stylex";
 
 export const styles = stylex.create({
   alignEnd: { alignSelf: "flex-end" },

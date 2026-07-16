@@ -4,7 +4,7 @@ import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
-} from "@/registry/bases/stylex/input-group/input-group";
+} from "@/registry/bases/stylex/ui/input-group";
 
 export default function InputGroupDemo() {
   return (

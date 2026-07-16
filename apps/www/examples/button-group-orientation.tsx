@@ -1,7 +1,7 @@
 import { MinusIcon, PlusIcon } from "lucide-react";
 
-import { ButtonGroup } from "@/registry/bases/stylex/button-group/button-group";
-import { Button } from "@/registry/bases/stylex/button/button";
+import { Button } from "@/registry/bases/stylex/ui/button";
+import { ButtonGroup } from "@/registry/bases/stylex/ui/button-group";
 
 export default function ButtonGroupOrientation() {
   return (

@@ -4,7 +4,7 @@ import * as React from "react";
 
 import { useTranslation } from "@/components/language-selector";
 import type { Translations } from "@/components/language-selector";
-import { Button } from "@/registry/bases/stylex/button/button";
+import { Button } from "@/registry/bases/stylex/ui/button";
 import {
   Card,
   CardAction,
@@ -13,9 +13,9 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/registry/bases/stylex/card/card";
-import { Input } from "@/registry/bases/stylex/input/input";
-import { Label } from "@/registry/bases/stylex/label/label";
+} from "@/registry/bases/stylex/ui/card";
+import { Input } from "@/registry/bases/stylex/ui/input";
+import { Label } from "@/registry/bases/stylex/ui/label";
 
 const translations: Translations = {
   ar: {

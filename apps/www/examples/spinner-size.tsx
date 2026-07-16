@@ -1,4 +1,4 @@
-import { Spinner } from "@/registry/bases/stylex/spinner/spinner";
+import { Spinner } from "@/registry/bases/stylex/ui/spinner";
 
 export default function SpinnerSize() {
   return (

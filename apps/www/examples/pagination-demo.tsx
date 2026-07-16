@@ -6,7 +6,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/registry/bases/stylex/pagination/pagination";
+} from "@/registry/bases/stylex/ui/pagination";
 
 export default function PaginationDemo() {
   return (

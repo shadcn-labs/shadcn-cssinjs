@@ -3,7 +3,7 @@ import * as stylex from "@stylexjs/stylex";
 import {
   colors,
   radius,
-} from "../../../../registry/bases/stylex/tokens.stylex";
+} from "../../../../registry/bases/stylex/lib/tokens.stylex";
 
 const pulse = stylex.keyframes({
   "0%, 100%": { opacity: 0.55 },

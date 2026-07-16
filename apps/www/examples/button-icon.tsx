@@ -1,6 +1,6 @@
 import { ChevronRightIcon } from "lucide-react";
 
-import { Button } from "@/registry/bases/stylex/button/button";
+import { Button } from "@/registry/bases/stylex/ui/button";
 
 export default function ButtonIcon() {
   return (

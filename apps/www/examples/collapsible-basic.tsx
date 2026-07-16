@@ -1,12 +1,12 @@
 import { ChevronDownIcon } from "lucide-react";
 
-import { Button } from "@/registry/bases/stylex/button/button";
-import { Card, CardContent } from "@/registry/bases/stylex/card/card";
+import { Button } from "@/registry/bases/stylex/ui/button";
+import { Card, CardContent } from "@/registry/bases/stylex/ui/card";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/registry/bases/stylex/collapsible/collapsible";
+} from "@/registry/bases/stylex/ui/collapsible";
 
 export default function CollapsibleBasic() {
   return (

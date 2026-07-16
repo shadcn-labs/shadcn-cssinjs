@@ -1,7 +1,7 @@
 import {
   ToggleGroup,
   ToggleGroupItem,
-} from "@/registry/bases/stylex/toggle-group/toggle-group";
+} from "@/registry/bases/stylex/ui/toggle-group";
 
 const SIDES = ["top", "bottom", "left", "right"];
 

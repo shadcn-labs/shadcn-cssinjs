@@ -7,18 +7,16 @@
     "@base-ui/react",
     "@stylexjs/stylex"
   ],
+  "registryDependencies": [
+    "stylex-tokens",
+    "stylex-utils"
+  ],
   "files": [
     {
-      "path": "registry/bases/stylex/collapsible/collapsible.tsx",
-      "content": "\"use client\";\n\nimport { Collapsible as CollapsiblePrimitive } from \"@base-ui/react/collapsible\";\n\n\nimport { styles } from \"./collapsible.stylex\";\nimport * as stylex from \"@stylexjs/stylex\";\n\nconst Collapsible = (\n  props: React.ComponentProps<typeof CollapsiblePrimitive.Root>\n) => <CollapsiblePrimitive.Root data-slot=\"collapsible\" {...props} />;\n\nconst CollapsibleTrigger = ({\n  className,\n  style,\n  ...props\n}: Omit<\n  React.ComponentProps<typeof CollapsiblePrimitive.Trigger>,\n  \"className\"\n> & { className?: string }) => {\n  const p = stylex.props(styles.trigger);\n  return (\n    <CollapsiblePrimitive.Trigger\n      data-slot=\"collapsible-trigger\"\n      className={[p.className, className].filter(Boolean).join(\" \") || undefined}\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nconst CollapsibleContent = ({\n  className,\n  style,\n  ...props\n}: Omit<\n  React.ComponentProps<typeof CollapsiblePrimitive.Panel>,\n  \"className\"\n> & { className?: string }) => {\n  const p = stylex.props(styles.panel);\n  return (\n    <CollapsiblePrimitive.Panel\n      data-slot=\"collapsible-content\"\n      className={[p.className, className].filter(Boolean).join(\" \") || undefined}\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nexport { Collapsible, CollapsibleContent, CollapsibleTrigger };\n",
+      "path": "registry/bases/stylex/ui/collapsible.tsx",
+      "content": "\"use client\";\n\nimport { Collapsible as CollapsiblePrimitive } from \"@base-ui/react/collapsible\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport type { StyleXStyles } from \"@stylexjs/stylex\";\n\nimport { customClassName } from \"@/lib/utils.stylex\";\n\nconst styles = stylex.create({\n  panel: {\n    overflow: \"hidden\",\n    transition: \"height 0.2s ease-in-out\",\n  },\n  trigger: {\n    alignItems: \"center\",\n    background: \"none\",\n    borderWidth: 0,\n    color: \"inherit\",\n    cursor: \"pointer\",\n    display: \"inline-flex\",\n    font: \"inherit\",\n    gap: \"0.25rem\",\n    outline: \"none\",\n    padding: 0,\n  },\n});\n\nconst Collapsible = (\n  props: React.ComponentProps<typeof CollapsiblePrimitive.Root>\n) => <CollapsiblePrimitive.Root data-slot=\"collapsible\" {...props} />;\n\nconst CollapsibleTrigger = ({\n  className,\n  style,\n  ...props\n}: Omit<\n  React.ComponentProps<typeof CollapsiblePrimitive.Trigger>,\n  \"className\"\n> & { className?: string }) => (\n  <CollapsiblePrimitive.Trigger\n    data-slot=\"collapsible-trigger\"\n    {...stylex.props(\n      styles.trigger,\n      customClassName(className),\n      style as StyleXStyles\n    )}\n    {...props}\n  />\n);\n\nconst CollapsibleContent = ({\n  className,\n  style,\n  ...props\n}: Omit<\n  React.ComponentProps<typeof CollapsiblePrimitive.Panel>,\n  \"className\"\n> & { className?: string }) => (\n  <CollapsiblePrimitive.Panel\n    data-slot=\"collapsible-content\"\n    {...stylex.props(\n      styles.panel,\n      customClassName(className),\n      style as StyleXStyles\n    )}\n    {...props}\n  />\n);\n\nexport { Collapsible, CollapsibleContent, CollapsibleTrigger };\n",
       "type": "registry:ui",
-      "target": "components/ui/collapsible/collapsible.tsx"
-    },
-    {
-      "path": "registry/bases/stylex/collapsible/collapsible.stylex.ts",
-      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nexport const styles = stylex.create({\n  panel: {\n    overflow: \"hidden\",\n    transition: \"height 0.2s ease-in-out\",\n  },\n  trigger: {\n    alignItems: \"center\",\n    background: \"none\",\n    borderWidth: 0,\n    color: \"inherit\",\n    cursor: \"pointer\",\n    display: \"inline-flex\",\n    font: \"inherit\",\n    gap: \"0.25rem\",\n    outline: \"none\",\n    padding: 0,\n  },\n});\n",
-      "type": "registry:ui",
-      "target": "components/ui/collapsible/collapsible.stylex.ts"
+      "target": "components/ui/collapsible.tsx"
     }
   ],
   "type": "registry:ui"

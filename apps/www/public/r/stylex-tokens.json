@@ -8,10 +8,10 @@
   ],
   "files": [
     {
-      "path": "registry/bases/stylex/tokens.stylex.ts",
+      "path": "registry/bases/stylex/lib/tokens.stylex.ts",
       "content": "import * as stylex from \"@stylexjs/stylex\";\n\n/**\n * Design tokens for the StyleX component set.\n *\n * Each token wraps the corresponding CSS custom property defined in the app's\n * global stylesheet (e.g. `--primary`). Theming therefore stays driven by the\n * class-based `.dark` toggle (next-themes) — flipping `.dark` updates the\n * underlying `--*` variables, which propagate through these tokens. Components\n * reference `colors.primary` / `radius.md` instead of stringly-typed\n * `var(--primary)` so token usage is typed and centralized.\n */\nexport const colors = stylex.defineVars({\n  accent: \"var(--accent)\",\n  accentForeground: \"var(--accent-foreground)\",\n  background: \"var(--background)\",\n  border: \"var(--border)\",\n  card: \"var(--card)\",\n  cardForeground: \"var(--card-foreground)\",\n  destructive: \"var(--destructive)\",\n  foreground: \"var(--foreground)\",\n  input: \"var(--input)\",\n  muted: \"var(--muted)\",\n  mutedForeground: \"var(--muted-foreground)\",\n  popover: \"var(--popover)\",\n  popoverForeground: \"var(--popover-foreground)\",\n  primary: \"var(--primary)\",\n  primaryForeground: \"var(--primary-foreground)\",\n  ring: \"var(--ring)\",\n  secondary: \"var(--secondary)\",\n  secondaryForeground: \"var(--secondary-foreground)\",\n  sidebar: \"var(--sidebar)\",\n  sidebarAccent: \"var(--sidebar-accent)\",\n  sidebarAccentForeground: \"var(--sidebar-accent-foreground)\",\n  sidebarBorder: \"var(--sidebar-border)\",\n  sidebarForeground: \"var(--sidebar-foreground)\",\n  sidebarPrimary: \"var(--sidebar-primary)\",\n  sidebarPrimaryForeground: \"var(--sidebar-primary-foreground)\",\n  sidebarRing: \"var(--sidebar-ring)\",\n});\n\nexport const radius = stylex.defineVars({\n  lg: \"var(--radius)\",\n  md: \"calc(var(--radius) - 2px)\",\n  sm: \"calc(var(--radius) - 4px)\",\n  xl: \"calc(var(--radius) + 4px)\",\n});\n",
       "type": "registry:lib",
-      "target": "components/ui/tokens.stylex.ts"
+      "target": "lib/tokens.stylex.ts"
     }
   ],
   "type": "registry:lib"

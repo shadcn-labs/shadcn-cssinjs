@@ -7,7 +7,7 @@ import {
   ContextMenuSubContent,
   ContextMenuSubTrigger,
   ContextMenuTrigger,
-} from "@/registry/bases/stylex/context-menu/context-menu";
+} from "@/registry/bases/stylex/ui/context-menu";
 
 export default function ContextMenuSubmenu() {
   return (

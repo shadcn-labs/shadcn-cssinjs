@@ -8,20 +8,15 @@
     "@stylexjs/stylex"
   ],
   "registryDependencies": [
-    "stylex-tokens"
+    "stylex-tokens",
+    "stylex-utils"
   ],
   "files": [
     {
-      "path": "registry/bases/stylex/separator/separator.tsx",
-      "content": "\"use client\";\n\nimport { Separator as SeparatorPrimitive } from \"@base-ui/react\";\n\nimport * as stylex from \"@stylexjs/stylex\";\n\nimport { styles } from \"./separator.stylex\";\n\nconst Separator = ({\n  className,\n  style,\n  orientation = \"horizontal\",\n  ...props\n}: Omit<React.ComponentProps<typeof SeparatorPrimitive>, \"className\"> & {\n  className?: string;\n}) => {\n  const p = stylex.props(\n    styles.root,\n    orientation === \"vertical\" ? styles.vertical : styles.horizontal\n  );\n  return (\n    <SeparatorPrimitive\n      data-slot=\"separator\"\n      orientation={orientation}\n      className={[p.className, className].filter(Boolean).join(\" \") || undefined}\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nexport { Separator };\n",
+      "path": "registry/bases/stylex/ui/separator.tsx",
+      "content": "\"use client\";\n\nimport { Separator as SeparatorPrimitive } from \"@base-ui/react\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport type { StyleXStyles } from \"@stylexjs/stylex\";\n\nimport { colors } from \"@/lib/tokens.stylex\";\nimport { customClassName } from \"@/lib/utils.stylex\";\n\nconst styles = stylex.create({\n  horizontal: {\n    height: \"1px\",\n    width: \"100%\",\n  },\n  root: {\n    backgroundColor: colors.border,\n    flexShrink: 0,\n  },\n  vertical: {\n    height: \"100%\",\n    width: \"1px\",\n  },\n});\n\nconst Separator = ({\n  className,\n  style,\n  orientation = \"horizontal\",\n  ...props\n}: Omit<React.ComponentProps<typeof SeparatorPrimitive>, \"className\"> & {\n  className?: string;\n}) => (\n  <SeparatorPrimitive\n    data-slot=\"separator\"\n    orientation={orientation}\n    {...stylex.props(\n      styles.root,\n      orientation === \"vertical\" ? styles.vertical : styles.horizontal,\n      customClassName(className),\n      style as StyleXStyles\n    )}\n    {...props}\n  />\n);\n\nexport { Separator };\n",
       "type": "registry:ui",
-      "target": "components/ui/separator/separator.tsx"
-    },
-    {
-      "path": "registry/bases/stylex/separator/separator.stylex.ts",
-      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nimport { colors } from \"../tokens.stylex\";\n\nexport const styles = stylex.create({\n  horizontal: {\n    height: \"1px\",\n    width: \"100%\",\n  },\n  root: {\n    backgroundColor: colors.border,\n    flexShrink: 0,\n  },\n  vertical: {\n    height: \"100%\",\n    width: \"1px\",\n  },\n});\n",
-      "type": "registry:ui",
-      "target": "components/ui/separator/separator.stylex.ts"
+      "target": "components/ui/separator.tsx"
     }
   ],
   "type": "registry:ui"

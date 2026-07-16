@@ -21,7 +21,7 @@ import {
   SidebarMenuItem,
   SidebarProvider,
   SidebarTrigger,
-} from "@/registry/bases/stylex/sidebar/sidebar";
+} from "@/registry/bases/stylex/ui/sidebar";
 
 const items = [
   { icon: HomeIcon, isActive: true, title: "Home" },

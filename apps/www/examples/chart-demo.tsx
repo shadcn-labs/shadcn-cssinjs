@@ -6,8 +6,8 @@ import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/registry/bases/stylex/chart/chart";
-import type { ChartConfig } from "@/registry/bases/stylex/chart/chart";
+} from "@/registry/bases/stylex/ui/chart";
+import type { ChartConfig } from "@/registry/bases/stylex/ui/chart";
 
 const chartData = [
   { desktop: 186, mobile: 80, month: "January" },

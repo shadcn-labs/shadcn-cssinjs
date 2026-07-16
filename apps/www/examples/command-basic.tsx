@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { Button } from "@/registry/bases/stylex/button/button";
+import { Button } from "@/registry/bases/stylex/ui/button";
 import {
   Command,
   CommandDialog,
@@ -11,7 +11,7 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/registry/bases/stylex/command/command";
+} from "@/registry/bases/stylex/ui/command";
 
 export default function CommandBasic() {
   const [open, setOpen] = useState(false);

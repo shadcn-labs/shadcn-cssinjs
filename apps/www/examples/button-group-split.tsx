@@ -1,10 +1,10 @@
 import { PlusIcon } from "lucide-react";
 
+import { Button } from "@/registry/bases/stylex/ui/button";
 import {
   ButtonGroup,
   ButtonGroupSeparator,
-} from "@/registry/bases/stylex/button-group/button-group";
-import { Button } from "@/registry/bases/stylex/button/button";
+} from "@/registry/bases/stylex/ui/button-group";
 
 export default function ButtonGroupSplit() {
   return (

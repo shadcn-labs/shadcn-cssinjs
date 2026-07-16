@@ -5,8 +5,8 @@ import {
   AvatarFallback,
   AvatarGroup,
   AvatarImage,
-} from "@/registry/bases/stylex/avatar/avatar";
-import { Button } from "@/registry/bases/stylex/button/button";
+} from "@/registry/bases/stylex/ui/avatar";
+import { Button } from "@/registry/bases/stylex/ui/button";
 import {
   Item,
   ItemActions,
@@ -14,7 +14,7 @@ import {
   ItemDescription,
   ItemMedia,
   ItemTitle,
-} from "@/registry/bases/stylex/item/item";
+} from "@/registry/bases/stylex/ui/item";
 
 export default function ItemAvatar() {
   return (

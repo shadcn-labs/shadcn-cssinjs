@@ -1,4 +1,4 @@
-import { cx, x } from "@/lib/utils";
+import { cx, x } from "@/registry/bases/stylex/lib/utils.stylex";
 
 import { styles } from "./message.stylex";
 

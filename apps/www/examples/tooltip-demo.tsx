@@ -1,9 +1,9 @@
-import { Button } from "@/registry/bases/stylex/button/button";
+import { Button } from "@/registry/bases/stylex/ui/button";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/registry/bases/stylex/tooltip/tooltip";
+} from "@/registry/bases/stylex/ui/tooltip";
 
 export default function TooltipDemo() {
   return (

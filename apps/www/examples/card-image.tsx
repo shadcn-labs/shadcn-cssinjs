@@ -1,5 +1,5 @@
-import { Badge } from "@/registry/bases/stylex/badge/badge";
-import { Button } from "@/registry/bases/stylex/button/button";
+import { Badge } from "@/registry/bases/stylex/ui/badge";
+import { Button } from "@/registry/bases/stylex/ui/button";
 import {
   Card,
   CardAction,
@@ -7,7 +7,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/registry/bases/stylex/card/card";
+} from "@/registry/bases/stylex/ui/card";
 
 export default function CardImage() {
   return (

@@ -11,11 +11,26 @@
       "dependencies": ["@stylexjs/stylex"],
       "files": [
         {
-          "path": "registry/bases/stylex/tokens.stylex.ts",
+          "path": "registry/bases/stylex/lib/tokens.stylex.ts",
           "type": "registry:lib",
-          "target": "components/ui/tokens.stylex.ts"
+          "target": "lib/tokens.stylex.ts"
         }
       ]
+    },
+    {
+      "name": "stylex-utils",
+      "type": "registry:lib",
+      "title": "StyleX Utilities",
+      "description": "StyleX class-name helpers plus reusable shimmer, scroll-fade, and visually-hidden utilities.",
+      "dependencies": ["@stylexjs/stylex"],
+      "files": [
+        {
+          "path": "registry/bases/stylex/lib/utils.stylex.ts",
+          "type": "registry:lib",
+          "target": "lib/utils.stylex.ts"
+        }
+      ],
+      "registryDependencies": ["stylex-tokens"]
     },
     {
       "name": "accordion",
@@ -25,17 +40,12 @@
       "dependencies": ["@base-ui/react", "@stylexjs/stylex", "lucide-react"],
       "files": [
         {
-          "path": "registry/bases/stylex/accordion/accordion.tsx",
+          "path": "registry/bases/stylex/ui/accordion.tsx",
           "type": "registry:ui",
-          "target": "components/ui/accordion/accordion.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/accordion/accordion.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/accordion/accordion.stylex.ts"
+          "target": "components/ui/accordion.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "alert",
@@ -45,17 +55,12 @@
       "dependencies": ["@stylexjs/stylex"],
       "files": [
         {
-          "path": "registry/bases/stylex/alert/alert.tsx",
+          "path": "registry/bases/stylex/ui/alert.tsx",
           "type": "registry:ui",
-          "target": "components/ui/alert/alert.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/alert/alert.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/alert/alert.stylex.ts"
+          "target": "components/ui/alert.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "aspect-ratio",
@@ -65,16 +70,12 @@
       "dependencies": ["@stylexjs/stylex"],
       "files": [
         {
-          "path": "registry/bases/stylex/aspect-ratio/aspect-ratio.tsx",
+          "path": "registry/bases/stylex/ui/aspect-ratio.tsx",
           "type": "registry:ui",
-          "target": "components/ui/aspect-ratio/aspect-ratio.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/aspect-ratio/aspect-ratio.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/aspect-ratio/aspect-ratio.stylex.ts"
+          "target": "components/ui/aspect-ratio.tsx"
         }
-      ]
+      ],
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "badge",
@@ -84,17 +85,12 @@
       "dependencies": ["@stylexjs/stylex"],
       "files": [
         {
-          "path": "registry/bases/stylex/badge/badge.tsx",
+          "path": "registry/bases/stylex/ui/badge.tsx",
           "type": "registry:ui",
-          "target": "components/ui/badge/badge.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/badge/badge.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/badge/badge.stylex.ts"
+          "target": "components/ui/badge.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "button",
@@ -104,17 +100,12 @@
       "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
       "files": [
         {
-          "path": "registry/bases/stylex/button/button.tsx",
+          "path": "registry/bases/stylex/ui/button.tsx",
           "type": "registry:ui",
-          "target": "components/ui/button/button.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/button/button.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/button/button.stylex.ts"
+          "target": "components/ui/button.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "card",
@@ -124,17 +115,12 @@
       "dependencies": ["@stylexjs/stylex"],
       "files": [
         {
-          "path": "registry/bases/stylex/card/card.tsx",
+          "path": "registry/bases/stylex/ui/card.tsx",
           "type": "registry:ui",
-          "target": "components/ui/card/card.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/card/card.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/card/card.stylex.ts"
+          "target": "components/ui/card.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "collapsible",
@@ -144,16 +130,12 @@
       "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
       "files": [
         {
-          "path": "registry/bases/stylex/collapsible/collapsible.tsx",
+          "path": "registry/bases/stylex/ui/collapsible.tsx",
           "type": "registry:ui",
-          "target": "components/ui/collapsible/collapsible.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/collapsible/collapsible.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/collapsible/collapsible.stylex.ts"
+          "target": "components/ui/collapsible.tsx"
         }
-      ]
+      ],
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "combobox",
@@ -163,17 +145,12 @@
       "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
       "files": [
         {
-          "path": "registry/bases/stylex/combobox/combobox.tsx",
+          "path": "registry/bases/stylex/ui/combobox.tsx",
           "type": "registry:ui",
-          "target": "components/ui/combobox/combobox.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/combobox/combobox.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/combobox/combobox.stylex.ts"
+          "target": "components/ui/combobox.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "command",
@@ -183,17 +160,12 @@
       "dependencies": ["@stylexjs/stylex", "lucide-react"],
       "files": [
         {
-          "path": "registry/bases/stylex/command/command.tsx",
+          "path": "registry/bases/stylex/ui/command.tsx",
           "type": "registry:ui",
-          "target": "components/ui/command/command.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/command/command.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/command/command.stylex.ts"
+          "target": "components/ui/command.tsx"
         }
       ],
-      "registryDependencies": ["dialog", "stylex-tokens"]
+      "registryDependencies": ["dialog", "stylex-tokens", "stylex-utils"]
     },
     {
       "name": "context-menu",
@@ -203,17 +175,12 @@
       "dependencies": ["@base-ui/react", "@stylexjs/stylex", "lucide-react"],
       "files": [
         {
-          "path": "registry/bases/stylex/context-menu/context-menu.tsx",
+          "path": "registry/bases/stylex/ui/context-menu.tsx",
           "type": "registry:ui",
-          "target": "components/ui/context-menu/context-menu.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/context-menu/context-menu.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/context-menu/context-menu.stylex.ts"
+          "target": "components/ui/context-menu.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "dialog",
@@ -223,17 +190,12 @@
       "dependencies": ["@base-ui/react", "@stylexjs/stylex", "lucide-react"],
       "files": [
         {
-          "path": "registry/bases/stylex/dialog/dialog.tsx",
+          "path": "registry/bases/stylex/ui/dialog.tsx",
           "type": "registry:ui",
-          "target": "components/ui/dialog/dialog.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/dialog/dialog.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/dialog/dialog.stylex.ts"
+          "target": "components/ui/dialog.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "drawer",
@@ -243,17 +205,12 @@
       "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
       "files": [
         {
-          "path": "registry/bases/stylex/drawer/drawer.tsx",
+          "path": "registry/bases/stylex/ui/drawer.tsx",
           "type": "registry:ui",
-          "target": "components/ui/drawer/drawer.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/drawer/drawer.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/drawer/drawer.stylex.ts"
+          "target": "components/ui/drawer.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "dropdown-menu",
@@ -263,17 +220,12 @@
       "dependencies": ["@base-ui/react", "@stylexjs/stylex", "lucide-react"],
       "files": [
         {
-          "path": "registry/bases/stylex/dropdown-menu/dropdown-menu.tsx",
+          "path": "registry/bases/stylex/ui/dropdown-menu.tsx",
           "type": "registry:ui",
-          "target": "components/ui/dropdown-menu/dropdown-menu.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/dropdown-menu/dropdown-menu.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/dropdown-menu/dropdown-menu.stylex.ts"
+          "target": "components/ui/dropdown-menu.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "empty",
@@ -283,17 +235,12 @@
       "dependencies": ["@stylexjs/stylex"],
       "files": [
         {
-          "path": "registry/bases/stylex/empty/empty.tsx",
+          "path": "registry/bases/stylex/ui/empty.tsx",
           "type": "registry:ui",
-          "target": "components/ui/empty/empty.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/empty/empty.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/empty/empty.stylex.ts"
+          "target": "components/ui/empty.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "field",
@@ -303,17 +250,17 @@
       "dependencies": ["@stylexjs/stylex"],
       "files": [
         {
-          "path": "registry/bases/stylex/field/field.tsx",
+          "path": "registry/bases/stylex/ui/field.tsx",
           "type": "registry:ui",
-          "target": "components/ui/field/field.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/field/field.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/field/field.stylex.ts"
+          "target": "components/ui/field.tsx"
         }
       ],
-      "registryDependencies": ["label", "separator", "stylex-tokens"]
+      "registryDependencies": [
+        "label",
+        "separator",
+        "stylex-tokens",
+        "stylex-utils"
+      ]
     },
     {
       "name": "input-group",
@@ -323,17 +270,12 @@
       "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
       "files": [
         {
-          "path": "registry/bases/stylex/input-group/input-group.tsx",
+          "path": "registry/bases/stylex/ui/input-group.tsx",
           "type": "registry:ui",
-          "target": "components/ui/input-group/input-group.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/input-group/input-group.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/input-group/input-group.stylex.ts"
+          "target": "components/ui/input-group.tsx"
         }
       ],
-      "registryDependencies": ["button", "stylex-tokens"]
+      "registryDependencies": ["button", "stylex-tokens", "stylex-utils"]
     },
     {
       "name": "item",
@@ -343,17 +285,12 @@
       "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
       "files": [
         {
-          "path": "registry/bases/stylex/item/item.tsx",
+          "path": "registry/bases/stylex/ui/item.tsx",
           "type": "registry:ui",
-          "target": "components/ui/item/item.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/item/item.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/item/item.stylex.ts"
+          "target": "components/ui/item.tsx"
         }
       ],
-      "registryDependencies": ["separator", "stylex-tokens"]
+      "registryDependencies": ["separator", "stylex-tokens", "stylex-utils"]
     },
     {
       "name": "input",
@@ -363,17 +300,12 @@
       "dependencies": ["@stylexjs/stylex"],
       "files": [
         {
-          "path": "registry/bases/stylex/input/input.tsx",
+          "path": "registry/bases/stylex/ui/input.tsx",
           "type": "registry:ui",
-          "target": "components/ui/input/input.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/input/input.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/input/input.stylex.ts"
+          "target": "components/ui/input.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "kbd",
@@ -383,17 +315,12 @@
       "dependencies": ["@stylexjs/stylex"],
       "files": [
         {
-          "path": "registry/bases/stylex/kbd/kbd.tsx",
+          "path": "registry/bases/stylex/ui/kbd.tsx",
           "type": "registry:ui",
-          "target": "components/ui/kbd/kbd.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/kbd/kbd.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/kbd/kbd.stylex.ts"
+          "target": "components/ui/kbd.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "native-select",
@@ -403,17 +330,12 @@
       "dependencies": ["@stylexjs/stylex", "lucide-react"],
       "files": [
         {
-          "path": "registry/bases/stylex/native-select/native-select.tsx",
+          "path": "registry/bases/stylex/ui/native-select.tsx",
           "type": "registry:ui",
-          "target": "components/ui/native-select/native-select.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/native-select/native-select.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/native-select/native-select.stylex.ts"
+          "target": "components/ui/native-select.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "popover",
@@ -423,17 +345,12 @@
       "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
       "files": [
         {
-          "path": "registry/bases/stylex/popover/popover.tsx",
+          "path": "registry/bases/stylex/ui/popover.tsx",
           "type": "registry:ui",
-          "target": "components/ui/popover/popover.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/popover/popover.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/popover/popover.stylex.ts"
+          "target": "components/ui/popover.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "separator",
@@ -443,17 +360,12 @@
       "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
       "files": [
         {
-          "path": "registry/bases/stylex/separator/separator.tsx",
+          "path": "registry/bases/stylex/ui/separator.tsx",
           "type": "registry:ui",
-          "target": "components/ui/separator/separator.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/separator/separator.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/separator/separator.stylex.ts"
+          "target": "components/ui/separator.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "sheet",
@@ -463,17 +375,12 @@
       "dependencies": ["@base-ui/react", "@stylexjs/stylex", "lucide-react"],
       "files": [
         {
-          "path": "registry/bases/stylex/sheet/sheet.tsx",
+          "path": "registry/bases/stylex/ui/sheet.tsx",
           "type": "registry:ui",
-          "target": "components/ui/sheet/sheet.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/sheet/sheet.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/sheet/sheet.stylex.ts"
+          "target": "components/ui/sheet.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "sidebar",
@@ -483,14 +390,9 @@
       "dependencies": ["@base-ui/react", "@stylexjs/stylex", "lucide-react"],
       "files": [
         {
-          "path": "registry/bases/stylex/sidebar/sidebar.tsx",
+          "path": "registry/bases/stylex/ui/sidebar.tsx",
           "type": "registry:ui",
-          "target": "components/ui/sidebar/sidebar.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/sidebar/sidebar.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/sidebar/sidebar.stylex.ts"
+          "target": "components/ui/sidebar.tsx"
         }
       ],
       "registryDependencies": [
@@ -500,7 +402,8 @@
         "sheet",
         "skeleton",
         "stylex-tokens",
-        "tooltip"
+        "tooltip",
+        "stylex-utils"
       ]
     },
     {
@@ -511,17 +414,12 @@
       "dependencies": ["@stylexjs/stylex"],
       "files": [
         {
-          "path": "registry/bases/stylex/skeleton/skeleton.tsx",
+          "path": "registry/bases/stylex/ui/skeleton.tsx",
           "type": "registry:ui",
-          "target": "components/ui/skeleton/skeleton.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/skeleton/skeleton.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/skeleton/skeleton.stylex.ts"
+          "target": "components/ui/skeleton.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "tabs",
@@ -531,17 +429,12 @@
       "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
       "files": [
         {
-          "path": "registry/bases/stylex/tabs/tabs.tsx",
+          "path": "registry/bases/stylex/ui/tabs.tsx",
           "type": "registry:ui",
-          "target": "components/ui/tabs/tabs.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/tabs/tabs.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/tabs/tabs.stylex.ts"
+          "target": "components/ui/tabs.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "toggle",
@@ -551,17 +444,12 @@
       "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
       "files": [
         {
-          "path": "registry/bases/stylex/toggle/toggle.tsx",
+          "path": "registry/bases/stylex/ui/toggle.tsx",
           "type": "registry:ui",
-          "target": "components/ui/toggle/toggle.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/toggle/toggle.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/toggle/toggle.stylex.ts"
+          "target": "components/ui/toggle.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "tooltip",
@@ -571,17 +459,12 @@
       "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
       "files": [
         {
-          "path": "registry/bases/stylex/tooltip/tooltip.tsx",
+          "path": "registry/bases/stylex/ui/tooltip.tsx",
           "type": "registry:ui",
-          "target": "components/ui/tooltip/tooltip.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/tooltip/tooltip.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/tooltip/tooltip.stylex.ts"
+          "target": "components/ui/tooltip.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "alert-dialog",
@@ -591,17 +474,12 @@
       "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
       "files": [
         {
-          "path": "registry/bases/stylex/alert-dialog/alert-dialog.tsx",
+          "path": "registry/bases/stylex/ui/alert-dialog.tsx",
           "type": "registry:ui",
-          "target": "components/ui/alert-dialog/alert-dialog.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/alert-dialog/alert-dialog.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/alert-dialog/alert-dialog.stylex.ts"
+          "target": "components/ui/alert-dialog.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "avatar",
@@ -611,17 +489,12 @@
       "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
       "files": [
         {
-          "path": "registry/bases/stylex/avatar/avatar.tsx",
+          "path": "registry/bases/stylex/ui/avatar.tsx",
           "type": "registry:ui",
-          "target": "components/ui/avatar/avatar.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/avatar/avatar.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/avatar/avatar.stylex.ts"
+          "target": "components/ui/avatar.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "breadcrumb",
@@ -631,17 +504,12 @@
       "dependencies": ["@stylexjs/stylex", "lucide-react"],
       "files": [
         {
-          "path": "registry/bases/stylex/breadcrumb/breadcrumb.tsx",
+          "path": "registry/bases/stylex/ui/breadcrumb.tsx",
           "type": "registry:ui",
-          "target": "components/ui/breadcrumb/breadcrumb.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/breadcrumb/breadcrumb.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/breadcrumb/breadcrumb.stylex.ts"
+          "target": "components/ui/breadcrumb.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "button-group",
@@ -651,17 +519,12 @@
       "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
       "files": [
         {
-          "path": "registry/bases/stylex/button-group/button-group.tsx",
+          "path": "registry/bases/stylex/ui/button-group.tsx",
           "type": "registry:ui",
-          "target": "components/ui/button-group/button-group.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/button-group/button-group.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/button-group/button-group.stylex.ts"
+          "target": "components/ui/button-group.tsx"
         }
       ],
-      "registryDependencies": ["separator", "stylex-tokens"]
+      "registryDependencies": ["separator", "stylex-tokens", "stylex-utils"]
     },
     {
       "name": "calendar",
@@ -671,17 +534,12 @@
       "dependencies": ["@stylexjs/stylex", "lucide-react", "react-day-picker"],
       "files": [
         {
-          "path": "registry/bases/stylex/calendar/calendar.tsx",
+          "path": "registry/bases/stylex/ui/calendar.tsx",
           "type": "registry:ui",
-          "target": "components/ui/calendar/calendar.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/calendar/calendar.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/calendar/calendar.stylex.ts"
+          "target": "components/ui/calendar.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "carousel",
@@ -695,17 +553,12 @@
       ],
       "files": [
         {
-          "path": "registry/bases/stylex/carousel/carousel.tsx",
+          "path": "registry/bases/stylex/ui/carousel.tsx",
           "type": "registry:ui",
-          "target": "components/ui/carousel/carousel.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/carousel/carousel.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/carousel/carousel.stylex.ts"
+          "target": "components/ui/carousel.tsx"
         }
       ],
-      "registryDependencies": ["button", "stylex-tokens"]
+      "registryDependencies": ["button", "stylex-tokens", "stylex-utils"]
     },
     {
       "name": "chart",
@@ -715,17 +568,12 @@
       "dependencies": ["@stylexjs/stylex", "recharts"],
       "files": [
         {
-          "path": "registry/bases/stylex/chart/chart.tsx",
+          "path": "registry/bases/stylex/ui/chart.tsx",
           "type": "registry:ui",
-          "target": "components/ui/chart/chart.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/chart/chart.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/chart/chart.stylex.ts"
+          "target": "components/ui/chart.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "checkbox",
@@ -735,17 +583,12 @@
       "dependencies": ["@base-ui/react", "@stylexjs/stylex", "lucide-react"],
       "files": [
         {
-          "path": "registry/bases/stylex/checkbox/checkbox.tsx",
+          "path": "registry/bases/stylex/ui/checkbox.tsx",
           "type": "registry:ui",
-          "target": "components/ui/checkbox/checkbox.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/checkbox/checkbox.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/checkbox/checkbox.stylex.ts"
+          "target": "components/ui/checkbox.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "hover-card",
@@ -755,17 +598,12 @@
       "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
       "files": [
         {
-          "path": "registry/bases/stylex/hover-card/hover-card.tsx",
+          "path": "registry/bases/stylex/ui/hover-card.tsx",
           "type": "registry:ui",
-          "target": "components/ui/hover-card/hover-card.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/hover-card/hover-card.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/hover-card/hover-card.stylex.ts"
+          "target": "components/ui/hover-card.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "input-otp",
@@ -775,17 +613,12 @@
       "dependencies": ["@base-ui/react", "@stylexjs/stylex", "lucide-react"],
       "files": [
         {
-          "path": "registry/bases/stylex/input-otp/input-otp.tsx",
+          "path": "registry/bases/stylex/ui/input-otp.tsx",
           "type": "registry:ui",
-          "target": "components/ui/input-otp/input-otp.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/input-otp/input-otp.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/input-otp/input-otp.stylex.ts"
+          "target": "components/ui/input-otp.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "label",
@@ -795,17 +628,12 @@
       "dependencies": ["@stylexjs/stylex"],
       "files": [
         {
-          "path": "registry/bases/stylex/label/label.tsx",
+          "path": "registry/bases/stylex/ui/label.tsx",
           "type": "registry:ui",
-          "target": "components/ui/label/label.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/label/label.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/label/label.stylex.ts"
+          "target": "components/ui/label.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "menubar",
@@ -815,17 +643,12 @@
       "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
       "files": [
         {
-          "path": "registry/bases/stylex/menubar/menubar.tsx",
+          "path": "registry/bases/stylex/ui/menubar.tsx",
           "type": "registry:ui",
-          "target": "components/ui/menubar/menubar.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/menubar/menubar.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/menubar/menubar.stylex.ts"
+          "target": "components/ui/menubar.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "navigation-menu",
@@ -835,17 +658,12 @@
       "dependencies": ["@base-ui/react", "@stylexjs/stylex", "lucide-react"],
       "files": [
         {
-          "path": "registry/bases/stylex/navigation-menu/navigation-menu.tsx",
+          "path": "registry/bases/stylex/ui/navigation-menu.tsx",
           "type": "registry:ui",
-          "target": "components/ui/navigation-menu/navigation-menu.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/navigation-menu/navigation-menu.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/navigation-menu/navigation-menu.stylex.ts"
+          "target": "components/ui/navigation-menu.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "pagination",
@@ -855,17 +673,12 @@
       "dependencies": ["@stylexjs/stylex", "lucide-react"],
       "files": [
         {
-          "path": "registry/bases/stylex/pagination/pagination.tsx",
+          "path": "registry/bases/stylex/ui/pagination.tsx",
           "type": "registry:ui",
-          "target": "components/ui/pagination/pagination.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/pagination/pagination.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/pagination/pagination.stylex.ts"
+          "target": "components/ui/pagination.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "progress",
@@ -875,17 +688,12 @@
       "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
       "files": [
         {
-          "path": "registry/bases/stylex/progress/progress.tsx",
+          "path": "registry/bases/stylex/ui/progress.tsx",
           "type": "registry:ui",
-          "target": "components/ui/progress/progress.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/progress/progress.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/progress/progress.stylex.ts"
+          "target": "components/ui/progress.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "radio-group",
@@ -895,17 +703,12 @@
       "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
       "files": [
         {
-          "path": "registry/bases/stylex/radio-group/radio-group.tsx",
+          "path": "registry/bases/stylex/ui/radio-group.tsx",
           "type": "registry:ui",
-          "target": "components/ui/radio-group/radio-group.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/radio-group/radio-group.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/radio-group/radio-group.stylex.ts"
+          "target": "components/ui/radio-group.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "resizable",
@@ -919,17 +722,12 @@
       ],
       "files": [
         {
-          "path": "registry/bases/stylex/resizable/resizable.tsx",
+          "path": "registry/bases/stylex/ui/resizable.tsx",
           "type": "registry:ui",
-          "target": "components/ui/resizable/resizable.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/resizable/resizable.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/resizable/resizable.stylex.ts"
+          "target": "components/ui/resizable.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "scroll-area",
@@ -939,17 +737,12 @@
       "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
       "files": [
         {
-          "path": "registry/bases/stylex/scroll-area/scroll-area.tsx",
+          "path": "registry/bases/stylex/ui/scroll-area.tsx",
           "type": "registry:ui",
-          "target": "components/ui/scroll-area/scroll-area.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/scroll-area/scroll-area.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/scroll-area/scroll-area.stylex.ts"
+          "target": "components/ui/scroll-area.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "select",
@@ -959,17 +752,12 @@
       "dependencies": ["@base-ui/react", "@stylexjs/stylex", "lucide-react"],
       "files": [
         {
-          "path": "registry/bases/stylex/select/select.tsx",
+          "path": "registry/bases/stylex/ui/select.tsx",
           "type": "registry:ui",
-          "target": "components/ui/select/select.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/select/select.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/select/select.stylex.ts"
+          "target": "components/ui/select.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "slider",
@@ -979,17 +767,12 @@
       "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
       "files": [
         {
-          "path": "registry/bases/stylex/slider/slider.tsx",
+          "path": "registry/bases/stylex/ui/slider.tsx",
           "type": "registry:ui",
-          "target": "components/ui/slider/slider.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/slider/slider.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/slider/slider.stylex.ts"
+          "target": "components/ui/slider.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "sonner",
@@ -999,11 +782,12 @@
       "dependencies": ["sonner", "next-themes"],
       "files": [
         {
-          "path": "registry/bases/stylex/sonner/sonner.tsx",
+          "path": "registry/bases/stylex/ui/sonner.tsx",
           "type": "registry:ui",
-          "target": "components/ui/sonner/sonner.tsx"
+          "target": "components/ui/sonner.tsx"
         }
-      ]
+      ],
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "spinner",
@@ -1013,17 +797,12 @@
       "dependencies": ["@stylexjs/stylex", "lucide-react"],
       "files": [
         {
-          "path": "registry/bases/stylex/spinner/spinner.tsx",
+          "path": "registry/bases/stylex/ui/spinner.tsx",
           "type": "registry:ui",
-          "target": "components/ui/spinner/spinner.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/spinner/spinner.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/spinner/spinner.stylex.ts"
+          "target": "components/ui/spinner.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "switch",
@@ -1033,17 +812,12 @@
       "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
       "files": [
         {
-          "path": "registry/bases/stylex/switch/switch.tsx",
+          "path": "registry/bases/stylex/ui/switch.tsx",
           "type": "registry:ui",
-          "target": "components/ui/switch/switch.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/switch/switch.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/switch/switch.stylex.ts"
+          "target": "components/ui/switch.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "table",
@@ -1053,17 +827,12 @@
       "dependencies": ["@stylexjs/stylex"],
       "files": [
         {
-          "path": "registry/bases/stylex/table/table.tsx",
+          "path": "registry/bases/stylex/ui/table.tsx",
           "type": "registry:ui",
-          "target": "components/ui/table/table.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/table/table.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/table/table.stylex.ts"
+          "target": "components/ui/table.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "textarea",
@@ -1073,17 +842,12 @@
       "dependencies": ["@stylexjs/stylex"],
       "files": [
         {
-          "path": "registry/bases/stylex/textarea/textarea.tsx",
+          "path": "registry/bases/stylex/ui/textarea.tsx",
           "type": "registry:ui",
-          "target": "components/ui/textarea/textarea.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/textarea/textarea.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/textarea/textarea.stylex.ts"
+          "target": "components/ui/textarea.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "toggle-group",
@@ -1093,17 +857,12 @@
       "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
       "files": [
         {
-          "path": "registry/bases/stylex/toggle-group/toggle-group.tsx",
+          "path": "registry/bases/stylex/ui/toggle-group.tsx",
           "type": "registry:ui",
-          "target": "components/ui/toggle-group/toggle-group.tsx"
-        },
-        {
-          "path": "registry/bases/stylex/toggle-group/toggle-group.stylex.ts",
-          "type": "registry:ui",
-          "target": "components/ui/toggle-group/toggle-group.stylex.ts"
+          "target": "components/ui/toggle-group.tsx"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils", "toggle"]
     },
     {
       "name": "attachment",
@@ -1123,7 +882,7 @@
           "target": "components/ui/attachment/attachment.stylex.ts"
         }
       ],
-      "registryDependencies": ["button", "stylex-tokens"]
+      "registryDependencies": ["button", "stylex-tokens", "stylex-utils"]
     },
     {
       "name": "bubble",
@@ -1143,7 +902,7 @@
           "target": "components/ui/bubble/bubble.stylex.ts"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "direction",
@@ -1177,7 +936,7 @@
           "target": "components/ui/marker/marker.stylex.ts"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "message",
@@ -1197,7 +956,7 @@
           "target": "components/ui/message/message.stylex.ts"
         }
       ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
     },
     {
       "name": "message-scroller",
@@ -1217,22 +976,7 @@
           "target": "components/ui/message-scroller/message-scroller.stylex.ts"
         }
       ],
-      "registryDependencies": ["button", "stylex-tokens"]
-    },
-    {
-      "name": "stylex-utils",
-      "type": "registry:lib",
-      "title": "StyleX Utilities",
-      "description": "Reusable shimmer, scroll-fade, and visually-hidden StyleX utilities.",
-      "dependencies": ["@stylexjs/stylex"],
-      "files": [
-        {
-          "path": "registry/bases/stylex/utils/stylex-utils.ts",
-          "type": "registry:lib",
-          "target": "components/ui/utils/stylex-utils.ts"
-        }
-      ],
-      "registryDependencies": ["stylex-tokens"]
+      "registryDependencies": ["button", "stylex-tokens", "stylex-utils"]
     },
     {
       "name": "use-mobile",

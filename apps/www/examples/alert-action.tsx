@@ -4,8 +4,8 @@ import {
   Alert,
   AlertDescription,
   AlertTitle,
-} from "@/registry/bases/stylex/alert/alert";
-import { Button } from "@/registry/bases/stylex/button/button";
+} from "@/registry/bases/stylex/ui/alert";
+import { Button } from "@/registry/bases/stylex/ui/button";
 
 export default function AlertAction() {
   return (

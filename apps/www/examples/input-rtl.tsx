@@ -2,7 +2,7 @@
 
 import { useTranslation } from "@/components/language-selector";
 import type { Translations } from "@/components/language-selector";
-import { Input } from "@/registry/bases/stylex/input/input";
+import { Input } from "@/registry/bases/stylex/ui/input";
 
 const translations: Translations = {
   ar: { dir: "rtl", values: { placeholder: "البريد الإلكتروني" } },

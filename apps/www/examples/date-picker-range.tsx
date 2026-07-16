@@ -5,14 +5,14 @@ import { CalendarIcon } from "lucide-react";
 import { useState } from "react";
 import type { DateRange } from "react-day-picker";
 
-import { Button } from "@/registry/bases/stylex/button/button";
-import { Calendar } from "@/registry/bases/stylex/calendar/calendar";
-import { Field, FieldLabel } from "@/registry/bases/stylex/field/field";
+import { Button } from "@/registry/bases/stylex/ui/button";
+import { Calendar } from "@/registry/bases/stylex/ui/calendar";
+import { Field, FieldLabel } from "@/registry/bases/stylex/ui/field";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/registry/bases/stylex/popover/popover";
+} from "@/registry/bases/stylex/ui/popover";
 
 export default function DatePickerWithRange() {
   const [date, setDate] = useState<DateRange | undefined>({

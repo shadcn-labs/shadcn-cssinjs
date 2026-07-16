@@ -8,7 +8,7 @@ import {
   FieldDescription,
   FieldGroup,
   FieldLabel,
-} from "@/registry/bases/stylex/field/field";
+} from "@/registry/bases/stylex/ui/field";
 import {
   Select,
   SelectContent,
@@ -16,8 +16,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/registry/bases/stylex/select/select";
-import { Switch } from "@/registry/bases/stylex/switch/switch";
+} from "@/registry/bases/stylex/ui/select";
+import { Switch } from "@/registry/bases/stylex/ui/switch";
 
 const fruits = ["Apple", "Banana", "Blueberry", "Grapes", "Pineapple"];
 

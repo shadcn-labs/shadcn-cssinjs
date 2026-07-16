@@ -3,9 +3,9 @@
 import { useRender } from "@base-ui/react";
 import type { StyleXStyles } from "@stylexjs/stylex";
 
-import { cx, x } from "@/lib/utils";
+import { cx, x } from "@/registry/bases/stylex/lib/utils.stylex";
+import { Button } from "@/registry/bases/stylex/ui/button";
 
-import { Button } from "../button/button";
 import { styles } from "./attachment.stylex";
 
 type AttachmentSize = "default" | "sm" | "xs";

@@ -1,4 +1,4 @@
-import { Checkbox } from "@/registry/bases/stylex/checkbox/checkbox";
+import { Checkbox } from "@/registry/bases/stylex/ui/checkbox";
 import {
   Field,
   FieldDescription,
@@ -6,7 +6,7 @@ import {
   FieldLabel,
   FieldLegend,
   FieldSet,
-} from "@/registry/bases/stylex/field/field";
+} from "@/registry/bases/stylex/ui/field";
 
 const ITEMS = [
   { defaultChecked: true, id: "hard-disks", label: "Hard disks" },

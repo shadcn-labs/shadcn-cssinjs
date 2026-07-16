@@ -7,7 +7,7 @@ import {
   InputOTPGroup,
   InputOTPSeparator,
   InputOTPSlot,
-} from "@/registry/bases/stylex/input-otp/input-otp";
+} from "@/registry/bases/stylex/ui/input-otp";
 
 const translations: Translations = {
   ar: { dir: "rtl", values: {} },

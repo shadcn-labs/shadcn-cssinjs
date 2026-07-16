@@ -4,8 +4,8 @@ import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
-} from "@/registry/bases/stylex/input-group/input-group";
-import { Kbd } from "@/registry/bases/stylex/kbd/kbd";
+} from "@/registry/bases/stylex/ui/input-group";
+import { Kbd } from "@/registry/bases/stylex/ui/kbd";
 
 export default function KbdInputGroup() {
   return (

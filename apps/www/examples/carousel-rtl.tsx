@@ -4,14 +4,14 @@ import * as React from "react";
 
 import { useTranslation } from "@/components/language-selector";
 import type { Translations } from "@/components/language-selector";
-import { Card, CardContent } from "@/registry/bases/stylex/card/card";
+import { Card, CardContent } from "@/registry/bases/stylex/ui/card";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/registry/bases/stylex/carousel/carousel";
+} from "@/registry/bases/stylex/ui/carousel";
 
 const translations: Translations = {
   ar: {

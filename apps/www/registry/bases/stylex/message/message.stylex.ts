@@ -1,6 +1,6 @@
 import * as stylex from "@stylexjs/stylex";
 
-import { colors } from "../tokens.stylex";
+import { colors } from "@/registry/bases/stylex/lib/tokens.stylex";
 
 export const styles = stylex.create({
   avatar: {

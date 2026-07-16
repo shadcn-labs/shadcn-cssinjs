@@ -6,7 +6,7 @@ import {
   ItemContent,
   ItemDescription,
   ItemTitle,
-} from "@/registry/bases/stylex/item/item";
+} from "@/registry/bases/stylex/ui/item";
 
 export default function ItemLink() {
   return (

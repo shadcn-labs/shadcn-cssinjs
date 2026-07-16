@@ -6,11 +6,11 @@ import {
   Field,
   FieldDescription,
   FieldLabel,
-} from "@/registry/bases/stylex/field/field";
+} from "@/registry/bases/stylex/ui/field";
 import {
   ToggleGroup,
   ToggleGroupItem,
-} from "@/registry/bases/stylex/toggle-group/toggle-group";
+} from "@/registry/bases/stylex/ui/toggle-group";
 
 const WEIGHTS = [
   { className: "font-light", label: "Light", value: "light" },

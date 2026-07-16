@@ -8,9 +8,9 @@ import {
 } from "@shadcn/react/message-scroller";
 import { ArrowDownIcon } from "lucide-react";
 
-import { cx, x } from "@/lib/utils";
+import { cx, x } from "@/registry/bases/stylex/lib/utils.stylex";
+import { Button } from "@/registry/bases/stylex/ui/button";
 
-import { Button } from "../button/button";
 import { styles } from "./message-scroller.stylex";
 
 const MessageScrollerProvider = (

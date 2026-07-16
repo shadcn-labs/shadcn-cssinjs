@@ -3,7 +3,7 @@ import * as stylex from "@stylexjs/stylex";
 import {
   colors,
   radius,
-} from "../../../../registry/bases/stylex/tokens.stylex";
+} from "../../../../registry/bases/stylex/lib/tokens.stylex";
 
 const rise = stylex.keyframes({
   from: { opacity: 0, transform: "translateY(6px)" },

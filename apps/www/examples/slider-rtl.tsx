@@ -4,7 +4,7 @@ import * as React from "react";
 
 import { useTranslation } from "@/components/language-selector";
 import type { Translations } from "@/components/language-selector";
-import { Slider } from "@/registry/bases/stylex/slider/slider";
+import { Slider } from "@/registry/bases/stylex/ui/slider";
 
 const translations: Translations = {
   ar: {

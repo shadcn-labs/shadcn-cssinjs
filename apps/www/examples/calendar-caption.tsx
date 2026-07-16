@@ -1,6 +1,6 @@
 "use client";
 
-import { Calendar } from "@/registry/bases/stylex/calendar/calendar";
+import { Calendar } from "@/registry/bases/stylex/ui/calendar";
 
 export default function CalendarCaption() {
   return (

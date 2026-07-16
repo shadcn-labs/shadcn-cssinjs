@@ -6,7 +6,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/registry/bases/stylex/select/select";
+} from "@/registry/bases/stylex/ui/select";
 
 const groups = [
   {

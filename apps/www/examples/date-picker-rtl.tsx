@@ -11,13 +11,13 @@ import {
 
 import { useTranslation } from "@/components/language-selector";
 import type { Translations } from "@/components/language-selector";
-import { Button } from "@/registry/bases/stylex/button/button";
-import { Calendar } from "@/registry/bases/stylex/calendar/calendar";
+import { Button } from "@/registry/bases/stylex/ui/button";
+import { Calendar } from "@/registry/bases/stylex/ui/calendar";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/registry/bases/stylex/popover/popover";
+} from "@/registry/bases/stylex/ui/popover";
 
 const translations: Translations = {
   ar: {

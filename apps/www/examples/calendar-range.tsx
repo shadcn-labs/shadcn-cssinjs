@@ -4,7 +4,7 @@ import { addDays } from "date-fns";
 import { useState } from "react";
 import type { DateRange } from "react-day-picker";
 
-import { Calendar } from "@/registry/bases/stylex/calendar/calendar";
+import { Calendar } from "@/registry/bases/stylex/ui/calendar";
 
 export default function CalendarRange() {
   const [dateRange, setDateRange] = useState<DateRange | undefined>({

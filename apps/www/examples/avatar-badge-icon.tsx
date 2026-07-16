@@ -5,7 +5,7 @@ import {
   AvatarBadge,
   AvatarFallback,
   AvatarImage,
-} from "@/registry/bases/stylex/avatar/avatar";
+} from "@/registry/bases/stylex/ui/avatar";
 
 export default function AvatarBadgeIcon() {
   return (

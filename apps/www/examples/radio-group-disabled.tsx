@@ -1,8 +1,8 @@
-import { Field, FieldLabel } from "@/registry/bases/stylex/field/field";
+import { Field, FieldLabel } from "@/registry/bases/stylex/ui/field";
 import {
   RadioGroup,
   RadioGroupItem,
-} from "@/registry/bases/stylex/radio-group/radio-group";
+} from "@/registry/bases/stylex/ui/radio-group";
 
 export default function RadioGroupDisabled() {
   return (
