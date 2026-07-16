@@ -5,12 +5,12 @@ import * as React from "react";
 
 import { useTranslation } from "@/components/language-selector";
 import type { Translations } from "@/components/language-selector";
-import { Button } from "@/registry/bases/stylex/button/button";
+import { Button } from "@/registry/bases/stylex/ui/button";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/registry/bases/stylex/collapsible/collapsible";
+} from "@/registry/bases/stylex/ui/collapsible";
 
 const translations: Translations = {
   ar: {

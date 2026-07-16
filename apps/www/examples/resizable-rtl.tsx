@@ -8,7 +8,7 @@ import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
-} from "@/registry/bases/stylex/resizable/resizable";
+} from "@/registry/bases/stylex/ui/resizable";
 
 const translations: Translations = {
   ar: {

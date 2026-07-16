@@ -9,7 +9,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/registry/bases/stylex/accordion/accordion";
+} from "@/registry/bases/stylex/ui/accordion";
 
 const translations: Translations = {
   ar: {

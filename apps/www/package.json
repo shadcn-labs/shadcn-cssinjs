@@ -9,7 +9,7 @@
     "typecheck": "tsc --noEmit",
     "tokenami:build": "tokenami --output ./styles/tokenami.css --minify",
     "tokenami:watch": "tokenami --output ./styles/tokenami.css --watch",
-    "registry:build": "shadcn build registry.json --output ./public/r",
+    "registry:build": "shadcn build registry.json --output ./public/r && node scripts/rewrite-registry-ui-imports.mjs",
     "postinstall": "fumadocs-mdx",
     "check": "ultracite check",
     "fix": "ultracite fix"

@@ -7,7 +7,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/registry/bases/stylex/table/table";
+} from "@/registry/bases/stylex/ui/table";
 
 const INVOICES = [
   {

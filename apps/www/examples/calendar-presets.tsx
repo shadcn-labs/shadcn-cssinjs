@@ -3,13 +3,9 @@
 import { addDays } from "date-fns";
 import { useState } from "react";
 
-import { Button } from "@/registry/bases/stylex/button/button";
-import { Calendar } from "@/registry/bases/stylex/calendar/calendar";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-} from "@/registry/bases/stylex/card/card";
+import { Button } from "@/registry/bases/stylex/ui/button";
+import { Calendar } from "@/registry/bases/stylex/ui/calendar";
+import { Card, CardContent, CardFooter } from "@/registry/bases/stylex/ui/card";
 
 export default function CalendarWithPresets() {
   const [date, setDate] = useState<Date | undefined>(

@@ -7,7 +7,7 @@ import {
   SelectSeparator,
   SelectTrigger,
   SelectValue,
-} from "@/registry/bases/stylex/select/select";
+} from "@/registry/bases/stylex/ui/select";
 
 const fruits = ["Apple", "Banana", "Blueberry"];
 const vegetables = ["Carrot", "Broccoli", "Spinach"];

@@ -2,7 +2,7 @@
 
 import { toast } from "sonner";
 
-import { Button } from "@/registry/bases/stylex/button/button";
+import { Button } from "@/registry/bases/stylex/ui/button";
 
 const POSITIONS = [
   "top-left",

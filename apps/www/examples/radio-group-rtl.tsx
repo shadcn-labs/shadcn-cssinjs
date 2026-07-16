@@ -5,7 +5,7 @@ import type { Translations } from "@/components/language-selector";
 import {
   RadioGroup,
   RadioGroupItem,
-} from "@/registry/bases/stylex/radio-group/radio-group";
+} from "@/registry/bases/stylex/ui/radio-group";
 
 const translations: Translations = {
   ar: {

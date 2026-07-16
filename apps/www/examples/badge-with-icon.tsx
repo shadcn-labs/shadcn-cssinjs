@@ -1,6 +1,6 @@
 import { BadgeCheckIcon } from "lucide-react";
 
-import { Badge } from "@/registry/bases/stylex/badge/badge";
+import { Badge } from "@/registry/bases/stylex/ui/badge";
 
 export default function BadgeWithIcon() {
   return (

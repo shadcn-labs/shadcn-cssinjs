@@ -2,7 +2,7 @@
 
 import { useTranslation } from "@/components/language-selector";
 import type { Translations } from "@/components/language-selector";
-import { Textarea } from "@/registry/bases/stylex/textarea/textarea";
+import { Textarea } from "@/registry/bases/stylex/ui/textarea";
 
 const translations: Translations = {
   ar: { dir: "rtl", values: { placeholder: "اكتب رسالتك هنا." } },

@@ -4,8 +4,8 @@ import * as React from "react";
 
 import { useTranslation } from "@/components/language-selector";
 import type { Translations } from "@/components/language-selector";
-import { Checkbox } from "@/registry/bases/stylex/checkbox/checkbox";
-import { Label } from "@/registry/bases/stylex/label/label";
+import { Checkbox } from "@/registry/bases/stylex/ui/checkbox";
+import { Label } from "@/registry/bases/stylex/ui/label";
 
 const translations: Translations = {
   ar: {

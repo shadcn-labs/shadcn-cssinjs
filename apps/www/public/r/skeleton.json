@@ -7,20 +7,15 @@
     "@stylexjs/stylex"
   ],
   "registryDependencies": [
-    "stylex-tokens"
+    "stylex-tokens",
+    "stylex-utils"
   ],
   "files": [
     {
-      "path": "registry/bases/stylex/skeleton/skeleton.tsx",
-      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nimport { styles } from \"./skeleton.stylex\";\n\nconst Skeleton = ({\n  className,\n  style,\n  ...props\n}: React.ComponentProps<\"div\">) => {\n  const p = stylex.props(styles.root);\n  return (\n    <div\n      data-slot=\"skeleton\"\n      className={[p.className, className].filter(Boolean).join(\" \") || undefined}\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nexport { Skeleton };\n",
+      "path": "registry/bases/stylex/ui/skeleton.tsx",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\nimport type { StyleXStyles } from \"@stylexjs/stylex\";\n\nimport { colors, radius } from \"@/lib/tokens.stylex\";\nimport { customClassName } from \"@/lib/utils.stylex\";\n\nconst pulse = stylex.keyframes({\n  \"50%\": { opacity: 0.5 },\n});\n\nconst styles = stylex.create({\n  root: {\n    animationDuration: \"2s\",\n    animationIterationCount: \"infinite\",\n    animationName: pulse,\n    animationTimingFunction: \"cubic-bezier(0.4, 0, 0.6, 1)\",\n    backgroundColor: `color-mix(in oklab, ${colors.muted} 50%, transparent)`,\n    borderRadius: radius.md,\n  },\n});\n\nconst Skeleton = ({\n  className,\n  style,\n  ...props\n}: React.ComponentProps<\"div\">) => (\n  <div\n    data-slot=\"skeleton\"\n    {...stylex.props(\n      styles.root,\n      customClassName(className),\n      style as StyleXStyles\n    )}\n    {...props}\n  />\n);\n\nexport { Skeleton };\n",
       "type": "registry:ui",
-      "target": "components/ui/skeleton/skeleton.tsx"
-    },
-    {
-      "path": "registry/bases/stylex/skeleton/skeleton.stylex.ts",
-      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nimport { colors, radius } from \"../tokens.stylex\";\n\nconst pulse = stylex.keyframes({\n  \"50%\": { opacity: 0.5 },\n});\n\nexport const styles = stylex.create({\n  root: {\n    animationDuration: \"2s\",\n    animationIterationCount: \"infinite\",\n    animationName: pulse,\n    animationTimingFunction: \"cubic-bezier(0.4, 0, 0.6, 1)\",\n    backgroundColor: `color-mix(in oklab, ${colors.muted} 50%, transparent)`,\n    borderRadius: radius.md,\n  },\n});\n",
-      "type": "registry:ui",
-      "target": "components/ui/skeleton/skeleton.stylex.ts"
+      "target": "components/ui/skeleton.tsx"
     }
   ],
   "type": "registry:ui"

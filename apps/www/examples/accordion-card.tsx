@@ -3,14 +3,14 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/registry/bases/stylex/accordion/accordion";
+} from "@/registry/bases/stylex/ui/accordion";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/registry/bases/stylex/card/card";
+} from "@/registry/bases/stylex/ui/card";
 
 export default function AccordionCard() {
   return (

@@ -1,4 +1,4 @@
-import { Toggle } from "@/registry/bases/stylex/toggle/toggle";
+import { Toggle } from "@/registry/bases/stylex/ui/toggle";
 
 export default function ToggleSizes() {
   return (

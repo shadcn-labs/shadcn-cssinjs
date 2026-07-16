@@ -8,20 +8,15 @@
     "@stylexjs/stylex"
   ],
   "registryDependencies": [
-    "stylex-tokens"
+    "stylex-tokens",
+    "stylex-utils"
   ],
   "files": [
     {
-      "path": "registry/bases/stylex/scroll-area/scroll-area.tsx",
-      "content": "\"use client\";\n\nimport { ScrollArea as ScrollAreaPrimitive } from \"@base-ui/react/scroll-area\";\n\nimport * as stylex from \"@stylexjs/stylex\";\n\nimport { styles } from \"./scroll-area.stylex\";\n\nconst ScrollArea = ({\n  className,\n  style,\n  children,\n  ...props\n}: Omit<React.ComponentProps<typeof ScrollAreaPrimitive.Root>, \"className\"> & {\n  className?: string;\n}) => {\n  const root = stylex.props(styles.root);\n  return (\n    <ScrollAreaPrimitive.Root\n      className={[root.className, className].filter(Boolean).join(\" \") || undefined}\n      data-slot=\"scroll-area\"\n      style={{ ...root.style, ...style }}\n      {...props}\n    >\n      <ScrollAreaPrimitive.Viewport\n        className={stylex.props(styles.viewport).className}\n        data-slot=\"scroll-area-viewport\"\n      >\n        {children}\n      </ScrollAreaPrimitive.Viewport>\n      <ScrollAreaPrimitive.Scrollbar\n        className={stylex.props(styles.scrollbar).className}\n        data-slot=\"scroll-area-scrollbar\"\n        orientation=\"vertical\"\n      >\n        <ScrollAreaPrimitive.Thumb\n          className={stylex.props(styles.thumb).className}\n          data-slot=\"scroll-area-thumb\"\n        />\n      </ScrollAreaPrimitive.Scrollbar>\n    </ScrollAreaPrimitive.Root>\n  );\n};\n\nexport { ScrollArea };\n",
+      "path": "registry/bases/stylex/ui/scroll-area.tsx",
+      "content": "\"use client\";\n\nimport { ScrollArea as ScrollAreaPrimitive } from \"@base-ui/react/scroll-area\";\nimport * as stylex from \"@stylexjs/stylex\";\nimport type { StyleXStyles } from \"@stylexjs/stylex\";\n\nimport { colors } from \"@/lib/tokens.stylex\";\nimport { customClassName } from \"@/lib/utils.stylex\";\n\nconst styles = stylex.create({\n  root: {\n    overflow: \"hidden\",\n    position: \"relative\",\n  },\n  scrollbar: {\n    display: \"flex\",\n    padding: \"1px\",\n    touchAction: \"none\",\n    transition: \"opacity 0.15s ease-in-out\",\n    userSelect: \"none\",\n    width: \"0.625rem\",\n  },\n  thumb: {\n    backgroundColor: colors.border,\n    borderRadius: \"9999px\",\n    flex: 1,\n  },\n  viewport: {\n    height: \"100%\",\n    outline: \"none\",\n    overscrollBehavior: \"contain\",\n    width: \"100%\",\n  },\n});\n\nconst ScrollArea = ({\n  className,\n  style,\n  children,\n  ...props\n}: Omit<React.ComponentProps<typeof ScrollAreaPrimitive.Root>, \"className\"> & {\n  className?: string;\n}) => (\n  <ScrollAreaPrimitive.Root\n    {...stylex.props(\n      styles.root,\n      customClassName(className),\n      style as StyleXStyles\n    )}\n    data-slot=\"scroll-area\"\n    {...props}\n  >\n    <ScrollAreaPrimitive.Viewport\n      className={stylex.props(styles.viewport).className}\n      data-slot=\"scroll-area-viewport\"\n    >\n      {children}\n    </ScrollAreaPrimitive.Viewport>\n    <ScrollAreaPrimitive.Scrollbar\n      className={stylex.props(styles.scrollbar).className}\n      data-slot=\"scroll-area-scrollbar\"\n      orientation=\"vertical\"\n    >\n      <ScrollAreaPrimitive.Thumb\n        className={stylex.props(styles.thumb).className}\n        data-slot=\"scroll-area-thumb\"\n      />\n    </ScrollAreaPrimitive.Scrollbar>\n  </ScrollAreaPrimitive.Root>\n);\n\nexport { ScrollArea };\n",
       "type": "registry:ui",
-      "target": "components/ui/scroll-area/scroll-area.tsx"
-    },
-    {
-      "path": "registry/bases/stylex/scroll-area/scroll-area.stylex.ts",
-      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nimport { colors } from \"../tokens.stylex\";\n\nexport const styles = stylex.create({\n  root: {\n    overflow: \"hidden\",\n    position: \"relative\",\n  },\n  scrollbar: {\n    display: \"flex\",\n    padding: \"1px\",\n    touchAction: \"none\",\n    transition: \"opacity 0.15s ease-in-out\",\n    userSelect: \"none\",\n    width: \"0.625rem\",\n  },\n  thumb: {\n    backgroundColor: colors.border,\n    borderRadius: \"9999px\",\n    flex: 1,\n  },\n  viewport: {\n    height: \"100%\",\n    outline: \"none\",\n    overscrollBehavior: \"contain\",\n    width: \"100%\",\n  },\n});\n",
-      "type": "registry:ui",
-      "target": "components/ui/scroll-area/scroll-area.stylex.ts"
+      "target": "components/ui/scroll-area.tsx"
     }
   ],
   "type": "registry:ui"

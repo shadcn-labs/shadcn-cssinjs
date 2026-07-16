@@ -4,7 +4,7 @@ import * as React from "react";
 
 import { useTranslation } from "@/components/language-selector";
 import type { Translations } from "@/components/language-selector";
-import { Separator } from "@/registry/bases/stylex/separator/separator";
+import { Separator } from "@/registry/bases/stylex/ui/separator";
 
 const translations: Translations = {
   ar: {

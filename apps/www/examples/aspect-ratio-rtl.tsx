@@ -5,7 +5,7 @@ import * as React from "react";
 
 import { useTranslation } from "@/components/language-selector";
 import type { Translations } from "@/components/language-selector";
-import { AspectRatio } from "@/registry/bases/stylex/aspect-ratio/aspect-ratio";
+import { AspectRatio } from "@/registry/bases/stylex/ui/aspect-ratio";
 
 const translations: Translations = {
   ar: {

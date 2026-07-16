@@ -1,4 +1,4 @@
-import { Checkbox } from "@/registry/bases/stylex/checkbox/checkbox";
+import { Checkbox } from "@/registry/bases/stylex/ui/checkbox";
 import {
   Field,
   FieldDescription,
@@ -6,7 +6,7 @@ import {
   FieldLabel,
   FieldSeparator,
   FieldSet,
-} from "@/registry/bases/stylex/field/field";
+} from "@/registry/bases/stylex/ui/field";
 
 export default function FieldGroupExample() {
   return (

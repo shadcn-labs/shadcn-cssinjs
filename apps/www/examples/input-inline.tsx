@@ -1,6 +1,6 @@
-import { Button } from "@/registry/bases/stylex/button/button";
-import { Field } from "@/registry/bases/stylex/field/field";
-import { Input } from "@/registry/bases/stylex/input/input";
+import { Button } from "@/registry/bases/stylex/ui/button";
+import { Field } from "@/registry/bases/stylex/ui/field";
+import { Input } from "@/registry/bases/stylex/ui/input";
 
 export default function InputInline() {
   return (

@@ -1,4 +1,4 @@
-import { Button } from "@/registry/bases/stylex/button/button";
+import { Button } from "@/registry/bases/stylex/ui/button";
 import {
   Empty,
   EmptyContent,
@@ -6,8 +6,8 @@ import {
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
-} from "@/registry/bases/stylex/empty/empty";
-import { Spinner } from "@/registry/bases/stylex/spinner/spinner";
+} from "@/registry/bases/stylex/ui/empty";
+import { Spinner } from "@/registry/bases/stylex/ui/spinner";
 
 export default function SpinnerEmpty() {
   return (

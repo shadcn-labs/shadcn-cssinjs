@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { Checkbox } from "@/registry/bases/stylex/checkbox/checkbox";
+import { Checkbox } from "@/registry/bases/stylex/ui/checkbox";
 import {
   Table,
   TableBody,
@@ -10,7 +10,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/registry/bases/stylex/table/table";
+} from "@/registry/bases/stylex/ui/table";
 
 const tableData = [
   {

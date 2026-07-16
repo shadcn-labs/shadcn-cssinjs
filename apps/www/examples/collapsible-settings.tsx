@@ -2,12 +2,12 @@
 
 import { ChevronsUpDownIcon } from "lucide-react";
 
-import { Button } from "@/registry/bases/stylex/button/button";
+import { Button } from "@/registry/bases/stylex/ui/button";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/registry/bases/stylex/collapsible/collapsible";
+} from "@/registry/bases/stylex/ui/collapsible";
 
 const row = {
   border: "1px solid var(--border)",

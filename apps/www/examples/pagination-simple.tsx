@@ -3,7 +3,7 @@ import {
   PaginationContent,
   PaginationItem,
   PaginationLink,
-} from "@/registry/bases/stylex/pagination/pagination";
+} from "@/registry/bases/stylex/ui/pagination";
 
 const PAGES = [1, 2, 3, 4, 5];
 

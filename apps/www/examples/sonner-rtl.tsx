@@ -4,8 +4,8 @@ import { toast } from "sonner";
 
 import { useTranslation } from "@/components/language-selector";
 import type { Translations } from "@/components/language-selector";
-import { Button } from "@/registry/bases/stylex/button/button";
-import { Toaster } from "@/registry/bases/stylex/sonner/sonner";
+import { Button } from "@/registry/bases/stylex/ui/button";
+import { Toaster } from "@/registry/bases/stylex/ui/sonner";
 
 const translations: Translations = {
   ar: {

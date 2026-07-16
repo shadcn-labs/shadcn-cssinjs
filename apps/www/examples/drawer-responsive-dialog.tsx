@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 import { useIsMobile } from "@/hooks/use-mobile";
-import { Button } from "@/registry/bases/stylex/button/button";
+import { Button } from "@/registry/bases/stylex/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -11,7 +11,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/registry/bases/stylex/dialog/dialog";
+} from "@/registry/bases/stylex/ui/dialog";
 import {
   Drawer,
   DrawerClose,
@@ -21,9 +21,9 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "@/registry/bases/stylex/drawer/drawer";
-import { Input } from "@/registry/bases/stylex/input/input";
-import { Label } from "@/registry/bases/stylex/label/label";
+} from "@/registry/bases/stylex/ui/drawer";
+import { Input } from "@/registry/bases/stylex/ui/input";
+import { Label } from "@/registry/bases/stylex/ui/label";
 
 const ProfileForm = () => (
   <form className="grid items-start gap-4">

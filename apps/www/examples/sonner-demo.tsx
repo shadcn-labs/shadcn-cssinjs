@@ -2,8 +2,8 @@
 
 import { toast } from "sonner";
 
-import { Button } from "@/registry/bases/stylex/button/button";
-import { Toaster } from "@/registry/bases/stylex/sonner/sonner";
+import { Button } from "@/registry/bases/stylex/ui/button";
+import { Toaster } from "@/registry/bases/stylex/ui/sonner";
 
 export default function SonnerDemo() {
   return (

@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/registry/bases/stylex/button/button";
+import { Button } from "@/registry/bases/stylex/ui/button";
 import {
   Combobox,
   ComboboxContent,
@@ -10,7 +10,7 @@ import {
   ComboboxList,
   ComboboxTrigger,
   ComboboxValue,
-} from "@/registry/bases/stylex/combobox/combobox";
+} from "@/registry/bases/stylex/ui/combobox";
 
 const countries = [
   { code: "", continent: "", label: "Select country", value: "" },

@@ -5,6 +5,9 @@ const config = {
     // These options must match `.babelrc` so the class-name hashes emitted
     // here line up with the ones the Babel transform produces at runtime.
     "@stylexjs/postcss-plugin": {
+      aliases: {
+        "@/registry/bases/stylex/lib/*": ["../lib/*"],
+      },
       include: [
         "registry/**/*.{js,jsx,ts,tsx}",
         "examples/**/*.{js,jsx,ts,tsx}",

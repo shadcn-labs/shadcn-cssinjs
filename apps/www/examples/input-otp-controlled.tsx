@@ -6,7 +6,7 @@ import {
   InputOTP,
   InputOTPGroup,
   InputOTPSlot,
-} from "@/registry/bases/stylex/input-otp/input-otp";
+} from "@/registry/bases/stylex/ui/input-otp";
 
 export default function InputOTPControlled() {
   const [value, setValue] = useState("");
