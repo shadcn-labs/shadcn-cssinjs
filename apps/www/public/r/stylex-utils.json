@@ -2,14 +2,17 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "stylex-utils",
   "title": "StyleX Utilities",
-  "description": "Utilities for composing custom class names with StyleX.",
+  "description": "StyleX class-name helpers plus reusable shimmer, scroll-fade, and visually-hidden utilities.",
   "dependencies": [
     "@stylexjs/stylex"
+  ],
+  "registryDependencies": [
+    "stylex-tokens"
   ],
   "files": [
     {
       "path": "registry/bases/stylex/lib/utils.stylex.ts",
-      "content": "import type { StyleXStyles } from \"@stylexjs/stylex\";\n\nexport const customClassName = (className: string | undefined) =>\n  className ? ({ [className]: className, $$css: true } as StyleXStyles) : null;\n",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\nimport type { StyleXStyles } from \"@stylexjs/stylex\";\n\nimport { colors } from \"./tokens.stylex\";\n\nconst shimmer = stylex.keyframes({\n  \"0%\": { backgroundPosition: \"200% 0\" },\n  \"100%\": { backgroundPosition: \"-200% 0\" },\n});\n\nexport const customClassName = (className: string | undefined) =>\n  className ? ({ [className]: className, $$css: true } as StyleXStyles) : null;\n\nexport const x = (\n  ...styles: (StyleXStyles | boolean | null | undefined | 0)[]\n): ReturnType<typeof stylex.props> =>\n  stylex.props(...(styles.filter(Boolean) as StyleXStyles[]));\n\nexport const cx = (...parts: (string | false | null | undefined)[]) =>\n  parts.filter(Boolean).join(\" \") || undefined;\n\nexport const utilityStyles = stylex.create({\n  scrollFadeBlock: {\n    maskImage:\n      \"linear-gradient(to bottom, transparent, black 1.5rem, black calc(100% - 1.5rem), transparent)\",\n  },\n  scrollFadeInline: {\n    maskImage:\n      \"linear-gradient(to right, transparent, black 1.5rem, black calc(100% - 1.5rem), transparent)\",\n  },\n  shimmer: {\n    WebkitBackgroundClip: \"text\",\n    animationDuration: \"2s\",\n    animationIterationCount: \"infinite\",\n    animationName: shimmer,\n    animationTimingFunction: \"linear\",\n    backgroundImage: `linear-gradient(90deg, ${colors.mutedForeground} 0%, ${colors.foreground} 50%, ${colors.mutedForeground} 100%)`,\n    backgroundSize: \"200% 100%\",\n    color: \"transparent\",\n  },\n  visuallyHidden: {\n    border: 0,\n    clip: \"rect(0 0 0 0)\",\n    clipPath: \"inset(50%)\",\n    height: \"1px\",\n    margin: \"-1px\",\n    overflow: \"hidden\",\n    padding: 0,\n    position: \"absolute\",\n    whiteSpace: \"nowrap\",\n    width: \"1px\",\n  },\n});\n\nexport { stylex };\n",
       "type": "registry:lib",
       "target": "lib/utils.stylex.ts"
     }

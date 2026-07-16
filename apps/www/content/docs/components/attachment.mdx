@@ -1,0 +1,38 @@
+---
+title: Attachment
+description: Display file attachments, upload states, metadata, and actions.
+---
+
+## Installation
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/attachment.json
+```
+
+## Usage
+
+```tsx
+import {
+  Attachment,
+  AttachmentActions,
+  AttachmentContent,
+  AttachmentDescription,
+  AttachmentMedia,
+  AttachmentTitle,
+} from "@/components/ui/attachment/attachment";
+```
+
+```tsx
+<Attachment state="done">
+  <AttachmentMedia>PDF</AttachmentMedia>
+  <AttachmentContent>
+    <AttachmentTitle>report.pdf</AttachmentTitle>
+    <AttachmentDescription>2.4 MB</AttachmentDescription>
+  </AttachmentContent>
+  <AttachmentActions>{/* Actions */}</AttachmentActions>
+</Attachment>
+```
+
+## API Reference
+
+`Attachment` accepts `state`, `size`, and `orientation`. Use `AttachmentGroup` to display a horizontally scrollable collection.

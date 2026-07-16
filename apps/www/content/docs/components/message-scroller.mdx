@@ -1,0 +1,39 @@
+---
+title: Message Scroller
+description: Keep streaming message lists anchored and provide scroll controls.
+---
+
+## Installation
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/message-scroller.json
+```
+
+## Usage
+
+```tsx
+import {
+  MessageScroller,
+  MessageScrollerButton,
+  MessageScrollerContent,
+  MessageScrollerItem,
+  MessageScrollerViewport,
+} from "@/components/ui/message-scroller/message-scroller";
+```
+
+```tsx
+<MessageScroller>
+  <MessageScrollerViewport>
+    <MessageScrollerContent>
+      {messages.map((message) => (
+        <MessageScrollerItem key={message.id}>
+          {message.content}
+        </MessageScrollerItem>
+      ))}
+    </MessageScrollerContent>
+  </MessageScrollerViewport>
+  <MessageScrollerButton direction="end" />
+</MessageScroller>
+```
+
+Wrap multiple scrollers in `MessageScrollerProvider` when they need shared state.

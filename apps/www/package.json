@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",
+    "@shadcn/react": "^0.2.1",
     "@stylexjs/stylex": "^0.18.3",
     "@tailwindcss/postcss": "^4.2.4",
     "@tanstack/react-table": "^8.21.3",
@@ -33,6 +34,7 @@
     "motion": "^12.38.0",
     "next": "16.2.10",
     "next-themes": "0.4.6",
+    "nuqs": "^2.9.0",
     "postcss": "^8.5.10",
     "radix-ui": "^1.4.3",
     "react": "19.2.5",

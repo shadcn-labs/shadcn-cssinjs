@@ -21,7 +21,7 @@
       "name": "stylex-utils",
       "type": "registry:lib",
       "title": "StyleX Utilities",
-      "description": "Utilities for composing custom class names with StyleX.",
+      "description": "StyleX class-name helpers plus reusable shimmer, scroll-fade, and visually-hidden utilities.",
       "dependencies": ["@stylexjs/stylex"],
       "files": [
         {
@@ -29,7 +29,8 @@
           "type": "registry:lib",
           "target": "lib/utils.stylex.ts"
         }
-      ]
+      ],
+      "registryDependencies": ["stylex-tokens"]
     },
     {
       "name": "accordion",
@@ -862,6 +863,133 @@
         }
       ],
       "registryDependencies": ["stylex-tokens", "stylex-utils", "toggle"]
+    },
+    {
+      "name": "attachment",
+      "type": "registry:ui",
+      "title": "Attachment",
+      "description": "Attachment component styled with StyleX on Base UI primitives.",
+      "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
+      "files": [
+        {
+          "path": "registry/bases/stylex/attachment/attachment.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/attachment/attachment.tsx"
+        },
+        {
+          "path": "registry/bases/stylex/attachment/attachment.stylex.ts",
+          "type": "registry:ui",
+          "target": "components/ui/attachment/attachment.stylex.ts"
+        }
+      ],
+      "registryDependencies": ["button", "stylex-tokens", "stylex-utils"]
+    },
+    {
+      "name": "bubble",
+      "type": "registry:ui",
+      "title": "Bubble",
+      "description": "Bubble component styled with StyleX on Base UI primitives.",
+      "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
+      "files": [
+        {
+          "path": "registry/bases/stylex/bubble/bubble.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/bubble/bubble.tsx"
+        },
+        {
+          "path": "registry/bases/stylex/bubble/bubble.stylex.ts",
+          "type": "registry:ui",
+          "target": "components/ui/bubble/bubble.stylex.ts"
+        }
+      ],
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
+    },
+    {
+      "name": "direction",
+      "type": "registry:ui",
+      "title": "Direction",
+      "description": "Direction provider utilities from Base UI.",
+      "dependencies": ["@base-ui/react"],
+      "files": [
+        {
+          "path": "registry/bases/stylex/direction/direction.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/direction/direction.tsx"
+        }
+      ]
+    },
+    {
+      "name": "marker",
+      "type": "registry:ui",
+      "title": "Marker",
+      "description": "Marker component styled with StyleX on Base UI primitives.",
+      "dependencies": ["@base-ui/react", "@stylexjs/stylex"],
+      "files": [
+        {
+          "path": "registry/bases/stylex/marker/marker.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/marker/marker.tsx"
+        },
+        {
+          "path": "registry/bases/stylex/marker/marker.stylex.ts",
+          "type": "registry:ui",
+          "target": "components/ui/marker/marker.stylex.ts"
+        }
+      ],
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
+    },
+    {
+      "name": "message",
+      "type": "registry:ui",
+      "title": "Message",
+      "description": "Message layout component styled with StyleX.",
+      "dependencies": ["@stylexjs/stylex"],
+      "files": [
+        {
+          "path": "registry/bases/stylex/message/message.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/message/message.tsx"
+        },
+        {
+          "path": "registry/bases/stylex/message/message.stylex.ts",
+          "type": "registry:ui",
+          "target": "components/ui/message/message.stylex.ts"
+        }
+      ],
+      "registryDependencies": ["stylex-tokens", "stylex-utils"]
+    },
+    {
+      "name": "message-scroller",
+      "type": "registry:ui",
+      "title": "Message Scroller",
+      "description": "Message scroller component styled with StyleX.",
+      "dependencies": ["@shadcn/react", "@stylexjs/stylex", "lucide-react"],
+      "files": [
+        {
+          "path": "registry/bases/stylex/message-scroller/message-scroller.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/message-scroller/message-scroller.tsx"
+        },
+        {
+          "path": "registry/bases/stylex/message-scroller/message-scroller.stylex.ts",
+          "type": "registry:ui",
+          "target": "components/ui/message-scroller/message-scroller.stylex.ts"
+        }
+      ],
+      "registryDependencies": ["button", "stylex-tokens", "stylex-utils"]
+    },
+    {
+      "name": "use-mobile",
+      "type": "registry:hook",
+      "title": "Use Mobile",
+      "description": "Reactive mobile breakpoint hook.",
+      "files": [
+        {
+          "path": "registry/bases/stylex/hooks/use-mobile.ts",
+          "type": "registry:hook",
+          "target": "hooks/use-mobile.ts"
+        }
+      ]
     }
   ]
 }
