@@ -1,9 +1,11 @@
 import type { ReactNode } from "react";
 
+import type { ComponentBase } from "@/components/base-provider";
 import { ComponentPreviewTabs } from "@/components/component-preview-tabs";
 import { ComponentSource } from "@/components/component-source";
+import { getAvailableBases } from "@/lib/registry";
 
-export const ComponentPreview = ({
+export const ComponentPreview = async ({
   name,
   children,
   className,
@@ -19,19 +21,42 @@ export const ComponentPreview = ({
   align?: "center" | "start" | "end";
   direction?: "ltr" | "rtl";
   hideCode?: boolean;
-}) => (
-  <ComponentPreviewTabs
-    align={align}
-    className={className}
-    component={children}
-    direction={direction}
-    hideCode={hideCode || !name}
-    previewClassName={previewClassName}
-    source={name ? <ComponentSource collapsible={false} name={name} /> : null}
-    sourcePreview={
-      name ? (
-        <ComponentSource collapsible={false} maxLines={6} name={name} />
-      ) : null
+}) => {
+  const bases: ComponentBase[] = name
+    ? await getAvailableBases(name)
+    : ["stylex"];
+
+  const sources: Partial<Record<ComponentBase, ReactNode>> = {};
+  const sourcePreviews: Partial<Record<ComponentBase, ReactNode>> = {};
+
+  if (name) {
+    for (const base of bases) {
+      sources[base] = (
+        <ComponentSource base={base} collapsible={false} name={name} />
+      );
+      sourcePreviews[base] = (
+        <ComponentSource
+          base={base}
+          collapsible={false}
+          maxLines={6}
+          name={name}
+        />
+      );
     }
-  />
-);
+  }
+
+  return (
+    <ComponentPreviewTabs
+      align={align}
+      bases={bases}
+      className={className}
+      component={children}
+      direction={direction}
+      hideCode={hideCode || !name}
+      name={name}
+      previewClassName={previewClassName}
+      sourcePreviews={sourcePreviews}
+      sources={sources}
+    />
+  );
+};

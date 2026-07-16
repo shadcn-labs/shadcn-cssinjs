@@ -4,11 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "pnpm registry:build && next build",
+    "build": "pnpm panda:codegen && pnpm panda:build && pnpm registry:build && next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
+    "panda:codegen": "panda codegen",
+    "panda:build": "panda cssgen --outfile ./styles/panda.css --minify",
+    "panda:watch": "panda cssgen --outfile ./styles/panda.css --watch",
     "registry:build": "shadcn build registry.json --output ./public/r && node scripts/rewrite-registry-ui-imports.mjs",
-    "postinstall": "fumadocs-mdx",
+    "postinstall": "fumadocs-mdx && panda codegen",
     "check": "ultracite check",
     "fix": "ultracite fix"
   },
@@ -52,6 +55,7 @@
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.29.7",
+    "@pandacss/dev": "^1.11.3",
     "@stylexjs/babel-plugin": "^0.18.3",
     "@stylexjs/postcss-plugin": "0.18.3",
     "@tailwindcss/postcss": "^4.2.4",

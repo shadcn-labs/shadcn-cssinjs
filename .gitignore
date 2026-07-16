@@ -46,6 +46,9 @@ next-env.d.ts
 .content-collections
 **/.source
 
+# Panda CSS generated runtime
+**/styled-system
+
 # package builds
 **/dist
 **/.turbo
