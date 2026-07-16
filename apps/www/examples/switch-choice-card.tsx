@@ -5,8 +5,8 @@ import {
   FieldGroup,
   FieldLabel,
   FieldTitle,
-} from "@/registry/bases/stylex/field/field";
-import { Switch } from "@/registry/bases/stylex/switch/switch";
+} from "@/registry/bases/stylex/ui/field";
+import { Switch } from "@/registry/bases/stylex/ui/switch";
 
 export default function SwitchChoiceCard() {
   return (

@@ -1,11 +1,11 @@
-import { ButtonGroup } from "@/registry/bases/stylex/button-group/button-group";
-import { Button } from "@/registry/bases/stylex/button/button";
-import { Kbd, KbdGroup } from "@/registry/bases/stylex/kbd/kbd";
+import { Button } from "@/registry/bases/stylex/ui/button";
+import { ButtonGroup } from "@/registry/bases/stylex/ui/button-group";
+import { Kbd, KbdGroup } from "@/registry/bases/stylex/ui/kbd";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/registry/bases/stylex/tooltip/tooltip";
+} from "@/registry/bases/stylex/ui/tooltip";
 
 export default function KbdTooltip() {
   return (

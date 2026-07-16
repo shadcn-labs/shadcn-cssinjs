@@ -1,5 +1,5 @@
-import { Button } from "@/registry/bases/stylex/button/button";
-import { Spinner } from "@/registry/bases/stylex/spinner/spinner";
+import { Button } from "@/registry/bases/stylex/ui/button";
+import { Spinner } from "@/registry/bases/stylex/ui/spinner";
 
 export default function SpinnerDemo() {
   return (

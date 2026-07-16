@@ -6,7 +6,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/registry/bases/stylex/breadcrumb/breadcrumb";
+} from "@/registry/bases/stylex/ui/breadcrumb";
 
 export default function BreadcrumbEllipsisDemo() {
   return (

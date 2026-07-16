@@ -12,8 +12,8 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/registry/bases/stylex/alert-dialog/alert-dialog";
-import { Button } from "@/registry/bases/stylex/button/button";
+} from "@/registry/bases/stylex/ui/alert-dialog";
+import { Button } from "@/registry/bases/stylex/ui/button";
 
 const translations: Translations = {
   ar: {

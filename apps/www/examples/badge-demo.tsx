@@ -1,4 +1,4 @@
-import { Badge } from "@/registry/bases/stylex/badge/badge";
+import { Badge } from "@/registry/bases/stylex/ui/badge";
 
 export default function BadgeDemo() {
   return (

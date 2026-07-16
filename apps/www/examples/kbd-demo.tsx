@@ -1,4 +1,4 @@
-import { Kbd, KbdGroup } from "@/registry/bases/stylex/kbd/kbd";
+import { Kbd, KbdGroup } from "@/registry/bases/stylex/ui/kbd";
 
 export default function KbdDemo() {
   return (

@@ -1,4 +1,4 @@
-import { Button } from "@/registry/bases/stylex/button/button";
+import { Button } from "@/registry/bases/stylex/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -8,9 +8,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/registry/bases/stylex/dialog/dialog";
-import { Input } from "@/registry/bases/stylex/input/input";
-import { Label } from "@/registry/bases/stylex/label/label";
+} from "@/registry/bases/stylex/ui/dialog";
+import { Input } from "@/registry/bases/stylex/ui/input";
+import { Label } from "@/registry/bases/stylex/ui/label";
 
 export default function DialogCloseButton() {
   return (

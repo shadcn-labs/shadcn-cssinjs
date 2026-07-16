@@ -5,7 +5,7 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from "@/registry/bases/stylex/navigation-menu/navigation-menu";
+} from "@/registry/bases/stylex/ui/navigation-menu";
 
 export default function NavigationMenuDemo() {
   return (

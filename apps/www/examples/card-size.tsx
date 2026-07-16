@@ -1,6 +1,6 @@
 import { ChevronRightIcon } from "lucide-react";
 
-import { Button } from "@/registry/bases/stylex/button/button";
+import { Button } from "@/registry/bases/stylex/ui/button";
 import {
   Card,
   CardContent,
@@ -8,7 +8,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/registry/bases/stylex/card/card";
+} from "@/registry/bases/stylex/ui/card";
 
 const STEPS = [
   "Choose a schedule (daily, or weekly).",

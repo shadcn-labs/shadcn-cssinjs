@@ -2,7 +2,7 @@
 
 import { useTranslation } from "@/components/language-selector";
 import type { Translations } from "@/components/language-selector";
-import { Progress } from "@/registry/bases/stylex/progress/progress";
+import { Progress } from "@/registry/bases/stylex/ui/progress";
 
 const translations: Translations = {
   ar: { dir: "rtl", values: {} },

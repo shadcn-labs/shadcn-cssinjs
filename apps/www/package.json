@@ -10,7 +10,7 @@
     "panda:codegen": "panda codegen",
     "panda:build": "panda cssgen --outfile ./styles/panda.css --minify",
     "panda:watch": "panda cssgen --outfile ./styles/panda.css --watch",
-    "registry:build": "shadcn build registry.json --output ./public/r",
+    "registry:build": "shadcn build registry.json --output ./public/r && node scripts/rewrite-registry-ui-imports.mjs",
     "postinstall": "fumadocs-mdx && panda codegen",
     "check": "ultracite check",
     "fix": "ultracite fix"

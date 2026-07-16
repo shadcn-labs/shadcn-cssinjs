@@ -1,4 +1,4 @@
-import { ScrollArea } from "@/registry/bases/stylex/scroll-area/scroll-area";
+import { ScrollArea } from "@/registry/bases/stylex/ui/scroll-area";
 
 const TAGS = Array.from({ length: 24 }).map((_, i) => `v1.2.0-beta.${24 - i}`);
 

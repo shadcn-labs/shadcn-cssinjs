@@ -1,4 +1,4 @@
-import { Switch } from "@/registry/bases/stylex/switch/switch";
+import { Switch } from "@/registry/bases/stylex/ui/switch";
 
 export default function SwitchDemo() {
   return (

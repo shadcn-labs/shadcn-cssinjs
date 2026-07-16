@@ -1,6 +1,6 @@
-import { Badge } from "@/registry/bases/stylex/badge/badge";
-import { Field, FieldLabel } from "@/registry/bases/stylex/field/field";
-import { Input } from "@/registry/bases/stylex/input/input";
+import { Badge } from "@/registry/bases/stylex/ui/badge";
+import { Field, FieldLabel } from "@/registry/bases/stylex/ui/field";
+import { Input } from "@/registry/bases/stylex/ui/input";
 
 export default function InputBadge() {
   return (

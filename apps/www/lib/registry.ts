@@ -35,15 +35,10 @@ export const getRegistryUiSourceCandidates = ({
     return [path.join("registry", "bases", base, name, `${name}.tsx`)];
   }
   return [
-    path.join("registry", "bases", "stylex", name, `${name}.tsx`),
+    path.join("registry", "bases", "stylex", "ui", `${name}.tsx`),
     path.join("registry", "new-york", `${name}.tsx`),
   ];
 };
-
-export const getRegistryStyleSource = (name: string): Promise<string | null> =>
-  readOptionalFromRoot(
-    path.join("registry", "bases", "stylex", name, `${name}.stylex.ts`)
-  );
 
 export const getDemoSource = (
   name: string,

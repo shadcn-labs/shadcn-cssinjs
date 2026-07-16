@@ -7,12 +7,16 @@
     "sonner",
     "next-themes"
   ],
+  "registryDependencies": [
+    "stylex-tokens",
+    "stylex-utils"
+  ],
   "files": [
     {
-      "path": "registry/bases/stylex/sonner/sonner.tsx",
+      "path": "registry/bases/stylex/ui/sonner.tsx",
       "content": "\"use client\";\n\nimport { useTheme } from \"next-themes\";\nimport { Toaster as Sonner } from \"sonner\";\nimport type { ToasterProps } from \"sonner\";\n\nconst Toaster = (props: ToasterProps) => {\n  const { theme = \"system\" } = useTheme();\n  return (\n    <Sonner\n      className=\"toaster group\"\n      data-slot=\"sonner\"\n      style={\n        {\n          \"--normal-bg\": \"var(--popover)\",\n          \"--normal-border\": \"var(--border)\",\n          \"--normal-text\": \"var(--popover-foreground)\",\n        } as React.CSSProperties\n      }\n      theme={theme as ToasterProps[\"theme\"]}\n      {...props}\n    />\n  );\n};\n\nexport { Toaster };\n",
       "type": "registry:ui",
-      "target": "components/ui/sonner/sonner.tsx"
+      "target": "components/ui/sonner.tsx"
     }
   ],
   "type": "registry:ui"

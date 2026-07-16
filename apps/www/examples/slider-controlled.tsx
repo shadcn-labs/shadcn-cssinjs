@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 
-import { Label } from "@/registry/bases/stylex/label/label";
-import { Slider } from "@/registry/bases/stylex/slider/slider";
+import { Label } from "@/registry/bases/stylex/ui/label";
+import { Slider } from "@/registry/bases/stylex/ui/slider";
 
 export default function SliderControlled() {
   const [value, setValue] = useState<number[]>([0.3, 0.7]);

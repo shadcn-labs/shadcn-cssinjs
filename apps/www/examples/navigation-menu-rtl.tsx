@@ -9,7 +9,7 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from "@/registry/bases/stylex/navigation-menu/navigation-menu";
+} from "@/registry/bases/stylex/ui/navigation-menu";
 
 const translations: Translations = {
   ar: {

@@ -1,8 +1,8 @@
 import { SearchIcon } from "lucide-react";
 
-import { ButtonGroup } from "@/registry/bases/stylex/button-group/button-group";
-import { Button } from "@/registry/bases/stylex/button/button";
-import { Input } from "@/registry/bases/stylex/input/input";
+import { Button } from "@/registry/bases/stylex/ui/button";
+import { ButtonGroup } from "@/registry/bases/stylex/ui/button-group";
+import { Input } from "@/registry/bases/stylex/ui/input";
 
 export default function ButtonGroupInput() {
   return (

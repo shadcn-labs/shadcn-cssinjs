@@ -1,4 +1,4 @@
-import { AspectRatio } from "@/registry/bases/stylex/aspect-ratio/aspect-ratio";
+import { AspectRatio } from "@/registry/bases/stylex/ui/aspect-ratio";
 
 export default function AspectRatioSquare() {
   return (

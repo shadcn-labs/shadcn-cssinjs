@@ -4,7 +4,7 @@ import { FolderCodeIcon } from "lucide-react";
 
 import { useTranslation } from "@/components/language-selector";
 import type { Translations } from "@/components/language-selector";
-import { Button } from "@/registry/bases/stylex/button/button";
+import { Button } from "@/registry/bases/stylex/ui/button";
 import {
   Empty,
   EmptyContent,
@@ -12,7 +12,7 @@ import {
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
-} from "@/registry/bases/stylex/empty/empty";
+} from "@/registry/bases/stylex/ui/empty";
 
 const translations: Translations = {
   ar: {

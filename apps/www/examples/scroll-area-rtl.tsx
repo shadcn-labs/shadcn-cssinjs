@@ -4,8 +4,8 @@ import * as React from "react";
 
 import { useTranslation } from "@/components/language-selector";
 import type { Translations } from "@/components/language-selector";
-import { ScrollArea } from "@/registry/bases/stylex/scroll-area/scroll-area";
-import { Separator } from "@/registry/bases/stylex/separator/separator";
+import { ScrollArea } from "@/registry/bases/stylex/ui/scroll-area";
+import { Separator } from "@/registry/bases/stylex/ui/separator";
 
 const tags = Array.from({ length: 50 }).map(
   (_, i, a) => `v1.2.0-beta.${a.length - i}`

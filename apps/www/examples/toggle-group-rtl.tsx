@@ -7,7 +7,7 @@ import type { Translations } from "@/components/language-selector";
 import {
   ToggleGroup,
   ToggleGroupItem,
-} from "@/registry/bases/stylex/toggle-group/toggle-group";
+} from "@/registry/bases/stylex/ui/toggle-group";
 
 const translations: Translations = {
   ar: {

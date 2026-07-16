@@ -1,4 +1,4 @@
-import { ScrollArea } from "@/registry/bases/stylex/scroll-area/scroll-area";
+import { ScrollArea } from "@/registry/bases/stylex/ui/scroll-area";
 
 const works = [
   {

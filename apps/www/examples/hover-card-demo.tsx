@@ -1,11 +1,11 @@
 import { CalendarIcon } from "lucide-react";
 
-import { Button } from "@/registry/bases/stylex/button/button";
+import { Button } from "@/registry/bases/stylex/ui/button";
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from "@/registry/bases/stylex/hover-card/hover-card";
+} from "@/registry/bases/stylex/ui/hover-card";
 
 export default function HoverCardDemo() {
   return (
