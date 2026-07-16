@@ -21,6 +21,7 @@ export default defineConfig({
     "**/.source/**",
     "**/dist/**",
     "**/public/r/**",
+    "**/styles/tokenami.css",
     ".agents/**",
     ".cursor/**",
     ".changeset/**",
