@@ -1,5 +1,5 @@
-import { Badge } from "@/registry/bases/stylex/badge/badge";
-import { Spinner } from "@/registry/bases/stylex/spinner/spinner";
+import { Badge } from "@/registry/bases/stylex/ui/badge";
+import { Spinner } from "@/registry/bases/stylex/ui/spinner";
 
 export default function BadgeWithSpinner() {
   return (

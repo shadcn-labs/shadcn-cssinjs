@@ -1,12 +1,12 @@
 import { InfoIcon } from "lucide-react";
 
-import { Field, FieldLabel } from "@/registry/bases/stylex/field/field";
+import { Field, FieldLabel } from "@/registry/bases/stylex/ui/field";
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
   InputGroupText,
-} from "@/registry/bases/stylex/input-group/input-group";
+} from "@/registry/bases/stylex/ui/input-group";
 
 export default function InputInputGroup() {
   return (

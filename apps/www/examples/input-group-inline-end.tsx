@@ -4,12 +4,12 @@ import {
   Field,
   FieldDescription,
   FieldLabel,
-} from "@/registry/bases/stylex/field/field";
+} from "@/registry/bases/stylex/ui/field";
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
-} from "@/registry/bases/stylex/input-group/input-group";
+} from "@/registry/bases/stylex/ui/input-group";
 
 export default function InputGroupInlineEnd() {
   return (

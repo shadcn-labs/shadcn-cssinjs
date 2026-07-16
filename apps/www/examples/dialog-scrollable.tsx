@@ -1,4 +1,4 @@
-import { Button } from "@/registry/bases/stylex/button/button";
+import { Button } from "@/registry/bases/stylex/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -8,7 +8,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/registry/bases/stylex/dialog/dialog";
+} from "@/registry/bases/stylex/ui/dialog";
 
 const SECTIONS = [
   "1. The service is provided “as is” without warranty of any kind.",

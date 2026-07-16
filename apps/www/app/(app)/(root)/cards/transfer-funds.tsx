@@ -1,4 +1,4 @@
-import { Button } from "@/registry/bases/stylex/button/button";
+import { Button } from "@/registry/bases/stylex/ui/button";
 import {
   Card,
   CardContent,
@@ -6,16 +6,16 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/registry/bases/stylex/card/card";
-import { Input } from "@/registry/bases/stylex/input/input";
-import { Label } from "@/registry/bases/stylex/label/label";
+} from "@/registry/bases/stylex/ui/card";
+import { Input } from "@/registry/bases/stylex/ui/input";
+import { Label } from "@/registry/bases/stylex/ui/label";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/registry/bases/stylex/select/select";
+} from "@/registry/bases/stylex/ui/select";
 
 export const TransferFunds = () => (
   <Card data-slot="card">

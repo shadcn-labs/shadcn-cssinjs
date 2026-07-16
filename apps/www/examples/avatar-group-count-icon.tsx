@@ -6,7 +6,7 @@ import {
   AvatarGroup,
   AvatarGroupCount,
   AvatarImage,
-} from "@/registry/bases/stylex/avatar/avatar";
+} from "@/registry/bases/stylex/ui/avatar";
 
 const USERS = [
   { alt: "@shadcn", fallback: "CN", src: "https://github.com/shadcn.png" },

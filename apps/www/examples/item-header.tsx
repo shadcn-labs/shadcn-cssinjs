@@ -5,7 +5,7 @@ import {
   ItemGroup,
   ItemHeader,
   ItemTitle,
-} from "@/registry/bases/stylex/item/item";
+} from "@/registry/bases/stylex/ui/item";
 
 const models = [
   {

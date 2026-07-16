@@ -7,7 +7,7 @@ import {
   MenubarSeparator,
   MenubarShortcut,
   MenubarTrigger,
-} from "@/registry/bases/stylex/menubar/menubar";
+} from "@/registry/bases/stylex/ui/menubar";
 
 export default function MenubarCheckbox() {
   return (

@@ -1,4 +1,4 @@
-import { Button } from "@/registry/bases/stylex/button/button";
+import { Button } from "@/registry/bases/stylex/ui/button";
 import {
   Field,
   FieldContent,
@@ -7,8 +7,8 @@ import {
   FieldLabel,
   FieldLegend,
   FieldSet,
-} from "@/registry/bases/stylex/field/field";
-import { Input } from "@/registry/bases/stylex/input/input";
+} from "@/registry/bases/stylex/ui/field";
+import { Input } from "@/registry/bases/stylex/ui/input";
 
 export default function FieldResponsive() {
   return (

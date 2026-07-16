@@ -11,7 +11,7 @@ import {
   MenubarRadioItem,
   MenubarSeparator,
   MenubarTrigger,
-} from "@/registry/bases/stylex/menubar/menubar";
+} from "@/registry/bases/stylex/ui/menubar";
 
 export default function MenubarRadio() {
   const [user, setUser] = useState("benoit");

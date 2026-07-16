@@ -2,10 +2,10 @@
 
 import { ArrowRightIcon, SearchIcon } from "lucide-react";
 
-import { Badge } from "@/registry/bases/stylex/badge/badge";
-import { Button } from "@/registry/bases/stylex/button/button";
-import { Card, CardContent } from "@/registry/bases/stylex/card/card";
-import { Checkbox } from "@/registry/bases/stylex/checkbox/checkbox";
+import { Badge } from "@/registry/bases/stylex/ui/badge";
+import { Button } from "@/registry/bases/stylex/ui/button";
+import { Card, CardContent } from "@/registry/bases/stylex/ui/card";
+import { Checkbox } from "@/registry/bases/stylex/ui/checkbox";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,19 +14,19 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/registry/bases/stylex/dropdown-menu/dropdown-menu";
-import { Input } from "@/registry/bases/stylex/input/input";
+} from "@/registry/bases/stylex/ui/dropdown-menu";
+import { Input } from "@/registry/bases/stylex/ui/input";
 import {
   RadioGroup,
   RadioGroupItem,
-} from "@/registry/bases/stylex/radio-group/radio-group";
-import { Switch } from "@/registry/bases/stylex/switch/switch";
+} from "@/registry/bases/stylex/ui/radio-group";
+import { Switch } from "@/registry/bases/stylex/ui/switch";
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@/registry/bases/stylex/tabs/tabs";
+} from "@/registry/bases/stylex/ui/tabs";
 
 export const UIElements = () => (
   <Card data-slot="card" className="w-full">

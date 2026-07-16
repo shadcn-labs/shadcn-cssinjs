@@ -1,5 +1,5 @@
-import { Button } from "@/registry/bases/stylex/button/button";
-import { Input } from "@/registry/bases/stylex/input/input";
+import { Button } from "@/registry/bases/stylex/ui/button";
+import { Input } from "@/registry/bases/stylex/ui/input";
 import {
   Sheet,
   SheetClose,
@@ -9,7 +9,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/registry/bases/stylex/sheet/sheet";
+} from "@/registry/bases/stylex/ui/sheet";
 
 export default function SheetDemo() {
   return (

@@ -3,16 +3,16 @@
 import { ArrowRightIcon } from "lucide-react";
 import { useState } from "react";
 
-import { ButtonGroup } from "@/registry/bases/stylex/button-group/button-group";
-import { Button } from "@/registry/bases/stylex/button/button";
-import { Input } from "@/registry/bases/stylex/input/input";
+import { Button } from "@/registry/bases/stylex/ui/button";
+import { ButtonGroup } from "@/registry/bases/stylex/ui/button-group";
+import { Input } from "@/registry/bases/stylex/ui/input";
 import {
   Select,
   SelectContent,
   SelectGroup,
   SelectItem,
   SelectTrigger,
-} from "@/registry/bases/stylex/select/select";
+} from "@/registry/bases/stylex/ui/select";
 
 const CURRENCIES = [
   { label: "US Dollar", value: "$" },

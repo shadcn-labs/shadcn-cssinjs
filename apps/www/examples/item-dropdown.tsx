@@ -6,22 +6,22 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from "@/registry/bases/stylex/avatar/avatar";
-import { Button } from "@/registry/bases/stylex/button/button";
+} from "@/registry/bases/stylex/ui/avatar";
+import { Button } from "@/registry/bases/stylex/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/registry/bases/stylex/dropdown-menu/dropdown-menu";
+} from "@/registry/bases/stylex/ui/dropdown-menu";
 import {
   Item,
   ItemContent,
   ItemDescription,
   ItemMedia,
   ItemTitle,
-} from "@/registry/bases/stylex/item/item";
+} from "@/registry/bases/stylex/ui/item";
 
 const people = [
   {

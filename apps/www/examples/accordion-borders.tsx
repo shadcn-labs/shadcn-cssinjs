@@ -3,7 +3,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/registry/bases/stylex/accordion/accordion";
+} from "@/registry/bases/stylex/ui/accordion";
 
 export default function AccordionBorders() {
   return (

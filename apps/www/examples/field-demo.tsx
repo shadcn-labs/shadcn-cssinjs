@@ -1,5 +1,5 @@
-import { Button } from "@/registry/bases/stylex/button/button";
-import { Checkbox } from "@/registry/bases/stylex/checkbox/checkbox";
+import { Button } from "@/registry/bases/stylex/ui/button";
+import { Checkbox } from "@/registry/bases/stylex/ui/checkbox";
 import {
   Field,
   FieldDescription,
@@ -8,8 +8,8 @@ import {
   FieldLegend,
   FieldSeparator,
   FieldSet,
-} from "@/registry/bases/stylex/field/field";
-import { Input } from "@/registry/bases/stylex/input/input";
+} from "@/registry/bases/stylex/ui/field";
+import { Input } from "@/registry/bases/stylex/ui/input";
 import {
   Select,
   SelectContent,
@@ -17,8 +17,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/registry/bases/stylex/select/select";
-import { Textarea } from "@/registry/bases/stylex/textarea/textarea";
+} from "@/registry/bases/stylex/ui/select";
+import { Textarea } from "@/registry/bases/stylex/ui/textarea";
 
 const months = [
   "01",

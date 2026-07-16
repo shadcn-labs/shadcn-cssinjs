@@ -1,10 +1,10 @@
-import { Badge } from "@/registry/bases/stylex/badge/badge";
+import { Badge } from "@/registry/bases/stylex/ui/badge";
 import {
   Card,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/registry/bases/stylex/card/card";
+} from "@/registry/bases/stylex/ui/card";
 import {
   Table,
   TableBody,
@@ -12,7 +12,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/registry/bases/stylex/table/table";
+} from "@/registry/bases/stylex/ui/table";
 
 const PAYMENTS = [
   { amount: "$316.00", email: "ken99@example.com", status: "Success" },

@@ -2,21 +2,21 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from "@/registry/bases/stylex/avatar/avatar";
-import { Badge } from "@/registry/bases/stylex/badge/badge";
+} from "@/registry/bases/stylex/ui/avatar";
+import { Badge } from "@/registry/bases/stylex/ui/badge";
 import {
   Card,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/registry/bases/stylex/card/card";
+} from "@/registry/bases/stylex/ui/card";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/registry/bases/stylex/select/select";
+} from "@/registry/bases/stylex/ui/select";
 
 const MEMBERS = [
   {

@@ -1,5 +1,5 @@
-import { Checkbox } from "@/registry/bases/stylex/checkbox/checkbox";
-import { Label } from "@/registry/bases/stylex/label/label";
+import { Checkbox } from "@/registry/bases/stylex/ui/checkbox";
+import { Label } from "@/registry/bases/stylex/ui/label";
 
 export default function LabelDemo() {
   return (

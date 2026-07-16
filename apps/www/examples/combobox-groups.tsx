@@ -11,7 +11,7 @@ import {
   ComboboxLabel,
   ComboboxList,
   ComboboxSeparator,
-} from "@/registry/bases/stylex/combobox/combobox";
+} from "@/registry/bases/stylex/ui/combobox";
 
 const timezones = [
   {

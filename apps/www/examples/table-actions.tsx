@@ -2,7 +2,7 @@
 
 import { MoreHorizontalIcon } from "lucide-react";
 
-import { Button } from "@/registry/bases/stylex/button/button";
+import { Button } from "@/registry/bases/stylex/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,7 +10,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/registry/bases/stylex/dropdown-menu/dropdown-menu";
+} from "@/registry/bases/stylex/ui/dropdown-menu";
 import {
   Table,
   TableBody,
@@ -18,7 +18,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/registry/bases/stylex/table/table";
+} from "@/registry/bases/stylex/ui/table";
 
 const INVOICES = [
   {

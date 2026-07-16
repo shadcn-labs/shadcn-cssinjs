@@ -2,7 +2,7 @@ import {
   Progress,
   ProgressLabel,
   ProgressValue,
-} from "@/registry/bases/stylex/progress/progress";
+} from "@/registry/bases/stylex/ui/progress";
 
 export default function ProgressWithLabel() {
   return (

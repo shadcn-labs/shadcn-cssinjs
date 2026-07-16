@@ -5,8 +5,8 @@ import {
   InputGroupAddon,
   InputGroupInput,
   InputGroupText,
-} from "@/registry/bases/stylex/input-group/input-group";
-import { Spinner } from "@/registry/bases/stylex/spinner/spinner";
+} from "@/registry/bases/stylex/ui/input-group";
+import { Spinner } from "@/registry/bases/stylex/ui/spinner";
 
 export default function InputGroupSpinner() {
   return (

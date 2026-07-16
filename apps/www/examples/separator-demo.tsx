@@ -1,4 +1,4 @@
-import { Separator } from "@/registry/bases/stylex/separator/separator";
+import { Separator } from "@/registry/bases/stylex/ui/separator";
 
 export default function SeparatorDemo() {
   return (

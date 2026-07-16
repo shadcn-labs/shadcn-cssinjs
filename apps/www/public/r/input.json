@@ -7,20 +7,15 @@
     "@stylexjs/stylex"
   ],
   "registryDependencies": [
-    "stylex-tokens"
+    "stylex-tokens",
+    "stylex-utils"
   ],
   "files": [
     {
-      "path": "registry/bases/stylex/input/input.tsx",
-      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nimport { styles } from \"./input.stylex\";\n\nconst Input = ({\n  className,\n  style,\n  type,\n  ...props\n}: React.ComponentProps<\"input\">) => {\n  const p = stylex.props(styles.root);\n  return (\n    <input\n      type={type}\n      data-slot=\"input\"\n      className={[p.className, className].filter(Boolean).join(\" \") || undefined}\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nexport { Input };\n",
+      "path": "registry/bases/stylex/ui/input.tsx",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\nimport type { StyleXStyles } from \"@stylexjs/stylex\";\n\nimport { colors, radius } from \"@/lib/tokens.stylex\";\nimport { customClassName } from \"@/lib/utils.stylex\";\n\nconst styles = stylex.create({\n  root: {\n    \"::file-selector-button\": {\n      backgroundColor: \"transparent\",\n      border: \"none\",\n      color: colors.foreground,\n      fontSize: \"0.875rem\",\n      fontWeight: 500,\n      marginInlineEnd: \"0.5rem\",\n    },\n    \"::placeholder\": {\n      color: colors.mutedForeground,\n    },\n    \"::selection\": {\n      backgroundColor: colors.primary,\n      color: colors.primaryForeground,\n    },\n    backgroundColor: \"transparent\",\n    borderColor: {\n      \":focus-visible\": colors.ring,\n      default: colors.input,\n    },\n    borderRadius: radius.md,\n    borderStyle: \"solid\",\n    borderWidth: \"1px\",\n    boxShadow: {\n      \":focus-visible\": `0 0 0 3px color-mix(in oklab, ${colors.ring} 50%, transparent)`,\n      default: \"0 1px 2px 0 rgb(0 0 0 / 0.05)\",\n    },\n    color: colors.foreground,\n    cursor: { \":disabled\": \"not-allowed\", default: \"auto\" },\n    display: \"flex\",\n    fontSize: \"0.875rem\",\n    height: \"2.25rem\",\n    lineHeight: \"1.25rem\",\n    minWidth: 0,\n    opacity: { \":disabled\": 0.5, default: 1 },\n    outline: \"none\",\n    paddingBottom: \"0.25rem\",\n    paddingInline: \"0.75rem\",\n    paddingTop: \"0.25rem\",\n    transition:\n      \"color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, border-color 0.15s ease-in-out\",\n    width: \"100%\",\n  },\n});\n\nconst Input = ({\n  className,\n  style,\n  type,\n  ...props\n}: React.ComponentProps<\"input\">) => (\n  <input\n    type={type}\n    data-slot=\"input\"\n    {...stylex.props(\n      styles.root,\n      customClassName(className),\n      style as StyleXStyles\n    )}\n    {...props}\n  />\n);\n\nexport { Input };\n",
       "type": "registry:ui",
-      "target": "components/ui/input/input.tsx"
-    },
-    {
-      "path": "registry/bases/stylex/input/input.stylex.ts",
-      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nimport { colors, radius } from \"../tokens.stylex\";\n\nexport const styles = stylex.create({\n  root: {\n    \"::file-selector-button\": {\n      backgroundColor: \"transparent\",\n      border: \"none\",\n      color: colors.foreground,\n      fontSize: \"0.875rem\",\n      fontWeight: 500,\n      marginInlineEnd: \"0.5rem\",\n    },\n    \"::placeholder\": {\n      color: colors.mutedForeground,\n    },\n    \"::selection\": {\n      backgroundColor: colors.primary,\n      color: colors.primaryForeground,\n    },\n    backgroundColor: \"transparent\",\n    borderColor: {\n      \":focus-visible\": colors.ring,\n      default: colors.input,\n    },\n    borderRadius: radius.md,\n    borderStyle: \"solid\",\n    borderWidth: \"1px\",\n    boxShadow: {\n      \":focus-visible\": `0 0 0 3px color-mix(in oklab, ${colors.ring} 50%, transparent)`,\n      default: \"0 1px 2px 0 rgb(0 0 0 / 0.05)\",\n    },\n    color: colors.foreground,\n    cursor: { \":disabled\": \"not-allowed\", default: \"auto\" },\n    display: \"flex\",\n    fontSize: \"0.875rem\",\n    height: \"2.25rem\",\n    lineHeight: \"1.25rem\",\n    minWidth: 0,\n    opacity: { \":disabled\": 0.5, default: 1 },\n    outline: \"none\",\n    paddingBottom: \"0.25rem\",\n    paddingInline: \"0.75rem\",\n    paddingTop: \"0.25rem\",\n    transition:\n      \"color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, border-color 0.15s ease-in-out\",\n    width: \"100%\",\n  },\n});\n",
-      "type": "registry:ui",
-      "target": "components/ui/input/input.stylex.ts"
+      "target": "components/ui/input.tsx"
     }
   ],
   "type": "registry:ui"

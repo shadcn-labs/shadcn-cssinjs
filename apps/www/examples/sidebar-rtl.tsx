@@ -23,7 +23,7 @@ import {
   SidebarMenuItem,
   SidebarProvider,
   SidebarTrigger,
-} from "@/registry/bases/stylex/sidebar/sidebar";
+} from "@/registry/bases/stylex/ui/sidebar";
 
 const translations: Translations = {
   ar: {

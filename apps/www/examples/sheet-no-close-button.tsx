@@ -1,4 +1,4 @@
-import { Button } from "@/registry/bases/stylex/button/button";
+import { Button } from "@/registry/bases/stylex/ui/button";
 import {
   Sheet,
   SheetContent,
@@ -6,7 +6,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/registry/bases/stylex/sheet/sheet";
+} from "@/registry/bases/stylex/ui/sheet";
 
 export default function SheetNoCloseButton() {
   return (

@@ -6,8 +6,8 @@ import {
   UsersIcon,
 } from "lucide-react";
 
-import { Badge } from "@/registry/bases/stylex/badge/badge";
-import { Card, CardContent } from "@/registry/bases/stylex/card/card";
+import { Badge } from "@/registry/bases/stylex/ui/badge";
+import { Card, CardContent } from "@/registry/bases/stylex/ui/card";
 
 const ITEMS = [
   { active: true, badge: null, icon: HomeIcon, label: "Dashboard" },

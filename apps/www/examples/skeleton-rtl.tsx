@@ -4,7 +4,7 @@ import * as React from "react";
 
 import { useTranslation } from "@/components/language-selector";
 import type { Translations } from "@/components/language-selector";
-import { Skeleton } from "@/registry/bases/stylex/skeleton/skeleton";
+import { Skeleton } from "@/registry/bases/stylex/ui/skeleton";
 
 const translations: Translations = {
   ar: {

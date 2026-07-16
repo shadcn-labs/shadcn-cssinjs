@@ -4,8 +4,8 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/registry/bases/stylex/card/card";
-import { Switch } from "@/registry/bases/stylex/switch/switch";
+} from "@/registry/bases/stylex/ui/card";
+import { Switch } from "@/registry/bases/stylex/ui/switch";
 
 const SETTINGS = [
   {

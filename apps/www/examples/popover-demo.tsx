@@ -1,10 +1,10 @@
-import { Button } from "@/registry/bases/stylex/button/button";
-import { Input } from "@/registry/bases/stylex/input/input";
+import { Button } from "@/registry/bases/stylex/ui/button";
+import { Input } from "@/registry/bases/stylex/ui/input";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/registry/bases/stylex/popover/popover";
+} from "@/registry/bases/stylex/ui/popover";
 
 export default function PopoverDemo() {
   return (

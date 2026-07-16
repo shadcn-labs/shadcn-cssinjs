@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 
-import { Calendar } from "@/registry/bases/stylex/calendar/calendar";
-import { Card, CardContent } from "@/registry/bases/stylex/card/card";
+import { Calendar } from "@/registry/bases/stylex/ui/calendar";
+import { Card, CardContent } from "@/registry/bases/stylex/ui/card";
 
 export const CalendarCard = () => {
   const [date, setDate] = useState<Date | undefined>(new Date(2026, 5, 12));

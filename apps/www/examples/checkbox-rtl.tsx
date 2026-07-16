@@ -2,7 +2,7 @@
 
 import { useTranslation } from "@/components/language-selector";
 import type { Translations } from "@/components/language-selector";
-import { Checkbox } from "@/registry/bases/stylex/checkbox/checkbox";
+import { Checkbox } from "@/registry/bases/stylex/ui/checkbox";
 
 const translations: Translations = {
   ar: { dir: "rtl", values: { label: "أوافق على الشروط والأحكام" } },

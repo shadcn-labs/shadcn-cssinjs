@@ -1,4 +1,4 @@
-import { Skeleton } from "@/registry/bases/stylex/skeleton/skeleton";
+import { Skeleton } from "@/registry/bases/stylex/ui/skeleton";
 
 export default function SkeletonAvatar() {
   return (

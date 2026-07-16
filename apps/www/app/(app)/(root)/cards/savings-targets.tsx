@@ -4,8 +4,8 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/registry/bases/stylex/card/card";
-import { Progress } from "@/registry/bases/stylex/progress/progress";
+} from "@/registry/bases/stylex/ui/card";
+import { Progress } from "@/registry/bases/stylex/ui/progress";
 
 const TARGETS = [
   { label: "Emergency fund", saved: "$8,400", target: "$10,000", value: 84 },

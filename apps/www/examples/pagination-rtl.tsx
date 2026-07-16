@@ -10,7 +10,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/registry/bases/stylex/pagination/pagination";
+} from "@/registry/bases/stylex/ui/pagination";
 
 const translations: Translations = {
   ar: { dir: "rtl", values: {} },

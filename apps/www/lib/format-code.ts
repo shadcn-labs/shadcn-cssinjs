@@ -45,8 +45,13 @@ export const formatCode = async (code: string) => {
   let formattedCode = code;
 
   formattedCode = formattedCode.replaceAll(
-    "@/registry/bases/stylex/",
-    "@/components/"
+    "@/registry/bases/stylex/lib/",
+    "@/lib/"
+  );
+
+  formattedCode = formattedCode.replaceAll(
+    "@/registry/bases/stylex/ui/",
+    "@/components/ui/"
   );
 
   formattedCode = formattedCode.replaceAll("export default", "export");

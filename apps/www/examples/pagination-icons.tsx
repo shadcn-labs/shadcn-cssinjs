@@ -4,7 +4,7 @@ import {
   PaginationItem,
   PaginationNext,
   PaginationPrevious,
-} from "@/registry/bases/stylex/pagination/pagination";
+} from "@/registry/bases/stylex/ui/pagination";
 
 export default function PaginationIcons() {
   return (

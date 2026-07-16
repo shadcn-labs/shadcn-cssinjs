@@ -1,4 +1,4 @@
-import { Button } from "@/registry/bases/stylex/button/button";
+import { Button } from "@/registry/bases/stylex/ui/button";
 import {
   Card,
   CardAction,
@@ -7,8 +7,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/registry/bases/stylex/card/card";
-import { Input } from "@/registry/bases/stylex/input/input";
+} from "@/registry/bases/stylex/ui/card";
+import { Input } from "@/registry/bases/stylex/ui/input";
 
 export default function CardDemo() {
   return (

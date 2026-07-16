@@ -2,7 +2,7 @@ import {
   Field,
   FieldDescription,
   FieldLabel,
-} from "@/registry/bases/stylex/field/field";
+} from "@/registry/bases/stylex/ui/field";
 import {
   Select,
   SelectContent,
@@ -10,7 +10,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/registry/bases/stylex/select/select";
+} from "@/registry/bases/stylex/ui/select";
 
 export default function FieldSelect() {
   return (

@@ -1,6 +1,6 @@
 import { ArrowUpRightIcon, FolderCodeIcon } from "lucide-react";
 
-import { Button } from "@/registry/bases/stylex/button/button";
+import { Button } from "@/registry/bases/stylex/ui/button";
 import {
   Empty,
   EmptyContent,
@@ -8,7 +8,7 @@ import {
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
-} from "@/registry/bases/stylex/empty/empty";
+} from "@/registry/bases/stylex/ui/empty";
 
 export default function EmptyDemo() {
   return (

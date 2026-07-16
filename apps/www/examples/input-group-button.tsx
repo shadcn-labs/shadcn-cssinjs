@@ -8,7 +8,7 @@ import {
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
-} from "@/registry/bases/stylex/input-group/input-group";
+} from "@/registry/bases/stylex/ui/input-group";
 
 export default function InputGroupButtonExample() {
   const [isCopied, setIsCopied] = useState(false);

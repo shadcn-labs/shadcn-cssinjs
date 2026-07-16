@@ -2,8 +2,8 @@
 
 import { useTranslation } from "@/components/language-selector";
 import type { Translations } from "@/components/language-selector";
-import { Button } from "@/registry/bases/stylex/button/button";
-import { Input } from "@/registry/bases/stylex/input/input";
+import { Button } from "@/registry/bases/stylex/ui/button";
+import { Input } from "@/registry/bases/stylex/ui/input";
 import {
   Sheet,
   SheetClose,
@@ -13,7 +13,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/registry/bases/stylex/sheet/sheet";
+} from "@/registry/bases/stylex/ui/sheet";
 
 const translations: Translations = {
   ar: {

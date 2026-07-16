@@ -1,5 +1,5 @@
-import { Button } from "@/registry/bases/stylex/button/button";
-import { Textarea } from "@/registry/bases/stylex/textarea/textarea";
+import { Button } from "@/registry/bases/stylex/ui/button";
+import { Textarea } from "@/registry/bases/stylex/ui/textarea";
 
 export default function TextareaButton() {
   return (

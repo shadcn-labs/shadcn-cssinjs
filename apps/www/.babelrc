@@ -6,6 +6,9 @@
       {
         "runtimeInjection": false,
         "styleResolution": "property-specificity",
+        "aliases": {
+          "@/registry/bases/stylex/lib/*": ["../lib/*"]
+        },
         "unstable_moduleResolution": {
           "type": "commonJS",
           "rootDir": "."

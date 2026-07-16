@@ -8,20 +8,15 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "stylex-tokens"
+    "stylex-tokens",
+    "stylex-utils"
   ],
   "files": [
     {
-      "path": "registry/bases/stylex/spinner/spinner.tsx",
-      "content": "import { Loader2Icon } from \"lucide-react\";\n\nimport * as stylex from \"@stylexjs/stylex\";\n\nimport { styles } from \"./spinner.stylex\";\n\nconst Spinner = ({\n  className,\n  style,\n  ...props\n}: React.ComponentProps<typeof Loader2Icon> & { className?: string }) => {\n  const p = stylex.props(styles.root);\n  return (\n    <Loader2Icon\n      aria-label=\"Loading\"\n      className={[p.className, className].filter(Boolean).join(\" \") || undefined}\n      data-slot=\"spinner\"\n      role=\"status\"\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nexport { Spinner };\n",
+      "path": "registry/bases/stylex/ui/spinner.tsx",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\nimport type { StyleXStyles } from \"@stylexjs/stylex\";\nimport { Loader2Icon } from \"lucide-react\";\n\nimport { customClassName } from \"@/lib/utils.stylex\";\n\nconst spin = stylex.keyframes({\n  from: { transform: \"rotate(0deg)\" },\n  to: { transform: \"rotate(360deg)\" },\n});\n\nconst styles = stylex.create({\n  root: {\n    animationDuration: \"1s\",\n    animationIterationCount: \"infinite\",\n    animationName: spin,\n    animationTimingFunction: \"linear\",\n    flexShrink: 0,\n    height: \"1rem\",\n    width: \"1rem\",\n  },\n});\n\nconst Spinner = ({\n  className,\n  style,\n  ...props\n}: React.ComponentProps<typeof Loader2Icon> & { className?: string }) => (\n  <Loader2Icon\n    aria-label=\"Loading\"\n    {...stylex.props(\n      styles.root,\n      customClassName(className),\n      style as StyleXStyles\n    )}\n    data-slot=\"spinner\"\n    role=\"status\"\n    {...props}\n  />\n);\n\nexport { Spinner };\n",
       "type": "registry:ui",
-      "target": "components/ui/spinner/spinner.tsx"
-    },
-    {
-      "path": "registry/bases/stylex/spinner/spinner.stylex.ts",
-      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nconst spin = stylex.keyframes({\n  from: { transform: \"rotate(0deg)\" },\n  to: { transform: \"rotate(360deg)\" },\n});\n\nexport const styles = stylex.create({\n  root: {\n    animationDuration: \"1s\",\n    animationIterationCount: \"infinite\",\n    animationName: spin,\n    animationTimingFunction: \"linear\",\n    flexShrink: 0,\n    height: \"1rem\",\n    width: \"1rem\",\n  },\n});\n",
-      "type": "registry:ui",
-      "target": "components/ui/spinner/spinner.stylex.ts"
+      "target": "components/ui/spinner.tsx"
     }
   ],
   "type": "registry:ui"

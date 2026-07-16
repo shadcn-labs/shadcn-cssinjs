@@ -6,13 +6,13 @@ import {
   EmptyDescription,
   EmptyHeader,
   EmptyTitle,
-} from "@/registry/bases/stylex/empty/empty";
+} from "@/registry/bases/stylex/ui/empty";
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
-} from "@/registry/bases/stylex/input-group/input-group";
-import { Kbd } from "@/registry/bases/stylex/kbd/kbd";
+} from "@/registry/bases/stylex/ui/input-group";
+import { Kbd } from "@/registry/bases/stylex/ui/kbd";
 
 export default function EmptyInputGroup() {
   return (

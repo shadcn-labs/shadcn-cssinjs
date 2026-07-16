@@ -4,12 +4,12 @@ import { CalendarIcon } from "lucide-react";
 
 import { useTranslation } from "@/components/language-selector";
 import type { Translations } from "@/components/language-selector";
-import { Button } from "@/registry/bases/stylex/button/button";
+import { Button } from "@/registry/bases/stylex/ui/button";
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from "@/registry/bases/stylex/hover-card/hover-card";
+} from "@/registry/bases/stylex/ui/hover-card";
 
 const translations: Translations = {
   ar: {
