@@ -4,10 +4,9 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 
 export const Announcement = () => (
-  <Badge asChild variant="secondary" className="bg-transparent">
-    <Link href="https://ui.shadcn.com" target="_blank" rel="noreferrer">
-      <span className="flex size-2 rounded-full bg-blue-500" title="New" />
-      Built with shadcn registry <ArrowRightIcon />
+  <Badge asChild className="bg-muted" variant="secondary">
+    <Link href="/docs/typeset">
+      Introducing shadcn/typeset <ArrowRightIcon />
     </Link>
   </Badge>
 );

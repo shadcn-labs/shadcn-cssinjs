@@ -2,11 +2,16 @@
 
 import * as stylex from "@stylexjs/stylex";
 import {
+  CaseUpperIcon,
   CheckIcon,
+  CircleIcon,
   ClipboardIcon,
   Code2Icon,
+  ComponentIcon,
   LockIcon,
   MenuIcon,
+  PaletteIcon,
+  PanelLeftIcon,
   Redo2Icon,
   RotateCcwIcon,
   ShuffleIcon,
@@ -42,6 +47,8 @@ import {
 } from "@/app/(app)/(create)/lib/search-params";
 import type { CreateSearchParams } from "@/app/(app)/(create)/lib/search-params";
 import { typesetStyles as shellStyles } from "@/app/(app)/(typeset)/components/typeset.stylex";
+import { GET_CODE_EVENT } from "@/components/designer-actions";
+import { darkColors } from "@/registry/bases/stylex/tokens.stylex";
 
 interface Option {
   color?: string;
@@ -75,7 +82,7 @@ function LockButton({ param }: { param: LockableCreateParam }) {
   const locked = isLocked(param);
 
   return (
-    <div {...stylex.props(shellStyles.lockButton)}>
+    <div {...stylex.props(shellStyles.lockButton)} data-locked={locked}>
       <IconButton
         label={locked ? `Unlock ${param}` : `Lock ${param}`}
         onClick={() => toggleLock(param)}
@@ -91,12 +98,14 @@ function LockButton({ param }: { param: LockableCreateParam }) {
 }
 
 function Control({
+  icon,
   label,
   onChange,
   options,
   param,
   value,
 }: {
+  icon: React.ReactNode;
   label: string;
   onChange: (value: string) => void;
   options: readonly Option[];
@@ -106,21 +115,9 @@ function Control({
   const selected = options.find((option) => option.value === value);
 
   return (
-    <label {...stylex.props(shellStyles.control)}>
-      <span {...stylex.props(shellStyles.controlLabel)}>{label}</span>
-      {selected?.color ? (
-        <span
-          {...stylex.props(
-            createStyles.swatch,
-            createStyles.colorDot(selected.color)
-          )}
-        />
-      ) : null}
+    <div {...stylex.props(shellStyles.control)}>
       <select
-        {...stylex.props(
-          shellStyles.controlSelect,
-          Boolean(selected?.color) && createStyles.selectWithSwatch
-        )}
+        {...stylex.props(shellStyles.controlSelect)}
         aria-label={label}
         value={value}
         onChange={(event) => onChange(event.target.value)}
@@ -131,8 +128,26 @@ function Control({
           </option>
         ))}
       </select>
+      <div {...stylex.props(shellStyles.controlContent)}>
+        <span {...stylex.props(shellStyles.controlLabel)}>{label}</span>
+        <span {...stylex.props(shellStyles.controlValue)}>
+          {selected?.label}
+        </span>
+      </div>
+      <span {...stylex.props(shellStyles.controlIcon)} aria-hidden>
+        {selected?.color ? (
+          <span
+            {...stylex.props(
+              createStyles.controlColorDot,
+              createStyles.colorDot(selected.color)
+            )}
+          />
+        ) : (
+          icon
+        )}
+      </span>
       <LockButton param={param} />
-    </label>
+    </div>
   );
 }
 
@@ -191,23 +206,65 @@ function Dialog({
 function MainMenu() {
   const { canGoBack, canGoForward, goBack, goForward } = useCreateHistory();
   const { resolvedTheme, setTheme } = useTheme();
+  const { randomize, reset } = useCreateRandom();
+  const [open, setOpen] = React.useState(false);
 
   return (
-    <div {...stylex.props(shellStyles.menu)}>
-      <MenuIcon {...stylex.props(shellStyles.icon)} aria-hidden />
-      <span {...stylex.props(shellStyles.controlValue)}>Menu</span>
-      <IconButton disabled={!canGoBack} label="Undo" onClick={goBack}>
-        <Undo2Icon {...stylex.props(shellStyles.icon)} />
-      </IconButton>
-      <IconButton disabled={!canGoForward} label="Redo" onClick={goForward}>
-        <Redo2Icon {...stylex.props(shellStyles.icon)} />
-      </IconButton>
-      <IconButton
-        label="Toggle theme"
-        onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+    <div {...stylex.props(shellStyles.menuRoot)}>
+      <button
+        {...stylex.props(shellStyles.menuTrigger)}
+        aria-expanded={open}
+        type="button"
+        onClick={() => setOpen((current) => !current)}
       >
-        <SunMoonIcon {...stylex.props(shellStyles.icon)} />
-      </IconButton>
+        <span>Menu</span>
+        <MenuIcon {...stylex.props(shellStyles.menuIcon)} aria-hidden />
+      </button>
+      {open ? (
+        <div {...stylex.props(shellStyles.menuPopover)}>
+          <button
+            {...stylex.props(shellStyles.menuItem)}
+            type="button"
+            onClick={randomize}
+          >
+            <ShuffleIcon {...stylex.props(shellStyles.icon)} /> Shuffle
+          </button>
+          <button
+            {...stylex.props(shellStyles.menuItem)}
+            type="button"
+            onClick={() =>
+              setTheme(resolvedTheme === "dark" ? "light" : "dark")
+            }
+          >
+            <SunMoonIcon {...stylex.props(shellStyles.icon)} /> Light/Dark
+          </button>
+          <div {...stylex.props(shellStyles.menuSeparator)} />
+          <button
+            {...stylex.props(shellStyles.menuItem)}
+            disabled={!canGoBack}
+            type="button"
+            onClick={goBack}
+          >
+            <Undo2Icon {...stylex.props(shellStyles.icon)} /> Undo
+          </button>
+          <button
+            {...stylex.props(shellStyles.menuItem)}
+            disabled={!canGoForward}
+            type="button"
+            onClick={goForward}
+          >
+            <Redo2Icon {...stylex.props(shellStyles.icon)} /> Redo
+          </button>
+          <div {...stylex.props(shellStyles.menuSeparator)} />
+          <button
+            {...stylex.props(shellStyles.menuItem)}
+            type="button"
+            onClick={reset}
+          >
+            <RotateCcwIcon {...stylex.props(shellStyles.icon)} /> Reset
+          </button>
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -410,6 +467,13 @@ export function CreateCustomizer() {
   const [openPreset, setOpenPreset] = React.useState(false);
   const [openProject, setOpenProject] = React.useState(false);
   const [copied, setCopied] = React.useState(false);
+  const customizer = stylex.props(darkColors, shellStyles.customizer);
+
+  React.useEffect(() => {
+    const openGetCode = () => setOpenProject(true);
+    window.addEventListener(GET_CODE_EVENT, openGetCode);
+    return () => window.removeEventListener(GET_CODE_EVENT, openGetCode);
+  }, []);
 
   const set = React.useCallback(
     <K extends keyof CreateSearchParams>(
@@ -433,13 +497,17 @@ export function CreateCustomizer() {
 
   return (
     <>
-      <aside {...stylex.props(shellStyles.customizer)}>
+      <aside
+        className={`dark ${customizer.className ?? ""}`}
+        style={customizer.style}
+      >
         <header {...stylex.props(shellStyles.cardHeader)}>
           <MainMenu />
         </header>
         <div {...stylex.props(shellStyles.cardContent)}>
           <div {...stylex.props(shellStyles.controlGrid)}>
             <Control
+              icon={<ComponentIcon height={18} width={18} />}
               label="Style"
               options={STYLES}
               param="style"
@@ -447,6 +515,7 @@ export function CreateCustomizer() {
               onChange={(value) => set("style", value as typeof params.style)}
             />
             <Control
+              icon={<CircleIcon height={18} width={18} />}
               label="Base color"
               options={BASE_COLORS}
               param="baseColor"
@@ -456,6 +525,7 @@ export function CreateCustomizer() {
               }
             />
             <Control
+              icon={<CircleIcon height={18} width={18} />}
               label="Theme"
               options={THEMES}
               param="theme"
@@ -463,6 +533,7 @@ export function CreateCustomizer() {
               onChange={(value) => set("theme", value as typeof params.theme)}
             />
             <Control
+              icon={<CircleIcon height={18} width={18} />}
               label="Chart color"
               options={THEMES}
               param="chartColor"
@@ -473,6 +544,7 @@ export function CreateCustomizer() {
             />
             <div {...stylex.props(shellStyles.fieldSeparator)} />
             <Control
+              icon={<CaseUpperIcon height={18} width={18} />}
               label="Heading"
               options={[{ label: "Inherit body", value: "inherit" }, ...FONTS]}
               param="fontHeading"
@@ -482,6 +554,7 @@ export function CreateCustomizer() {
               }
             />
             <Control
+              icon={<CaseUpperIcon height={18} width={18} />}
               label="Font"
               options={FONTS}
               param="font"
@@ -490,6 +563,7 @@ export function CreateCustomizer() {
             />
             <div {...stylex.props(shellStyles.fieldSeparator)} />
             <Control
+              icon={<PaletteIcon height={18} width={18} />}
               label="Icons"
               options={ICON_LIBRARIES}
               param="iconLibrary"
@@ -499,6 +573,7 @@ export function CreateCustomizer() {
               }
             />
             <Control
+              icon={<CircleIcon height={18} width={18} />}
               label="Radius"
               options={RADII}
               param="radius"
@@ -507,6 +582,7 @@ export function CreateCustomizer() {
             />
             <div {...stylex.props(shellStyles.fieldSeparator)} />
             <Control
+              icon={<PanelLeftIcon height={18} width={18} />}
               label="Menu color"
               options={MENU_COLORS}
               param="menuColor"
@@ -516,6 +592,7 @@ export function CreateCustomizer() {
               }
             />
             <Control
+              icon={<PanelLeftIcon height={18} width={18} />}
               label="Menu accent"
               options={MENU_ACCENTS}
               param="menuAccent"
@@ -525,6 +602,7 @@ export function CreateCustomizer() {
               }
             />
             <Control
+              icon={<ComponentIcon height={18} width={18} />}
               label="Component library"
               options={BASES}
               param="base"
@@ -544,7 +622,9 @@ export function CreateCustomizer() {
             ) : (
               <ClipboardIcon {...stylex.props(shellStyles.icon)} />
             )}
-            {copied ? "Copied" : "Copy preset"}
+            {copied
+              ? "Copied"
+              : `--preset ${encodeCreatePreset(params).slice(0, 2)}`}
           </button>
           <button
             {...stylex.props(shellStyles.button)}
@@ -560,10 +640,10 @@ export function CreateCustomizer() {
             onClick={randomize}
           >
             <ShuffleIcon {...stylex.props(shellStyles.icon)} />
-            Randomize
+            Shuffle
           </button>
           <button
-            {...stylex.props(shellStyles.button)}
+            {...stylex.props(shellStyles.button, createStyles.resetButton)}
             type="button"
             onClick={reset}
           >
@@ -571,7 +651,7 @@ export function CreateCustomizer() {
             Reset
           </button>
           <button
-            {...stylex.props(shellStyles.button, shellStyles.buttonPrimary)}
+            {...stylex.props(shellStyles.button, createStyles.getCodeButton)}
             type="button"
             onClick={() => setOpenProject(true)}
           >

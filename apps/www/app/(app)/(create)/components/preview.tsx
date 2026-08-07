@@ -1,129 +1,42 @@
 "use client";
 
 import * as stylex from "@stylexjs/stylex";
-import {
-  ExternalLinkIcon,
-  Redo2Icon,
-  RotateCcwIcon,
-  ShuffleIcon,
-  SunMoonIcon,
-  Undo2Icon,
-} from "lucide-react";
 import { useTheme } from "next-themes";
 import * as React from "react";
 
 import { createStyles } from "@/app/(app)/(create)/components/create.stylex";
 import { useCreateHistory } from "@/app/(app)/(create)/hooks/use-history";
 import { useCreateRandom } from "@/app/(app)/(create)/hooks/use-random";
-import { PREVIEW_ITEMS } from "@/app/(app)/(create)/lib/config";
 import {
   serializeCreateSearchParams,
   useCreateSearchParams,
 } from "@/app/(app)/(create)/lib/search-params";
-import { typesetStyles as shellStyles } from "@/app/(app)/(typeset)/components/typeset.stylex";
 
 export const CREATE_PARAMS_MESSAGE = "stylex-design-system-params";
 export const CREATE_COMMAND_MESSAGE = "stylex-design-system-command";
 
 type CreateCommand = "randomize" | "redo" | "reset" | "theme" | "undo";
 
-function ToolbarButton({
-  children,
-  label,
-  ...props
-}: React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  children: React.ReactNode;
-  label: string;
-}) {
-  return (
-    <button
-      {...stylex.props(shellStyles.iconButton)}
-      aria-label={label}
-      title={label}
-      type="button"
-      {...props}
-    >
-      {children}
-    </button>
-  );
-}
-
 function PreviewToolbar() {
   const [params, setParams] = useCreateSearchParams();
-  const { randomize, reset } = useCreateRandom();
-  const { canGoBack, canGoForward, goBack, goForward } = useCreateHistory();
-  const { resolvedTheme, setTheme } = useTheme();
-  const previewUrl = serializeCreateSearchParams(
-    `/preview/stylex/${params.item}`,
-    params
-  );
+  const items = [
+    { label: "01", value: "preview-02" },
+    { label: "02", value: "preview" },
+  ] as const;
 
   return (
-    <div {...stylex.props(shellStyles.toolbar)}>
-      <div {...stylex.props(shellStyles.toolbarGroup)}>
-        <ToolbarButton disabled={!canGoBack} label="Undo" onClick={goBack}>
-          <Undo2Icon {...stylex.props(shellStyles.icon)} />
-        </ToolbarButton>
-        <ToolbarButton
-          disabled={!canGoForward}
-          label="Redo"
-          onClick={goForward}
+    <div {...stylex.props(createStyles.previewSwitcher)}>
+      {items.map((item) => (
+        <button
+          {...stylex.props(createStyles.previewSwitchButton)}
+          data-active={params.item === item.value}
+          key={item.value}
+          type="button"
+          onClick={() => void setParams({ item: item.value })}
         >
-          <Redo2Icon {...stylex.props(shellStyles.icon)} />
-        </ToolbarButton>
-        <ToolbarButton label="Randomize" onClick={randomize}>
-          <ShuffleIcon {...stylex.props(shellStyles.icon)} />
-        </ToolbarButton>
-        <ToolbarButton label="Reset" onClick={reset}>
-          <RotateCcwIcon {...stylex.props(shellStyles.icon)} />
-        </ToolbarButton>
-        <ToolbarButton
-          label="Toggle theme"
-          onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-        >
-          <SunMoonIcon {...stylex.props(shellStyles.icon)} />
-        </ToolbarButton>
-      </div>
-      <div {...stylex.props(shellStyles.toolbarGroup)}>
-        <select
-          {...stylex.props(shellStyles.controlSelect)}
-          aria-label="Preview"
-          value={params.item}
-          onChange={(event) =>
-            void setParams({ item: event.target.value as typeof params.item })
-          }
-        >
-          {PREVIEW_ITEMS.map((item) => (
-            <option key={item.value} value={item.value}>
-              {item.label}
-            </option>
-          ))}
-        </select>
-        <label {...stylex.props(shellStyles.control)}>
-          <span {...stylex.props(shellStyles.controlLabel)}>Scale</span>
-          <input
-            {...stylex.props(createStyles.range)}
-            aria-label="Preview scale"
-            max={120}
-            min={65}
-            type="range"
-            value={params.size}
-            onChange={(event) =>
-              void setParams({ size: Number(event.target.value) })
-            }
-          />
-        </label>
-        <a
-          {...stylex.props(shellStyles.iconButton)}
-          aria-label="Open preview in new tab"
-          href={previewUrl}
-          rel="noreferrer"
-          target="_blank"
-          title="Open preview in new tab"
-        >
-          <ExternalLinkIcon {...stylex.props(shellStyles.icon)} />
-        </a>
-      </div>
+          {item.label}
+        </button>
+      ))}
     </div>
   );
 }
@@ -191,13 +104,10 @@ export function CreatePreview() {
   }, [goBack, goForward, randomize, reset, resolvedTheme, setTheme]);
 
   return (
-    <section {...stylex.props(shellStyles.preview)}>
+    <section {...stylex.props(createStyles.previewShell)}>
       <div {...stylex.props(createStyles.previewBackground)}>
         <iframe
-          {...stylex.props(
-            createStyles.previewFrame,
-            createStyles.previewScale(params.size)
-          )}
+          {...stylex.props(createStyles.previewFrame)}
           ref={iframeRef}
           src={previewUrl}
           title="Design system preview"

@@ -9,6 +9,13 @@ const config = {
         "@/registry/bases/stylex/lib/*": ["../lib/*"],
       },
       include: [
+        "apps/www/app/**/*.{js,jsx,ts,tsx}",
+        "apps/www/components/**/*.{js,jsx,ts,tsx}",
+        "apps/www/registry/**/*.{js,jsx,ts,tsx}",
+        "apps/www/examples/**/*.{js,jsx,ts,tsx}",
+        "apps/www/lib/**/*.{js,jsx,ts,tsx}",
+        "app/**/*.{js,jsx,ts,tsx}",
+        "components/**/*.{js,jsx,ts,tsx}",
         "registry/**/*.{js,jsx,ts,tsx}",
         "examples/**/*.{js,jsx,ts,tsx}",
         "lib/**/*.{js,jsx,ts,tsx}",

@@ -1,14 +1,7 @@
 "use client";
 
 import * as stylex from "@stylexjs/stylex";
-import {
-  ExternalLinkIcon,
-  Redo2Icon,
-  RotateCcwIcon,
-  ShuffleIcon,
-  SunMoonIcon,
-  Undo2Icon,
-} from "lucide-react";
+import { ExternalLinkIcon } from "lucide-react";
 import * as React from "react";
 
 import { TYPESET_COMMAND_MESSAGE } from "@/app/(app)/(typeset)/components/forward-scripts";
@@ -23,87 +16,44 @@ import {
   TYPESET_PARAMS_MESSAGE,
   useTypesetSearchParams,
 } from "@/app/(app)/(typeset)/lib/search-params";
-
-function ToolbarButton({
-  children,
-  label,
-  ...props
-}: React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  children: React.ReactNode;
-  label: string;
-}) {
-  return (
-    <button
-      {...stylex.props(styles.iconButton)}
-      aria-label={label}
-      title={label}
-      type="button"
-      {...props}
-    >
-      {children}
-    </button>
-  );
-}
+import { darkColors } from "@/registry/bases/stylex/tokens.stylex";
 
 function TypesetToolbar() {
   const [params, setParams] = useTypesetSearchParams();
-  const { shuffle, reset } = useShuffle();
-  const { canGoBack, canGoForward, goBack, goForward } = useHistory();
-  const { toggleTheme } = useThemeToggle({ shortcut: false });
   const previewUrl = serializeTypesetSearchParams(
     `/preview/typeset/${params.item}`,
     params
   );
+  const toolbarGroup = stylex.props(darkColors, styles.toolbarGroup);
 
   return (
     <div {...stylex.props(styles.toolbar)}>
-      <div {...stylex.props(styles.toolbarGroup)}>
-        <ToolbarButton disabled={!canGoBack} label="Undo" onClick={goBack}>
-          <Undo2Icon {...stylex.props(styles.icon)} />
-        </ToolbarButton>
-        <ToolbarButton
-          disabled={!canGoForward}
-          label="Redo"
-          onClick={goForward}
-        >
-          <Redo2Icon {...stylex.props(styles.icon)} />
-        </ToolbarButton>
-        <ToolbarButton label="Shuffle" onClick={shuffle}>
-          <ShuffleIcon {...stylex.props(styles.icon)} />
-        </ToolbarButton>
-        <ToolbarButton label="Reset" onClick={reset}>
-          <RotateCcwIcon {...stylex.props(styles.icon)} />
-        </ToolbarButton>
-        <ToolbarButton label="Toggle theme" onClick={toggleTheme}>
-          <SunMoonIcon {...stylex.props(styles.icon)} />
-        </ToolbarButton>
+      <div {...toolbarGroup} className={`dark ${toolbarGroup.className ?? ""}`}>
+        {AVAILABLE_CONTENT_OPTIONS.map((option, index) => (
+          <button
+            {...stylex.props(styles.toolbarPill)}
+            aria-label={option.label}
+            data-active={params.item === option.value}
+            key={option.value}
+            title={option.label}
+            type="button"
+            onClick={() => void setParams({ item: option.value })}
+          >
+            {String(index + 1).padStart(2, "0")}
+          </button>
+        ))}
       </div>
-      <div {...stylex.props(styles.toolbarGroup)}>
-        <select
-          {...stylex.props(styles.controlSelect)}
-          aria-label="Preview content"
-          value={params.item}
-          onChange={(event) =>
-            void setParams({
-              item: event.target.value as typeof params.item,
-            })
-          }
-        >
-          {AVAILABLE_CONTENT_OPTIONS.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
+      <div {...toolbarGroup} className={`dark ${toolbarGroup.className ?? ""}`}>
         <a
-          {...stylex.props(styles.iconButton)}
+          {...stylex.props(styles.toolbarLink)}
           aria-label="Open preview in new tab"
           href={previewUrl}
           rel="noreferrer"
           target="_blank"
           title="Open preview in new tab"
         >
-          <ExternalLinkIcon {...stylex.props(styles.icon)} />
+          <ExternalLinkIcon {...stylex.props(styles.toolbarLinkIcon)} />
+          <span>Open in New Tab</span>
         </a>
       </div>
     </div>

@@ -2,9 +2,13 @@
 
 import * as stylex from "@stylexjs/stylex";
 import {
+  ArrowLeftRightIcon,
+  BaselineIcon,
+  CaseUpperIcon,
   Code2Icon,
   LockIcon,
   MenuIcon,
+  PilcrowIcon,
   Redo2Icon,
   RotateCcwIcon,
   ShuffleIcon,
@@ -30,6 +34,7 @@ import {
   useTypesetSearchParams,
 } from "@/app/(app)/(typeset)/lib/search-params";
 import type { TypesetSearchParams } from "@/app/(app)/(typeset)/lib/search-params";
+import { darkColors } from "@/registry/bases/stylex/tokens.stylex";
 
 interface Option {
   label: string;
@@ -62,7 +67,7 @@ function LockButton({ param }: { param: LockableParam }) {
   const locked = isLocked(param);
 
   return (
-    <div {...stylex.props(styles.lockButton)}>
+    <div {...stylex.props(styles.lockButton)} data-locked={locked}>
       <IconButton
         label={locked ? `Unlock ${param}` : `Lock ${param}`}
         onClick={() => toggleLock(param)}
@@ -78,21 +83,24 @@ function LockButton({ param }: { param: LockableParam }) {
 }
 
 function Control({
+  icon,
   label,
   param,
   options,
   value,
   onChange,
 }: {
+  icon: React.ReactNode;
   label: string;
   param: LockableParam;
   options: readonly Option[];
   value: string;
   onChange: (value: string) => void;
 }) {
+  const current = options.find((option) => option.value === value);
+
   return (
-    <label {...stylex.props(styles.control)}>
-      <span {...stylex.props(styles.controlLabel)}>{label}</span>
+    <div {...stylex.props(styles.control)}>
       <select
         {...stylex.props(styles.controlSelect)}
         aria-label={label}
@@ -105,32 +113,79 @@ function Control({
           </option>
         ))}
       </select>
+      <div {...stylex.props(styles.controlContent)}>
+        <span {...stylex.props(styles.controlLabel)}>{label}</span>
+        <span {...stylex.props(styles.controlValue)}>{current?.label}</span>
+      </div>
+      <span {...stylex.props(styles.controlIcon)} aria-hidden>
+        {icon}
+      </span>
       <LockButton param={param} />
-    </label>
+    </div>
   );
 }
 
 function MainMenu() {
   const { canGoBack, canGoForward, goBack, goForward } = useHistory();
   const { reset } = useShuffle();
+  const { shuffle } = useShuffle();
   const { toggleTheme } = useThemeToggle();
+  const [open, setOpen] = React.useState(false);
 
   return (
-    <div {...stylex.props(styles.menu)}>
-      <MenuIcon {...stylex.props(styles.icon)} aria-hidden />
-      <span {...stylex.props(styles.controlValue)}>Menu</span>
-      <IconButton disabled={!canGoBack} label="Undo" onClick={goBack}>
-        <Undo2Icon {...stylex.props(styles.icon)} />
-      </IconButton>
-      <IconButton disabled={!canGoForward} label="Redo" onClick={goForward}>
-        <Redo2Icon {...stylex.props(styles.icon)} />
-      </IconButton>
-      <IconButton label="Toggle theme" onClick={toggleTheme}>
-        <SunMoonIcon {...stylex.props(styles.icon)} />
-      </IconButton>
-      <IconButton label="Reset" onClick={reset}>
-        <RotateCcwIcon {...stylex.props(styles.icon)} />
-      </IconButton>
+    <div {...stylex.props(styles.menuRoot)}>
+      <button
+        {...stylex.props(styles.menuTrigger)}
+        aria-expanded={open}
+        type="button"
+        onClick={() => setOpen((current) => !current)}
+      >
+        <span>Menu</span>
+        <MenuIcon {...stylex.props(styles.menuIcon)} aria-hidden />
+      </button>
+      {open ? (
+        <div {...stylex.props(styles.menuPopover)}>
+          <button
+            {...stylex.props(styles.menuItem)}
+            type="button"
+            onClick={shuffle}
+          >
+            <ShuffleIcon {...stylex.props(styles.icon)} /> Shuffle
+          </button>
+          <button
+            {...stylex.props(styles.menuItem)}
+            type="button"
+            onClick={toggleTheme}
+          >
+            <SunMoonIcon {...stylex.props(styles.icon)} /> Light/Dark
+          </button>
+          <div {...stylex.props(styles.menuSeparator)} />
+          <button
+            {...stylex.props(styles.menuItem)}
+            disabled={!canGoBack}
+            type="button"
+            onClick={goBack}
+          >
+            <Undo2Icon {...stylex.props(styles.icon)} /> Undo
+          </button>
+          <button
+            {...stylex.props(styles.menuItem)}
+            disabled={!canGoForward}
+            type="button"
+            onClick={goForward}
+          >
+            <Redo2Icon {...stylex.props(styles.icon)} /> Redo
+          </button>
+          <div {...stylex.props(styles.menuSeparator)} />
+          <button
+            {...stylex.props(styles.menuItem)}
+            type="button"
+            onClick={reset}
+          >
+            <RotateCcwIcon {...stylex.props(styles.icon)} /> Reset
+          </button>
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -189,6 +244,7 @@ export function TypesetCustomizer() {
   const [params, setParams] = useTypesetSearchParams();
   const { shuffle } = useShuffle();
   const [codeOpen, setCodeOpen] = React.useState(false);
+  const customizer = stylex.props(darkColors, styles.customizer);
 
   const set = React.useCallback(
     <K extends keyof TypesetSearchParams>(key: K, value: string) => {
@@ -210,13 +266,17 @@ export function TypesetCustomizer() {
 
   return (
     <>
-      <aside {...stylex.props(styles.customizer)}>
+      <aside
+        className={`dark ${customizer.className ?? ""}`}
+        style={customizer.style}
+      >
         <header {...stylex.props(styles.cardHeader)}>
           <MainMenu />
         </header>
         <div {...stylex.props(styles.cardContent)}>
           <div {...stylex.props(styles.controlGrid)}>
             <Control
+              icon={<ArrowLeftRightIcon height={18} width={18} />}
               label="Measure"
               param="measure"
               options={TYPESET_MEASURES}
@@ -225,13 +285,17 @@ export function TypesetCustomizer() {
             />
             <div {...stylex.props(styles.fieldSeparator)} />
             <Control
+              icon={<CaseUpperIcon height={18} width={18} />}
               label="Heading"
               param="heading"
               options={headingOptions}
-              value={params.heading}
+              value={
+                params.heading === "inherit" ? params.body : params.heading
+              }
               onChange={(value) => set("heading", value)}
             />
             <Control
+              icon={<CaseUpperIcon height={18} width={18} />}
               label="Body"
               param="body"
               options={fontOptions}
@@ -239,6 +303,7 @@ export function TypesetCustomizer() {
               onChange={(value) => set("body", value)}
             />
             <Control
+              icon={<CaseUpperIcon height={18} width={18} />}
               label="Mono"
               param="mono"
               options={monoFonts.map((font) => ({
@@ -250,6 +315,7 @@ export function TypesetCustomizer() {
             />
             <div {...stylex.props(styles.fieldSeparator)} />
             <Control
+              icon={<CaseUpperIcon height={18} width={18} />}
               label="Size"
               param="scale"
               options={TYPESET_SIZES}
@@ -257,6 +323,7 @@ export function TypesetCustomizer() {
               onChange={(value) => set("scale", value)}
             />
             <Control
+              icon={<BaselineIcon height={18} width={18} />}
               label="Leading"
               param="leading"
               options={TYPESET_LEADINGS}
@@ -264,6 +331,7 @@ export function TypesetCustomizer() {
               onChange={(value) => set("leading", value)}
             />
             <Control
+              icon={<PilcrowIcon height={18} width={18} />}
               label="Flow"
               param="flow"
               options={TYPESET_FLOWS}
@@ -282,7 +350,7 @@ export function TypesetCustomizer() {
             Shuffle
           </button>
           <button
-            {...stylex.props(styles.button)}
+            {...stylex.props(styles.button, styles.getCodeButton)}
             type="button"
             onClick={() => setCodeOpen(true)}
           >

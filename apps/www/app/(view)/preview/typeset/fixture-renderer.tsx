@@ -13,6 +13,14 @@ import {
 } from "@/app/(app)/(typeset)/lib/search-params";
 
 const HEADING_TAGS = new Set(["h1", "h2", "h3", "h4", "h5", "h6"]);
+const TABLE_STRUCTURE_TAGS = new Set([
+  "colgroup",
+  "table",
+  "tbody",
+  "tfoot",
+  "thead",
+  "tr",
+]);
 const BOOLEAN_ATTRIBUTES = new Set([
   "checked",
   "disabled",
@@ -179,6 +187,12 @@ function renderChildren(
 
   return nodes.map((node, index): React.ReactNode => {
     if (node.nodeType === Node.TEXT_NODE) {
+      if (
+        TABLE_STRUCTURE_TAGS.has(parentTag ?? "") &&
+        !node.textContent?.trim()
+      ) {
+        return null;
+      }
       return node.textContent;
     }
 

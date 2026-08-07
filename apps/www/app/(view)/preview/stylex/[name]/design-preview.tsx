@@ -2,18 +2,23 @@
 
 import * as stylex from "@stylexjs/stylex";
 import {
-  ActivityIcon,
   BarChart3Icon,
   BellIcon,
   BoxIcon,
-  CalendarDaysIcon,
   ChevronRightIcon,
   CircleUserRoundIcon,
   CreditCardIcon,
+  FolderIcon,
   LayoutDashboardIcon,
+  ListChecksIcon,
+  MailIcon,
   MenuIcon,
+  PanelLeftIcon,
+  PlusCircleIcon,
   SearchIcon,
   SettingsIcon,
+  TrendingDownIcon,
+  TrendingUpIcon,
   UsersIcon,
 } from "lucide-react";
 import { useTheme } from "next-themes";
@@ -87,22 +92,37 @@ const styleMap = {
 } as const;
 
 function MetricCard({
+  detail,
+  direction,
   label,
+  note,
   value,
   delta,
 }: {
+  detail: string;
   delta: string;
+  direction: "down" | "up";
   label: string;
+  note: string;
   value: string;
 }) {
+  const TrendIcon = direction === "up" ? TrendingUpIcon : TrendingDownIcon;
+
   return (
-    <article {...stylex.props(styles.card)}>
-      <div {...stylex.props(styles.toolbar)}>
+    <article {...stylex.props(styles.dashboardMetricCard)}>
+      <div {...stylex.props(styles.dashboardMetricHeader)}>
         <span {...stylex.props(styles.muted)}>{label}</span>
-        <ActivityIcon height={15} width={15} />
+        <span {...stylex.props(styles.dashboardDelta)}>
+          <TrendIcon height={13} width={13} /> {delta}
+        </span>
       </div>
       <strong {...stylex.props(styles.metric)}>{value}</strong>
-      <span {...stylex.props(styles.muted)}>{delta} from last month</span>
+      <div {...stylex.props(styles.dashboardMetricFooter)}>
+        <span {...stylex.props(styles.dashboardMetricDetail)}>
+          {detail} <TrendIcon height={15} width={15} />
+        </span>
+        <span {...stylex.props(styles.muted)}>{note}</span>
+      </div>
     </article>
   );
 }
@@ -122,30 +142,40 @@ function Chart({ color }: { color: string }) {
 
 function Dashboard({ chartColor }: { chartColor: string }) {
   return (
-    <>
-      <header {...stylex.props(styles.dashboardHeader)}>
-        <div {...stylex.props(styles.section)}>
-          <h1 {...stylex.props(styles.title)}>Dashboard</h1>
-          <p {...stylex.props(styles.muted)}>
-            Overview of your workspace performance.
-          </p>
-        </div>
-        <div {...stylex.props(styles.row, styles.rowWrap)}>
-          <button
-            {...stylex.props(styles.button, styles.buttonOutline)}
-            type="button"
-          >
-            <CalendarDaysIcon height={15} width={15} /> Last 30 days
-          </button>
-          <button {...stylex.props(styles.button)} type="button">
-            Download report
-          </button>
-        </div>
-      </header>
-      <div {...stylex.props(styles.grid, styles.gridThree)}>
-        <MetricCard delta="+12.4%" label="Revenue" value="$45,231" />
-        <MetricCard delta="+8.2%" label="Subscriptions" value="2,350" />
-        <MetricCard delta="+19.1%" label="Active now" value="573" />
+    <div {...stylex.props(styles.dashboardBlockBody)}>
+      <div {...stylex.props(styles.dashboardMetricGrid)}>
+        <MetricCard
+          delta="+12.5%"
+          detail="Trending up this month"
+          direction="up"
+          label="Total Revenue"
+          note="Visitors for the last 6 months"
+          value="$1,250.00"
+        />
+        <MetricCard
+          delta="-20%"
+          detail="Down 20% this period"
+          direction="down"
+          label="New Customers"
+          note="Acquisition needs attention"
+          value="1,234"
+        />
+        <MetricCard
+          delta="+12.5%"
+          detail="Strong user retention"
+          direction="up"
+          label="Active Accounts"
+          note="Engagement exceed targets"
+          value="45,678"
+        />
+        <MetricCard
+          delta="+4.5%"
+          detail="Steady performance increase"
+          direction="up"
+          label="Growth Rate"
+          note="Meets growth projections"
+          value="4.5%"
+        />
       </div>
       <div {...stylex.props(styles.grid)}>
         <article {...stylex.props(styles.card)}>
@@ -185,6 +215,110 @@ function Dashboard({ chartColor }: { chartColor: string }) {
           </div>
         </article>
       </div>
+    </div>
+  );
+}
+
+function DashboardMenu({ example = false }: { example?: boolean }) {
+  return (
+    <aside
+      {...stylex.props(
+        styles.dashboardMenu,
+        example && styles.dashboardMenuExample
+      )}
+    >
+      <div {...stylex.props(styles.dashboardBrand)}>
+        <BoxIcon height={18} width={18} /> Acme Inc.
+      </div>
+      {example ? (
+        <span {...stylex.props(styles.dashboardMenuLabel)}>Home</span>
+      ) : (
+        <div {...stylex.props(styles.dashboardQuickRow)}>
+          <button {...stylex.props(styles.dashboardQuickCreate)} type="button">
+            <PlusCircleIcon height={16} width={16} /> Quick Create
+          </button>
+          <button
+            {...stylex.props(styles.dashboardMessageButton)}
+            aria-label="Messages"
+            type="button"
+          >
+            <MailIcon height={16} width={16} />
+          </button>
+        </div>
+      )}
+      {[
+        { icon: LayoutDashboardIcon, label: "Dashboard" },
+        { icon: ListChecksIcon, label: "Lifecycle" },
+        { icon: BarChart3Icon, label: "Analytics" },
+        { icon: FolderIcon, label: "Projects" },
+        { icon: UsersIcon, label: "Team" },
+      ].map(({ icon: Icon, label }) => (
+        <div key={label} {...stylex.props(styles.dashboardMenuItem)}>
+          <Icon height={16} width={16} /> {label}
+        </div>
+      ))}
+      {example ? (
+        <>
+          <span {...stylex.props(styles.dashboardMenuLabel)}>Documents</span>
+          {[
+            { icon: CreditCardIcon, label: "Data Library" },
+            { icon: FolderIcon, label: "Reports" },
+          ].map(({ icon: Icon, label }) => (
+            <div key={label} {...stylex.props(styles.dashboardMenuItem)}>
+              <Icon height={16} width={16} /> {label}
+            </div>
+          ))}
+        </>
+      ) : null}
+    </aside>
+  );
+}
+
+function DashboardBlock({
+  chartColor,
+  example = false,
+}: {
+  chartColor: string;
+  example?: boolean;
+}) {
+  return (
+    <>
+      <DashboardMenu example={example} />
+      <section {...stylex.props(styles.dashboardBlockMain)}>
+        <header
+          {...stylex.props(
+            styles.dashboardBlockHeader,
+            example && styles.dashboardBlockHeaderExample
+          )}
+        >
+          <div {...stylex.props(styles.row)}>
+            <PanelLeftIcon height={16} width={16} />
+            <span {...stylex.props(styles.dashboardHeaderSeparator)} />
+            <h1 {...stylex.props(styles.dashboardBlockTitle)}>Documents</h1>
+          </div>
+          {example ? (
+            <button
+              {...stylex.props(
+                styles.dashboardQuickCreate,
+                styles.dashboardQuickCreateHeader
+              )}
+              type="button"
+            >
+              <PlusCircleIcon height={16} width={16} /> Quick Create
+            </button>
+          ) : (
+            <a
+              {...stylex.props(styles.dashboardGithub)}
+              href="https://github.com/shadcn-ui/ui"
+              rel="noreferrer"
+              target="_blank"
+            >
+              GitHub
+            </a>
+          )}
+        </header>
+        <Dashboard chartColor={chartColor} />
+      </section>
     </>
   );
 }
@@ -251,41 +385,268 @@ function Components() {
 
 function Authentication() {
   return (
-    <div {...stylex.props(styles.contentWide)}>
-      <article {...stylex.props(styles.card)}>
-        <div>
-          <h1 {...stylex.props(styles.title)}>Welcome back</h1>
-          <p {...stylex.props(styles.muted)}>
-            Enter your details to access your workspace.
-          </p>
+    <div {...stylex.props(styles.authPage)}>
+      <section {...stylex.props(styles.authBrandPanel)}>
+        <div {...stylex.props(styles.authBrand)}>
+          <BoxIcon height={24} width={24} /> Acme Inc
         </div>
-        <label {...stylex.props(styles.field)}>
-          <span {...stylex.props(styles.label)}>Email</span>
+        <blockquote {...stylex.props(styles.authQuote)}>
+          “This library has saved me countless hours of work and helped me
+          deliver stunning designs to my clients faster than ever before.” —
+          Sofia Davis
+        </blockquote>
+      </section>
+      <section {...stylex.props(styles.authFormPanel)}>
+        <button {...stylex.props(styles.authLogin)} type="button">
+          Login
+        </button>
+        <form {...stylex.props(styles.authForm)}>
+          <div {...stylex.props(styles.authFormHeader)}>
+            <h1 {...stylex.props(styles.title)}>Create an account</h1>
+            <p {...stylex.props(styles.muted)}>
+              Enter your email below to create your account
+            </p>
+          </div>
           <input
             {...stylex.props(styles.input)}
             placeholder="name@example.com"
             type="email"
           />
-        </label>
-        <label {...stylex.props(styles.field)}>
-          <span {...stylex.props(styles.label)}>Password</span>
-          <input
-            {...stylex.props(styles.input)}
-            placeholder="••••••••"
-            type="password"
-          />
-        </label>
-        <button {...stylex.props(styles.button)} type="button">
-          Sign in
+          <button {...stylex.props(styles.button)} type="submit">
+            Continue with Email
+          </button>
+          <div {...stylex.props(styles.authDivider)}>OR CONTINUE WITH</div>
+          <button
+            {...stylex.props(styles.button, styles.buttonOutline)}
+            type="button"
+          >
+            Continue with GitHub
+          </button>
+          <p {...stylex.props(styles.authTerms)}>
+            By clicking continue, you agree to our Terms of Service and Privacy
+            Policy.
+          </p>
+        </form>
+      </section>
+    </div>
+  );
+}
+
+function TasksExample() {
+  const tasks = [
+    [
+      "TASK-8782",
+      "You can't compress the program without quantifying the open-source SSD pixel!",
+      "In Progress",
+      "High",
+    ],
+    [
+      "TASK-7878",
+      "Try to calculate the EXE feed, maybe it will index the multi-byte pixel!",
+      "Backlog",
+      "Medium",
+    ],
+    ["TASK-7839", "We need to bypass the neural TCP card!", "Todo", "High"],
+    [
+      "TASK-5562",
+      "The SAS interface is down, bypass the open-source pixel so we can back up!",
+      "Done",
+      "Low",
+    ],
+    [
+      "TASK-8686",
+      "I'll parse the wireless SSL protocol, that should driver the API panel!",
+      "Canceled",
+      "Medium",
+    ],
+  ];
+
+  return (
+    <section {...stylex.props(styles.tasksPage)}>
+      <header {...stylex.props(styles.dashboardHeader)}>
+        <div>
+          <h1 {...stylex.props(styles.title)}>Welcome back!</h1>
+          <p {...stylex.props(styles.muted)}>
+            Here&apos;s a list of your tasks for this month.
+          </p>
+        </div>
+        <span {...stylex.props(styles.avatar)}>SD</span>
+      </header>
+      <div {...stylex.props(styles.tasksToolbar)}>
+        <input
+          {...stylex.props(styles.input, styles.tasksFilter)}
+          placeholder="Filter tasks..."
+        />
+        <button
+          {...stylex.props(styles.button, styles.buttonOutline)}
+          type="button"
+        >
+          Status
         </button>
         <button
           {...stylex.props(styles.button, styles.buttonOutline)}
           type="button"
         >
-          Continue with GitHub
+          Priority
         </button>
-      </article>
-    </div>
+        <button
+          {...stylex.props(
+            styles.button,
+            styles.buttonOutline,
+            styles.tasksView
+          )}
+          type="button"
+        >
+          View
+        </button>
+      </div>
+      <div {...stylex.props(styles.tasksTableShell)}>
+        <table {...stylex.props(styles.table)}>
+          <thead>
+            <tr>
+              {["Task", "Title", "Status", "Priority"].map((heading) => (
+                <th
+                  key={heading}
+                  {...stylex.props(styles.tableCell, styles.tableHead)}
+                >
+                  {heading}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {tasks.map((task) => (
+              <tr key={task[0]}>
+                {task.map((cell, index) => (
+                  <td key={cell} {...stylex.props(styles.tableCell)}>
+                    {index > 1 ? (
+                      <span {...stylex.props(styles.badge)}>{cell}</span>
+                    ) : (
+                      cell
+                    )}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  );
+}
+
+function PlaygroundExample() {
+  return (
+    <section {...stylex.props(styles.playgroundPage)}>
+      <header {...stylex.props(styles.playgroundHeader)}>
+        <h1 {...stylex.props(styles.heading)}>Playground</h1>
+        <div {...stylex.props(styles.row)}>
+          <select {...stylex.props(styles.input, styles.playgroundPreset)}>
+            <option>Load a preset...</option>
+          </select>
+          <button
+            {...stylex.props(styles.button, styles.buttonOutline)}
+            type="button"
+          >
+            Save
+          </button>
+          <button
+            {...stylex.props(styles.button, styles.buttonOutline)}
+            type="button"
+          >
+            View code
+          </button>
+          <button
+            {...stylex.props(styles.button, styles.buttonOutline)}
+            type="button"
+          >
+            Share
+          </button>
+        </div>
+      </header>
+      <div {...stylex.props(styles.playgroundBody)}>
+        <div {...stylex.props(styles.playgroundPrompt)}>
+          <textarea
+            {...stylex.props(styles.playgroundTextarea)}
+            aria-label="Prompt"
+            placeholder="Write a tagline for an ice cream shop"
+          />
+          <div {...stylex.props(styles.row)}>
+            <button {...stylex.props(styles.button)} type="button">
+              Submit
+            </button>
+            <button
+              {...stylex.props(styles.button, styles.buttonOutline)}
+              type="button"
+            >
+              Reset
+            </button>
+          </div>
+        </div>
+        <aside {...stylex.props(styles.playgroundControls)}>
+          <div {...stylex.props(styles.field)}>
+            <span {...stylex.props(styles.label)}>Mode</span>
+            <div {...stylex.props(styles.playgroundModes)}>
+              <button type="button">☰</button>
+              <button type="button">↓</button>
+              <button type="button">✎</button>
+            </div>
+          </div>
+          {[
+            ["Model", "text-davinci-003"],
+            ["Temperature", "0.56"],
+            ["Maximum Length", "256"],
+            ["Top P", "0.9"],
+          ].map(([label, value]) => (
+            <label key={label} {...stylex.props(styles.field)}>
+              <span {...stylex.props(styles.label)}>{label}</span>
+              <input {...stylex.props(styles.input)} defaultValue={value} />
+            </label>
+          ))}
+        </aside>
+      </div>
+    </section>
+  );
+}
+
+function RtlExample() {
+  return (
+    <section {...stylex.props(styles.rtlPage)} dir="rtl">
+      <header>
+        <h1 {...stylex.props(styles.title)}>مكوّنات واجهة عربية</h1>
+        <p {...stylex.props(styles.muted)}>
+          أمثلة كاملة لدعم اتجاه الكتابة من اليمين إلى اليسار.
+        </p>
+      </header>
+      <div {...stylex.props(styles.grid)}>
+        <article {...stylex.props(styles.card)}>
+          <h2 {...stylex.props(styles.heading)}>إعدادات المظهر</h2>
+          <label {...stylex.props(styles.field)}>
+            <span {...stylex.props(styles.label)}>اللغة</span>
+            <select {...stylex.props(styles.input)}>
+              <option>العربية</option>
+            </select>
+          </label>
+          <label {...stylex.props(styles.switchRow)}>
+            <span>الوضع الداكن</span>
+            <input defaultChecked type="checkbox" />
+          </label>
+          <button {...stylex.props(styles.button)} type="button">
+            حفظ التغييرات
+          </button>
+        </article>
+        <article {...stylex.props(styles.card)}>
+          <h2 {...stylex.props(styles.heading)}>اكتب رسالتك</h2>
+          <textarea
+            {...stylex.props(styles.playgroundTextarea, styles.rtlTextarea)}
+            placeholder="كيف يمكنني مساعدتك؟"
+          />
+          <button {...stylex.props(styles.button)} type="button">
+            إرسال
+          </button>
+        </article>
+      </div>
+    </section>
   );
 }
 
@@ -342,6 +703,231 @@ function DataTable() {
         </tbody>
       </table>
     </article>
+  );
+}
+
+function ContributionHistoryCard({ color }: { color: string }) {
+  return (
+    <article {...stylex.props(styles.showcaseCard)}>
+      <div>
+        <h2 {...stylex.props(styles.showcaseTitle)}>Contribution History</h2>
+        <p {...stylex.props(styles.showcaseDescription)}>
+          Last 6 months of activity
+        </p>
+      </div>
+      <div {...stylex.props(styles.showcaseBars)}>
+        {[42, 61, 48, 73, 39, 79].map((height, index) => (
+          <div key={height} {...stylex.props(styles.showcaseBarColumn)}>
+            <span
+              {...stylex.props(
+                styles.showcaseBar,
+                styles.showcaseBarValue(height, color)
+              )}
+            />
+            <span>{["Dec", "Jan", "Feb", "Mar", "Apr", "May"][index]}</span>
+          </div>
+        ))}
+      </div>
+      <div {...stylex.props(styles.showcaseSplit)}>
+        <div {...stylex.props(styles.showcaseInset)}>
+          <span {...stylex.props(styles.showcaseEyebrow)}>Upcoming</span>
+          <strong>May 25, 2024</strong>
+          <span {...stylex.props(styles.showcaseDescription)}>
+            $1,000 scheduled
+          </span>
+        </div>
+        <div {...stylex.props(styles.showcaseInset)}>
+          <span {...stylex.props(styles.showcaseEyebrow)}>Auto-save plan</span>
+          <strong>Accelerated</strong>
+          <span {...stylex.props(styles.showcaseDescription)}>
+            Recurring weekly
+          </span>
+        </div>
+      </div>
+      <div {...stylex.props(styles.showcaseFooter)}>
+        <button {...stylex.props(styles.showcaseButton)} type="button">
+          View Full Report
+        </button>
+      </div>
+    </article>
+  );
+}
+
+function PayoutThresholdCard() {
+  return (
+    <article {...stylex.props(styles.showcaseCard)}>
+      <div {...stylex.props(styles.showcaseToolbar)}>
+        <div>
+          <h2 {...stylex.props(styles.showcaseTitle)}>Payout Threshold</h2>
+          <p {...stylex.props(styles.showcaseDescription)}>
+            Set the minimum balance required before a payout is triggered.
+          </p>
+        </div>
+        <button {...stylex.props(styles.showcaseIconButton)} type="button">
+          ×
+        </button>
+      </div>
+      <label {...stylex.props(styles.showcaseField)}>
+        <span>Preferred Currency</span>
+        <select {...stylex.props(styles.showcaseInput)} defaultValue="usd">
+          <option value="usd">USD — United States Dollar</option>
+          <option value="eur">EUR — Euro</option>
+        </select>
+      </label>
+      <div {...stylex.props(styles.showcaseField)}>
+        <div {...stylex.props(styles.showcaseToolbar)}>
+          <span>Minimum Payout Amount</span>
+          <strong {...stylex.props(styles.showcaseAmount)}>$2500.00</strong>
+        </div>
+        <input max="10000" min="50" type="range" defaultValue="2500" />
+        <div {...stylex.props(styles.showcaseToolbar)}>
+          <span {...stylex.props(styles.showcaseDescription)}>$50 (MIN)</span>
+          <span {...stylex.props(styles.showcaseDescription)}>
+            $10,000 (MAX)
+          </span>
+        </div>
+      </div>
+      <label {...stylex.props(styles.showcaseField)}>
+        <span>Notes</span>
+        <textarea
+          {...stylex.props(styles.showcaseTextarea)}
+          placeholder="Add any notes for this payout configuration..."
+        />
+      </label>
+      <div {...stylex.props(styles.showcaseFooter)}>
+        <button {...stylex.props(styles.showcaseButton)} type="button">
+          Save Threshold
+        </button>
+      </div>
+    </article>
+  );
+}
+
+function SavingsTargetsCard() {
+  return (
+    <article {...stylex.props(styles.showcaseCard)}>
+      <div>
+        <h2 {...stylex.props(styles.showcaseTitle)}>Savings Targets</h2>
+        <p {...stylex.props(styles.showcaseDescription)}>
+          Active milestones for 2024
+        </p>
+      </div>
+      {["Retirement", "Real Estate"].map((label, index) => (
+        <div key={label} {...stylex.props(styles.showcaseTarget)}>
+          <span {...stylex.props(styles.showcaseEyebrow)}>{label}</span>
+          <strong {...stylex.props(styles.showcaseTargetValue)}>
+            {index === 0 ? "$420,000" : "$85,000"}
+          </strong>
+          <span
+            {...stylex.props(
+              styles.showcaseProgress,
+              styles.showcaseProgressValue(index === 0 ? "65%" : "32%")
+            )}
+          />
+          <span {...stylex.props(styles.showcaseDescription)}>
+            {index === 0 ? "65% achieved" : "32% achieved"}
+          </span>
+        </div>
+      ))}
+      <p {...stylex.props(styles.showcaseFooterText)}>
+        You have not met your targets for this year.
+      </p>
+    </article>
+  );
+}
+
+function EmptyDistributeTrackCard() {
+  return (
+    <article {...stylex.props(styles.showcaseCard, styles.showcaseEmpty)}>
+      <span {...stylex.props(styles.showcaseAdd)}>+</span>
+      <strong>Distribute Track</strong>
+      <p {...stylex.props(styles.showcaseDescription, styles.showcaseCentered)}>
+        Upload your first master to start reaching listeners on Spotify, Apple
+        Music, and more.
+      </p>
+      <button
+        {...stylex.props(styles.showcaseButton, styles.showcaseButtonFit)}
+        type="button"
+      >
+        Create Release
+      </button>
+    </article>
+  );
+}
+
+function ClaimableBalanceCard() {
+  return (
+    <article {...stylex.props(styles.showcaseCard)}>
+      <span {...stylex.props(styles.showcaseDescription)}>
+        Claimable Balance
+      </span>
+      <strong {...stylex.props(styles.showcaseBalance)}>$0.00</strong>
+      <span {...stylex.props(styles.showcaseStatus)}>● Pending Setup</span>
+      <div {...stylex.props(styles.showcaseInset)}>
+        <div {...stylex.props(styles.showcaseToolbar)}>
+          <span>Net Royalties</span>
+          <strong>$0.00</strong>
+        </div>
+        <div {...stylex.props(styles.showcaseToolbar)}>
+          <span>Processing Fee</span>
+          <strong>-$0.00</strong>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function TransactionsCard() {
+  return (
+    <article {...stylex.props(styles.showcaseCard)}>
+      <div>
+        <h2 {...stylex.props(styles.showcaseTitle)}>Recent Transactions</h2>
+        <p {...stylex.props(styles.showcaseDescription)}>
+          Your latest account activity.
+        </p>
+      </div>
+      <div {...stylex.props(styles.showcaseTransactions)}>
+        {[
+          ["Blue Bottle Coffee", "Food & Drink"],
+          ["Whole Foods Market", "Groceries"],
+          ["Stripe Payout", "Income"],
+          ["Uber Technologies", "Transport"],
+        ].map(([name, category], index) => (
+          <div key={name} {...stylex.props(styles.showcaseTransaction)}>
+            <span {...stylex.props(styles.showcaseTransactionIcon)}>
+              {index + 1}
+            </span>
+            <div>
+              <strong>{name}</strong>
+              <div {...stylex.props(styles.showcaseDescription)}>
+                {category}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </article>
+  );
+}
+
+function CardsPreview({ color }: { color: string }) {
+  return (
+    <div {...stylex.props(styles.showcaseCanvas)}>
+      <div {...stylex.props(styles.showcaseGrid)}>
+        <div {...stylex.props(styles.showcaseColumn)}>
+          <ContributionHistoryCard color={color} />
+          <EmptyDistributeTrackCard />
+        </div>
+        <div {...stylex.props(styles.showcaseColumn)}>
+          <PayoutThresholdCard />
+          <ClaimableBalanceCard />
+        </div>
+        <div {...stylex.props(styles.showcaseColumn)}>
+          <SavingsTargetsCard />
+          <TransactionsCard />
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -459,6 +1045,9 @@ function PreviewContent({
 export function DesignPreview({ name }: { name: string }) {
   const [params, setParams] = useCreateSearchParams({ history: "replace" });
   const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => setMounted(true), []);
 
   React.useEffect(() => {
     const receive = (event: MessageEvent) => {
@@ -478,7 +1067,7 @@ export function DesignPreview({ name }: { name: string }) {
     return () => window.removeEventListener("message", receive);
   }, [setParams]);
 
-  const dark = resolvedTheme === "dark";
+  const dark = mounted && resolvedTheme === "dark";
   const colors = palette(params.baseColor, params.theme, dark);
   const chartColor = PRIMARY[params.chartColor][dark ? "dark" : "light"];
   const radiusValue =
@@ -493,6 +1082,100 @@ export function DesignPreview({ name }: { name: string }) {
   const item = name === "preview" || name === "preview-02" ? params.item : name;
   const menuInverted = params.menuColor.startsWith("inverted");
   const menuTranslucent = params.menuColor.endsWith("translucent");
+
+  if (item === "preview-02") {
+    return (
+      <main
+        {...stylex.props(
+          styles.page,
+          styles.theme(
+            colors.background,
+            colors.foreground,
+            colors.card,
+            colors.muted,
+            colors.mutedForeground,
+            colors.primary,
+            colors.primaryForeground,
+            colors.border,
+            colors.accent,
+            radiusValue,
+            bodyFont,
+            headingFont,
+            params.rtl ? "rtl" : "ltr",
+            params.pointer ? "pointer" : "default"
+          ),
+          styleMap[params.style]
+        )}
+      >
+        <CardsPreview color={chartColor} />
+      </main>
+    );
+  }
+
+  if (item === "dashboard" || item === "example-dashboard") {
+    return (
+      <main
+        {...stylex.props(
+          styles.page,
+          styles.theme(
+            colors.background,
+            colors.foreground,
+            colors.card,
+            colors.muted,
+            colors.mutedForeground,
+            colors.primary,
+            colors.primaryForeground,
+            colors.border,
+            colors.accent,
+            radiusValue,
+            bodyFont,
+            headingFont,
+            params.rtl ? "rtl" : "ltr",
+            params.pointer ? "pointer" : "default"
+          ),
+          styleMap[params.style]
+        )}
+      >
+        <DashboardBlock
+          chartColor={chartColor}
+          example={item === "example-dashboard"}
+        />
+      </main>
+    );
+  }
+
+  if (["authentication", "playground", "rtl", "tasks"].includes(item)) {
+    return (
+      <main
+        {...stylex.props(
+          styles.page,
+          styles.examplePage,
+          styles.theme(
+            colors.background,
+            colors.foreground,
+            colors.card,
+            colors.muted,
+            colors.mutedForeground,
+            colors.primary,
+            colors.primaryForeground,
+            colors.border,
+            colors.accent,
+            radiusValue,
+            bodyFont,
+            headingFont,
+            params.rtl || item === "rtl" ? "rtl" : "ltr",
+            params.pointer ? "pointer" : "default"
+          ),
+          styleMap[params.style]
+        )}
+      >
+        {item === "authentication" ? <Authentication /> : null}
+        {item === "playground" ? <PlaygroundExample /> : null}
+        {item === "rtl" ? <RtlExample /> : null}
+        {item === "tasks" ? <TasksExample /> : null}
+      </main>
+    );
+  }
 
   return (
     <main

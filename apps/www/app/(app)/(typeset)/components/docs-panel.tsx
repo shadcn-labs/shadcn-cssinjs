@@ -2,6 +2,7 @@
 
 import * as stylex from "@stylexjs/stylex";
 import { CheckIcon, CopyIcon } from "lucide-react";
+import Link from "next/link";
 import * as React from "react";
 
 import { typesetStyles as styles } from "@/app/(app)/(typeset)/components/typeset.stylex";
@@ -88,7 +89,7 @@ function CopyButton({ value }: { value: string }) {
 
   return (
     <button
-      {...stylex.props(styles.iconButton, styles.docsCopy)}
+      {...stylex.props(styles.docsButton)}
       aria-label="Copy"
       title="Copy"
       type="button"
@@ -99,72 +100,91 @@ function CopyButton({ value }: { value: string }) {
       ) : (
         <CopyIcon {...stylex.props(styles.icon)} />
       )}
+      Copy typeset.stylex.ts
     </button>
   );
 }
 
 export function TypesetDocsContent() {
   const [params] = useTypesetSearchParams();
+  const [framework, setFramework] = React.useState("next");
   const [tab, setTab] = React.useState<"docs" | "prompt">("docs");
   const code = buildStyleXCode(params);
   const prompt = buildPrompt(params);
   const value = tab === "docs" ? code : prompt;
 
   return (
-    <div {...stylex.props(styles.docsBody)}>
-      <div {...stylex.props(styles.tabs)}>
-        <button
-          {...stylex.props(styles.tab)}
-          data-active={tab === "docs"}
-          type="button"
-          onClick={() => setTab("docs")}
+    <div {...stylex.props(styles.docsContent)}>
+      <div {...stylex.props(styles.docsToolbar)}>
+        <div {...stylex.props(styles.tabs)}>
+          <button
+            {...stylex.props(styles.tab)}
+            data-active={tab === "docs"}
+            type="button"
+            onClick={() => setTab("docs")}
+          >
+            Docs
+          </button>
+          <button
+            {...stylex.props(styles.tab)}
+            data-active={tab === "prompt"}
+            type="button"
+            onClick={() => setTab("prompt")}
+          >
+            Prompt
+          </button>
+        </div>
+        <select
+          {...stylex.props(styles.docsFrameworkSelect)}
+          aria-label="Framework"
+          value={framework}
+          onChange={(event) => setFramework(event.target.value)}
         >
-          Docs
-        </button>
-        <button
-          {...stylex.props(styles.tab)}
-          data-active={tab === "prompt"}
-          type="button"
-          onClick={() => setTab("prompt")}
-        >
-          Prompt
-        </button>
+          <option value="next">Next.js</option>
+          <option value="vite">Vite</option>
+          <option value="astro">Astro</option>
+          <option value="remix">Remix</option>
+        </select>
       </div>
-
-      {tab === "docs" ? (
-        <>
+      <div {...stylex.props(styles.docsScroll)}>
+        {tab === "docs" ? (
+          <>
+            <section {...stylex.props(styles.docsSection)}>
+              <h3 {...stylex.props(styles.docsTitle)}>
+                1. Create typeset.stylex.ts
+              </h3>
+              <p {...stylex.props(styles.docsText)}>
+                Copy the generated StyleX recipe into a typeset.stylex.ts file
+                next to the surface that renders your rich content.
+              </p>
+              <CopyButton value={code} />
+            </section>
+            <section {...stylex.props(styles.docsSection)}>
+              <h3 {...stylex.props(styles.docsTitle)}>2. Add the fonts</h3>
+              <p {...stylex.props(styles.docsText)}>
+                Load the fonts with{" "}
+                {framework === "next" ? "next/font" : "@fontsource"} in your
+                root layout.
+              </p>
+            </section>
+          </>
+        ) : (
           <section {...stylex.props(styles.docsSection)}>
-            <h3 {...stylex.props(styles.docsTitle)}>StyleX typeset recipe</h3>
+            <h3 {...stylex.props(styles.docsTitle)}>
+              AI implementation prompt
+            </h3>
             <p {...stylex.props(styles.docsText)}>
-              Use semantic elements and apply the generated StyleX styles at the
-              element boundary. This preserves the original typeset designer
-              behavior without relying on descendant selectors.
+              This prompt carries the live settings and the StyleX-only
+              constraints into another project.
             </p>
           </section>
-          <section {...stylex.props(styles.docsSection)}>
-            <h3 {...stylex.props(styles.docsTitle)}>Install</h3>
-            <div {...stylex.props(styles.docsSection)}>
-              <pre {...stylex.props(styles.code)}>
-                <code>pnpm add @stylexjs/stylex</code>
-              </pre>
-            </div>
-          </section>
-        </>
-      ) : (
-        <section {...stylex.props(styles.docsSection)}>
-          <h3 {...stylex.props(styles.docsTitle)}>AI implementation prompt</h3>
-          <p {...stylex.props(styles.docsText)}>
-            This prompt carries the live settings and the StyleX-only
-            constraints into another project.
-          </p>
-        </section>
-      )}
+        )}
 
-      <div {...stylex.props(styles.control)}>
-        <CopyButton value={value} />
-        <pre {...stylex.props(styles.code)}>
-          <code>{value}</code>
-        </pre>
+        <div {...stylex.props(styles.docsCodeWrap)}>
+          <pre {...stylex.props(styles.code)}>
+            <code>{value}</code>
+          </pre>
+        </div>
       </div>
     </div>
   );
@@ -172,12 +192,13 @@ export function TypesetDocsContent() {
 
 export function TypesetDocsPanel() {
   return (
-    <aside {...stylex.props(styles.docsPanel)}>
-      <header {...stylex.props(styles.docsHeader)}>
-        <h2 {...stylex.props(styles.docsTitle)}>Typeset</h2>
-        <span {...stylex.props(styles.controlLabel)}>StyleX</span>
-      </header>
-      <TypesetDocsContent />
+    <aside {...stylex.props(styles.docsColumn)}>
+      <div {...stylex.props(styles.docsPanel)}>
+        <TypesetDocsContent />
+      </div>
+      <Link {...stylex.props(styles.docsLink)} href="/docs/typeset">
+        Read the docs
+      </Link>
     </aside>
   );
 }
