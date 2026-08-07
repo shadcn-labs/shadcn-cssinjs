@@ -22,4 +22,18 @@ export default defineConfig({
     "**/audio/**",
     "**/lib/registry-base-colors.ts",
   ],
+  overrides: [
+    {
+      files: [
+        "apps/www/app/(app)/(create)/**/*.{ts,tsx}",
+        "apps/www/app/(app)/(typeset)/**/*.{ts,tsx}",
+        "apps/www/app/(view)/preview/**/*.{ts,tsx}",
+        "apps/www/components/v4-gallery/**/*.{ts,tsx}",
+      ],
+      rules: {
+        complexity: "off",
+        "func-style": "off",
+      },
+    },
+  ],
 });

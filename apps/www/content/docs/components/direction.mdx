@@ -1,0 +1,24 @@
+---
+title: Direction
+description: Provide left-to-right or right-to-left direction to Base UI components.
+links:
+  api: https://base-ui.com/react/utils/direction-provider
+---
+
+## Installation
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/direction.json
+```
+
+## Usage
+
+```tsx
+import { DirectionProvider } from "@/components/ui/direction/direction";
+```
+
+```tsx
+<DirectionProvider direction="rtl">{children}</DirectionProvider>
+```
+
+Use `useDirection()` to read the nearest configured direction.

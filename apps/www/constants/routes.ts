@@ -3,6 +3,10 @@ export const ROUTES = {
   AGENT_SKILLS_SITE_SKILL: "/.well-known/agent-skills/site-skill.md",
   API_CATALOG: "/.well-known/api-catalog",
   API_STATUS: "/api/status",
+  BLOCKS: "/blocks",
+  CHARTS: "/charts/area",
+  COLORS: "/colors",
+  CREATE: "/create",
   DOCS: "/docs",
   DOCS_CHANGELOG: "/docs/changelog",
   DOCS_COMPONENTS: "/docs/components",
@@ -24,4 +28,5 @@ export const ROUTES = {
   RSS: "/rss.xml",
   SITEMAP: "/sitemap.xml",
   SPONSOR: "/sponsor",
+  TYPESET: "/typeset",
 } as const;

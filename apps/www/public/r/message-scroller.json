@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "message-scroller",
+  "title": "Message Scroller",
+  "description": "Message scroller component styled with StyleX.",
+  "dependencies": [
+    "@shadcn/react",
+    "@stylexjs/stylex",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button",
+    "stylex-tokens",
+    "stylex-utils"
+  ],
+  "files": [
+    {
+      "path": "registry/bases/stylex/message-scroller/message-scroller.tsx",
+      "content": "\"use client\";\n\nimport {\n  MessageScroller as MessageScrollerPrimitive,\n  useMessageScroller,\n  useMessageScrollerScrollable,\n  useMessageScrollerVisibility,\n} from \"@shadcn/react/message-scroller\";\nimport { ArrowDownIcon } from \"lucide-react\";\n\nimport { cx, x } from \"@/lib/utils.stylex\";\nimport { Button } from \"@/components/ui/button\";\n\nimport { styles } from \"./message-scroller.stylex\";\n\nconst MessageScrollerProvider = (\n  props: React.ComponentProps<typeof MessageScrollerPrimitive.Provider>\n) => <MessageScrollerPrimitive.Provider {...props} />;\n\nconst MessageScroller = ({\n  className,\n  style,\n  ...props\n}: React.ComponentProps<typeof MessageScrollerPrimitive.Root>) => {\n  const p = x(styles.root);\n  return (\n    <MessageScrollerPrimitive.Root\n      className={cx(p.className, className)}\n      data-slot=\"message-scroller\"\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nconst MessageScrollerViewport = ({\n  className,\n  style,\n  ...props\n}: React.ComponentProps<typeof MessageScrollerPrimitive.Viewport>) => {\n  const p = x(styles.viewport);\n  return (\n    <MessageScrollerPrimitive.Viewport\n      className={cx(p.className, className)}\n      data-slot=\"message-scroller-viewport\"\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nconst MessageScrollerContent = ({\n  className,\n  style,\n  ...props\n}: React.ComponentProps<typeof MessageScrollerPrimitive.Content>) => {\n  const p = x(styles.content);\n  return (\n    <MessageScrollerPrimitive.Content\n      className={cx(p.className, className)}\n      data-slot=\"message-scroller-content\"\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nconst MessageScrollerItem = ({\n  className,\n  style,\n  scrollAnchor = false,\n  ...props\n}: React.ComponentProps<typeof MessageScrollerPrimitive.Item>) => {\n  const p = x(styles.item);\n  return (\n    <MessageScrollerPrimitive.Item\n      className={cx(p.className, className)}\n      data-slot=\"message-scroller-item\"\n      scrollAnchor={scrollAnchor}\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nconst MessageScrollerButton = ({\n  direction = \"end\",\n  className,\n  style,\n  children,\n  render,\n  variant = \"secondary\",\n  size = \"icon-sm\",\n  ...props\n}: React.ComponentProps<typeof MessageScrollerPrimitive.Button> &\n  Pick<React.ComponentProps<typeof Button>, \"variant\" | \"size\">) => {\n  const p = x(\n    styles.button,\n    direction === \"end\" ? styles.buttonEnd : styles.buttonStart\n  );\n  return (\n    <MessageScrollerPrimitive.Button\n      className={cx(p.className, className)}\n      data-direction={direction}\n      data-size={size}\n      data-slot=\"message-scroller-button\"\n      data-variant={variant}\n      direction={direction}\n      render={render ?? <Button size={size} variant={variant} />}\n      style={{ ...p.style, ...style }}\n      {...props}\n    >\n      {children ?? (\n        <>\n          <ArrowDownIcon aria-hidden=\"true\" />\n          <span\n            style={{\n              clip: \"rect(0, 0, 0, 0)\",\n              clipPath: \"inset(50%)\",\n              height: 1,\n              overflow: \"hidden\",\n              position: \"absolute\",\n              whiteSpace: \"nowrap\",\n              width: 1,\n            }}\n          >\n            {direction === \"end\" ? \"Scroll to end\" : \"Scroll to start\"}\n          </span>\n        </>\n      )}\n    </MessageScrollerPrimitive.Button>\n  );\n};\n\nexport {\n  MessageScrollerProvider,\n  MessageScroller,\n  MessageScrollerViewport,\n  MessageScrollerContent,\n  MessageScrollerItem,\n  MessageScrollerButton,\n  useMessageScroller,\n  useMessageScrollerScrollable,\n  useMessageScrollerVisibility,\n};\n",
+      "type": "registry:ui",
+      "target": "components/ui/message-scroller/message-scroller.tsx"
+    },
+    {
+      "path": "registry/bases/stylex/message-scroller/message-scroller.stylex.ts",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nimport { colors } from \"@/lib/tokens.stylex\";\n\nexport const styles = stylex.create({\n  button: {\n    backgroundColor: colors.background,\n    borderColor: colors.border,\n    color: colors.foreground,\n    insetInlineStart: \"50%\",\n    position: \"absolute\",\n    transform: \"translateX(-50%)\",\n    transition: \"transform 200ms, scale 200ms, opacity 200ms\",\n    zIndex: 10,\n  },\n  buttonEnd: { bottom: \"1rem\" },\n  buttonStart: { top: \"1rem\" },\n  content: {\n    display: \"flex\",\n    flexDirection: \"column\",\n    height: \"max-content\",\n    minHeight: \"100%\",\n  },\n  item: {\n    containIntrinsicSize: \"auto 10rem\",\n    contentVisibility: \"auto\",\n    flexShrink: 0,\n    minWidth: 0,\n  },\n  root: {\n    display: \"flex\",\n    flexDirection: \"column\",\n    height: \"100%\",\n    minHeight: 0,\n    overflow: \"hidden\",\n    position: \"relative\",\n    width: \"100%\",\n  },\n  viewport: {\n    contain: \"content\",\n    height: \"100%\",\n    minHeight: 0,\n    minWidth: 0,\n    overflowY: \"auto\",\n    overscrollBehavior: \"contain\",\n    scrollbarGutter: \"stable\",\n    width: \"100%\",\n  },\n});\n",
+      "type": "registry:ui",
+      "target": "components/ui/message-scroller/message-scroller.stylex.ts"
+    }
+  ],
+  "type": "registry:ui"
+}

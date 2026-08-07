@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-mobile",
+  "title": "Use Mobile",
+  "description": "Reactive mobile breakpoint hook.",
+  "files": [
+    {
+      "path": "registry/bases/stylex/hooks/use-mobile.ts",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nconst MOBILE_BREAKPOINT = 768;\n\nexport const useIsMobile = () => {\n  const [isMobile, setIsMobile] = React.useState(false);\n\n  React.useEffect(() => {\n    const media = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`);\n    const update = () => setIsMobile(media.matches);\n    update();\n    media.addEventListener(\"change\", update);\n    return () => media.removeEventListener(\"change\", update);\n  }, []);\n\n  return isMobile;\n};\n",
+      "type": "registry:hook",
+      "target": "hooks/use-mobile.ts"
+    }
+  ],
+  "type": "registry:hook"
+}

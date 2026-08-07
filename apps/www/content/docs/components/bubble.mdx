@@ -1,0 +1,35 @@
+---
+title: Bubble
+description: Display conversational content with alignment, variants, and reactions.
+---
+
+## Installation
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/bubble.json
+```
+
+## Usage
+
+```tsx
+import {
+  Bubble,
+  BubbleContent,
+  BubbleGroup,
+} from "@/components/ui/bubble/bubble";
+```
+
+```tsx
+<BubbleGroup>
+  <Bubble variant="muted">
+    <BubbleContent>Hello there.</BubbleContent>
+  </Bubble>
+  <Bubble align="end">
+    <BubbleContent>Hi!</BubbleContent>
+  </Bubble>
+</BubbleGroup>
+```
+
+## API Reference
+
+`Bubble` supports `align` and visual variants. `BubbleReactions` positions reaction content above or below a bubble.

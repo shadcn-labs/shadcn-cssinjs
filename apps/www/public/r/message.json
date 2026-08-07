@@ -1,0 +1,28 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "message",
+  "title": "Message",
+  "description": "Message layout component styled with StyleX.",
+  "dependencies": [
+    "@stylexjs/stylex"
+  ],
+  "registryDependencies": [
+    "stylex-tokens",
+    "stylex-utils"
+  ],
+  "files": [
+    {
+      "path": "registry/bases/stylex/message/message.tsx",
+      "content": "import { cx, x } from \"@/lib/utils.stylex\";\n\nimport { styles } from \"./message.stylex\";\n\nconst MessageGroup = ({\n  className,\n  style,\n  ...props\n}: React.ComponentProps<\"div\">) => {\n  const p = x(styles.group);\n  return (\n    <div\n      className={cx(p.className, className)}\n      data-slot=\"message-group\"\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nconst Message = ({\n  className,\n  style,\n  align = \"start\",\n  ...props\n}: React.ComponentProps<\"div\"> & { align?: \"start\" | \"end\" }) => {\n  const p = x(styles.message, align === \"end\" && styles.messageEnd);\n  return (\n    <div\n      className={cx(p.className, className)}\n      data-align={align}\n      data-slot=\"message\"\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nconst MessageAvatar = ({\n  className,\n  style,\n  ...props\n}: React.ComponentProps<\"div\">) => {\n  const p = x(styles.avatar);\n  return (\n    <div\n      className={cx(p.className, className)}\n      data-slot=\"message-avatar\"\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nconst MessageContent = ({\n  className,\n  style,\n  ...props\n}: React.ComponentProps<\"div\">) => {\n  const p = x(styles.content);\n  return (\n    <div\n      className={cx(p.className, className)}\n      data-slot=\"message-content\"\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nconst MessageHeader = ({\n  className,\n  style,\n  ...props\n}: React.ComponentProps<\"div\">) => {\n  const p = x(styles.header);\n  return (\n    <div\n      className={cx(p.className, className)}\n      data-slot=\"message-header\"\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nconst MessageFooter = ({\n  className,\n  style,\n  ...props\n}: React.ComponentProps<\"div\">) => {\n  const p = x(styles.footer);\n  return (\n    <div\n      className={cx(p.className, className)}\n      data-slot=\"message-footer\"\n      style={{ ...p.style, ...style }}\n      {...props}\n    />\n  );\n};\n\nexport {\n  MessageGroup,\n  Message,\n  MessageAvatar,\n  MessageContent,\n  MessageFooter,\n  MessageHeader,\n};\n",
+      "type": "registry:ui",
+      "target": "components/ui/message/message.tsx"
+    },
+    {
+      "path": "registry/bases/stylex/message/message.stylex.ts",
+      "content": "import * as stylex from \"@stylexjs/stylex\";\n\nimport { colors } from \"@/lib/tokens.stylex\";\n\nexport const styles = stylex.create({\n  avatar: {\n    alignItems: \"center\",\n    alignSelf: \"flex-end\",\n    backgroundColor: colors.muted,\n    borderRadius: \"9999px\",\n    display: \"flex\",\n    flexShrink: 0,\n    justifyContent: \"center\",\n    overflow: \"hidden\",\n    width: \"fit-content\",\n  },\n  content: {\n    display: \"flex\",\n    flexDirection: \"column\",\n    minWidth: 0,\n    overflowWrap: \"break-word\",\n    width: \"100%\",\n  },\n  footer: {\n    alignItems: \"center\",\n    display: \"flex\",\n    maxWidth: \"100%\",\n    minWidth: 0,\n  },\n  group: { display: \"flex\", flexDirection: \"column\", minWidth: 0 },\n  header: {\n    alignItems: \"center\",\n    display: \"flex\",\n    maxWidth: \"100%\",\n    minWidth: 0,\n  },\n  message: {\n    display: \"flex\",\n    minWidth: 0,\n    position: \"relative\",\n    width: \"100%\",\n  },\n  messageEnd: { flexDirection: \"row-reverse\" },\n});\n",
+      "type": "registry:ui",
+      "target": "components/ui/message/message.stylex.ts"
+    }
+  ],
+  "type": "registry:ui"
+}

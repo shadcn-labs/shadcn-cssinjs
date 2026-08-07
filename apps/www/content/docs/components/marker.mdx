@@ -1,0 +1,29 @@
+---
+title: Marker
+description: Add contextual labels, separators, or bordered markers between content.
+---
+
+## Installation
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/marker.json
+```
+
+## Usage
+
+```tsx
+import {
+  Marker,
+  MarkerContent,
+  MarkerIcon,
+} from "@/components/ui/marker/marker";
+```
+
+```tsx
+<Marker variant="separator">
+  <MarkerIcon>{/* Icon */}</MarkerIcon>
+  <MarkerContent>Today</MarkerContent>
+</Marker>
+```
+
+`variant` accepts `default`, `separator`, or `border`.

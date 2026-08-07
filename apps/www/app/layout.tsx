@@ -1,5 +1,6 @@
 import { SoundProvider } from "@web-kits/audio/react";
 import type { Metadata } from "next";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 import { Analytics } from "@/components/analytics";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -45,15 +46,17 @@ const RootLayout = ({
     </head>
     <body
       className={cn(
-        "text-foreground group/body overscroll-none font-sans antialiased [--footer-height:--spacing(14)] [--header-height:--spacing(14)] xl:[--footer-height:--spacing(24)]",
+        "text-foreground group/body overscroll-none font-sans antialiased [--footer-height:--spacing(14)] [--header-height:--spacing(14)] lg:[--header-height:--spacing(16)] xl:[--footer-height:--spacing(24)]",
         fontVariables
       )}
     >
       <SoundProvider>
         <ThemeProvider>
-          {children}
-          <Toaster position="top-center" />
-          <Analytics />
+          <NuqsAdapter>
+            {children}
+            <Toaster position="top-center" />
+            <Analytics />
+          </NuqsAdapter>
         </ThemeProvider>
       </SoundProvider>
     </body>

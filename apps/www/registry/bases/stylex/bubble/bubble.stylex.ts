@@ -1,0 +1,77 @@
+import * as stylex from "@stylexjs/stylex";
+
+import { colors, radius } from "@/registry/bases/stylex/lib/tokens.stylex";
+
+export const styles = stylex.create({
+  alignEnd: { alignSelf: "flex-end" },
+  bubble: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "0.25rem",
+    maxWidth: "80%",
+    minWidth: 0,
+    position: "relative",
+    width: "fit-content",
+  },
+  bubbleGhost: { maxWidth: "100%" },
+  content: {
+    borderColor: "transparent",
+    borderRadius: radius.xl,
+    borderStyle: "solid",
+    borderWidth: "1px",
+    fontSize: "0.875rem",
+    lineHeight: 1.625,
+    maxWidth: "100%",
+    minWidth: 0,
+    outline: "none",
+    overflow: "hidden",
+    overflowWrap: "break-word",
+    paddingBlock: "0.625rem",
+    paddingInline: "0.875rem",
+    width: "fit-content",
+  },
+  default: { backgroundColor: colors.primary, color: colors.primaryForeground },
+  destructive: {
+    backgroundColor: `color-mix(in oklab, ${colors.destructive} 10%, transparent)`,
+    color: colors.destructive,
+  },
+  ghost: { backgroundColor: "transparent", borderWidth: 0, padding: 0 },
+  group: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "0.5rem",
+    minWidth: 0,
+  },
+  muted: { backgroundColor: colors.muted, color: colors.foreground },
+  outline: {
+    backgroundColor: colors.background,
+    borderColor: colors.border,
+    color: colors.foreground,
+  },
+  reactions: {
+    alignItems: "center",
+    backgroundColor: colors.muted,
+    borderRadius: "9999px",
+    display: "flex",
+    fontSize: "0.875rem",
+    gap: "0.25rem",
+    justifyContent: "center",
+    paddingBlock: "0.125rem",
+    paddingInline: "0.375rem",
+    position: "absolute",
+    width: "fit-content",
+    zIndex: 10,
+  },
+  reactionsBottom: { bottom: 0, transform: "translateY(75%)" },
+  reactionsEnd: { right: "0.75rem" },
+  reactionsStart: { left: "0.75rem" },
+  reactionsTop: { top: 0, transform: "translateY(-75%)" },
+  secondary: {
+    backgroundColor: colors.secondary,
+    color: colors.secondaryForeground,
+  },
+  tinted: {
+    backgroundColor: `color-mix(in oklab, ${colors.primary} 15%, ${colors.background})`,
+    color: colors.foreground,
+  },
+});
