@@ -50,6 +50,11 @@ const nextConfig = {
         permanent: true,
         source: `${ROUTES.DOCS}/:path*.mdx`,
       },
+      {
+        destination: `${ROUTES.DOCS_COMPONENTS}/stylex/:name`,
+        permanent: true,
+        source: `${ROUTES.DOCS_COMPONENTS}/:name((?!index|stylex|panda)[^/]+)`,
+      },
     ];
   },
   // StyleX is configured via .babelrc - Next.js will use Babel when .babelrc is present

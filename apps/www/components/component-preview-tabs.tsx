@@ -72,6 +72,34 @@ const RtlLanguageSelector = () => {
   );
 };
 
+const PreviewToolbar = ({
+  visible,
+  variant = "inline",
+  base,
+  bases,
+  onBaseChange,
+}: {
+  visible: boolean;
+  variant?: "inline" | "bar";
+  base: ComponentBase;
+  bases: ComponentBase[];
+  onBaseChange: (base: ComponentBase) => void;
+}) => {
+  if (!visible) {
+    return null;
+  }
+
+  const toggle = (
+    <BaseToggle base={base} bases={bases} onBaseChange={onBaseChange} />
+  );
+
+  if (variant === "bar") {
+    return <div className="flex h-14 items-center border-b px-4">{toggle}</div>;
+  }
+
+  return toggle;
+};
+
 const PreviewWrapper = ({
   align,
   previewClassName,
@@ -116,6 +144,7 @@ export const ComponentPreviewTabs = ({
   direction = "ltr",
   name,
   bases = ["stylex"],
+  lockedBase,
 }: {
   className?: string;
   previewClassName?: string;
@@ -127,12 +156,14 @@ export const ComponentPreviewTabs = ({
   direction?: "ltr" | "rtl";
   name?: string;
   bases?: ComponentBase[];
+  lockedBase?: ComponentBase;
 }) => {
   const [isCodeVisible, setIsCodeVisible] = useState(false);
   const { base, setBase } = useComponentBase();
 
-  const hasAlternateBases = bases.length > 1;
-  const effectiveBase: ComponentBase = bases.includes(base) ? base : "stylex";
+  const hasAlternateBases = bases.length > 1 && !lockedBase;
+  const effectiveBase: ComponentBase =
+    lockedBase ?? (bases.includes(base) ? base : "stylex");
   const previewContent =
     effectiveBase !== "stylex" && name ? (
       <BaseExample base={effectiveBase} name={name} />
@@ -155,9 +186,12 @@ export const ComponentPreviewTabs = ({
         <LanguageProvider defaultLanguage="ar">
           <div className="flex h-14 items-center gap-2 border-b px-4">
             <RtlLanguageSelector />
-            {hasAlternateBases && (
-              <BaseToggle base={base} bases={bases} onBaseChange={setBase} />
-            )}
+            <PreviewToolbar
+              base={base}
+              bases={bases}
+              onBaseChange={setBase}
+              visible={hasAlternateBases}
+            />
             <Popover>
               <PopoverTrigger asChild>
                 <Button
@@ -195,11 +229,13 @@ export const ComponentPreviewTabs = ({
         </LanguageProvider>
       ) : (
         <div dir="ltr">
-          {hasAlternateBases && (
-            <div className="flex h-14 items-center border-b px-4">
-              <BaseToggle base={base} bases={bases} onBaseChange={setBase} />
-            </div>
-          )}
+          <PreviewToolbar
+            base={base}
+            bases={bases}
+            onBaseChange={setBase}
+            variant="bar"
+            visible={hasAlternateBases}
+          />
           <div
             className={cn(
               "preview relative flex min-h-[350px] w-full justify-center p-10",

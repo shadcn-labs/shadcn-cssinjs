@@ -3,10 +3,12 @@ import type { ReactNode } from "react";
 import type { ComponentBase } from "@/components/base-provider";
 import { ComponentPreviewTabs } from "@/components/component-preview-tabs";
 import { ComponentSource } from "@/components/component-source";
-import { getAvailableBases } from "@/lib/registry";
+import { DEFAULT_BASE } from "@/lib/bases";
+import { getAvailableBases, hasDemo } from "@/lib/registry";
 
 export const ComponentPreview = async ({
   name,
+  base,
   children,
   className,
   previewClassName,
@@ -15,6 +17,7 @@ export const ComponentPreview = async ({
   hideCode = false,
 }: {
   name?: string;
+  base?: ComponentBase;
   children?: ReactNode;
   className?: string;
   previewClassName?: string;
@@ -22,21 +25,26 @@ export const ComponentPreview = async ({
   direction?: "ltr" | "rtl";
   hideCode?: boolean;
 }) => {
-  const bases: ComponentBase[] = name
-    ? await getAvailableBases(name)
-    : ["stylex"];
+  let bases: ComponentBase[] = [DEFAULT_BASE];
+  if (base === DEFAULT_BASE) {
+    bases = [base];
+  } else if (base && name && (await hasDemo(name, base))) {
+    bases = [base];
+  } else if (name) {
+    bases = await getAvailableBases(name);
+  }
 
   const sources: Partial<Record<ComponentBase, ReactNode>> = {};
   const sourcePreviews: Partial<Record<ComponentBase, ReactNode>> = {};
 
   if (name) {
-    for (const base of bases) {
-      sources[base] = (
-        <ComponentSource base={base} collapsible={false} name={name} />
+    for (const candidateBase of bases) {
+      sources[candidateBase] = (
+        <ComponentSource base={candidateBase} collapsible={false} name={name} />
       );
-      sourcePreviews[base] = (
+      sourcePreviews[candidateBase] = (
         <ComponentSource
-          base={base}
+          base={candidateBase}
           collapsible={false}
           maxLines={6}
           name={name}
@@ -53,6 +61,7 @@ export const ComponentPreview = async ({
       component={children}
       direction={direction}
       hideCode={hideCode || !name}
+      lockedBase={bases.length === 1 && bases[0] === base ? base : undefined}
       name={name}
       previewClassName={previewClassName}
       sourcePreviews={sourcePreviews}
