@@ -5,7 +5,6 @@ import { CommandMenu } from "@/components/command-menu";
 import { LogoMark } from "@/components/logo";
 import { MainNav } from "@/components/main-nav";
 import { MobileNav } from "@/components/mobile-nav";
-import { ModeSwitcher } from "@/components/mode-switcher";
 import { NavItemGithub } from "@/components/nav-item-github";
 import { SiteSettings } from "@/components/site-settings";
 import { SponsorLink } from "@/components/sponsor-link";
@@ -54,7 +53,6 @@ export const SiteHeader = () => (
           <NavItemGithub />
           <SponsorLink />
           <ThemeCustomizer />
-          <ModeSwitcher />
           <SiteSettings />
         </div>
       </div>
