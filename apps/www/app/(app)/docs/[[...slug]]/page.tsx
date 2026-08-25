@@ -3,7 +3,10 @@ import { ArrowLeftIcon, ArrowRightIcon, ArrowUpRightIcon } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-// import { DocsBaseSwitcher } from "@/components/docs-base-switcher";
+import {
+  DocsBaseSwitcher,
+  getDocsBaseSwitcherProps,
+} from "@/components/docs-base-switcher";
 import { DocsCopyPage } from "@/components/docs-copy-page";
 import { DocsKeyboardShortcuts } from "@/components/docs-keyboard-shortcuts";
 import { DocsNavLink } from "@/components/docs-nav-link";
@@ -87,6 +90,7 @@ const Page = async (props: { params: Promise<{ slug?: string[] }> }) => {
 
   const { links } = doc as { links?: { doc?: string; api?: string } };
   const breadcrumbs = buildBreadcrumbs(params.slug ?? [], doc.title, page.url);
+  const baseSwitcher = getDocsBaseSwitcherProps(params.slug);
 
   return (
     <>
@@ -178,16 +182,9 @@ const Page = async (props: { params: Promise<{ slug?: string[] }> }) => {
                 ) : null}
               </div>
               <div className="w-full flex-1 *:data-[slot=alert]:first:mt-0">
-                {/* {params.slug &&
-                params.slug[0] === "components" &&
-                params.slug[1] &&
-                params.slug[2] && (
-                  <DocsBaseSwitcher
-                    base={params.slug[1]}
-                    component={params.slug.slice(2).join("/")}
-                    className="mb-4"
-                  />
-                )} */}
+                {baseSwitcher && (
+                  <DocsBaseSwitcher {...baseSwitcher} className="mb-4" />
+                )}
                 <MdxContent components={mdxComponents} />
               </div>
             </div>

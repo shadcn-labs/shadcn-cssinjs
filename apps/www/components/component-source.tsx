@@ -8,6 +8,7 @@ import {
   getRegistrySource,
   readOptionalFromRoot,
 } from "@/lib/registry";
+import type { ComponentBase } from "@/lib/registry";
 import { cn } from "@/lib/utils";
 
 const ComponentCode = ({
@@ -45,6 +46,7 @@ export const ComponentSource = async ({
   className,
   language,
   maxLines,
+  base = "stylex",
 }: {
   name?: string;
   src?: string;
@@ -53,11 +55,14 @@ export const ComponentSource = async ({
   className?: string;
   language?: string;
   maxLines?: number;
+  base?: ComponentBase;
 }) => {
   let code: string | null = null;
 
   if (name) {
-    code = (await getDemoSource(name)) ?? (await getRegistrySource(name));
+    code =
+      (await getDemoSource(name, base)) ??
+      (await getRegistrySource(name, base));
   }
 
   if (src) {

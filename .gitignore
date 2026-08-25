@@ -49,3 +49,5 @@ next-env.d.ts
 # package builds
 **/dist
 **/.turbo
+# Panda CSS (generated runtime)
+**/styled-system

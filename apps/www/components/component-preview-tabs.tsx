@@ -6,6 +6,9 @@ import Link from "next/link";
 import { useState } from "react";
 import type { ReactNode } from "react";
 
+import { BaseExample } from "@/components/base-example";
+import { BASE_LABELS, useComponentBase } from "@/components/base-provider";
+import type { ComponentBase } from "@/components/base-provider";
 import {
   LanguageProvider,
   LanguageSelector,
@@ -28,6 +31,34 @@ const directionTranslations: Translations<Record<string, never>> = {
   he: { dir: "rtl", values: {} },
 };
 
+const BaseToggle = ({
+  base,
+  bases,
+  onBaseChange,
+}: {
+  base: ComponentBase;
+  bases: ComponentBase[];
+  onBaseChange: (base: ComponentBase) => void;
+}) => (
+  <div className="bg-muted text-muted-foreground inline-flex h-7 items-center rounded-md p-0.5">
+    {bases.map((value) => (
+      <button
+        className={cn(
+          "inline-flex h-6 items-center rounded-sm px-2 text-xs font-medium transition-colors",
+          base === value
+            ? "bg-background text-foreground shadow-sm"
+            : "hover:text-foreground"
+        )}
+        key={value}
+        onClick={() => onBaseChange(value)}
+        type="button"
+      >
+        {BASE_LABELS[value]}
+      </button>
+    ))}
+  </div>
+);
+
 const RtlLanguageSelector = () => {
   const context = useLanguageContext();
   if (!context) {
@@ -39,6 +70,34 @@ const RtlLanguageSelector = () => {
       value={context.language}
     />
   );
+};
+
+const PreviewToolbar = ({
+  visible,
+  variant = "inline",
+  base,
+  bases,
+  onBaseChange,
+}: {
+  visible: boolean;
+  variant?: "inline" | "bar";
+  base: ComponentBase;
+  bases: ComponentBase[];
+  onBaseChange: (base: ComponentBase) => void;
+}) => {
+  if (!visible) {
+    return null;
+  }
+
+  const toggle = (
+    <BaseToggle base={base} bases={bases} onBaseChange={onBaseChange} />
+  );
+
+  if (variant === "bar") {
+    return <div className="flex h-14 items-center border-b px-4">{toggle}</div>;
+  }
+
+  return toggle;
 };
 
 const PreviewWrapper = ({
@@ -80,20 +139,40 @@ export const ComponentPreviewTabs = ({
   align = "center",
   hideCode = false,
   component,
-  source,
-  sourcePreview,
+  sources,
+  sourcePreviews,
   direction = "ltr",
+  name,
+  bases = ["stylex"],
+  lockedBase,
 }: {
   className?: string;
   previewClassName?: string;
   align?: "center" | "start" | "end";
   hideCode?: boolean;
   component: ReactNode;
-  source: ReactNode;
-  sourcePreview?: ReactNode;
+  sources: Partial<Record<ComponentBase, ReactNode>>;
+  sourcePreviews: Partial<Record<ComponentBase, ReactNode>>;
   direction?: "ltr" | "rtl";
+  name?: string;
+  bases?: ComponentBase[];
+  lockedBase?: ComponentBase;
 }) => {
   const [isCodeVisible, setIsCodeVisible] = useState(false);
+  const { base, setBase } = useComponentBase();
+
+  const hasAlternateBases = bases.length > 1 && !lockedBase;
+  const effectiveBase: ComponentBase =
+    lockedBase ?? (bases.includes(base) ? base : "stylex");
+  const previewContent =
+    effectiveBase !== "stylex" && name ? (
+      <BaseExample base={effectiveBase} name={name} />
+    ) : (
+      component
+    );
+  const codeSource = sources[effectiveBase] ?? sources.stylex;
+  const codeSourcePreview =
+    sourcePreviews[effectiveBase] ?? sourcePreviews.stylex;
 
   return (
     <div
@@ -105,8 +184,14 @@ export const ComponentPreviewTabs = ({
     >
       {direction === "rtl" ? (
         <LanguageProvider defaultLanguage="ar">
-          <div className="flex h-14 items-center border-b px-4">
+          <div className="flex h-14 items-center gap-2 border-b px-4">
             <RtlLanguageSelector />
+            <PreviewToolbar
+              base={base}
+              bases={bases}
+              onBaseChange={setBase}
+              visible={hasAlternateBases}
+            />
             <Popover>
               <PopoverTrigger asChild>
                 <Button
@@ -139,11 +224,18 @@ export const ComponentPreviewTabs = ({
             </Popover>
           </div>
           <PreviewWrapper align={align} previewClassName={previewClassName}>
-            <DirectionWrapper>{component}</DirectionWrapper>
+            <DirectionWrapper>{previewContent}</DirectionWrapper>
           </PreviewWrapper>
         </LanguageProvider>
       ) : (
         <div dir="ltr">
+          <PreviewToolbar
+            base={base}
+            bases={bases}
+            onBaseChange={setBase}
+            variant="bar"
+            visible={hasAlternateBases}
+          />
           <div
             className={cn(
               "preview relative flex min-h-[350px] w-full justify-center p-10",
@@ -153,7 +245,7 @@ export const ComponentPreviewTabs = ({
               previewClassName
             )}
           >
-            {component}
+            {previewContent}
           </div>
         </div>
       )}
@@ -181,11 +273,11 @@ export const ComponentPreviewTabs = ({
                   </span>
                 </div>
               )}
-              {source}
+              {codeSource}
             </>
           ) : (
             <div className="relative">
-              {sourcePreview}
+              {codeSourcePreview}
               <div className="absolute inset-0 flex items-center justify-center pb-4">
                 <div
                   className="absolute inset-0"
