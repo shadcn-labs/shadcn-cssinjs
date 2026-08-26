@@ -3,6 +3,29 @@
 
 @import "./themes.css";
 
+/* Tokenami: compiled styles for registry/bases/tokenami components. Generated
+   by `pnpm tokenami:build` (scans the tokenami registry + examples). Tokenami
+   manages its own `@layer tkb/tkc` cascade, so it's imported without an outer
+   layer. */
+@import "./tokenami.css";
+
+/* Keyframes referenced by Tokenami components (Tokenami's `--animation-name`
+   tokens reference these by name). */
+@keyframes tokenami-pulse {
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes tokenami-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* StyleX: compiled styles for registry/bases/stylex components are injected here. */
 @stylex;
 

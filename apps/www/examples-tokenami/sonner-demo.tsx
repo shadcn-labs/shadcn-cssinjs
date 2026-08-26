@@ -1,0 +1,26 @@
+"use client";
+
+"use client";
+
+import { toast } from "sonner";
+
+import { Button } from "@/registry/bases/tokenami/button/button";
+import { Toaster } from "@/registry/bases/tokenami/sonner/sonner";
+
+export default function SonnerDemo() {
+  return (
+    <>
+      <Button
+        onClick={() =>
+          toast("Event has been created", {
+            description: "Sunday, December 03, 2023 at 9:00 AM",
+          })
+        }
+        variant="outline"
+      >
+        Show toast
+      </Button>
+      <Toaster />
+    </>
+  );
+}
