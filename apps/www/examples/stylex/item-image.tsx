@@ -38,6 +38,7 @@ export default function ItemImage() {
           <Item
             key={song.title}
             variant="outline"
+            // oxlint-disable no-html-link-for-pages
             render={<a href="/docs" aria-label={song.title} />}
             role="listitem"
           >

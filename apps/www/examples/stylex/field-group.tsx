@@ -31,6 +31,7 @@ export default function FieldGroupExample() {
         <FieldLabel>Tasks</FieldLabel>
         <FieldDescription>
           Get notified when tasks you&apos;ve created have updates.{" "}
+          {/* oxlint-disable-next-line no-html-link-for-pages */}
           <a href="/docs">Manage tasks</a>
         </FieldDescription>
         <FieldGroup data-slot="checkbox-group">

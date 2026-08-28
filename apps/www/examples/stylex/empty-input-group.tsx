@@ -35,7 +35,9 @@ export default function EmptyInputGroup() {
           </InputGroupAddon>
         </InputGroup>
         <EmptyDescription>
-          Need help? <a href="/docs">Contact support</a>
+          Need help?
+          {/* oxlint-disable-next-line no-html-link-for-pages */}
+          <a href="/docs">Contact support</a>
         </EmptyDescription>
       </EmptyContent>
     </Empty>

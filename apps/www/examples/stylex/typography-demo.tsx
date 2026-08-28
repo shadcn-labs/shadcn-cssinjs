@@ -14,6 +14,7 @@ export default function TypographyDemo() {
       </h2>
       <p className="leading-7 [&:not(:first-child)]:mt-6">
         The king thought long and hard, and finally came up with{" "}
+        {/* oxlint-disable-next-line no-html-link-for-pages */}
         <a
           href="/docs"
           className="font-medium text-primary underline underline-offset-4"

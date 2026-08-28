@@ -89,6 +89,7 @@ export default function CardRtl() {
             <div className="grid gap-2">
               <div className="flex items-center">
                 <Label htmlFor="password-rtl">{t.password}</Label>
+                {/* oxlint-disable-next-line no-html-link-for-pages */}
                 <a
                   href="/docs"
                   className="ms-auto inline-block text-sm underline-offset-4 hover:underline"

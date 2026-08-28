@@ -64,6 +64,7 @@ export default function ItemRtl() {
       <Item
         variant="outline"
         size="sm"
+        // oxlint-disable no-html-link-for-pages
         render={<a href="/docs" aria-label={t.verifiedTitle} />}
         dir={dir}
       >

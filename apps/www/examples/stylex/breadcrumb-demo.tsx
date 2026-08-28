@@ -21,6 +21,7 @@ export default function BreadcrumbDemo() {
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
+          {/* oxlint-disable-next-line no-html-link-for-pages */}
           <BreadcrumbLink render={<a href="/docs" aria-label="Home" />}>
             Home
           </BreadcrumbLink>
@@ -45,6 +46,7 @@ export default function BreadcrumbDemo() {
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
+          {/* oxlint-disable-next-line no-html-link-for-pages */}
           <BreadcrumbLink render={<a href="/docs" aria-label="Components" />}>
             Components
           </BreadcrumbLink>

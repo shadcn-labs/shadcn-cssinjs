@@ -342,6 +342,7 @@ const NavProjects = ({
       <SidebarMenu>
         {projects.map((item) => (
           <SidebarMenuItem key={item.name}>
+            {/* oxlint-disable-next-line anchor-has-content no-html-link-for-pages */}
             <SidebarMenuButton render={<a href={item.url} />}>
               <item.icon />
               <span>{item.name}</span>

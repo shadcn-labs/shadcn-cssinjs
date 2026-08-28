@@ -29,6 +29,7 @@ export default function ItemDemo() {
       <Item
         variant="outline"
         size="sm"
+        // oxlint-disable-next-line no-html-link-for-pages
         render={<a href="/docs" aria-label="Your profile has been verified." />}
       >
         <ItemMedia>

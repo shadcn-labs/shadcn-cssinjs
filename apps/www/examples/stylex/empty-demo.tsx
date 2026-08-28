@@ -29,6 +29,7 @@ export default function EmptyDemo() {
       </EmptyContent>
       <Button
         variant="link"
+        // oxlint-disable-next-line no-html-link-for-pages
         render={<a href="/docs" aria-label="Learn more" />}
         className="text-muted-foreground"
         size="sm"

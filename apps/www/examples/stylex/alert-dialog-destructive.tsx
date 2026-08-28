@@ -28,6 +28,7 @@ export default function AlertDialogDestructive() {
           <AlertDialogTitle>Delete chat?</AlertDialogTitle>
           <AlertDialogDescription>
             This will permanently delete this chat conversation. View{" "}
+            {/* oxlint-disable-next-line no-html-link-for-pages */}
             <a href="/docs">Settings</a> delete any memories saved during this
             chat.
           </AlertDialogDescription>

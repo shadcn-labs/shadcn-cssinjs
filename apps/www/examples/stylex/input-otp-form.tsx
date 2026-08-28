@@ -56,6 +56,7 @@ export default function InputOTPForm() {
             </InputOTPGroup>
           </InputOTP>
           <FieldDescription>
+            {/* oxlint-disable-next-line no-html-link-for-pages */}
             <a href="/docs">I no longer have access to this email address.</a>
           </FieldDescription>
         </Field>
@@ -67,6 +68,7 @@ export default function InputOTPForm() {
           </Button>
           <div className="text-sm text-muted-foreground">
             Having trouble signing in?{" "}
+            {/* oxlint-disable-next-line no-html-link-for-pages */}
             <a
               href="/docs"
               className="underline underline-offset-4 transition-colors hover:text-primary"

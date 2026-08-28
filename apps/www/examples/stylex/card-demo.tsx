@@ -38,6 +38,7 @@ export default function CardDemo() {
             <div className="grid gap-2">
               <div className="flex items-center">
                 <Label htmlFor="password">Password</Label>
+                {/* oxlint-disable-next-line no-html-link-for-pages */}
                 <a
                   href="/docs"
                   className="ml-auto inline-block text-sm underline-offset-4 hover:underline"

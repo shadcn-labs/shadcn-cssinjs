@@ -11,6 +11,7 @@ import {
 export default function ItemLink() {
   return (
     <div className="flex w-full max-w-md flex-col gap-4">
+      {/* oxlint-disable-next-line no-html-link-for-pages */}
       <Item render={<a href="/docs" aria-label="Visit our documentation" />}>
         <ItemContent>
           <ItemTitle>Visit our documentation</ItemTitle>

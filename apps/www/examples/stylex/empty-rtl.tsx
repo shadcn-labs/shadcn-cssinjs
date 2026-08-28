@@ -67,6 +67,7 @@ export default function EmptyRtl() {
       </EmptyContent>
       <Button
         variant="link"
+        // oxlint-disable-next-line no-html-link-for-pages
         render={<a href="/docs" aria-label={t.learnMore} />}
         className="text-muted-foreground"
         size="sm"
