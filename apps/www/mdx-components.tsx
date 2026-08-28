@@ -84,6 +84,15 @@ export const mdxComponents = {
       {...props}
     />
   ),
+  Kbd: ({ className, ...props }: React.ComponentProps<"kbd">) => (
+    <kbd
+      className={cn(
+        "bg-muted border-muted-foreground/20 inline-flex h-5 min-w-5 items-center justify-center rounded border px-1 font-mono text-[0.7rem] font-medium",
+        className
+      )}
+      {...props}
+    />
+  ),
   Link: ({ className, ...props }: React.ComponentProps<typeof Link>) => (
     <Link
       className={cn("font-medium underline underline-offset-4", className)}
@@ -154,15 +163,6 @@ export const mdxComponents = {
       sound="tabSwitch"
       className={cn(
         "text-muted-foreground data-[state=active]:text-foreground data-[state=active]:border-primary dark:data-[state=active]:border-primary hover:text-primary rounded-none border-0 border-b-2 border-transparent bg-transparent px-0 pb-3 text-base data-[state=active]:bg-transparent data-[state=active]:shadow-none dark:data-[state=active]:bg-transparent",
-        className
-      )}
-      {...props}
-    />
-  ),
-  Kbd: ({ className, ...props }: React.ComponentProps<"kbd">) => (
-    <kbd
-      className={cn(
-        "bg-muted border-muted-foreground/20 inline-flex h-5 min-w-5 items-center justify-center rounded border px-1 font-mono text-[0.7rem] font-medium",
         className
       )}
       {...props}

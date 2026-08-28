@@ -237,6 +237,7 @@ const ComboboxInput = ({
   style,
   showTrigger = true,
   showClear = false,
+  children,
   ...props
 }: Omit<React.ComponentProps<typeof ComboboxPrimitive.Input>, "className"> & {
   className?: string;
@@ -255,6 +256,7 @@ const ComboboxInput = ({
         data-slot="combobox-input"
         {...props}
       />
+      {children}
       {showClear ? <ComboboxClear /> : null}
       {showTrigger && !showClear ? <ComboboxTrigger /> : null}
     </div>
