@@ -1,26 +1,22 @@
 ---
 title: Avatar
 description: An image element with a fallback for representing the user.
+component: true
 links:
   doc: https://base-ui.com/react/components/avatar
   api: https://base-ui.com/react/components/avatar#api-reference
 ---
 
-import AvatarDemo from "@/examples/avatar-demo";
-
-<ComponentPreview name="avatar-demo">
-  <AvatarDemo />
-</ComponentPreview>
+<ComponentPreview name="avatar-demo" previewClassName="h-72" />
 
 ## Installation
 
 <Tabs defaultValue="cli">
 
 <TabsList>
-  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="cli">Command</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
-
 <TabsContent value="cli">
 
 ```bash
@@ -58,107 +54,158 @@ pnpm add @base-ui/react @stylexjs/stylex
 
 ## Usage
 
-```tsx
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar/avatar";
+```tsx showLineNumbers
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 ```
 
-```tsx
+```tsx showLineNumbers
 <Avatar>
-  <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+  <AvatarImage src="https://github.com/shadcn.png" />
   <AvatarFallback>CN</AvatarFallback>
 </Avatar>
 ```
 
 ## Composition
 
-Use the following composition to build a `Avatar`:
+Use the following composition to build an `Avatar`:
 
-```txt
+```text
 Avatar
 ├── AvatarImage
-└── AvatarFallback
+├── AvatarFallback
+└── AvatarBadge
 ```
 
-## Examples
+Use the following composition to build an `AvatarGroup`:
 
-import AvatarWithBadge from "@/examples/avatar-badge";
-import AvatarBadgeIcon from "@/examples/avatar-badge-icon";
-import AvatarGroupExample from "@/examples/avatar-group";
-import AvatarGroupCountExample from "@/examples/avatar-group-count";
-import AvatarGroupCountIcon from "@/examples/avatar-group-count-icon";
-import AvatarSizeExample from "@/examples/avatar-size";
-import AvatarDropdown from "@/examples/avatar-dropdown";
+```text
+AvatarGroup
+├── Avatar
+│   ├── AvatarImage
+│   ├── AvatarFallback
+│   └── AvatarBadge
+├── Avatar
+│   ├── AvatarImage
+│   ├── AvatarFallback
+│   └── AvatarBadge
+└── AvatarGroupCount
+```
 
-### Basic
+## Basic
 
-<ComponentPreview name="avatar-demo">
-  <AvatarDemo />
-</ComponentPreview>
+A basic avatar component with an image and a fallback.
 
-### Badge
+<ComponentPreview name="avatar-basic" />
 
-Use `AvatarBadge` to display a status indicator.
+## Badge
 
-<ComponentPreview name="avatar-badge">
-  <AvatarWithBadge />
-</ComponentPreview>
+Use the `AvatarBadge` component to add a badge to the avatar. The badge is positioned at the bottom right of the avatar.
 
-### Badge with Icon
+<ComponentPreview name="avatar-badge" />
 
-<ComponentPreview name="avatar-badge-icon">
-  <AvatarBadgeIcon />
-</ComponentPreview>
+Use the `className` prop to add custom styles to the badge such as custom colors, sizes, etc.
 
-### Avatar Group
+```tsx showLineNumbers
+<Avatar>
+  <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+  <AvatarFallback>CN</AvatarFallback>
+  <AvatarBadge className="bg-green-600 dark:bg-green-800" />
+</Avatar>
+```
 
-Use `AvatarGroup` to display overlapping avatars.
+## Badge with Icon
 
-<ComponentPreview name="avatar-group">
-  <AvatarGroupExample />
-</ComponentPreview>
+You can also use an icon inside `<AvatarBadge>`.
 
-### Avatar Group Count
+<ComponentPreview name="avatar-badge-icon" />
 
-Use `AvatarGroupCount` to display a count of additional members.
+## Avatar Group
 
-<ComponentPreview name="avatar-group-count">
-  <AvatarGroupCountExample />
-</ComponentPreview>
+Use the `AvatarGroup` component to add a group of avatars.
 
-### Avatar Group with Icon
+<ComponentPreview name="avatar-group" />
 
-<ComponentPreview name="avatar-group-count-icon">
-  <AvatarGroupCountIcon />
-</ComponentPreview>
+## Avatar Group Count
 
-### Sizes
+Use `<AvatarGroupCount>` to add a count to the group.
 
-Use the `size` prop to change the avatar size.
+<ComponentPreview name="avatar-group-count" />
 
-<ComponentPreview name="avatar-size">
-  <AvatarSizeExample />
-</ComponentPreview>
+## Avatar Group with Icon
 
-### Dropdown
+You can also use an icon inside `<AvatarGroupCount>`.
 
-<ComponentPreview name="avatar-dropdown">
-  <AvatarDropdown />
-</ComponentPreview>
+<ComponentPreview name="avatar-group-count-icon" />
 
-import AvatarRtl from "@/examples/avatar-rtl";
+## Sizes
+
+Use the `size` prop to change the size of the avatar.
+
+<ComponentPreview name="avatar-size" />
+
+## Dropdown
+
+You can use the `Avatar` component as a trigger for a dropdown menu.
+
+<ComponentPreview name="avatar-dropdown" />
 
 ## RTL
 
-To enable right-to-left support, see the [RTL guide](/docs/rtl).
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview name="avatar-rtl" direction="rtl">
-  <AvatarRtl />
-</ComponentPreview>
+<ComponentPreview name="avatar-rtl" direction="rtl" previewClassName="h-72" />
 
 ## API Reference
 
-See the [Base UI](https://base-ui.com/react/components/avatar#api-reference) documentation for the full API.
+### Avatar
+
+The `Avatar` component is the root component that wraps the avatar image and fallback.
+
+| Prop        | Type                        | Default     |
+| ----------- | --------------------------- | ----------- |
+| `size`      | `"default" \| "sm" \| "lg"` | `"default"` |
+| `className` | `string`                    | -           |
+
+### AvatarImage
+
+The `AvatarImage` component displays the avatar image. It accepts all Base UI Avatar Image props.
+
+| Prop        | Type     | Default |
+| ----------- | -------- | ------- |
+| `src`       | `string` | -       |
+| `alt`       | `string` | -       |
+| `className` | `string` | -       |
+
+### AvatarFallback
+
+The `AvatarFallback` component displays a fallback when the image fails to load. It accepts all Base UI Avatar Fallback props.
+
+| Prop        | Type     | Default |
+| ----------- | -------- | ------- |
+| `className` | `string` | -       |
+
+### AvatarBadge
+
+The `AvatarBadge` component displays a badge indicator on the avatar, typically positioned at the bottom right.
+
+| Prop        | Type     | Default |
+| ----------- | -------- | ------- |
+| `className` | `string` | -       |
+
+### AvatarGroup
+
+The `AvatarGroup` component displays a group of avatars with overlapping styling.
+
+| Prop        | Type     | Default |
+| ----------- | -------- | ------- |
+| `className` | `string` | -       |
+
+### AvatarGroupCount
+
+The `AvatarGroupCount` component displays a count indicator in an avatar group, typically showing the number of additional avatars.
+
+| Prop        | Type     | Default |
+| ----------- | -------- | ------- |
+| `className` | `string` | -       |
+
+For more information about Base UI Avatar props, see the [Base UI documentation](https://base-ui.com/react/components/avatar#api-reference).

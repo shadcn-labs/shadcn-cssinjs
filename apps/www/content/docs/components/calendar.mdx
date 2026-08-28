@@ -1,25 +1,21 @@
 ---
 title: Calendar
-description: A date field component that allows users to enter and edit dates.
+description: A calendar component that allows users to select a date or a range of dates.
+component: true
 links:
-  doc: https://daypicker.dev
+  doc: https://react-day-picker.js.org
 ---
 
-import CalendarDemo from "@/examples/calendar-demo";
-
-<ComponentPreview name="calendar-demo">
-  <CalendarDemo />
-</ComponentPreview>
+<ComponentPreview name="calendar-demo" previewClassName="h-96" />
 
 ## Installation
 
 <Tabs defaultValue="cli">
 
 <TabsList>
-  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="cli">Command</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
-
 <TabsContent value="cli">
 
 ```bash
@@ -35,13 +31,12 @@ npx shadcn@latest add https://shadcn-cssinjs.com/r/calendar.json
 <Step>Install the following dependencies:</Step>
 
 ```bash
-pnpm add react-day-picker date-fns @stylexjs/stylex
+npm install react-day-picker date-fns
 ```
 
-<Step>
-  Make sure [StyleX is configured](/docs/installation) and the design tokens are
-  installed.
-</Step>
+<Step>Add the `Button` component to your project.</Step>
+
+The `Calendar` component uses the `Button` component. Make sure you have it installed in your project.
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -57,76 +52,165 @@ pnpm add react-day-picker date-fns @stylexjs/stylex
 
 ## Usage
 
-```tsx
-import { Calendar } from "@/components/ui/calendar/calendar";
+```tsx showLineNumbers
+import { Calendar } from "@/components/ui/calendar";
 ```
 
-```tsx
-<Calendar mode="single" selected={date} onSelect={setDate} />
+```tsx showLineNumbers
+const [date, setDate] = React.useState<Date | undefined>(new Date());
+
+return (
+  <Calendar
+    mode="single"
+    selected={date}
+    onSelect={setDate}
+    className="rounded-lg border"
+  />
+);
 ```
 
-## Examples
+See the [React DayPicker](https://react-day-picker.js.org) documentation for more information.
 
-import CalendarRange from "@/examples/calendar-range";
-import CalendarCaption from "@/examples/calendar-caption";
-import CalendarWithPresets from "@/examples/calendar-presets";
-import CalendarBookedDates from "@/examples/calendar-booked-dates";
-import CalendarWeekNumbers from "@/examples/calendar-week-numbers";
+## About
 
-### Basic
+The `Calendar` component is built on top of [React DayPicker](https://react-day-picker.js.org).
 
-<ComponentPreview name="calendar-demo">
-  <CalendarDemo />
-</ComponentPreview>
+## Date Picker
 
-### Range Calendar
+You can use the `<Calendar>` component to build a date picker. See the [Date Picker](/docs/components/base/date-picker) page for more information.
 
-Use `mode="range"` to select a range of dates.
+## Persian / Hijri / Jalali Calendar
 
-<ComponentPreview name="calendar-range">
-  <CalendarRange />
-</ComponentPreview>
+To use the Persian calendar, edit `components/ui/calendar.tsx` and replace `react-day-picker` with `react-day-picker/persian`.
 
-### Month and Year Selector
+```diff
+- import { DayPicker } from "react-day-picker"
++ import { DayPicker } from "react-day-picker/persian"
+```
+
+<ComponentPreview
+  name="calendar-hijri"
+  title="Persian / Hijri / Jalali Calendar"
+  description="A Persian calendar."
+  previewClassName="h-[400px]"
+/>
+
+## Selected Date (With TimeZone)
+
+The Calendar component accepts a `timeZone` prop to ensure dates are displayed and selected in the user's local timezone.
+
+```tsx showLineNumbers
+export function CalendarWithTimezone() {
+  const [date, setDate] = React.useState<Date | undefined>(undefined);
+  const [timeZone, setTimeZone] = React.useState<string | undefined>(undefined);
+
+  React.useEffect(() => {
+    setTimeZone(Intl.DateTimeFormat().resolvedOptions().timeZone);
+  }, []);
+
+  return (
+    <Calendar
+      mode="single"
+      selected={date}
+      onSelect={setDate}
+      timeZone={timeZone}
+    />
+  );
+}
+```
+
+**Note:** If you notice a selected date offset (for example, selecting the 20th highlights the 19th), make sure the `timeZone` prop is set to the user's local timezone.
+
+**Why client-side?** The timezone is detected using `Intl.DateTimeFormat().resolvedOptions().timeZone` inside a `useEffect` to ensure compatibility with server-side rendering. Detecting the timezone during render would cause hydration mismatches, as the server and client may be in different timezones.
+
+## Basic
+
+A basic calendar component. We used `className="rounded-lg border"` to style the calendar.
+
+<ComponentPreview name="calendar-basic" previewClassName="h-96" />
+
+## Range Calendar
+
+Use the `mode="range"` prop to enable range selection.
+
+<ComponentPreview name="calendar-range" previewClassName="h-[36rem] md:h-96" />
+
+## Month and Year Selector
 
 Use `captionLayout="dropdown"` to show month and year dropdowns.
 
-<ComponentPreview name="calendar-caption">
-  <CalendarCaption />
-</ComponentPreview>
+<ComponentPreview name="calendar-caption" previewClassName="h-96" />
 
-### Presets
+## Presets
 
-<ComponentPreview name="calendar-presets">
-  <CalendarWithPresets />
-</ComponentPreview>
+<ComponentPreview name="calendar-presets" previewClassName="h-[650px]" />
 
-### Booked dates
+## Date and Time Picker
 
-Use `disabled` and `modifiers` to mark booked dates.
+<ComponentPreview name="calendar-time" previewClassName="h-[600px]" />
 
-<ComponentPreview name="calendar-booked-dates">
-  <CalendarBookedDates />
-</ComponentPreview>
+## Booked dates
 
-### Week Numbers
+<ComponentPreview name="calendar-booked-dates" previewClassName="h-96" />
 
-Use `showWeekNumber` to display week numbers.
+## Custom Cell Size
 
-<ComponentPreview name="calendar-week-numbers">
-  <CalendarWeekNumbers />
-</ComponentPreview>
+<ComponentPreview
+  name="calendar-custom-days"
+  title="Custom Cell Size"
+  description="A calendar with custom cell size that's responsive."
+  className="**:[.preview]:h-[560px]"
+/>
 
-import CalendarRtl from "@/examples/calendar-rtl";
+You can customize the size of calendar cells using the `--cell-size` CSS variable. You can also make it responsive by using breakpoint-specific values:
+
+```tsx showLineNumbers
+<Calendar
+  mode="single"
+  selected={date}
+  onSelect={setDate}
+  className="rounded-lg border [--cell-size:--spacing(11)] md:[--cell-size:--spacing(12)]"
+/>
+```
+
+Or use fixed values:
+
+```tsx showLineNumbers
+<Calendar
+  mode="single"
+  selected={date}
+  onSelect={setDate}
+  className="rounded-lg border [--cell-size:2.75rem] md:[--cell-size:3rem]"
+/>
+```
+
+## Week Numbers
+
+Use `showWeekNumber` to show week numbers.
+
+<ComponentPreview name="calendar-week-numbers" previewClassName="h-96" />
 
 ## RTL
 
-To enable right-to-left support, see the [RTL guide](/docs/rtl).
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview name="calendar-rtl" direction="rtl">
-  <CalendarRtl />
-</ComponentPreview>
+See also the [Hijri Guide](#persian--hijri--jalali-calendar) for enabling the Persian / Hijri / Jalali calendar.
+
+<ComponentPreview name="calendar-rtl" direction="rtl" previewClassName="h-96" />
+
+When using RTL, import the locale from `react-day-picker/locale` and pass both the `locale` and `dir` props to the Calendar component:
+
+```tsx showLineNumbers
+import { arSA } from "react-day-picker/locale";
+<Calendar
+  mode="single"
+  selected={date}
+  onSelect={setDate}
+  locale={arSA}
+  dir="rtl"
+/>;
+```
 
 ## API Reference
 
-The `Calendar` component is built on top of [React DayPicker](https://daypicker.dev). See the [React DayPicker documentation](https://daypicker.dev) for the full list of props.
+See the [React DayPicker](https://react-day-picker.js.org) documentation for more information on the `Calendar` component.

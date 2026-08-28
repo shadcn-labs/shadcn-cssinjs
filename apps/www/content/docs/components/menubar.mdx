@@ -1,26 +1,22 @@
 ---
 title: Menubar
-description: A visually persistent menu common in desktop applications.
+description: A visually persistent menu common in desktop applications that provides quick access to a consistent set of commands.
+component: true
 links:
   doc: https://base-ui.com/react/components/menubar
   api: https://base-ui.com/react/components/menubar#api-reference
 ---
 
-import MenubarDemo from "@/examples/menubar-demo";
-
-<ComponentPreview name="menubar-demo">
-  <MenubarDemo />
-</ComponentPreview>
+<ComponentPreview name="menubar-demo" />
 
 ## Installation
 
 <Tabs defaultValue="cli">
 
 <TabsList>
-  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="cli">Command</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
-
 <TabsContent value="cli">
 
 ```bash
@@ -58,22 +54,35 @@ pnpm add @base-ui/react @stylexjs/stylex
 
 ## Usage
 
-```tsx
+```tsx showLineNumbers
 import {
   Menubar,
   MenubarContent,
+  MenubarGroup,
   MenubarItem,
   MenubarMenu,
+  MenubarSeparator,
+  MenubarShortcut,
   MenubarTrigger,
-} from "@/components/ui/menubar/menubar";
+} from "@/components/ui/menubar";
 ```
 
-```tsx
+```tsx showLineNumbers
 <Menubar>
   <MenubarMenu>
     <MenubarTrigger>File</MenubarTrigger>
     <MenubarContent>
-      <MenubarItem>New Tab</MenubarItem>
+      <MenubarGroup>
+        <MenubarItem>
+          New Tab <MenubarShortcut>⌘T</MenubarShortcut>
+        </MenubarItem>
+        <MenubarItem>New Window</MenubarItem>
+      </MenubarGroup>
+      <MenubarSeparator />
+      <MenubarGroup>
+        <MenubarItem>Share</MenubarItem>
+        <MenubarItem>Print</MenubarItem>
+      </MenubarGroup>
     </MenubarContent>
   </MenubarMenu>
 </Menubar>
@@ -83,58 +92,70 @@ import {
 
 Use the following composition to build a `Menubar`:
 
-```txt
+```text
 Menubar
+├── MenubarMenu
+│   ├── MenubarTrigger
+│   └── MenubarContent
+│       ├── MenubarGroup
+│       │   ├── MenubarLabel
+│       │   ├── MenubarItem
+│       │   └── MenubarItem
+│       ├── MenubarSeparator
+│       ├── MenubarGroup
+│       │   ├── MenubarLabel
+│       │   ├── MenubarCheckboxItem
+│       │   └── MenubarCheckboxItem
+│       ├── MenubarSeparator
+│       ├── MenubarGroup
+│       │   ├── MenubarLabel
+│       │   └── MenubarRadioGroup
+│       │       ├── MenubarRadioItem
+│       │       └── MenubarRadioItem
+│       └── MenubarSub
+│           ├── MenubarSubTrigger
+│           └── MenubarSubContent
+│               └── MenubarGroup
+│                   ├── MenubarLabel
+│                   ├── MenubarItem
+│                   └── MenubarItem
 └── MenubarMenu
     ├── MenubarTrigger
     └── MenubarContent
-        ├── MenubarItem
-        │   └── MenubarShortcut
-        ├── MenubarSeparator
         └── MenubarGroup
+            ├── MenubarLabel
+            ├── MenubarItem
+            └── MenubarItem
 ```
 
-## Examples
+## Checkbox
 
-import MenubarCheckbox from "@/examples/menubar-checkbox";
-import MenubarRadio from "@/examples/menubar-radio";
-import MenubarSubmenu from "@/examples/menubar-submenu";
-import MenubarIcons from "@/examples/menubar-icons";
+Use `MenubarCheckboxItem` for toggleable options.
 
-### Checkbox
+<ComponentPreview name="menubar-checkbox" />
 
-<ComponentPreview name="menubar-checkbox">
-  <MenubarCheckbox />
-</ComponentPreview>
+## Radio
 
-### Radio
+Use `MenubarRadioGroup` and `MenubarRadioItem` for single-select options.
 
-<ComponentPreview name="menubar-radio">
-  <MenubarRadio />
-</ComponentPreview>
+<ComponentPreview name="menubar-radio" />
 
-### Submenu
+## Submenu
 
-<ComponentPreview name="menubar-submenu">
-  <MenubarSubmenu />
-</ComponentPreview>
+Use `MenubarSub`, `MenubarSubTrigger`, and `MenubarSubContent` for nested menus.
 
-### With Icons
+<ComponentPreview name="menubar-submenu" />
 
-<ComponentPreview name="menubar-icons">
-  <MenubarIcons />
-</ComponentPreview>
+## With Icons
 
-import MenubarRtl from "@/examples/menubar-rtl";
+<ComponentPreview name="menubar-icons" />
 
 ## RTL
 
-To enable right-to-left support, see the [RTL guide](/docs/rtl).
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview name="menubar-rtl" direction="rtl">
-  <MenubarRtl />
-</ComponentPreview>
+<ComponentPreview name="menubar-rtl" direction="rtl" />
 
 ## API Reference
 
-See the [Base UI](https://base-ui.com/react/components/menubar#api-reference) documentation for the full API.
+See the [Base UI Menubar](https://base-ui.com/react/components/menubar#api-reference) documentation.

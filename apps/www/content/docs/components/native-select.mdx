@@ -1,24 +1,26 @@
 ---
 title: Native Select
-description: Displays a styled native select element.
+description: A styled native HTML select element with consistent design system integration.
+component: true
 ---
 
-import NativeSelectDemo from "@/examples/native-select-demo";
-import NativeSelectDisabled from "@/examples/native-select-disabled";
+import { InfoIcon } from "lucide-react";
 
-<ComponentPreview name="native-select-demo">
-  <NativeSelectDemo />
-</ComponentPreview>
+<Callout variant="info" icon={<InfoIcon className="translate-y-[3px]!" />}>
+  For a styled select component, see the [Select](/docs/components/select)
+  component.
+</Callout>
+
+<ComponentPreview name="native-select-demo" />
 
 ## Installation
 
 <Tabs defaultValue="cli">
 
 <TabsList>
-  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="cli">Command</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
-
 <TabsContent value="cli">
 
 ```bash
@@ -30,17 +32,6 @@ npx shadcn@latest add https://shadcn-cssinjs.com/r/native-select.json
 <TabsContent value="manual">
 
 <Steps>
-
-<Step>Install the following dependencies:</Step>
-
-```bash
-pnpm add @stylexjs/stylex
-```
-
-<Step>
-  Make sure [StyleX is configured](/docs/installation) and the design tokens are
-  installed.
-</Step>
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -56,77 +47,93 @@ pnpm add @stylexjs/stylex
 
 ## Usage
 
-```tsx
+```tsx showLineNumbers
 import {
   NativeSelect,
-  NativeSelectOption,
   NativeSelectOptGroup,
-} from "@/components/ui/native-select/native-select";
+  NativeSelectOption,
+} from "@/components/ui/native-select";
 ```
 
-```tsx
-<NativeSelect defaultValue="apple">
+```tsx showLineNumbers
+<NativeSelect>
+  <NativeSelectOption value="">Select a fruit</NativeSelectOption>
   <NativeSelectOption value="apple">Apple</NativeSelectOption>
   <NativeSelectOption value="banana">Banana</NativeSelectOption>
+  <NativeSelectOption value="blueberry">Blueberry</NativeSelectOption>
+  <NativeSelectOption value="pineapple">Pineapple</NativeSelectOption>
 </NativeSelect>
 ```
 
 ## Composition
 
-Use the following composition to build a `NativeSelect`:
+### Simple
 
-```txt
+Options placed directly under `NativeSelect` (no `NativeSelectOptGroup`).
+
+```text
 NativeSelect
 ├── NativeSelectOption
+├── NativeSelectOption
+├── NativeSelectOption
+└── NativeSelectOption
+```
+
+### With groups
+
+Use `NativeSelectOptGroup` to organize options into categories.
+
+```text
+NativeSelect
+├── NativeSelectOptGroup
+│   ├── NativeSelectOption
+│   └── NativeSelectOption
 └── NativeSelectOptGroup
+    ├── NativeSelectOption
     └── NativeSelectOption
 ```
 
-## Examples
+## Groups
 
-### Groups
+Use `NativeSelectOptGroup` to organize options into categories.
 
-Use `NativeSelectOptGroup` to group related options.
+<ComponentPreview name="native-select-groups" />
 
-<ComponentPreview name="native-select-demo">
-  <NativeSelectDemo />
-</ComponentPreview>
+## Disabled
 
-### Disabled
+Add the `disabled` prop to the `NativeSelect` component to disable the select.
 
-<ComponentPreview name="native-select-disabled">
-  <NativeSelectDisabled />
-</ComponentPreview>
+<ComponentPreview name="native-select-disabled" />
 
-import NativeSelectInvalid from "@/examples/native-select-invalid";
+## Invalid
 
-### Invalid
+Use `aria-invalid` to show validation errors and the `data-invalid` attribute to the `Field` component for styling.
 
-Set `aria-invalid` to show an error state.
+<ComponentPreview name="native-select-invalid" />
 
-<ComponentPreview name="native-select-invalid">
-  <NativeSelectInvalid />
-</ComponentPreview>
+## Native Select vs Select
 
-import NativeSelectRtl from "@/examples/native-select-rtl";
+- Use `NativeSelect` for native browser behavior, better performance, or mobile-optimized dropdowns.
+- Use `Select` for custom styling, animations, or complex interactions.
 
 ## RTL
 
-To enable right-to-left support, see the [RTL guide](/docs/rtl).
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview name="native-select-rtl" direction="rtl">
-  <NativeSelectRtl />
-</ComponentPreview>
+<ComponentPreview name="native-select-rtl" direction="rtl" />
 
 ## API Reference
 
 ### NativeSelect
 
-The main select component that wraps the native HTML `select` element and accepts all of its props.
+The main select component that wraps the native HTML select element.
 
-| Prop        | Type     | Default |
-| ----------- | -------- | ------- |
-| `className` | `string` | -       |
+```tsx
+<NativeSelect>
+  <NativeSelectOption value="option1">Option 1</NativeSelectOption>
+  <NativeSelectOption value="option2">Option 2</NativeSelectOption>
+</NativeSelect>
+```
 
 ### NativeSelectOption
 
@@ -134,7 +141,7 @@ Represents an individual option within the select.
 
 | Prop       | Type      | Default |
 | ---------- | --------- | ------- |
-| `value`    | `string`  | -       |
+| `value`    | `string`  |         |
 | `disabled` | `boolean` | `false` |
 
 ### NativeSelectOptGroup
@@ -143,5 +150,12 @@ Groups related options together for better organization.
 
 | Prop       | Type      | Default |
 | ---------- | --------- | ------- |
-| `label`    | `string`  | -       |
+| `label`    | `string`  |         |
 | `disabled` | `boolean` | `false` |
+
+```tsx
+<NativeSelectOptGroup label="Fruits">
+  <NativeSelectOption value="apple">Apple</NativeSelectOption>
+  <NativeSelectOption value="banana">Banana</NativeSelectOption>
+</NativeSelectOptGroup>
+```

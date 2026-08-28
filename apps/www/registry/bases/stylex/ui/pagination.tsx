@@ -103,6 +103,7 @@ const PaginationLink = ({
   isActive,
   ...props
 }: React.ComponentProps<"a"> & { isActive?: boolean }) => (
+  // oxlint-disable-next-line eslint-plugin-jsx-a11y/anchor-has-content: content is passed by the consumer via children
   <a
     aria-current={isActive ? "page" : undefined}
     {...stylex.props(

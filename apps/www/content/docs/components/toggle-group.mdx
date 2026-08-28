@@ -1,26 +1,22 @@
 ---
 title: Toggle Group
 description: A set of two-state buttons that can be toggled on or off.
+component: true
 links:
   doc: https://base-ui.com/react/components/toggle-group
   api: https://base-ui.com/react/components/toggle-group#api-reference
 ---
 
-import ToggleGroupDemo from "@/examples/toggle-group-demo";
-
-<ComponentPreview name="toggle-group-demo">
-  <ToggleGroupDemo />
-</ComponentPreview>
+<ComponentPreview name="toggle-group-demo" />
 
 ## Installation
 
 <Tabs defaultValue="cli">
 
 <TabsList>
-  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="cli">Command</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
-
 <TabsContent value="cli">
 
 ```bash
@@ -59,86 +55,70 @@ pnpm add @base-ui/react @stylexjs/stylex
 ## Usage
 
 ```tsx
-import {
-  ToggleGroup,
-  ToggleGroupItem,
-} from "@/components/ui/toggle-group/toggle-group";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 ```
 
 ```tsx
-<ToggleGroup multiple>
-  <ToggleGroupItem value="bold">B</ToggleGroupItem>
-  <ToggleGroupItem value="italic">I</ToggleGroupItem>
+<ToggleGroup type="single">
+  <ToggleGroupItem value="a">A</ToggleGroupItem>
+  <ToggleGroupItem value="b">B</ToggleGroupItem>
+  <ToggleGroupItem value="c">C</ToggleGroupItem>
 </ToggleGroup>
 ```
 
 ## Composition
 
-Use the following composition to build a `Toggle Group`:
+Use the following composition to build a `ToggleGroup`:
 
-```txt
+```text
 ToggleGroup
 ├── ToggleGroupItem
 └── ToggleGroupItem
 ```
 
-## Examples
+## Outline
 
-import ToggleGroupOutline from "@/examples/toggle-group-outline";
-import ToggleGroupSizes from "@/examples/toggle-group-sizes";
-import ToggleGroupSpacing from "@/examples/toggle-group-spacing";
-import ToggleGroupVertical from "@/examples/toggle-group-vertical";
-import ToggleGroupDisabled from "@/examples/toggle-group-disabled";
-import ToggleGroupCustom from "@/examples/toggle-group-custom";
+Use `variant="outline"` for an outline style.
 
-### Outline
+<ComponentPreview name="toggle-group-outline" />
 
-<ComponentPreview name="toggle-group-outline">
-  <ToggleGroupOutline />
-</ComponentPreview>
+## Size
 
-### Size
+Use the `size` prop to change the size of the toggle group.
 
-<ComponentPreview name="toggle-group-sizes">
-  <ToggleGroupSizes />
-</ComponentPreview>
+<ComponentPreview name="toggle-group-sizes" />
 
-### Spacing
+## Spacing
 
-Use the `spacing` prop to separate the items.
+Use `spacing` to add spacing between toggle group items.
 
-<ComponentPreview name="toggle-group-spacing">
-  <ToggleGroupSpacing />
-</ComponentPreview>
+<ComponentPreview name="toggle-group-spacing" />
 
-### Vertical
+## Vertical
 
-<ComponentPreview name="toggle-group-vertical">
-  <ToggleGroupVertical />
-</ComponentPreview>
+Use `orientation="vertical"` for vertical toggle groups.
 
-### Disabled
+<ComponentPreview name="toggle-group-vertical" />
 
-<ComponentPreview name="toggle-group-disabled">
-  <ToggleGroupDisabled />
-</ComponentPreview>
+## Disabled
 
-### Custom
+<ComponentPreview name="toggle-group-disabled" />
 
-<ComponentPreview name="toggle-group-custom">
-  <ToggleGroupCustom />
-</ComponentPreview>
+## Custom
 
-import ToggleGroupRtl from "@/examples/toggle-group-rtl";
+A custom toggle group example.
+
+<ComponentPreview
+  name="toggle-group-font-weight-selector"
+  previewClassName="*:data-[slot=field]:max-w-xs"
+/>
 
 ## RTL
 
-To enable right-to-left support, see the [RTL guide](/docs/rtl).
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview name="toggle-group-rtl" direction="rtl">
-  <ToggleGroupRtl />
-</ComponentPreview>
+<ComponentPreview name="toggle-group-rtl" direction="rtl" />
 
 ## API Reference
 
-See the [Base UI](https://base-ui.com/react/components/toggle-group#api-reference) documentation for the full API.
+See the [Base UI Toggle Group](https://base-ui.com/react/components/toggle-group#api-reference) documentation.

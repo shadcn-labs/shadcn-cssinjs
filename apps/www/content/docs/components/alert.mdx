@@ -1,25 +1,19 @@
 ---
 title: Alert
 description: Displays a callout for user attention.
+component: true
 ---
 
-import AlertDemo from "@/examples/alert-demo";
-import AlertDestructive from "@/examples/alert-destructive";
-import AlertAction from "@/examples/alert-action";
-
-<ComponentPreview name="alert-demo">
-  <AlertDemo />
-</ComponentPreview>
+<ComponentPreview name="alert-demo" previewClassName="h-auto sm:h-72 p-6" />
 
 ## Installation
 
 <Tabs defaultValue="cli">
 
 <TabsList>
-  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="cli">Command</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
-
 <TabsContent value="cli">
 
 ```bash
@@ -31,17 +25,6 @@ npx shadcn@latest add https://shadcn-cssinjs.com/r/alert.json
 <TabsContent value="manual">
 
 <Steps>
-
-<Step>Install the following dependencies:</Step>
-
-```bash
-pnpm add @stylexjs/stylex
-```
-
-<Step>
-  Make sure [StyleX is configured](/docs/installation) and the design tokens are
-  installed.
-</Step>
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -57,21 +40,25 @@ pnpm add @stylexjs/stylex
 
 ## Usage
 
-```tsx
+```tsx showLineNumbers
 import {
   Alert,
+  AlertAction,
   AlertDescription,
   AlertTitle,
-} from "@/components/ui/alert/alert";
+} from "@/components/ui/alert";
 ```
 
-```tsx
+```tsx showLineNumbers
 <Alert>
-  <TerminalIcon />
+  <InfoIcon />
   <AlertTitle>Heads up!</AlertTitle>
   <AlertDescription>
-    You can add components to your app using the CLI.
+    You can add components and dependencies to your app using the cli.
   </AlertDescription>
+  <AlertAction>
+    <Button variant="outline">Enable</Button>
+  </AlertAction>
 </Alert>
 ```
 
@@ -79,58 +66,50 @@ import {
 
 Use the following composition to build an `Alert`:
 
-```txt
+```text
 Alert
+├── Icon
 ├── AlertTitle
-└── AlertDescription
+├── AlertDescription
+└── AlertAction
 ```
 
-## Examples
+## Basic
 
-import AlertBasic from "@/examples/alert-basic";
-import AlertColors from "@/examples/alert-colors";
+A basic alert with an icon, title and description.
 
-### Basic
+<ComponentPreview name="alert-basic" previewClassName="h-auto sm:h-72 p-6" />
 
-A simple alert with an icon, title, and description.
+## Destructive
 
-<ComponentPreview name="alert-basic">
-  <AlertBasic />
-</ComponentPreview>
+Use `variant="destructive"` to create a destructive alert.
 
-### Destructive
+<ComponentPreview
+  name="alert-destructive"
+  previewClassName="h-auto sm:h-72 p-6"
+/>
 
-Use the `destructive` variant to indicate an error or a destructive action.
+## Action
 
-<ComponentPreview name="alert-destructive">
-  <AlertDestructive />
-</ComponentPreview>
+Use `AlertAction` to add a button or other action element to the alert.
 
-### Action
+<ComponentPreview name="alert-action" previewClassName="h-auto sm:h-72 p-6" />
 
-Add an action to the `AlertDescription` to let the user respond.
+## Custom Colors
 
-<ComponentPreview name="alert-action">
-  <AlertAction />
-</ComponentPreview>
+You can customize the alert colors by adding custom classes such as `bg-amber-50 dark:bg-amber-950` to the `Alert` component.
 
-### Custom Colors
-
-Use utility classes to apply custom colors to the alert.
-
-<ComponentPreview name="alert-colors">
-  <AlertColors />
-</ComponentPreview>
-
-import AlertRtl from "@/examples/alert-rtl";
+<ComponentPreview name="alert-colors" previewClassName="h-auto sm:h-72 p-6" />
 
 ## RTL
 
-To enable right-to-left support, see the [RTL guide](/docs/rtl).
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview name="alert-rtl" direction="rtl">
-  <AlertRtl />
-</ComponentPreview>
+<ComponentPreview
+  name="alert-rtl"
+  direction="rtl"
+  previewClassName="h-auto sm:h-72 p-6"
+/>
 
 ## API Reference
 
@@ -153,6 +132,14 @@ The `AlertTitle` component displays the title of the alert.
 ### AlertDescription
 
 The `AlertDescription` component displays the description or content of the alert.
+
+| Prop        | Type     | Default |
+| ----------- | -------- | ------- |
+| `className` | `string` | -       |
+
+### AlertAction
+
+The `AlertAction` component displays an action element (like a button) positioned absolutely in the top-right corner of the alert.
 
 | Prop        | Type     | Default |
 | ----------- | -------- | ------- |

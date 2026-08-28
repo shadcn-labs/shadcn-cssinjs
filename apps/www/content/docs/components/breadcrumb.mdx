@@ -1,23 +1,19 @@
 ---
 title: Breadcrumb
 description: Displays the path to the current resource using a hierarchy of links.
+component: true
 ---
 
-import BreadcrumbDemo from "@/examples/breadcrumb-demo";
-
-<ComponentPreview name="breadcrumb-demo">
-  <BreadcrumbDemo />
-</ComponentPreview>
+<ComponentPreview name="breadcrumb-demo" previewClassName="p-2" />
 
 ## Installation
 
 <Tabs defaultValue="cli">
 
 <TabsList>
-  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="cli">Command</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
-
 <TabsContent value="cli">
 
 ```bash
@@ -29,17 +25,6 @@ npx shadcn@latest add https://shadcn-cssinjs.com/r/breadcrumb.json
 <TabsContent value="manual">
 
 <Steps>
-
-<Step>Install the following dependencies:</Step>
-
-```bash
-pnpm add @stylexjs/stylex
-```
-
-<Step>
-  Make sure [StyleX is configured](/docs/installation) and the design tokens are
-  installed.
-</Step>
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -55,7 +40,7 @@ pnpm add @stylexjs/stylex
 
 ## Usage
 
-```tsx
+```tsx showLineNumbers
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -63,18 +48,24 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb/breadcrumb";
+} from "@/components/ui/breadcrumb";
 ```
 
-```tsx
+```tsx showLineNumbers
 <Breadcrumb>
   <BreadcrumbList>
     <BreadcrumbItem>
-      <BreadcrumbLink href="/">Home</BreadcrumbLink>
+      <BreadcrumbLink render={<a href="/" />}>Home</BreadcrumbLink>
     </BreadcrumbItem>
     <BreadcrumbSeparator />
     <BreadcrumbItem>
-      <BreadcrumbPage>Current</BreadcrumbPage>
+      <BreadcrumbLink render={<a href="/components" />}>
+        Components
+      </BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
     </BreadcrumbItem>
   </BreadcrumbList>
 </Breadcrumb>
@@ -84,71 +75,58 @@ import {
 
 Use the following composition to build a `Breadcrumb`:
 
-```txt
+```text
 Breadcrumb
 └── BreadcrumbList
     ├── BreadcrumbItem
-    │   ├── BreadcrumbLink
-    │   └── BreadcrumbPage
+    │   └── BreadcrumbLink
     ├── BreadcrumbSeparator
-    └── BreadcrumbEllipsis
+    ├── BreadcrumbItem
+    │   └── BreadcrumbLink
+    ├── BreadcrumbSeparator
+    └── BreadcrumbItem
+        └── BreadcrumbPage
 ```
 
-## Examples
+## Basic
 
-import BreadcrumbBasic from "@/examples/breadcrumb-basic";
-import BreadcrumbSeparatorDemo from "@/examples/breadcrumb-separator";
-import BreadcrumbDropdown from "@/examples/breadcrumb-dropdown";
-import BreadcrumbEllipsisDemo from "@/examples/breadcrumb-ellipsis";
-import BreadcrumbLinkDemo from "@/examples/breadcrumb-link";
+A basic breadcrumb with a home link and a components link.
 
-### Basic
+<ComponentPreview name="breadcrumb-basic" />
 
-<ComponentPreview name="breadcrumb-basic">
-  <BreadcrumbBasic />
-</ComponentPreview>
+## Custom separator
 
-### Custom separator
+Use a custom component as `children` for `<BreadcrumbSeparator />` to create a custom separator.
 
-Pass children to `BreadcrumbSeparator` to use a custom separator.
+<ComponentPreview name="breadcrumb-separator" />
 
-<ComponentPreview name="breadcrumb-separator">
-  <BreadcrumbSeparatorDemo />
-</ComponentPreview>
+## Dropdown
 
-### Dropdown
+You can compose `<BreadcrumbItem />` with a `<DropdownMenu />` to create a dropdown in the breadcrumb.
 
-Compose with a `DropdownMenu` to show a list of links.
+<ComponentPreview name="breadcrumb-dropdown" />
 
-<ComponentPreview name="breadcrumb-dropdown">
-  <BreadcrumbDropdown />
-</ComponentPreview>
+## Collapsed
 
-### Collapsed
+We provide a `<BreadcrumbEllipsis />` component to show a collapsed state when the breadcrumb is too long.
 
-Use `BreadcrumbEllipsis` to collapse a long breadcrumb.
+<ComponentPreview name="breadcrumb-ellipsis" previewClassName="p-2" />
 
-<ComponentPreview name="breadcrumb-ellipsis">
-  <BreadcrumbEllipsisDemo />
-</ComponentPreview>
+## Link component
 
-### Link component
+To use a custom link component from your routing library, you can use the `render` prop on `<BreadcrumbLink />`.
 
-Use the `render` prop to render a custom link component.
-
-<ComponentPreview name="breadcrumb-link">
-  <BreadcrumbLinkDemo />
-</ComponentPreview>
-
-import BreadcrumbRtl from "@/examples/breadcrumb-rtl";
+<ComponentPreview name="breadcrumb-link" />
 
 ## RTL
 
-To enable right-to-left support, see the [RTL guide](/docs/rtl).
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview name="breadcrumb-rtl" direction="rtl">
-  <BreadcrumbRtl />
-</ComponentPreview>
+<ComponentPreview
+  name="breadcrumb-rtl"
+  direction="rtl"
+  previewClassName="p-2"
+/>
 
 ## API Reference
 
@@ -194,7 +172,7 @@ The `BreadcrumbPage` component displays the current page in the breadcrumb (non-
 
 ### BreadcrumbSeparator
 
-The `BreadcrumbSeparator` component displays a separator between breadcrumb items. Pass custom children to override the default separator icon.
+The `BreadcrumbSeparator` component displays a separator between breadcrumb items. You can pass custom children to override the default separator icon.
 
 | Prop        | Type              | Default |
 | ----------- | ----------------- | ------- |

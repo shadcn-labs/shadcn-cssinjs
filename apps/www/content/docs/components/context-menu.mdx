@@ -1,28 +1,25 @@
 ---
 title: Context Menu
-description: Displays a menu located at the pointer, triggered by a right click.
+description: Displays a menu of actions triggered by a right click.
+component: true
 links:
   doc: https://base-ui.com/react/components/context-menu
   api: https://base-ui.com/react/components/context-menu#api-reference
 ---
 
-import ContextMenuDemo from "@/examples/context-menu-demo";
-import ContextMenuSubmenu from "@/examples/context-menu-submenu";
-import ContextMenuCheckboxes from "@/examples/context-menu-checkboxes";
-
-<ComponentPreview name="context-menu-demo">
-  <ContextMenuDemo />
-</ComponentPreview>
+<ComponentPreview
+  name="context-menu-demo"
+  description="A context menu with sub menu items."
+/>
 
 ## Installation
 
 <Tabs defaultValue="cli">
 
 <TabsList>
-  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="cli">Command</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
-
 <TabsContent value="cli">
 
 ```bash
@@ -60,21 +57,23 @@ pnpm add @base-ui/react @stylexjs/stylex
 
 ## Usage
 
-```tsx
+```tsx showLineNumbers
 import {
   ContextMenu,
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuTrigger,
-} from "@/components/ui/context-menu/context-menu";
+} from "@/components/ui/context-menu";
 ```
 
-```tsx
+```tsx showLineNumbers
 <ContextMenu>
-  <ContextMenuTrigger>Right click</ContextMenuTrigger>
+  <ContextMenuTrigger>Right click here</ContextMenuTrigger>
   <ContextMenuContent>
     <ContextMenuItem>Profile</ContextMenuItem>
     <ContextMenuItem>Billing</ContextMenuItem>
+    <ContextMenuItem>Team</ContextMenuItem>
+    <ContextMenuItem>Subscription</ContextMenuItem>
   </ContextMenuContent>
 </ContextMenu>
 ```
@@ -83,87 +82,107 @@ import {
 
 Use the following composition to build a `ContextMenu`:
 
-```txt
+```text
 ContextMenu
 ├── ContextMenuTrigger
 └── ContextMenuContent
-    ├── ContextMenuLabel
-    ├── ContextMenuItem
-    │   └── ContextMenuShortcut
-    ├── ContextMenuCheckboxItem
-    ├── ContextMenuRadioGroup
-    │   └── ContextMenuRadioItem
+    ├── ContextMenuGroup
+    │   ├── ContextMenuLabel
+    │   ├── ContextMenuItem
+    │   └── ContextMenuItem
     ├── ContextMenuSeparator
+    ├── ContextMenuGroup
+    │   ├── ContextMenuLabel
+    │   ├── ContextMenuCheckboxItem
+    │   └── ContextMenuCheckboxItem
+    ├── ContextMenuSeparator
+    ├── ContextMenuGroup
+    │   ├── ContextMenuLabel
+    │   └── ContextMenuRadioGroup
+    │       ├── ContextMenuRadioItem
+    │       └── ContextMenuRadioItem
     └── ContextMenuSub
         ├── ContextMenuSubTrigger
         └── ContextMenuSubContent
+            └── ContextMenuGroup
+                ├── ContextMenuItem
+                └── ContextMenuItem
 ```
 
-## Examples
+## Basic
 
-import ContextMenuBasic from "@/examples/context-menu-basic";
-import ContextMenuShortcuts from "@/examples/context-menu-shortcuts";
-import ContextMenuGroups from "@/examples/context-menu-groups";
-import ContextMenuIcons from "@/examples/context-menu-icons";
-import ContextMenuDestructive from "@/examples/context-menu-destructive";
+A simple context menu with a few actions.
 
-### Basic
+<ComponentPreview name="context-menu-basic" />
 
-<ComponentPreview name="context-menu-basic">
-  <ContextMenuBasic />
-</ComponentPreview>
+## Submenu
 
-### Submenu
+Use `ContextMenuSub` to nest secondary actions.
 
-Nest a `ContextMenuSub` to create a submenu.
+<ComponentPreview name="context-menu-submenu" />
 
-<ComponentPreview name="context-menu-submenu">
-  <ContextMenuSubmenu />
-</ComponentPreview>
+## Shortcuts
 
-### Shortcuts
+Add `ContextMenuShortcut` to show keyboard hints.
 
-<ComponentPreview name="context-menu-shortcuts">
-  <ContextMenuShortcuts />
-</ComponentPreview>
+<ComponentPreview name="context-menu-shortcuts" />
 
-### Groups
+## Groups
 
-<ComponentPreview name="context-menu-groups">
-  <ContextMenuGroups />
-</ComponentPreview>
+Group related actions and separate them with dividers.
 
-### Icons
+<ComponentPreview name="context-menu-groups" />
 
-<ComponentPreview name="context-menu-icons">
-  <ContextMenuIcons />
-</ComponentPreview>
+## Icons
 
-### Checkboxes & Radio
+Combine icons with labels for quick scanning.
 
-Use `ContextMenuCheckboxItem` and `ContextMenuRadioGroup` for selectable items.
+<ComponentPreview name="context-menu-icons" />
 
-<ComponentPreview name="context-menu-checkboxes">
-  <ContextMenuCheckboxes />
-</ComponentPreview>
+## Checkboxes
 
-### Destructive
+Use `ContextMenuCheckboxItem` for toggles.
 
-<ComponentPreview name="context-menu-destructive">
-  <ContextMenuDestructive />
-</ComponentPreview>
+<ComponentPreview name="context-menu-checkboxes" />
 
-import ContextMenuRtl from "@/examples/context-menu-rtl";
+## Radio
+
+Use `ContextMenuRadioItem` for exclusive choices.
+
+<ComponentPreview name="context-menu-radio" />
+
+## Destructive
+
+Use `variant="destructive"` to style the menu item as destructive.
+
+<ComponentPreview name="context-menu-destructive" />
+
+## Sides
+
+Control submenu placement with side and align props.
+
+<ComponentPreview name="context-menu-sides" />
 
 ## RTL
 
-To enable right-to-left support, see the [RTL guide](/docs/rtl).
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview name="context-menu-rtl" direction="rtl">
-  <ContextMenuRtl />
-</ComponentPreview>
+<ComponentPreview name="context-menu-rtl" direction="rtl" />
+
+Use `side="inline-end"` to place the menu on the logical right side of the trigger.
+
+```tsx showLineNumbers
+<ContextMenu>
+  <ContextMenuTrigger>Right click here</ContextMenuTrigger>
+  <ContextMenuContent side="inline-end">
+    <ContextMenuItem>Profile</ContextMenuItem>
+    <ContextMenuItem>Billing</ContextMenuItem>
+    <ContextMenuItem>Team</ContextMenuItem>
+    <ContextMenuItem>Subscription</ContextMenuItem>
+  </ContextMenuContent>
+</ContextMenu>
+```
 
 ## API Reference
 
-See the [Base UI](https://base-ui.com/react/components/context-menu#api-reference)
-documentation for the full API.
+See the [Base UI](https://base-ui.com/react/components/context-menu#api-reference) documentation for more information.

@@ -1,24 +1,19 @@
 ---
 title: Skeleton
 description: Use to show a placeholder while content is loading.
+component: true
 ---
 
-import SkeletonDemo from "@/examples/skeleton-demo";
-import SkeletonCard from "@/examples/skeleton-card";
-
-<ComponentPreview name="skeleton-demo">
-  <SkeletonDemo />
-</ComponentPreview>
+<ComponentPreview name="skeleton-demo" />
 
 ## Installation
 
 <Tabs defaultValue="cli">
 
 <TabsList>
-  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="cli">Command</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
-
 <TabsContent value="cli">
 
 ```bash
@@ -30,17 +25,6 @@ npx shadcn@latest add https://shadcn-cssinjs.com/r/skeleton.json
 <TabsContent value="manual">
 
 <Steps>
-
-<Step>Install the following dependencies:</Step>
-
-```bash
-pnpm add @stylexjs/stylex
-```
-
-<Step>
-  Make sure [StyleX is configured](/docs/installation) and the design tokens are
-  installed.
-</Step>
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -57,58 +41,35 @@ pnpm add @stylexjs/stylex
 ## Usage
 
 ```tsx
-import { Skeleton } from "@/components/ui/skeleton/skeleton";
+import { Skeleton } from "@/components/ui/skeleton";
 ```
 
 ```tsx
-<Skeleton style={{ width: 200, height: 16 }} />
+<Skeleton className="h-[20px] w-[100px] rounded-full" />
 ```
 
-## Examples
+## Avatar
 
-import SkeletonAvatar from "@/examples/skeleton-avatar";
-import SkeletonText from "@/examples/skeleton-text";
-import SkeletonForm from "@/examples/skeleton-form";
-import SkeletonTable from "@/examples/skeleton-table";
+<ComponentPreview name="skeleton-avatar" />
 
-### Avatar
+## Card
 
-<ComponentPreview name="skeleton-avatar">
-  <SkeletonAvatar />
-</ComponentPreview>
+<ComponentPreview name="skeleton-card" previewClassName="h-80" />
 
-### Card
+## Text
 
-Compose multiple skeletons to outline a loading card.
+<ComponentPreview name="skeleton-text" />
 
-<ComponentPreview name="skeleton-card">
-  <SkeletonCard />
-</ComponentPreview>
+## Form
 
-### Text
+<ComponentPreview name="skeleton-form" />
 
-<ComponentPreview name="skeleton-text">
-  <SkeletonText />
-</ComponentPreview>
+## Table
 
-### Form
-
-<ComponentPreview name="skeleton-form">
-  <SkeletonForm />
-</ComponentPreview>
-
-### Table
-
-<ComponentPreview name="skeleton-table">
-  <SkeletonTable />
-</ComponentPreview>
-
-import SkeletonRtl from "@/examples/skeleton-rtl";
+<ComponentPreview name="skeleton-table" />
 
 ## RTL
 
-To enable right-to-left support, see the [RTL guide](/docs/rtl).
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview name="skeleton-rtl" direction="rtl">
-  <SkeletonRtl />
-</ComponentPreview>
+<ComponentPreview name="skeleton-rtl" direction="rtl" />

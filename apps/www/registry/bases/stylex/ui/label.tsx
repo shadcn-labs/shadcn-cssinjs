@@ -22,7 +22,7 @@ const Label = ({
   style,
   ...props
 }: React.ComponentProps<"label"> & { className?: string }) => (
-  // biome-ignore lint/a11y/noLabelWithoutControl: htmlFor/children supplied by consumer
+  // oxlint-disable-next-line eslint-plugin-jsx-a11y/label-has-associated-control
   <label
     {...stylex.props(
       styles.root,

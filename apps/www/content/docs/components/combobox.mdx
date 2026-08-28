@@ -1,30 +1,25 @@
 ---
 title: Combobox
-description: Autocomplete input and command palette with filtering and selection.
+description: Autocomplete input with a list of suggestions.
+component: true
+links:
+  doc: https://base-ui.com/react/components/combobox
+  api: https://base-ui.com/react/components/combobox#api-reference
 ---
 
-import ComboboxBasic from "@/examples/combobox-demo";
-import ComboboxWithGroupsAndSeparator from "@/examples/combobox-groups";
-import ComboboxDisabled from "@/examples/combobox-disabled";
-import ComboboxWithClear from "@/examples/combobox-clear";
-import ComboboxMultiple from "@/examples/combobox-multiple";
-import ComboboxAutoHighlight from "@/examples/combobox-auto-highlight";
-import ComboboxInvalid from "@/examples/combobox-invalid";
-import ComboboxPopup from "@/examples/combobox-popup";
-
-<ComponentPreview name="combobox-demo">
-  <ComboboxBasic />
-</ComponentPreview>
+<ComponentPreview
+  name="combobox-demo"
+  description="A combobox with a list of frameworks."
+/>
 
 ## Installation
 
 <Tabs defaultValue="cli">
 
 <TabsList>
-  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="cli">Command</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
-
 <TabsContent value="cli">
 
 ```bash
@@ -32,7 +27,6 @@ npx shadcn@latest add https://shadcn-cssinjs.com/r/combobox.json
 ```
 
 </TabsContent>
-
 <TabsContent value="manual">
 
 <Steps>
@@ -62,7 +56,7 @@ pnpm add @base-ui/react @stylexjs/stylex
 
 ## Usage
 
-```tsx
+```tsx showLineNumbers
 import {
   Combobox,
   ComboboxContent,
@@ -70,92 +64,257 @@ import {
   ComboboxInput,
   ComboboxItem,
   ComboboxList,
-} from "@/components/ui/combobox/combobox";
+} from "@/components/ui/combobox";
 ```
 
-```tsx
-<Combobox items={frameworks}>
-  <ComboboxInput placeholder="Select a framework" />
-  <ComboboxContent>
-    <ComboboxEmpty>No items found.</ComboboxEmpty>
-    <ComboboxList>
-      {(item) => (
-        <ComboboxItem key={item} value={item}>
-          {item}
-        </ComboboxItem>
-      )}
-    </ComboboxList>
-  </ComboboxContent>
-</Combobox>
+```tsx showLineNumbers
+const frameworks = ["Next.js", "SvelteKit", "Nuxt.js", "Remix", "Astro"];
+
+export function ExampleCombobox() {
+  return (
+    <Combobox items={frameworks}>
+      <ComboboxInput placeholder="Select a framework" />
+      <ComboboxContent>
+        <ComboboxEmpty>No items found.</ComboboxEmpty>
+        <ComboboxList>
+          {(item) => (
+            <ComboboxItem key={item} value={item}>
+              {item}
+            </ComboboxItem>
+          )}
+        </ComboboxList>
+      </ComboboxContent>
+    </Combobox>
+  );
+}
 ```
 
-## Examples
+## Composition
 
-### Basic
+### Simple
 
-<ComponentPreview name="combobox-demo">
-  <ComboboxBasic />
-</ComponentPreview>
+A single-line input and a flat list (see [Basic](#basic)).
 
-### Groups
+```text
+Combobox
+├── ComboboxInput
+└── ComboboxContent
+    ├── ComboboxEmpty
+    └── ComboboxList
+        ├── ComboboxItem
+        └── ComboboxItem
+```
 
-<ComponentPreview name="combobox-groups">
-  <ComboboxWithGroupsAndSeparator />
-</ComponentPreview>
+### With chips
 
-### Multiple
+Multi-select with `multiple`, chips, and a chips input (see [Multiple](#multiple)).
 
-Use the `multiple` prop with `ComboboxChips` to select several items.
+```text
+Combobox
+├── ComboboxChips
+│   ├── ComboboxValue
+│   │   └── ComboboxChip
+│   └── ComboboxChipsInput
+└── ComboboxContent
+    ├── ComboboxEmpty
+    └── ComboboxList
+        ├── ComboboxItem
+        └── ComboboxItem
+```
 
-<ComponentPreview name="combobox-multiple">
-  <ComboboxMultiple />
-</ComponentPreview>
+### With groups and collection
 
-### Clear Button
+Nested items per group using `ComboboxCollection` inside each `ComboboxGroup`, with a separator between groups (see [Groups](#groups)).
 
-Use `showClear` on `ComboboxInput` to render a clear button.
+```text
+Combobox
+├── ComboboxInput
+└── ComboboxContent
+    ├── ComboboxEmpty
+    └── ComboboxList
+        ├── ComboboxGroup
+        │   ├── ComboboxLabel
+        │   └── ComboboxCollection
+        │       ├── ComboboxItem
+        │       └── ComboboxItem
+        ├── ComboboxSeparator
+        └── ComboboxGroup
+            ├── ComboboxLabel
+            └── ComboboxCollection
+                ├── ComboboxItem
+                └── ComboboxItem
+```
 
-<ComponentPreview name="combobox-clear">
-  <ComboboxWithClear />
-</ComponentPreview>
+## Custom Items
 
-### Auto Highlight
+Use `itemToStringValue` when your items are objects.
 
-Use the `autoHighlight` prop to highlight the first matching item.
+```tsx showLineNumbers
+import * as React from "react";
 
-<ComponentPreview name="combobox-auto-highlight">
-  <ComboboxAutoHighlight />
-</ComponentPreview>
+import {
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList,
+} from "@/components/ui/combobox";
 
-### Invalid
+type Framework = {
+  label: string;
+  value: string;
+};
 
-<ComponentPreview name="combobox-invalid">
-  <ComboboxInvalid />
-</ComponentPreview>
+const frameworks: Framework[] = [
+  { label: "Next.js", value: "next" },
+  { label: "SvelteKit", value: "sveltekit" },
+  { label: "Nuxt", value: "nuxt" },
+];
 
-### Disabled
+export function ExampleComboboxCustomItems() {
+  return (
+    <Combobox
+      items={frameworks}
+      itemToStringValue={(framework) => framework.label}
+    >
+      <ComboboxInput placeholder="Select a framework" />
+      <ComboboxContent>
+        <ComboboxEmpty>No items found.</ComboboxEmpty>
+        <ComboboxList>
+          {(framework) => (
+            <ComboboxItem key={framework.value} value={framework}>
+              {framework.label}
+            </ComboboxItem>
+          )}
+        </ComboboxList>
+      </ComboboxContent>
+    </Combobox>
+  );
+}
+```
 
-<ComponentPreview name="combobox-disabled">
-  <ComboboxDisabled />
-</ComponentPreview>
+## Multiple Selection
 
-### Popup
+Use `multiple` with chips for multi-select behavior.
 
-<ComponentPreview name="combobox-popup">
-  <ComboboxPopup />
-</ComponentPreview>
+```tsx showLineNumbers
+import * as React from "react";
 
-import ComboboxRtl from "@/examples/combobox-rtl";
+import {
+  Combobox,
+  ComboboxChip,
+  ComboboxChips,
+  ComboboxChipsInput,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList,
+  ComboboxValue,
+} from "@/components/ui/combobox";
+
+const frameworks = ["Next.js", "SvelteKit", "Nuxt.js", "Remix", "Astro"];
+
+export function ExampleComboboxMultiple() {
+  const [value, setValue] = React.useState<string[]>([]);
+
+  return (
+    <Combobox
+      items={frameworks}
+      multiple
+      value={value}
+      onValueChange={setValue}
+    >
+      <ComboboxChips>
+        <ComboboxValue>
+          {value.map((item) => (
+            <ComboboxChip key={item}>{item}</ComboboxChip>
+          ))}
+        </ComboboxValue>
+        <ComboboxChipsInput placeholder="Add framework" />
+      </ComboboxChips>
+      <ComboboxContent>
+        <ComboboxEmpty>No items found.</ComboboxEmpty>
+        <ComboboxList>
+          {(item) => (
+            <ComboboxItem key={item} value={item}>
+              {item}
+            </ComboboxItem>
+          )}
+        </ComboboxList>
+      </ComboboxContent>
+    </Combobox>
+  );
+}
+```
+
+## Basic
+
+A simple combobox with a list of frameworks.
+
+<ComponentPreview name="combobox-basic" />
+
+## Multiple
+
+A combobox with multiple selection using `multiple` and `ComboboxChips`.
+
+<ComponentPreview name="combobox-multiple" />
+
+## Clear Button
+
+Use the `showClear` prop to show a clear button.
+
+<ComponentPreview name="combobox-clear" />
+
+## Groups
+
+Use `ComboboxGroup` and `ComboboxSeparator` to group items.
+
+<ComponentPreview name="combobox-groups" />
+
+## Custom Items
+
+You can render a custom component inside `ComboboxItem`.
+
+<ComponentPreview name="combobox-custom" />
+
+## Invalid
+
+Use the `aria-invalid` prop to make the combobox invalid.
+
+<ComponentPreview name="combobox-invalid" />
+
+## Disabled
+
+Use the `disabled` prop to disable the combobox.
+
+<ComponentPreview name="combobox-disabled" />
+
+## Auto Highlight
+
+Use the `autoHighlight` prop to automatically highlight the first item on filter.
+
+<ComponentPreview name="combobox-auto-highlight" />
+
+## Popup
+
+You can trigger the combobox from a button or any other component by using the `render` prop. Move the `ComboboxInput` inside the `ComboboxContent`.
+
+<ComponentPreview name="combobox-popup" />
+
+## Input Group
+
+You can add an addon to the combobox by using the `InputGroupAddon` component inside the `ComboboxInput`.
+
+<ComponentPreview name="combobox-input-group" />
 
 ## RTL
 
-To enable right-to-left support, see the [RTL guide](/docs/rtl).
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview name="combobox-rtl" direction="rtl">
-  <ComboboxRtl />
-</ComponentPreview>
+<ComponentPreview name="combobox-rtl" direction="rtl" align="start" />
 
 ## API Reference
 
-See the [Base UI Combobox](https://base-ui.com/react/components/combobox#api-reference)
-documentation for the full API.
+See the [Base UI](https://base-ui.com/react/components/combobox#api-reference) documentation for more information.

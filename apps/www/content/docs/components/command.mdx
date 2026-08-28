@@ -1,25 +1,29 @@
 ---
 title: Command
-description: Fast, composable, command menu for React.
+description: Command menu for search and quick actions.
+component: true
 links:
-  doc: https://cmdk.paco.me
+  doc: https://github.com/dip/cmdk
 ---
 
-import CommandDemo from "@/examples/command-demo";
+<ComponentPreview
+  name="command-demo"
+  align="start"
+  previewClassName="h-[24.5rem]"
+/>
 
-<ComponentPreview name="command-demo" align="start">
-  <CommandDemo />
-</ComponentPreview>
+## About
+
+The `<Command />` component uses the [`cmdk`](https://github.com/dip/cmdk) component by [Dip](https://www.dip.org/).
 
 ## Installation
 
 <Tabs defaultValue="cli">
 
 <TabsList>
-  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="cli">Command</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
-
 <TabsContent value="cli">
 
 ```bash
@@ -35,13 +39,8 @@ npx shadcn@latest add https://shadcn-cssinjs.com/r/command.json
 <Step>Install the following dependencies:</Step>
 
 ```bash
-pnpm add cmdk @stylexjs/stylex
+npm install cmdk
 ```
-
-<Step>
-  Make sure [StyleX is configured](/docs/installation) and the design tokens are
-  installed.
-</Step>
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -57,9 +56,10 @@ pnpm add cmdk @stylexjs/stylex
 
 ## Usage
 
-```tsx
+```tsx showLineNumbers
 import {
   Command,
+  CommandDialog,
   CommandEmpty,
   CommandGroup,
   CommandInput,
@@ -67,16 +67,24 @@ import {
   CommandList,
   CommandSeparator,
   CommandShortcut,
-} from "@/components/ui/command/command";
+} from "@/components/ui/command";
 ```
 
-```tsx
-<Command>
+```tsx showLineNumbers
+<Command className="max-w-sm rounded-lg border">
   <CommandInput placeholder="Type a command or search..." />
   <CommandList>
     <CommandEmpty>No results found.</CommandEmpty>
     <CommandGroup heading="Suggestions">
       <CommandItem>Calendar</CommandItem>
+      <CommandItem>Search Emoji</CommandItem>
+      <CommandItem>Calculator</CommandItem>
+    </CommandGroup>
+    <CommandSeparator />
+    <CommandGroup heading="Settings">
+      <CommandItem>Profile</CommandItem>
+      <CommandItem>Billing</CommandItem>
+      <CommandItem>Settings</CommandItem>
     </CommandGroup>
   </CommandList>
 </Command>
@@ -86,69 +94,53 @@ import {
 
 Use the following composition to build a `Command`:
 
-```txt
+```text
 Command
 ├── CommandInput
 └── CommandList
     ├── CommandEmpty
     ├── CommandGroup
+    │   ├── CommandItem
     │   └── CommandItem
-    │       └── CommandShortcut
-    └── CommandSeparator
+    ├── CommandSeparator
+    └── CommandGroup
+        ├── CommandItem
+        └── CommandItem
 ```
 
-## Examples
+## Basic
 
-### Groups & Shortcuts
+A simple command menu in a dialog.
 
-Group related items with `CommandGroup` and annotate them with
-`CommandShortcut`.
+<ComponentPreview name="command-basic" />
 
-<ComponentPreview name="command-demo" align="start">
-  <CommandDemo />
-</ComponentPreview>
+## Shortcuts
 
-import CommandBasic from "@/examples/command-basic";
-import CommandShortcuts from "@/examples/command-shortcuts";
-import CommandGroups from "@/examples/command-groups";
-import CommandScrollable from "@/examples/command-scrollable";
+<ComponentPreview name="command-shortcuts" />
 
-### Basic
+## Groups
 
-Use `CommandDialog` to render the command menu in a dialog.
+A command menu with groups, icons and separators.
 
-<ComponentPreview name="command-basic" align="start">
-  <CommandBasic />
-</ComponentPreview>
+<ComponentPreview name="command-groups" />
 
-### Shortcuts
+## Scrollable
 
-<ComponentPreview name="command-shortcuts" align="start">
-  <CommandShortcuts />
-</ComponentPreview>
+Scrollable command menu with multiple items.
 
-### Groups
-
-<ComponentPreview name="command-groups" align="start">
-  <CommandGroups />
-</ComponentPreview>
-
-### Scrollable
-
-<ComponentPreview name="command-scrollable" align="start">
-  <CommandScrollable />
-</ComponentPreview>
-
-import CommandRtl from "@/examples/command-rtl";
+<ComponentPreview name="command-scrollable" />
 
 ## RTL
 
-To enable right-to-left support, see the [RTL guide](/docs/rtl).
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview name="command-rtl" direction="rtl">
-  <CommandRtl />
-</ComponentPreview>
+<ComponentPreview
+  name="command-rtl"
+  direction="rtl"
+  align="start"
+  previewClassName="h-[24.5rem]"
+/>
 
 ## API Reference
 
-See the [cmdk](https://github.com/pacocoursey/cmdk) documentation for more information.
+See the [cmdk](https://github.com/dip/cmdk) documentation for more information.

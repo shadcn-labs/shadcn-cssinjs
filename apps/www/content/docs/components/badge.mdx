@@ -1,25 +1,19 @@
 ---
 title: Badge
 description: Displays a badge or a component that looks like a badge.
+component: true
 ---
 
-import BadgeDemo from "@/examples/badge-demo";
-import BadgeWithIcon from "@/examples/badge-with-icon";
-import BadgeLink from "@/examples/badge-link";
-
-<ComponentPreview name="badge-demo">
-  <BadgeDemo />
-</ComponentPreview>
+<ComponentPreview name="badge-demo" />
 
 ## Installation
 
 <Tabs defaultValue="cli">
 
 <TabsList>
-  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="cli">Command</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
-
 <TabsContent value="cli">
 
 ```bash
@@ -31,17 +25,6 @@ npx shadcn@latest add https://shadcn-cssinjs.com/r/badge.json
 <TabsContent value="manual">
 
 <Steps>
-
-<Step>Install the following dependencies:</Step>
-
-```bash
-pnpm add @stylexjs/stylex
-```
-
-<Step>
-  Make sure [StyleX is configured](/docs/installation) and the design tokens are
-  installed.
-</Step>
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -58,68 +41,48 @@ pnpm add @stylexjs/stylex
 ## Usage
 
 ```tsx
-import { Badge } from "@/components/ui/badge/badge";
+import { Badge } from "@/components/ui/badge";
 ```
 
 ```tsx
-<Badge variant="outline">Badge</Badge>
+<Badge variant="default | outline | secondary | destructive">Badge</Badge>
 ```
 
-## Examples
+## Variants
 
-### Variants
+Use the `variant` prop to change the variant of the badge.
 
-Use the `variant` prop to change the badge style: `default`, `secondary`,
-`destructive`, or `outline`.
+<ComponentPreview name="badge-variants" />
 
-<ComponentPreview name="badge-demo">
-  <BadgeDemo />
-</ComponentPreview>
+## With Icon
 
-### With Icon
+You can render an icon inside the badge. Use `data-icon="inline-start"` to render the icon on the left and `data-icon="inline-end"` to render the icon on the right.
 
-Add an icon before the label.
+<ComponentPreview name="badge-icon" />
 
-<ComponentPreview name="badge-with-icon">
-  <BadgeWithIcon />
-</ComponentPreview>
+## With Spinner
 
-import BadgeWithSpinner from "@/examples/badge-spinner";
-import BadgeCustomColors from "@/examples/badge-colors";
+You can render a spinner inside the badge. Remember to add the `data-icon="inline-start"` or `data-icon="inline-end"` prop to the spinner.
 
-### With Spinner
+<ComponentPreview name="badge-spinner" />
 
-Add a `Spinner` to indicate a loading or in-progress state.
+## Link
 
-<ComponentPreview name="badge-spinner">
-  <BadgeWithSpinner />
-</ComponentPreview>
+Use the `render` prop to render a link as a badge.
 
-### Link
+<ComponentPreview name="badge-link" />
 
-Wrap the badge in an anchor to make it a link.
+## Custom Colors
 
-<ComponentPreview name="badge-link">
-  <BadgeLink />
-</ComponentPreview>
+You can customize the colors of a badge by adding custom classes such as `bg-green-50 dark:bg-green-800` to the `Badge` component.
 
-### Custom Colors
-
-Use utility classes to apply custom colors to the badge.
-
-<ComponentPreview name="badge-colors">
-  <BadgeCustomColors />
-</ComponentPreview>
-
-import BadgeRtl from "@/examples/badge-rtl";
+<ComponentPreview name="badge-colors" />
 
 ## RTL
 
-To enable right-to-left support, see the [RTL guide](/docs/rtl).
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview name="badge-rtl" direction="rtl">
-  <BadgeRtl />
-</ComponentPreview>
+<ComponentPreview name="badge-rtl" direction="rtl" />
 
 ## API Reference
 
@@ -127,7 +90,7 @@ To enable right-to-left support, see the [RTL guide](/docs/rtl).
 
 The `Badge` component displays a badge or a component that looks like a badge.
 
-| Prop        | Type                                                     | Default     |
-| ----------- | -------------------------------------------------------- | ----------- |
-| `variant`   | `"default" \| "secondary" \| "destructive" \| "outline"` | `"default"` |
-| `className` | `string`                                                 | -           |
+| Prop        | Type                                                                          | Default     |
+| ----------- | ----------------------------------------------------------------------------- | ----------- |
+| `variant`   | `"default" \| "secondary" \| "destructive" \| "outline" \| "ghost" \| "link"` | `"default"` |
+| `className` | `string`                                                                      | -           |

@@ -1,23 +1,19 @@
 ---
 title: Spinner
 description: An indicator that can be used to show a loading state.
+component: true
 ---
 
-import SpinnerDemo from "@/examples/spinner-demo";
-
-<ComponentPreview name="spinner-demo">
-  <SpinnerDemo />
-</ComponentPreview>
+<ComponentPreview name="spinner-demo" />
 
 ## Installation
 
 <Tabs defaultValue="cli">
 
 <TabsList>
-  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="cli">Command</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
-
 <TabsContent value="cli">
 
 ```bash
@@ -29,17 +25,6 @@ npx shadcn@latest add https://shadcn-cssinjs.com/r/spinner.json
 <TabsContent value="manual">
 
 <Steps>
-
-<Step>Install the following dependencies:</Step>
-
-```bash
-pnpm add lucide-react @stylexjs/stylex
-```
-
-<Step>
-  Make sure [StyleX is configured](/docs/installation) and the design tokens are
-  installed.
-</Step>
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -56,58 +41,66 @@ pnpm add lucide-react @stylexjs/stylex
 ## Usage
 
 ```tsx
-import { Spinner } from "@/components/ui/spinner/spinner";
+import { Spinner } from "@/components/ui/spinner";
 ```
 
 ```tsx
 <Spinner />
 ```
 
-## Examples
+## Customization
 
-import SpinnerSize from "@/examples/spinner-size";
-import SpinnerButton from "@/examples/spinner-button";
-import SpinnerBadge from "@/examples/spinner-badge";
-import SpinnerEmpty from "@/examples/spinner-empty";
+You can replace the default spinner icon with any other icon by editing the `Spinner` component.
 
-### Size
+<ComponentPreview name="spinner-custom" />
 
-<ComponentPreview name="spinner-size">
-  <SpinnerSize />
-</ComponentPreview>
+```tsx showLineNumbers title="components/ui/spinner.tsx"
+import { LoaderIcon } from "lucide-react";
 
-### Button
+import { cn } from "@/lib/utils";
 
-<ComponentPreview name="spinner-button">
-  <SpinnerButton />
-</ComponentPreview>
+function Spinner({ className, ...props }: React.ComponentProps<"svg">) {
+  return (
+    <LoaderIcon
+      role="status"
+      aria-label="Loading"
+      className={cn("size-4 animate-spin", className)}
+      {...props}
+    />
+  );
+}
 
-### Badge
+export { Spinner };
+```
 
-<ComponentPreview name="spinner-badge">
-  <SpinnerBadge />
-</ComponentPreview>
+## Size
 
-### Empty
+Use the `size-*` utility class to change the size of the spinner.
 
-<ComponentPreview name="spinner-empty">
-  <SpinnerEmpty />
-</ComponentPreview>
+<ComponentPreview name="spinner-size" />
 
-import SpinnerInputGroup from "@/examples/spinner-input-group";
+## Button
 
-### Input Group
+Add a spinner to a button to indicate a loading state. Place the `<Spinner />` before the label with `data-icon="inline-start"` for a start position, or after the label with `data-icon="inline-end"` for an end position.
 
-<ComponentPreview name="spinner-input-group">
-  <SpinnerInputGroup />
-</ComponentPreview>
+<ComponentPreview name="spinner-button" />
 
-import SpinnerRtl from "@/examples/spinner-rtl";
+## Badge
+
+Add a spinner to a badge to indicate a loading state. Place the `<Spinner />` before the label with `data-icon="inline-start"` for a start position, or after the label with `data-icon="inline-end"` for an end position.
+
+<ComponentPreview name="spinner-badge" />
+
+## Input Group
+
+<ComponentPreview name="spinner-input-group" />
+
+## Empty
+
+<ComponentPreview name="spinner-empty" />
 
 ## RTL
 
-To enable right-to-left support, see the [RTL guide](/docs/rtl).
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview name="spinner-rtl" direction="rtl">
-  <SpinnerRtl />
-</ComponentPreview>
+<ComponentPreview name="spinner-rtl" direction="rtl" />

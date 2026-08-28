@@ -49,3 +49,4 @@ next-env.d.ts
 # package builds
 **/dist
 **/.turbo
+**/styled-system

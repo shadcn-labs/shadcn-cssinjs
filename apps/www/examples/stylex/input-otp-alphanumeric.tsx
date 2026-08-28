@@ -1,0 +1,26 @@
+"use client";
+
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSeparator,
+  InputOTPSlot,
+} from "@/registry/bases/stylex/ui/input-otp";
+
+export default function InputOTPAlphanumeric() {
+  return (
+    <InputOTP length={6} validationType="alphanumeric">
+      <InputOTPGroup>
+        <InputOTPSlot />
+        <InputOTPSlot />
+        <InputOTPSlot />
+      </InputOTPGroup>
+      <InputOTPSeparator />
+      <InputOTPGroup>
+        <InputOTPSlot />
+        <InputOTPSlot />
+        <InputOTPSlot />
+      </InputOTPGroup>
+    </InputOTP>
+  );
+}

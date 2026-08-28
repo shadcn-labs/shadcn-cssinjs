@@ -1,25 +1,19 @@
 ---
 title: Aspect Ratio
 description: Displays content within a desired ratio.
+component: true
 ---
 
-import AspectRatioDemo from "@/examples/aspect-ratio-demo";
-import AspectRatioSquare from "@/examples/aspect-ratio-square";
-import AspectRatioPortrait from "@/examples/aspect-ratio-portrait";
-
-<ComponentPreview name="aspect-ratio-demo">
-  <AspectRatioDemo />
-</ComponentPreview>
+<ComponentPreview name="aspect-ratio-demo" />
 
 ## Installation
 
 <Tabs defaultValue="cli">
 
 <TabsList>
-  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="cli">Command</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
-
 <TabsContent value="cli">
 
 ```bash
@@ -35,7 +29,7 @@ npx shadcn@latest add https://shadcn-cssinjs.com/r/aspect-ratio.json
 <Step>Install the following dependencies:</Step>
 
 ```bash
-pnpm add @stylexjs/stylex
+pnpm add @base-ui/react @stylexjs/stylex
 ```
 
 <Step>
@@ -57,43 +51,37 @@ pnpm add @stylexjs/stylex
 
 ## Usage
 
-```tsx
-import { AspectRatio } from "@/components/ui/aspect-ratio/aspect-ratio";
+```tsx showLineNumbers
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 ```
 
-```tsx
+```tsx showLineNumbers
 <AspectRatio ratio={16 / 9}>
-  <img src="..." alt="Image" />
+  <Image src="..." alt="Image" className="rounded-md object-cover" />
 </AspectRatio>
 ```
 
-## Examples
+## Square
 
-### Square
+A square aspect ratio component using the `ratio={1 / 1}` prop. This is useful for displaying images in a square format.
 
-Use `ratio={1}` for a square.
+<ComponentPreview name="aspect-ratio-square" />
 
-<ComponentPreview name="aspect-ratio-square">
-  <AspectRatioSquare />
-</ComponentPreview>
+## Portrait
 
-### Portrait
+A portrait aspect ratio component using the `ratio={9 / 16}` prop. This is useful for displaying images in a portrait format.
 
-Use a ratio below `1` for a portrait orientation.
-
-<ComponentPreview name="aspect-ratio-portrait">
-  <AspectRatioPortrait />
-</ComponentPreview>
-
-import AspectRatioRtl from "@/examples/aspect-ratio-rtl";
+<ComponentPreview name="aspect-ratio-portrait" previewClassName="h-96" />
 
 ## RTL
 
-To enable right-to-left support, see the [RTL guide](/docs/rtl).
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview name="aspect-ratio-rtl" direction="rtl">
-  <AspectRatioRtl />
-</ComponentPreview>
+<ComponentPreview
+  name="aspect-ratio-rtl"
+  direction="rtl"
+  previewClassName="h-96"
+/>
 
 ## API Reference
 
@@ -103,5 +91,7 @@ The `AspectRatio` component displays content within a desired ratio.
 
 | Prop        | Type     | Default | Required |
 | ----------- | -------- | ------- | -------- |
-| `ratio`     | `number` | `1`     | No       |
+| `ratio`     | `number` | -       | Yes      |
 | `className` | `string` | -       | No       |
+
+For more information, see the [Base UI documentation](https://base-ui.com/react/components/aspect-ratio#api-reference).

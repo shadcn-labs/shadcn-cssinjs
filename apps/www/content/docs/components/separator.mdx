@@ -1,27 +1,22 @@
 ---
 title: Separator
 description: Visually or semantically separates content.
+component: true
 links:
   doc: https://base-ui.com/react/components/separator
   api: https://base-ui.com/react/components/separator#api-reference
 ---
 
-import SeparatorDemo from "@/examples/separator-demo";
-import SeparatorVertical from "@/examples/separator-vertical";
-
-<ComponentPreview name="separator-demo">
-  <SeparatorDemo />
-</ComponentPreview>
+<ComponentPreview name="separator-demo" />
 
 ## Installation
 
 <Tabs defaultValue="cli">
 
 <TabsList>
-  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="cli">Command</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
-
 <TabsContent value="cli">
 
 ```bash
@@ -59,55 +54,38 @@ pnpm add @base-ui/react @stylexjs/stylex
 
 ## Usage
 
-```tsx
-import { Separator } from "@/components/ui/separator/separator";
+```tsx showLineNumbers
+import { Separator } from "@/components/ui/separator";
 ```
 
-```tsx
+```tsx showLineNumbers
 <Separator />
-<Separator orientation="vertical" />
 ```
 
-## Examples
+## Vertical
 
-### Vertical
+Use `orientation="vertical"` for a vertical separator.
 
-Use `orientation="vertical"` inside a flex row.
+<ComponentPreview name="separator-vertical" />
 
-<ComponentPreview name="separator-vertical">
-  <SeparatorVertical />
-</ComponentPreview>
+## Menu
 
-import SeparatorMenu from "@/examples/separator-menu";
-import SeparatorList from "@/examples/separator-list";
+Vertical separators between menu items with descriptions.
 
-### Menu
+<ComponentPreview name="separator-menu" />
 
-Use vertical separators to divide inline menu items.
+## List
 
-<ComponentPreview name="separator-menu">
-  <SeparatorMenu />
-</ComponentPreview>
+Horizontal separators between list items.
 
-### List
-
-Use horizontal separators to divide stacked list items.
-
-<ComponentPreview name="separator-list">
-  <SeparatorList />
-</ComponentPreview>
-
-import SeparatorRtl from "@/examples/separator-rtl";
+<ComponentPreview name="separator-list" />
 
 ## RTL
 
-To enable right-to-left support, see the [RTL guide](/docs/rtl).
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview name="separator-rtl" direction="rtl">
-  <SeparatorRtl />
-</ComponentPreview>
+<ComponentPreview name="separator-rtl" direction="rtl" />
 
 ## API Reference
 
-See the [Base UI](https://base-ui.com/react/components/separator#api-reference)
-documentation for the full API.
+See the [Base UI Separator](https://base-ui.com/react/components/separator#api-reference) documentation.

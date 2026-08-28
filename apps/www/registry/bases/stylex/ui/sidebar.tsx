@@ -807,6 +807,7 @@ const SidebarMenuSubButton = ({
   size?: "sm" | "md";
   isActive?: boolean;
 }) => (
+  // oxlint-disable-next-line eslint-plugin-jsx-a11y/anchor-has-content: content is passed by the consumer via children
   <a
     data-active={isActive}
     data-sidebar="menu-sub-button"

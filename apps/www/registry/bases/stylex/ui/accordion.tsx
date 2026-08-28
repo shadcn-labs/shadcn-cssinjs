@@ -3,77 +3,64 @@
 import { Accordion as AccordionPrimitive } from "@base-ui/react/accordion";
 import * as stylex from "@stylexjs/stylex";
 import type { StyleXStyles } from "@stylexjs/stylex";
-import { ChevronDownIcon, ChevronUpIcon } from "lucide-react";
+import { ChevronDownIcon } from "lucide-react";
 
 import { colors, radius } from "@/registry/bases/stylex/lib/tokens.stylex";
 import { customClassName } from "@/registry/bases/stylex/lib/utils.stylex";
 
 const styles = stylex.create({
-  chevronDown: {
+  chevron: {
     color: colors.mutedForeground,
     flexShrink: 0,
     height: "1rem",
     pointerEvents: "none",
+    transform: "translateY(0.125rem)",
     transition: "transform 0.2s ease-in-out",
     width: "1rem",
   },
-  chevronDownOpen: {
-    display: "none",
+  chevronOpen: {
+    transform: "translateY(0.125rem) rotate(180deg)",
   },
-  chevronUp: {
-    color: colors.mutedForeground,
-    display: "none",
-    flexShrink: 0,
-    height: "1rem",
-    pointerEvents: "none",
-    transition: "transform 0.2s ease-in-out",
-    width: "1rem",
-  },
-  chevronUpOpen: {
-    display: "block",
+  content: {
+    paddingBottom: "1rem",
+    paddingTop: 0,
   },
   header: {
     display: "flex",
     margin: 0,
   },
   item: {
-    ":last-child": {
-      borderBottomColor: "transparent",
-    },
     borderBottomColor: colors.border,
     borderBottomStyle: "solid",
-    borderBottomWidth: "1px",
+    borderBottomWidth: { ":last-child": 0, default: "1px" },
   },
   panel: {
     fontSize: "0.875rem",
+    lineHeight: "1.25rem",
     overflow: "hidden",
-    paddingBottom: "0.625rem",
-    paddingTop: 0,
+    transition: "height 0.2s ease-in-out",
   },
   trigger: {
-    ":focus-visible": {
-      borderColor: colors.ring,
-      boxShadow: `0 0 0 3px color-mix(in oklab, ${colors.ring} 50%, transparent)`,
-    },
     alignItems: "flex-start",
-    background: "none",
+    backgroundColor: "transparent",
     borderRadius: radius.md,
-    borderWidth: "1px",
-    color: colors.foreground,
-    cursor: {
-      ":disabled": "not-allowed",
-      default: "pointer",
+    boxShadow: {
+      ":focus-visible": `0 0 0 3px color-mix(in oklab, ${colors.ring} 50%, transparent)`,
+      default: null,
     },
+    color: colors.foreground,
+    cursor: { ":disabled": "not-allowed", default: "pointer" },
     display: "flex",
     flex: 1,
     fontSize: "0.875rem",
     fontWeight: 500,
     gap: "1rem",
     justifyContent: "space-between",
+    lineHeight: "1.25rem",
     opacity: { ":disabled": 0.5, default: 1 },
     outline: "none",
-    paddingBottom: "0.625rem",
-    paddingTop: "0.625rem",
+    paddingBottom: "1rem",
+    paddingTop: "1rem",
     pointerEvents: { ":disabled": "none", default: null },
     textAlign: "start",
     textDecorationLine: { ":hover": "underline", default: "none" },
@@ -131,14 +118,8 @@ const AccordionTrigger = ({
             {children}
             <ChevronDownIcon
               {...stylex.props(
-                styles.chevronDown,
-                state.open && styles.chevronDownOpen
-              )}
-            />
-            <ChevronUpIcon
-              {...stylex.props(
-                styles.chevronUp,
-                state.open && styles.chevronUpOpen
+                styles.chevron,
+                state.open && styles.chevronOpen
               )}
             />
           </button>
@@ -159,14 +140,18 @@ const AccordionContent = ({
 }) => (
   <AccordionPrimitive.Panel
     data-slot="accordion-content"
-    {...stylex.props(
-      styles.panel,
-      customClassName(className),
-      style as StyleXStyles
-    )}
+    {...stylex.props(styles.panel)}
     {...props}
   >
-    {children}
+    <div
+      {...stylex.props(
+        styles.content,
+        customClassName(className),
+        style as StyleXStyles
+      )}
+    >
+      {children}
+    </div>
   </AccordionPrimitive.Panel>
 );
 

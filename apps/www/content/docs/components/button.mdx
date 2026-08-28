@@ -1,29 +1,19 @@
 ---
 title: Button
 description: Displays a button or a component that looks like a button.
+component: true
 ---
 
-import ButtonDemo from "@/examples/button-demo";
-import ButtonVariants from "@/examples/button-variants";
-import ButtonSizes from "@/examples/button-sizes";
-import ButtonIcon from "@/examples/button-icon";
-import ButtonWithIcon from "@/examples/button-with-icon";
-import ButtonLink from "@/examples/button-link";
-import ButtonDisabled from "@/examples/button-disabled";
-
-<ComponentPreview name="button-demo">
-  <ButtonDemo />
-</ComponentPreview>
+<ComponentPreview name="button-demo" />
 
 ## Installation
 
 <Tabs defaultValue="cli">
 
 <TabsList>
-  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="cli">Command</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
-
 <TabsContent value="cli">
 
 ```bash
@@ -62,134 +52,84 @@ pnpm add @base-ui/react @stylexjs/stylex
 ## Usage
 
 ```tsx
-import { Button } from "@/components/ui/button/button";
+import { Button } from "@/components/ui/button";
 ```
 
 ```tsx
 <Button variant="outline">Button</Button>
 ```
 
-## Examples
+## Size
 
-### Variants
+Use the `size` prop to change the size of the button.
 
-Use the `variant` prop to change the button style.
+<ComponentPreview name="button-size" />
 
-<ComponentPreview name="button-variants">
-  <ButtonVariants />
-</ComponentPreview>
+## Default
 
-### Size
+<ComponentPreview name="button-default" />
 
-Use the `size` prop to change the button size.
+## Outline
 
-<ComponentPreview name="button-sizes">
-  <ButtonSizes />
-</ComponentPreview>
+<ComponentPreview name="button-outline" />
 
-### Link
+## Secondary
 
-<ComponentPreview name="button-link">
-  <ButtonLink />
-</ComponentPreview>
+<ComponentPreview name="button-secondary" />
 
-### Icon
+## Ghost
 
-Use `size="icon"` for a square, icon-only button.
+<ComponentPreview name="button-ghost" />
 
-<ComponentPreview name="button-icon">
-  <ButtonIcon />
-</ComponentPreview>
+## Destructive
 
-### With Icon
+<ComponentPreview name="button-destructive" />
 
-Place an icon before or after the label.
+## Link
 
-<ComponentPreview name="button-with-icon">
-  <ButtonWithIcon />
-</ComponentPreview>
+<ComponentPreview name="button-link" />
 
-### Disabled
+## Icon
 
-<ComponentPreview name="button-disabled">
-  <ButtonDisabled />
-</ComponentPreview>
+<ComponentPreview name="button-icon" />
 
-import ButtonDefault from "@/examples/button-default";
-import ButtonOutline from "@/examples/button-outline";
-import ButtonSecondary from "@/examples/button-secondary";
-import ButtonGhost from "@/examples/button-ghost";
-import ButtonDestructive from "@/examples/button-destructive";
-import ButtonRounded from "@/examples/button-rounded";
-import ButtonSpinner from "@/examples/button-spinner";
-import ButtonGroupExample from "@/examples/button-group-example";
-import ButtonAsLink from "@/examples/button-as-link";
+## With Icon
 
-### Default
+Remember to add the `data-icon="inline-start"` or `data-icon="inline-end"` attribute to the icon for the correct spacing.
 
-<ComponentPreview name="button-default">
-  <ButtonDefault />
-</ComponentPreview>
+<ComponentPreview name="button-with-icon" />
 
-### Outline
+## Rounded
 
-<ComponentPreview name="button-outline">
-  <ButtonOutline />
-</ComponentPreview>
+Use the `className` prop to make the button rounded.
 
-### Secondary
+<ComponentPreview name="button-rounded" />
 
-<ComponentPreview name="button-secondary">
-  <ButtonSecondary />
-</ComponentPreview>
+## Spinner
 
-### Ghost
+Render a `<Spinner />` component inside the button to show a loading state. Remember to add the `data-icon="inline-start"` or `data-icon="inline-end"` attribute to the spinner for the correct spacing.
 
-<ComponentPreview name="button-ghost">
-  <ButtonGhost />
-</ComponentPreview>
+<ComponentPreview name="button-spinner" />
 
-### Destructive
+## Button Group
 
-<ComponentPreview name="button-destructive">
-  <ButtonDestructive />
-</ComponentPreview>
+To create a button group, use the `ButtonGroup` component. See the [Button Group](/docs/components/base/button-group) documentation for more details.
 
-### Rounded
+<ComponentPreview name="button-group-demo" />
 
-<ComponentPreview name="button-rounded">
-  <ButtonRounded />
-</ComponentPreview>
+## As Link
 
-### Spinner
+You can use the `buttonVariants` helper to make a link look like a button.
 
-<ComponentPreview name="button-spinner">
-  <ButtonSpinner />
-</ComponentPreview>
+**Do not use `<Button render={<a />} nativeButton={false} />` for links.** The Base UI `Button` component always applies `role="button"`, which overrides the semantic link role on `<a>` elements. Use `buttonVariants` with a plain `<a>` tag instead.
 
-### Button Group
-
-<ComponentPreview name="button-group-example">
-  <ButtonGroupExample />
-</ComponentPreview>
-
-### As Link
-
-Use the `render` prop to render the button as a link.
-
-<ComponentPreview name="button-as-link">
-  <ButtonAsLink />
-</ComponentPreview>
-
-import ButtonRtl from "@/examples/button-rtl";
+<ComponentPreview name="button-render" />
 
 ## RTL
 
-To enable right-to-left support, see the [RTL guide](/docs/rtl).
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview name="button-rtl" direction="rtl">
-  <ButtonRtl />
-</ComponentPreview>
+<ComponentPreview name="button-rtl" direction="rtl" />
 
 ## API Reference
 
@@ -197,10 +137,7 @@ To enable right-to-left support, see the [RTL guide](/docs/rtl).
 
 The `Button` component is a wrapper around the `button` element that adds a variety of styles and functionality.
 
-| Prop      | Type                                                                          | Default     |
-| --------- | ----------------------------------------------------------------------------- | ----------- |
-| `variant` | `"default" \| "destructive" \| "outline" \| "secondary" \| "ghost" \| "link"` | `"default"` |
-| `size`    | `"default" \| "sm" \| "lg" \| "icon" \| "icon-sm" \| "icon-lg"`               | `"default"` |
-| `render`  | `React.ReactElement`                                                          | -           |
-
-Use the `render` prop to render the button as a different element (the Base UI equivalent of `asChild`).
+| Prop      | Type                                                                                 | Default     |
+| --------- | ------------------------------------------------------------------------------------ | ----------- |
+| `variant` | `"default" \| "outline" \| "ghost" \| "destructive" \| "secondary" \| "link"`        | `"default"` |
+| `size`    | `"default" \| "xs" \| "sm" \| "lg" \| "icon" \| "icon-xs" \| "icon-sm" \| "icon-lg"` | `"default"` |

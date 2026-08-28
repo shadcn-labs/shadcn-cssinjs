@@ -98,7 +98,7 @@ const BreadcrumbLink = ({
       "data-slot": "breadcrumb-link",
       ...props,
     },
-    // oxlint-disable-next-line anchor-has-content
+    // oxlint-disable-next-line eslint-plugin-jsx-a11y/anchor-is-valid: href is supplied by the consuming application, eslint-plugin-jsx-a11y/anchor-has-content: content is supplied by the consuming application
     render: render ?? <a />,
   });
 
@@ -115,6 +115,7 @@ const BreadcrumbPage = ({
       style as StyleXStyles
     )}
     data-slot="breadcrumb-page"
+    // oxlint-disable-next-line eslint-plugin-jsx-a11y/prefer-tag-over-role: element type is controlled by Base UI's render prop
     role="link"
     {...props}
   />

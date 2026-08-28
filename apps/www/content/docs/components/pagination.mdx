@@ -1,23 +1,19 @@
 ---
 title: Pagination
 description: Pagination with page navigation, next and previous links.
+component: true
 ---
 
-import PaginationDemo from "@/examples/pagination-demo";
-
-<ComponentPreview name="pagination-demo">
-  <PaginationDemo />
-</ComponentPreview>
+<ComponentPreview name="pagination-demo" />
 
 ## Installation
 
 <Tabs defaultValue="cli">
 
 <TabsList>
-  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="cli">Command</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
-
 <TabsContent value="cli">
 
 ```bash
@@ -29,17 +25,6 @@ npx shadcn@latest add https://shadcn-cssinjs.com/r/pagination.json
 <TabsContent value="manual">
 
 <Steps>
-
-<Step>Install the following dependencies:</Step>
-
-```bash
-pnpm add @stylexjs/stylex
-```
-
-<Step>
-  Make sure [StyleX is configured](/docs/installation) and the design tokens are
-  installed.
-</Step>
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -55,18 +40,19 @@ pnpm add @stylexjs/stylex
 
 ## Usage
 
-```tsx
+```tsx showLineNumbers
 import {
   Pagination,
   PaginationContent,
+  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/components/ui/pagination/pagination";
+} from "@/components/ui/pagination";
 ```
 
-```tsx
+```tsx showLineNumbers
 <Pagination>
   <PaginationContent>
     <PaginationItem>
@@ -74,6 +60,17 @@ import {
     </PaginationItem>
     <PaginationItem>
       <PaginationLink href="#">1</PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink href="#" isActive>
+        2
+      </PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink href="#">3</PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationEllipsis />
     </PaginationItem>
     <PaginationItem>
       <PaginationNext href="#" />
@@ -86,39 +83,63 @@ import {
 
 Use the following composition to build a `Pagination`:
 
-```txt
+```text
 Pagination
 └── PaginationContent
+    ├── PaginationItem
+    │   └── PaginationPrevious
+    ├── PaginationItem
+    │   └── PaginationLink
+    ├── PaginationItem
+    │   └── PaginationEllipsis
     └── PaginationItem
-        ├── PaginationPrevious
-        ├── PaginationLink
-        ├── PaginationEllipsis
         └── PaginationNext
 ```
 
-## Examples
+## Simple
 
-import PaginationSimple from "@/examples/pagination-simple";
-import PaginationIcons from "@/examples/pagination-icons";
+A simple pagination with only page numbers.
 
-### Simple
+<ComponentPreview name="pagination-simple" />
 
-<ComponentPreview name="pagination-simple">
-  <PaginationSimple />
-</ComponentPreview>
+## Icons Only
 
-### Icons Only
+Use just the previous and next buttons without page numbers. This is useful for data tables with a rows per page selector.
 
-<ComponentPreview name="pagination-icons">
-  <PaginationIcons />
-</ComponentPreview>
+<ComponentPreview name="pagination-icons-only" />
 
-import PaginationRtl from "@/examples/pagination-rtl";
+## Next.js
+
+By default the `<PaginationLink />` component will render an `<a />` tag.
+
+To use the Next.js `<Link />` component, make the following updates to `pagination.tsx`.
+
+```diff showLineNumbers /typeof Link/ {1}
++ import Link from "next/link"
+
+- type PaginationLinkProps = ... & React.ComponentProps<"a">
++ type PaginationLinkProps = ... & React.ComponentProps<typeof Link>
+
+const PaginationLink = ({...props }: ) => (
+  <PaginationItem>
+-   <a>
++   <Link>
+      // ...
+-   </a>
++   </Link>
+  </PaginationItem>
+)
+
+```
+
+<Callout className="mt-6">
+
+**Note:** We are making updates to the cli to automatically do this for you.
+
+</Callout>
 
 ## RTL
 
-To enable right-to-left support, see the [RTL guide](/docs/rtl).
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview name="pagination-rtl" direction="rtl">
-  <PaginationRtl />
-</ComponentPreview>
+<ComponentPreview name="pagination-rtl" direction="rtl" />

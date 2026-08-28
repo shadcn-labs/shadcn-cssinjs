@@ -1,24 +1,19 @@
 ---
 title: Kbd
 description: Used to display textual user input from keyboard.
+component: true
 ---
 
-import KbdDemo from "@/examples/kbd-demo";
-import KbdGroupExample from "@/examples/kbd-group";
-
-<ComponentPreview name="kbd-demo">
-  <KbdDemo />
-</ComponentPreview>
+<ComponentPreview name="kbd-demo" />
 
 ## Installation
 
 <Tabs defaultValue="cli">
 
 <TabsList>
-  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="cli">Command</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
-
 <TabsContent value="cli">
 
 ```bash
@@ -30,17 +25,6 @@ npx shadcn@latest add https://shadcn-cssinjs.com/r/kbd.json
 <TabsContent value="manual">
 
 <Steps>
-
-<Step>Install the following dependencies:</Step>
-
-```bash
-pnpm add @stylexjs/stylex
-```
-
-<Step>
-  Make sure [StyleX is configured](/docs/installation) and the design tokens are
-  installed.
-</Step>
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -57,74 +41,53 @@ pnpm add @stylexjs/stylex
 ## Usage
 
 ```tsx
-import { Kbd, KbdGroup } from "@/components/ui/kbd/kbd";
+import { Kbd } from "@/components/ui/kbd";
 ```
 
 ```tsx
-<KbdGroup>
-  <Kbd>⌘</Kbd>
-  <Kbd>K</Kbd>
-</KbdGroup>
+<Kbd>Ctrl</Kbd>
 ```
 
 ## Composition
 
-Use the following composition to build a `Kbd`:
+Use the following composition to build `Kbd` and `KbdGroup`:
 
-```txt
+```text
+Kbd
 KbdGroup
 ├── Kbd
 └── Kbd
 ```
 
-## Examples
+## Group
 
-### Group
+Use the `KbdGroup` component to group keyboard keys together.
 
-Use `KbdGroup` to display a key combination inline with text.
+<ComponentPreview name="kbd-group" />
 
-<ComponentPreview name="kbd-group">
-  <KbdGroupExample />
-</ComponentPreview>
+## Button
 
-import KbdButton from "@/examples/kbd-button";
-import KbdTooltip from "@/examples/kbd-tooltip";
+Use the `Kbd` component inside a `Button` component to display a keyboard key inside a button.
 
-### Button
+<ComponentPreview name="kbd-button" />
 
-Use `Kbd` inside a `Button` to show a shortcut.
+## Tooltip
 
-<ComponentPreview name="kbd-button">
-  <KbdButton />
-</ComponentPreview>
+You can use the `Kbd` component inside a `Tooltip` component to display a tooltip with a keyboard key.
 
-### Tooltip
+<ComponentPreview name="kbd-tooltip" />
 
-Show keyboard shortcuts inside a `Tooltip`.
+## Input Group
 
-<ComponentPreview name="kbd-tooltip">
-  <KbdTooltip />
-</ComponentPreview>
+You can use the `Kbd` component inside a `InputGroupAddon` component to display a keyboard key inside an input group.
 
-import KbdInputGroup from "@/examples/kbd-input-group";
-
-### Input Group
-
-Use `Kbd` inside an `InputGroup` addon.
-
-<ComponentPreview name="kbd-input-group">
-  <KbdInputGroup />
-</ComponentPreview>
-
-import KbdRtl from "@/examples/kbd-rtl";
+<ComponentPreview name="kbd-input-group" />
 
 ## RTL
 
-To enable right-to-left support, see the [RTL guide](/docs/rtl).
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview name="kbd-rtl" direction="rtl">
-  <KbdRtl />
-</ComponentPreview>
+<ComponentPreview name="kbd-rtl" direction="rtl" />
 
 ## API Reference
 
@@ -134,7 +97,11 @@ Use the `Kbd` component to display a keyboard key.
 
 | Prop        | Type     | Default |
 | ----------- | -------- | ------- |
-| `className` | `string` | -       |
+| `className` | `string` | ``      |
+
+```tsx
+<Kbd>Ctrl</Kbd>
+```
 
 ### KbdGroup
 
@@ -142,4 +109,11 @@ Use the `KbdGroup` component to group `Kbd` components together.
 
 | Prop        | Type     | Default |
 | ----------- | -------- | ------- |
-| `className` | `string` | -       |
+| `className` | `string` | ``      |
+
+```tsx
+<KbdGroup>
+  <Kbd>Ctrl</Kbd>
+  <Kbd>B</Kbd>
+</KbdGroup>
+```

@@ -10,16 +10,14 @@ import { customClassName } from "@/registry/bases/stylex/lib/utils.stylex";
 
 const styles = stylex.create({
   group: {
-    backgroundColor: colors.border,
-    borderRadius: radius.md,
-    display: "inline-flex",
-    gap: "1px",
-    overflow: "hidden",
+    alignItems: "center",
+    display: "flex",
   },
   root: {
     alignItems: "center",
     display: "flex",
     gap: "0.5rem",
+    opacity: { "[data-disabled]": 0.5, default: 1 },
   },
   separator: {
     alignItems: "center",
@@ -27,19 +25,44 @@ const styles = stylex.create({
     display: "flex",
   },
   slot: {
-    backgroundColor: colors.background,
-    borderWidth: 0,
+    backgroundColor: "transparent",
+    borderBottomLeftRadius: { ":first-child": radius.md, default: 0 },
+    borderBottomRightRadius: { ":last-child": radius.md, default: 0 },
+    borderBottomStyle: "solid",
+    borderBottomWidth: "1px",
+    borderColor: {
+      ":focus": {
+        '[aria-invalid="true"]': colors.destructive,
+        default: colors.ring,
+      },
+      '[aria-invalid="true"]': colors.destructive,
+      default: colors.input,
+    },
+    borderLeftStyle: "solid",
+    borderLeftWidth: { ":first-child": "1px", default: 0 },
+    borderRightStyle: "solid",
+    borderRightWidth: "1px",
+    borderTopLeftRadius: { ":first-child": radius.md, default: 0 },
+    borderTopRightRadius: { ":last-child": radius.md, default: 0 },
+    borderTopStyle: "solid",
+    borderTopWidth: "1px",
     boxShadow: {
-      ":focus": `inset 0 0 0 2px ${colors.ring}`,
-      default: null,
+      ":focus": {
+        '[aria-invalid="true"]': `0 0 0 3px color-mix(in oklab, ${colors.destructive} 20%, transparent)`,
+        default: `0 0 0 3px color-mix(in oklab, ${colors.ring} 50%, transparent)`,
+      },
+      default: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
     },
     color: colors.foreground,
     fontSize: "0.875rem",
     height: "2.25rem",
+    lineHeight: "1.25rem",
     outline: "none",
+    position: "relative",
     textAlign: "center",
-    transition: "box-shadow 0.15s ease-in-out",
+    transition: "box-shadow 0.15s ease-in-out, border-color 0.15s ease-in-out",
     width: "2.25rem",
+    zIndex: { ":focus": 10, default: "auto" },
   },
 });
 

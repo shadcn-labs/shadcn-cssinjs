@@ -1,26 +1,25 @@
 ---
 title: Input OTP
-description: Accessible one-time password component with copy paste functionality.
+description: Accessible one-time password component with copy-paste functionality.
+component: true
 links:
-  doc: https://base-ui.com/react/components/otp-field
-  api: https://base-ui.com/react/components/otp-field#api-reference
+  doc: https://input-otp.rodz.dev
 ---
 
-import InputOTPDemo from "@/examples/input-otp-demo";
+<ComponentPreview name="input-otp-demo" />
 
-<ComponentPreview name="input-otp-demo">
-  <InputOTPDemo />
-</ComponentPreview>
+## About
+
+Input OTP is built on top of [input-otp](https://github.com/guilhermerodz/input-otp) by [@guilherme_rodz](https://twitter.com/guilherme_rodz).
 
 ## Installation
 
 <Tabs defaultValue="cli">
 
 <TabsList>
-  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="cli">Command</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
-
 <TabsContent value="cli">
 
 ```bash
@@ -36,13 +35,8 @@ npx shadcn@latest add https://shadcn-cssinjs.com/r/input-otp.json
 <Step>Install the following dependencies:</Step>
 
 ```bash
-pnpm add @base-ui/react @stylexjs/stylex
+npm install input-otp
 ```
-
-<Step>
-  Make sure [StyleX is configured](/docs/installation) and the design tokens are
-  installed.
-</Step>
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -58,93 +52,111 @@ pnpm add @base-ui/react @stylexjs/stylex
 
 ## Usage
 
-```tsx
+```tsx showLineNumbers
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSeparator,
   InputOTPSlot,
-} from "@/components/ui/input-otp/input-otp";
+} from "@/components/ui/input-otp";
 ```
 
-```tsx
-<InputOTP length={6}>
+```tsx showLineNumbers
+<InputOTP maxLength={6}>
   <InputOTPGroup>
-    <InputOTPSlot />
-    <InputOTPSlot />
-    <InputOTPSlot />
+    <InputOTPSlot index={0} />
+    <InputOTPSlot index={1} />
+    <InputOTPSlot index={2} />
+  </InputOTPGroup>
+  <InputOTPSeparator />
+  <InputOTPGroup>
+    <InputOTPSlot index={3} />
+    <InputOTPSlot index={4} />
+    <InputOTPSlot index={5} />
   </InputOTPGroup>
 </InputOTP>
 ```
 
 ## Composition
 
-Use the following composition to build a `Input OTP`:
+Use the following composition to build an `InputOTP`:
 
-```txt
+```text
 InputOTP
 ├── InputOTPGroup
+│   ├── InputOTPSlot
+│   ├── InputOTPSlot
+│   └── InputOTPSlot
+├── InputOTPSeparator
+├── InputOTPGroup
+│   ├── InputOTPSlot
+│   ├── InputOTPSlot
 │   └── InputOTPSlot
 ├── InputOTPSeparator
 └── InputOTPGroup
+    ├── InputOTPSlot
     └── InputOTPSlot
 ```
 
-## Examples
+## Pattern
 
-import InputOTPWithSeparator from "@/examples/input-otp-separator";
-import InputOTPDisabled from "@/examples/input-otp-disabled";
-import InputOTPControlled from "@/examples/input-otp-controlled";
-import InputOTPInvalid from "@/examples/input-otp-invalid";
-import InputOTPFourDigits from "@/examples/input-otp-four-digits";
-import InputOTPAlphanumeric from "@/examples/input-otp-alphanumeric";
+Use the `pattern` prop to define a custom pattern for the OTP input.
 
-### Separator
+```tsx showLineNumbers {1,5}
+import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
+<InputOTP maxLength={6} pattern={REGEXP_ONLY_DIGITS_AND_CHARS}>
+  ...
+</InputOTP>;
+```
 
-<ComponentPreview name="input-otp-separator">
-  <InputOTPWithSeparator />
-</ComponentPreview>
+<ComponentPreview name="input-otp-pattern" />
 
-### Disabled
+## Separator
 
-<ComponentPreview name="input-otp-disabled">
-  <InputOTPDisabled />
-</ComponentPreview>
+Use the `<InputOTPSeparator />` component to add a separator between input groups.
 
-### Controlled
+<ComponentPreview name="input-otp-separator" />
 
-<ComponentPreview name="input-otp-controlled">
-  <InputOTPControlled />
-</ComponentPreview>
+## Disabled
 
-### Invalid
+Use the `disabled` prop to disable the input.
 
-<ComponentPreview name="input-otp-invalid">
-  <InputOTPInvalid />
-</ComponentPreview>
+<ComponentPreview name="input-otp-disabled" />
 
-### Four Digits
+## Controlled
 
-<ComponentPreview name="input-otp-four-digits">
-  <InputOTPFourDigits />
-</ComponentPreview>
+Use the `value` and `onChange` props to control the input value.
 
-### Alphanumeric
+<ComponentPreview name="input-otp-controlled" />
 
-<ComponentPreview name="input-otp-alphanumeric">
-  <InputOTPAlphanumeric />
-</ComponentPreview>
+## Invalid
 
-import InputOTPRtl from "@/examples/input-otp-rtl";
+Use `aria-invalid` on the slots to show an error state.
+
+<ComponentPreview name="input-otp-invalid" />
+
+## Four Digits
+
+A common pattern for PIN codes. This uses the `pattern={REGEXP_ONLY_DIGITS}` prop.
+
+<ComponentPreview name="input-otp-four-digits" />
+
+## Alphanumeric
+
+Use `REGEXP_ONLY_DIGITS_AND_CHARS` to accept both letters and numbers.
+
+<ComponentPreview name="input-otp-alphanumeric" />
+
+## Form
+
+<ComponentPreview name="input-otp-form" previewClassName="h-[30rem]" />
 
 ## RTL
 
-To enable right-to-left support, see the [RTL guide](/docs/rtl).
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview name="input-otp-rtl" direction="rtl">
-  <InputOTPRtl />
-</ComponentPreview>
+<ComponentPreview name="input-otp-rtl" direction="rtl" />
 
 ## API Reference
 
-See the [Base UI](https://base-ui.com/react/components/otp-field#api-reference) documentation for the full API.
+See the [input-otp](https://input-otp.rodz.dev) documentation for more information.

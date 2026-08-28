@@ -1,29 +1,22 @@
 ---
 title: Toggle
 description: A two-state button that can be either on or off.
+component: true
 links:
   doc: https://base-ui.com/react/components/toggle
   api: https://base-ui.com/react/components/toggle#api-reference
 ---
 
-import ToggleDemo from "@/examples/toggle-demo";
-import ToggleOutline from "@/examples/toggle-outline";
-import ToggleWithText from "@/examples/toggle-with-text";
-import ToggleDisabled from "@/examples/toggle-disabled";
-
-<ComponentPreview name="toggle-demo">
-  <ToggleDemo />
-</ComponentPreview>
+<ComponentPreview name="toggle-demo" />
 
 ## Installation
 
 <Tabs defaultValue="cli">
 
 <TabsList>
-  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="cli">Command</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
-
 <TabsContent value="cli">
 
 ```bash
@@ -62,56 +55,39 @@ pnpm add @base-ui/react @stylexjs/stylex
 ## Usage
 
 ```tsx
-import { Toggle } from "@/components/ui/toggle/toggle";
+import { Toggle } from "@/components/ui/toggle";
 ```
 
 ```tsx
-<Toggle aria-label="Toggle bold">
-  <BoldIcon />
-</Toggle>
+<Toggle>Toggle</Toggle>
 ```
 
-## Examples
+## Outline
 
-### Outline
+Use `variant="outline"` for an outline style.
 
-Use the `outline` variant for a bordered toggle.
+<ComponentPreview name="toggle-outline" />
 
-<ComponentPreview name="toggle-outline">
-  <ToggleOutline />
-</ComponentPreview>
+## With Text
 
-### With Text
+<ComponentPreview name="toggle-text" />
 
-<ComponentPreview name="toggle-with-text">
-  <ToggleWithText />
-</ComponentPreview>
+## Size
 
-import ToggleSizes from "@/examples/toggle-sizes";
+Use the `size` prop to change the size of the toggle.
 
-### Size
+<ComponentPreview name="toggle-sizes" />
 
-<ComponentPreview name="toggle-sizes">
-  <ToggleSizes />
-</ComponentPreview>
+## Disabled
 
-### Disabled
-
-<ComponentPreview name="toggle-disabled">
-  <ToggleDisabled />
-</ComponentPreview>
-
-import ToggleRtl from "@/examples/toggle-rtl";
+<ComponentPreview name="toggle-disabled" />
 
 ## RTL
 
-To enable right-to-left support, see the [RTL guide](/docs/rtl).
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview name="toggle-rtl" direction="rtl">
-  <ToggleRtl />
-</ComponentPreview>
+<ComponentPreview name="toggle-rtl" direction="rtl" />
 
 ## API Reference
 
-See the [Base UI](https://base-ui.com/react/components/toggle#api-reference)
-documentation for the full API.
+See the [Base UI Toggle](https://base-ui.com/react/components/toggle#api-reference) documentation.
