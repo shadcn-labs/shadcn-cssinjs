@@ -159,6 +159,15 @@ export const mdxComponents = {
       {...props}
     />
   ),
+  Kbd: ({ className, ...props }: React.ComponentProps<"kbd">) => (
+    <kbd
+      className={cn(
+        "bg-muted border-muted-foreground/20 inline-flex h-5 min-w-5 items-center justify-center rounded border px-1 font-mono text-[0.7rem] font-medium",
+        className
+      )}
+      {...props}
+    />
+  ),
   a: ({ className, children, ...props }: React.ComponentProps<"a">) => (
     <a
       className={cn("font-medium underline underline-offset-4", className)}
