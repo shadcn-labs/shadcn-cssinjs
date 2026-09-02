@@ -1,4 +1,5 @@
 "use client";
+
 import { ScrollArea as ScrollAreaPrimitive } from "@base-ui/react/scroll-area";
 import * as stylex from "@stylexjs/stylex";
 import type { StyleXStyles } from "@stylexjs/stylex";

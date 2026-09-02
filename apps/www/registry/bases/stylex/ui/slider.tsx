@@ -1,4 +1,5 @@
 "use client";
+
 import { Slider as SliderPrimitive } from "@base-ui/react/slider";
 import * as stylex from "@stylexjs/stylex";
 import type { StyleXStyles } from "@stylexjs/stylex";

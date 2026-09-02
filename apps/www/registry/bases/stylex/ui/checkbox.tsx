@@ -1,4 +1,5 @@
 "use client";
+
 import { Checkbox as CheckboxPrimitive } from "@base-ui/react/checkbox";
 import * as stylex from "@stylexjs/stylex";
 import type { StyleXStyles } from "@stylexjs/stylex";

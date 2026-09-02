@@ -1,4 +1,5 @@
 "use client";
+
 import { Input as InputPrimitive } from "@base-ui/react/input";
 import * as stylex from "@stylexjs/stylex";
 import type { StyleXStyles } from "@stylexjs/stylex";

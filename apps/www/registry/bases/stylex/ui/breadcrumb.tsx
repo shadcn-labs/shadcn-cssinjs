@@ -1,4 +1,5 @@
 "use client";
+
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
 import * as stylex from "@stylexjs/stylex";

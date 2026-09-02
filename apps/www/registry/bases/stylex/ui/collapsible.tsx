@@ -1,4 +1,5 @@
 "use client";
+
 import { Collapsible as CollapsiblePrimitive } from "@base-ui/react/collapsible";
 import * as stylex from "@stylexjs/stylex";
 import type { StyleXStyles } from "@stylexjs/stylex";

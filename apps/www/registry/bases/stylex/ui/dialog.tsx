@@ -1,4 +1,5 @@
 "use client";
+
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog";
 import * as stylex from "@stylexjs/stylex";
 import type { StyleXStyles } from "@stylexjs/stylex";

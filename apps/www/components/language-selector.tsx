@@ -4,9 +4,13 @@ import { createContext, useContext, useState } from "react";
 import type { ReactNode } from "react";
 
 import {
-  NativeSelect,
-  NativeSelectOption,
-} from "@/components/ui/native-select";
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 
 export type Language = "en" | "ar" | "he";
@@ -82,20 +86,31 @@ export const LanguageSelector = ({
   className?: string;
   languages?: Language[];
 }) => (
-  <NativeSelect
-    className={cn("w-40", className)}
-    data-name="language-selector"
-    dir="ltr"
-    onChange={(event) => onValueChange(event.target.value as Language)}
-    size="sm"
+  <Select
     value={value}
+    onValueChange={(newValue) => onValueChange(newValue as Language)}
   >
-    {languageOptions
-      .filter((option) => languages.includes(option.value as Language))
-      .map((option) => (
-        <NativeSelectOption key={option.value} value={option.value}>
-          {option.label}
-        </NativeSelectOption>
-      ))}
-  </NativeSelect>
+    <SelectTrigger
+      size="sm"
+      className={cn("w-36", className)}
+      dir="ltr"
+      data-name="language-selector"
+    >
+      <SelectValue />
+    </SelectTrigger>
+    <SelectContent
+      dir="ltr"
+      className="data-open:animate-none data-closed:animate-none"
+    >
+      <SelectGroup>
+        {languageOptions
+          .filter((option) => languages.includes(option.value as Language))
+          .map((option) => (
+            <SelectItem key={option.value} value={option.value}>
+              {option.label}
+            </SelectItem>
+          ))}
+      </SelectGroup>
+    </SelectContent>
+  </Select>
 );

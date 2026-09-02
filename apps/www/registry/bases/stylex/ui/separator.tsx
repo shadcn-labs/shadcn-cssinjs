@@ -1,4 +1,5 @@
 "use client";
+
 import { Separator as SeparatorPrimitive } from "@base-ui/react/separator";
 import * as stylex from "@stylexjs/stylex";
 import type { StyleXStyles } from "@stylexjs/stylex";
