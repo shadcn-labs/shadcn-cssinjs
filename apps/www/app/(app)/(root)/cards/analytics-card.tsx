@@ -1,65 +1,58 @@
-"use client";
+import * as stylex from "@stylexjs/stylex";
 
-import { TrendingUpIcon } from "lucide-react";
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
-
+import { Badge } from "@/registry/bases/stylex/ui/badge";
+import { Button } from "@/registry/bases/stylex/ui/button";
 import {
   Card,
-  CardContent,
+  CardAction,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "@/registry/bases/stylex/ui/card";
-import {
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "@/registry/bases/stylex/ui/chart";
-import type { ChartConfig } from "@/registry/bases/stylex/ui/chart";
 
-const chartData = [
-  { desktop: 186, mobile: 80, month: "January" },
-  { desktop: 305, mobile: 200, month: "February" },
-  { desktop: 237, mobile: 120, month: "March" },
-  { desktop: 73, mobile: 190, month: "April" },
-  { desktop: 209, mobile: 130, month: "May" },
-  { desktop: 214, mobile: 140, month: "June" },
-];
-
-const chartConfig = {
-  desktop: { color: "var(--primary)", label: "Desktop" },
-  mobile: {
-    color: "color-mix(in oklab, var(--primary) 40%, transparent)",
-    label: "Mobile",
+const styles = stylex.create({
+  card1: {
+    marginInline: "auto",
+    maxWidth: "24rem",
+    paddingBottom: {
+      ":is([data-size=sm])": "0rem",
+      default: null,
+    },
+    width: "100%",
   },
-} satisfies ChartConfig;
+});
+
+const areaPath = "M0 52L18 40L36 46L54 70L72 50L100 49V86H0Z";
+const strokePath = "M0 52L18 40L36 46L54 70L72 50L100 49";
 
 export const AnalyticsCard = () => (
-  <Card data-slot="card">
+  <Card size="sm" style={styles.card1}>
     <CardHeader>
-      <CardTitle>Visitors</CardTitle>
-      <CardDescription>Last 6 months</CardDescription>
+      <CardTitle>Analytics</CardTitle>
+      <CardDescription>
+        418.2K Visitors <Badge>+10%</Badge>
+      </CardDescription>
+      <CardAction>
+        <Button variant="outline" size="sm">
+          View Analytics
+        </Button>
+      </CardAction>
     </CardHeader>
-    <CardContent>
-      <ChartContainer className="max-h-[180px] w-full" config={chartConfig}>
-        <BarChart data={chartData}>
-          <CartesianGrid vertical={false} />
-          <XAxis
-            axisLine={false}
-            dataKey="month"
-            tickFormatter={(value: string) => value.slice(0, 3)}
-            tickLine={false}
-            tickMargin={10}
-          />
-          <ChartTooltip content={<ChartTooltipContent />} />
-          <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
-          <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />
-        </BarChart>
-      </ChartContainer>
-      <div className="text-muted-foreground mt-3 flex items-center gap-2 text-sm">
-        <TrendingUpIcon className="size-4" />
-        Trending up by 5.2% this month
-      </div>
-    </CardContent>
+    <svg
+      viewBox="0 0 100 86"
+      preserveAspectRatio="none"
+      className="aspect-[1/0.35] w-full text-chart-1"
+      role="img"
+      aria-label="Visitor trend"
+    >
+      <path d={areaPath} fill="currentColor" opacity="0.28" />
+      <path
+        d={strokePath}
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        vectorEffect="non-scaling-stroke"
+      />
+    </svg>
   </Card>
 );

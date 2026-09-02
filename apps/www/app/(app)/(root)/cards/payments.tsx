@@ -1,61 +1,139 @@
-import { Badge } from "@/registry/bases/stylex/ui/badge";
+import * as stylex from "@stylexjs/stylex";
 import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/registry/bases/stylex/ui/card";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/registry/bases/stylex/ui/table";
+  ArrowRight as ArrowRight01Icon,
+  CalendarDays as Calendar03Icon,
+  CircleEllipsis as MoreHorizontalCircle01Icon,
+  RefreshCw as RefreshIcon,
+  Settings as Settings01Icon,
+} from "lucide-react";
 
-const PAYMENTS = [
-  { amount: "$316.00", email: "ken99@example.com", status: "Success" },
-  { amount: "$242.00", email: "abe45@example.com", status: "Success" },
-  { amount: "$837.00", email: "monserrat@example.com", status: "Processing" },
-  { amount: "$721.00", email: "carmella@example.com", status: "Failed" },
-];
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/registry/bases/stylex/ui/breadcrumb";
+import { Button } from "@/registry/bases/stylex/ui/button";
+import { Card, CardContent, CardHeader } from "@/registry/bases/stylex/ui/card";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/registry/bases/stylex/ui/dropdown-menu";
+import {
+  Item,
+  ItemContent,
+  ItemDescription,
+  ItemGroup,
+  ItemMedia,
+  ItemTitle,
+} from "@/registry/bases/stylex/ui/item";
+
+const styles = stylex.create({
+  cardHeader1: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "0.75rem",
+  },
+});
 
 export const Payments = () => (
-  <Card data-slot="card">
-    <CardHeader>
-      <CardTitle>Payments</CardTitle>
-      <CardDescription>Recent transactions across accounts.</CardDescription>
-    </CardHeader>
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead>Status</TableHead>
-          <TableHead>Email</TableHead>
-          <TableHead className="text-right">Amount</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {PAYMENTS.map((payment) => (
-          <TableRow key={payment.email}>
-            <TableCell>
-              <Badge
-                variant={
-                  payment.status === "Failed" ? "destructive" : "secondary"
+  <Card>
+    <CardHeader style={styles.cardHeader1}>
+      <Breadcrumb>
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink href="#">Home</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <DropdownMenu>
+              <DropdownMenuTrigger
+                render={
+                  <Button
+                    size="icon-sm"
+                    variant="ghost"
+                    aria-label="Account options"
+                  />
                 }
               >
-                {payment.status}
-              </Badge>
-            </TableCell>
-            <TableCell className="text-muted-foreground">
-              {payment.email}
-            </TableCell>
-            <TableCell className="text-right font-medium">
-              {payment.amount}
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+                <MoreHorizontalCircle01Icon strokeWidth={2} />
+                <span className="sr-only">Account options</span>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start">
+                <DropdownMenuGroup>
+                  <DropdownMenuItem>Profile</DropdownMenuItem>
+                  <DropdownMenuItem>Statements</DropdownMenuItem>
+                  <DropdownMenuItem>Documents</DropdownMenuItem>
+                </DropdownMenuGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>Payments</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+    </CardHeader>
+    <CardContent>
+      <ItemGroup>
+        <div role="listitem" className="w-full">
+          <Item variant="muted" render={<a href="#" />}>
+            <ItemMedia variant="icon">
+              <Settings01Icon strokeWidth={2} />
+            </ItemMedia>
+            <ItemContent>
+              <ItemTitle>Change transfer limit</ItemTitle>
+              <ItemDescription>
+                Adjust how much you can send from your balance.
+              </ItemDescription>
+            </ItemContent>
+            <ArrowRight01Icon
+              className="size-4 shrink-0 text-muted-foreground"
+              strokeWidth={2}
+            />
+          </Item>
+        </div>
+        <div role="listitem" className="w-full">
+          <Item variant="muted" render={<a href="#" />}>
+            <ItemMedia variant="icon">
+              <Calendar03Icon strokeWidth={2} />
+            </ItemMedia>
+            <ItemContent>
+              <ItemTitle>Scheduled transfers</ItemTitle>
+              <ItemDescription>
+                Set up a transfer to send at a later date.
+              </ItemDescription>
+            </ItemContent>
+            <ArrowRight01Icon
+              className="size-4 shrink-0 text-muted-foreground"
+              strokeWidth={2}
+            />
+          </Item>
+        </div>
+        <div role="listitem" className="w-full">
+          <Item variant="muted" render={<a href="#" />}>
+            <ItemMedia variant="icon">
+              <RefreshIcon strokeWidth={2} />
+            </ItemMedia>
+            <ItemContent>
+              <ItemTitle>Recurring card payments</ItemTitle>
+              <ItemDescription>
+                Manage your repeated card transactions.
+              </ItemDescription>
+            </ItemContent>
+            <ArrowRight01Icon
+              className="size-4 shrink-0 text-muted-foreground"
+              strokeWidth={2}
+            />
+          </Item>
+        </div>
+      </ItemGroup>
+    </CardContent>
   </Card>
 );

@@ -1,54 +1,79 @@
+import * as stylex from "@stylexjs/stylex";
+
+import { Button } from "@/registry/bases/stylex/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/registry/bases/stylex/ui/card";
-import { Switch } from "@/registry/bases/stylex/ui/switch";
+import { Checkbox } from "@/registry/bases/stylex/ui/checkbox";
+import {
+  Field,
+  FieldContent,
+  FieldDescription,
+  FieldGroup,
+  FieldLabel,
+} from "@/registry/bases/stylex/ui/field";
 
-const SETTINGS = [
+const styles = stylex.create({
+  button1: {
+    width: "100%",
+  },
+});
+
+const NOTIFICATIONS = [
   {
-    description: "Receive emails about your account activity.",
-    enabled: true,
-    title: "Email notifications",
+    defaultChecked: true,
+    description: "Deposits, withdrawals, and transfers.",
+    id: "transactions",
+    label: "Transaction alerts",
   },
   {
-    description: "Get push notifications on your devices.",
-    enabled: false,
-    title: "Push notifications",
+    defaultChecked: true,
+    description: "Login attempts and account changes.",
+    id: "security",
+    label: "Security alerts",
   },
   {
-    description: "Receive a weekly summary every Monday.",
-    enabled: true,
-    title: "Weekly digest",
+    defaultChecked: false,
+    description: "Updates at 25%, 50%, 75%, and 100%.",
+    id: "goals",
+    label: "Goal milestones",
+  },
+  {
+    defaultChecked: false,
+    description: "Daily portfolio summary and price alerts.",
+    id: "market",
+    label: "Market updates",
   },
 ];
 
 export const NotificationSettings = () => (
-  <Card data-slot="card">
+  <Card>
     <CardHeader>
       <CardTitle>Notifications</CardTitle>
-      <CardDescription>Choose what you want to hear about.</CardDescription>
+      <CardDescription>
+        Choose which email and push alerts you want to receive.
+      </CardDescription>
     </CardHeader>
-    <CardContent className="flex flex-col gap-4">
-      {SETTINGS.map((setting) => {
-        const id = setting.title.toLowerCase().replaceAll(" ", "-");
-        return (
-          <div
-            className="flex items-start justify-between gap-4"
-            key={setting.title}
-          >
-            <label className="flex flex-col gap-0.5" htmlFor={id}>
-              <span className="text-sm font-medium">{setting.title}</span>
-              <span className="text-muted-foreground text-sm">
-                {setting.description}
-              </span>
-            </label>
-            <Switch defaultChecked={setting.enabled} id={id} />
-          </div>
-        );
-      })}
+    <CardContent>
+      <FieldGroup>
+        {NOTIFICATIONS.map((n) => (
+          <Field key={n.id} orientation="horizontal">
+            <Checkbox id={`notify-${n.id}`} defaultChecked={n.defaultChecked} />
+            <FieldContent>
+              <FieldLabel htmlFor={`notify-${n.id}`}>{n.label}</FieldLabel>
+              <FieldDescription>{n.description}</FieldDescription>
+            </FieldContent>
+          </Field>
+        ))}
+      </FieldGroup>
     </CardContent>
+    <CardFooter>
+      <Button style={styles.button1}>Save Preferences</Button>
+    </CardFooter>
   </Card>
 );

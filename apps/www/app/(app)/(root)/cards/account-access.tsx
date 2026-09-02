@@ -1,85 +1,102 @@
+import * as stylex from "@stylexjs/stylex";
 import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/registry/bases/stylex/ui/avatar";
-import { Badge } from "@/registry/bases/stylex/ui/badge";
+  CircleAlert as AlertCircleIcon,
+  ArrowRight as ArrowRight01Icon,
+  LockKeyhole as SquareLock02Icon,
+} from "lucide-react";
+
+import { Button } from "@/registry/bases/stylex/ui/button";
 import {
   Card,
+  CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/registry/bases/stylex/ui/card";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/registry/bases/stylex/ui/select";
+  Field,
+  FieldGroup,
+  FieldLabel,
+} from "@/registry/bases/stylex/ui/field";
+import { Input } from "@/registry/bases/stylex/ui/input";
+import {
+  Item,
+  ItemContent,
+  ItemDescription,
+  ItemMedia,
+  ItemTitle,
+} from "@/registry/bases/stylex/ui/item";
 
-const MEMBERS = [
-  {
-    email: "sofia@example.com",
-    fallback: "SD",
-    name: "Sofia Davis",
-    role: "owner",
-    src: "https://github.com/shadcn.png",
+const styles = stylex.create({
+  button1: {
+    width: "100%",
   },
-  {
-    email: "jackson@example.com",
-    fallback: "JL",
-    name: "Jackson Lee",
-    role: "member",
-    src: "",
+  cardFooter1: {
+    flexDirection: "column",
+    gap: "1rem",
   },
-  {
-    email: "isabella@example.com",
-    fallback: "IN",
-    name: "Isabella Nguyen",
-    role: "member",
-    src: "",
+  itemDescription1: {
+    WebkitBoxOrient: "vertical",
+    WebkitLineClamp: 1,
+    display: "-webkit-box",
+    overflow: "hidden",
   },
-];
+});
 
 export const AccountAccess = () => (
-  <Card data-slot="card">
+  <Card>
     <CardHeader>
-      <CardTitle>Account access</CardTitle>
-      <CardDescription>Manage who can access this workspace.</CardDescription>
+      <CardTitle>Account Access</CardTitle>
+      <CardDescription>
+        Update your credentials or re-authenticate.
+      </CardDescription>
     </CardHeader>
-    <div className="flex flex-col gap-4 px-6 pb-6">
-      {MEMBERS.map((member) => (
-        <div className="flex items-center gap-3" key={member.email}>
-          <Avatar>
-            {member.src ? (
-              <AvatarImage alt={member.name} src={member.src} />
-            ) : null}
-            <AvatarFallback>{member.fallback}</AvatarFallback>
-          </Avatar>
-          <div className="flex flex-col">
-            <span className="text-sm font-medium">{member.name}</span>
-            <span className="text-muted-foreground text-sm">
-              {member.email}
-            </span>
+    <CardContent>
+      <FieldGroup>
+        <Field>
+          <FieldLabel htmlFor="email-address">Email Address</FieldLabel>
+          <Input
+            id="email-address"
+            type="email"
+            placeholder="artist@studio.inc"
+          />
+        </Field>
+        <Field>
+          <div className="flex items-center justify-between">
+            <FieldLabel htmlFor="current-password">Current Password</FieldLabel>
+            <a
+              href="#"
+              className="text-xs font-medium tracking-wider text-muted-foreground uppercase hover:text-foreground"
+            >
+              Forgot?
+            </a>
           </div>
-          {member.role === "owner" ? (
-            <Badge className="ml-auto" variant="secondary">
-              Owner
-            </Badge>
-          ) : (
-            <Select defaultValue="member">
-              <SelectTrigger className="ml-auto w-28">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="member">Member</SelectItem>
-                <SelectItem value="viewer">Viewer</SelectItem>
-              </SelectContent>
-            </Select>
-          )}
-        </div>
-      ))}
-    </div>
+          <Input
+            id="current-password"
+            type="password"
+            placeholder="••••••••••••••••••••••••"
+          />
+        </Field>
+      </FieldGroup>
+    </CardContent>
+    <CardFooter style={styles.cardFooter1}>
+      <Button style={styles.button1}>
+        <SquareLock02Icon strokeWidth={2} />
+        Update Security
+      </Button>
+      <Item variant="muted" render={<a href="#" />}>
+        <ItemMedia variant="icon">
+          <AlertCircleIcon className="text-destructive" strokeWidth={2} />
+        </ItemMedia>
+        <ItemContent>
+          <ItemTitle>Danger Zone</ItemTitle>
+          <ItemDescription style={styles.itemDescription1}>
+            Archive account and remove catalog
+          </ItemDescription>
+        </ItemContent>
+        <ArrowRight01Icon className="size-4" strokeWidth={2} />
+      </Item>
+    </CardFooter>
   </Card>
 );
