@@ -24,6 +24,7 @@ const CalendarDayButton = ({
   className,
   day,
   modifiers,
+  style: _style,
   ...props
 }: React.ComponentProps<typeof DayButton>) => {
   const defaultClassNames = getDefaultClassNames();
