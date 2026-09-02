@@ -1,0 +1,170 @@
+---
+title: Laravel
+description: Install and configure shadcn-cssinjs with StyleX for Laravel.
+---
+
+Choose the setup that matches your starting point.
+
+<div className="mt-6 grid gap-4 sm:grid-cols-2 sm:gap-6">
+  <LinkedCard
+    href="#scaffold-with-cli"
+    className="items-start gap-1 p-6 text-sm md:p-6"
+  >
+    <div className="font-medium">Use the CLI</div>
+    <div className="leading-relaxed text-muted-foreground">
+      Scaffold a new Laravel project directly from the terminal.
+    </div>
+  </LinkedCard>
+  <LinkedCard
+    href="#existing-project"
+    className="items-start gap-1 p-6 text-sm md:p-6"
+  >
+    <div className="font-medium">Existing Project</div>
+    <div className="leading-relaxed text-muted-foreground">
+      Configure shadcn-cssinjs manually in an existing Laravel project.
+    </div>
+  </LinkedCard>
+</div>
+
+<div id="scaffold-with-cli" className="scroll-mt-24" />
+## Use the CLI
+
+<Steps>
+
+### Create Project
+
+Create a new Laravel project first, then run the init command:
+
+```bash
+laravel new my-app
+cd my-app
+npx shadcn@latest init
+```
+
+### Add Components
+
+Add the `Button` component to your project:
+
+```bash
+npx shadcn@latest add button
+```
+
+The command above will add the `Button` component to your project. You can then import it like this:
+
+```tsx showLineNumbers title="resources/js/components/demo.tsx";
+import { Button } from "@/components/ui/button/button";
+
+export function Demo() {
+  return (
+    <div className="flex min-h-svh items-center justify-center">
+      <Button>Click me</Button>
+    </div>
+  );
+}
+```
+
+</Steps>
+
+<div id="existing-project" className="scroll-mt-24" />
+## Existing Project
+
+<Steps>
+
+### Create Project
+
+If you need a new Laravel project, create one first. Otherwise, skip this step.
+
+```bash
+laravel new my-app
+```
+
+### Install StyleX and Base UI
+
+```bash
+pnpm add @stylexjs/stylex @base-ui/react
+pnpm add -D @stylexjs/babel-plugin @stylexjs/postcss-plugin @babel/preset-typescript
+```
+
+### Configure Babel
+
+Create a `babel.config.js` at the root of your project:
+
+```js title="babel.config.js"
+module.exports = {
+  presets: ["@babel/preset-typescript"],
+  plugins: [
+    [
+      "@stylexjs/babel-plugin",
+      {
+        runtimeInjection: false,
+        styleResolution: "property-specificity",
+        unstable_moduleResolution: { type: "commonJS", rootDir: __dirname },
+      },
+    ],
+  ],
+};
+```
+
+### Configure PostCSS
+
+The PostCSS plugin extracts the compiled CSS. It must run **before** Tailwind, and its
+options must match your Babel config so the class-name hashes line up.
+
+```js title="postcss.config.mjs"
+const config = {
+  plugins: {
+    "@stylexjs/postcss-plugin": {
+      include: ["resources/**/*.{js,jsx,ts,tsx}"],
+      useCSSLayers: true,
+      styleResolution: "property-specificity",
+      runtimeInjection: false,
+      unstable_moduleResolution: { type: "commonJS", rootDir: process.cwd() },
+    },
+    "@tailwindcss/postcss": {},
+  },
+};
+export default config;
+```
+
+### Add the StyleX directive
+
+Add `@stylex;` to your global stylesheet. The PostCSS plugin replaces it with the compiled
+component CSS.
+
+```css title="resources/css/app.css"
+@import "tailwindcss";
+
+@stylex;
+```
+
+### Add the design tokens
+
+Every component references a shared set of design tokens. Install them once:
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/stylex-tokens.json
+```
+
+### Add Components
+
+You can now start adding components to your project.
+
+```bash
+npx shadcn@latest add button
+```
+
+The command above will add the `Button` component to your project. You can then import it like this:
+
+```tsx showLineNumbers title="resources/js/components/demo.tsx";
+import { Button } from "@/components/ui/button/button";
+
+export function Demo() {
+  return (
+    <div className="flex min-h-svh items-center justify-center">
+      <Button>Click me</Button>
+    </div>
+  );
+}
+```
+
+</Steps>

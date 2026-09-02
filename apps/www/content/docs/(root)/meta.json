@@ -2,7 +2,6 @@
   "title": "Get Started",
   "pages": [
     "index",
-    "[Installation](/docs/installation)",
     "[Theming](/docs/theming)",
     "[RTL](/docs/rtl)",
     "[Registry](/docs/registry)",

@@ -7,6 +7,16 @@ export const ROUTES = {
   DOCS_CHANGELOG: "/docs/changelog",
   DOCS_COMPONENTS: "/docs/components",
   DOCS_INSTALLATION: "/docs/installation",
+  DOCS_INSTALLATION_STYLEX: "/docs/installation/stylex",
+  DOCS_INSTALLATION_STYLEX_ASTRO: "/docs/installation/stylex/astro",
+  DOCS_INSTALLATION_STYLEX_LARAVEL: "/docs/installation/stylex/laravel",
+  DOCS_INSTALLATION_STYLEX_MANUAL: "/docs/installation/stylex/manual",
+  DOCS_INSTALLATION_STYLEX_NEXT: "/docs/installation/stylex/next",
+  DOCS_INSTALLATION_STYLEX_REACT_ROUTER:
+    "/docs/installation/stylex/react-router",
+  DOCS_INSTALLATION_STYLEX_TANSTACK_START:
+    "/docs/installation/stylex/tanstack-start",
+  DOCS_INSTALLATION_STYLEX_VITE: "/docs/installation/stylex/vite",
   DOCS_MCP: "/docs/mcp",
   DOCS_REGISTRY: "/docs/registry",
   DOCS_RTL: "/docs/rtl",
