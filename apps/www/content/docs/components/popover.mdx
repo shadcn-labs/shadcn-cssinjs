@@ -1,26 +1,22 @@
 ---
 title: Popover
 description: Displays rich content in a portal, triggered by a button.
+component: true
 links:
   doc: https://base-ui.com/react/components/popover
   api: https://base-ui.com/react/components/popover#api-reference
 ---
 
-import PopoverDemo from "@/examples/popover-demo";
-
-<ComponentPreview name="popover-demo">
-  <PopoverDemo />
-</ComponentPreview>
+<ComponentPreview name="popover-demo" />
 
 ## Installation
 
 <Tabs defaultValue="cli">
 
 <TabsList>
-  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="cli">Command</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
-
 <TabsContent value="cli">
 
 ```bash
@@ -58,18 +54,28 @@ pnpm add @base-ui/react @stylexjs/stylex
 
 ## Usage
 
-```tsx
+```tsx showLineNumbers
 import {
   Popover,
   PopoverContent,
+  PopoverDescription,
+  PopoverHeader,
+  PopoverTitle,
   PopoverTrigger,
-} from "@/components/ui/popover/popover";
+} from "@/components/ui/popover";
 ```
 
-```tsx
+```tsx showLineNumbers
 <Popover>
-  <PopoverTrigger>Open</PopoverTrigger>
-  <PopoverContent>Place content for the popover here.</PopoverContent>
+  <PopoverTrigger render={<Button variant="outline" />}>
+    Open Popover
+  </PopoverTrigger>
+  <PopoverContent>
+    <PopoverHeader>
+      <PopoverTitle>Title</PopoverTitle>
+      <PopoverDescription>Description text here.</PopoverDescription>
+    </PopoverHeader>
+  </PopoverContent>
 </Popover>
 ```
 
@@ -77,53 +83,36 @@ import {
 
 Use the following composition to build a `Popover`:
 
-```txt
+```text
 Popover
 ├── PopoverTrigger
 └── PopoverContent
 ```
 
-## Examples
+## Basic
 
-import PopoverBasic from "@/examples/popover-basic";
-import PopoverAlignments from "@/examples/popover-alignments";
+A simple popover with a header, title, and description.
 
-### Basic
+<ComponentPreview name="popover-basic" />
 
-Use `PopoverHeader`, `PopoverTitle`, and `PopoverDescription` to structure the
-content.
+## Align
 
-<ComponentPreview name="popover-basic">
-  <PopoverBasic />
-</ComponentPreview>
+Use the `align` prop on `PopoverContent` to control the horizontal alignment.
 
-### Align
+<ComponentPreview name="popover-alignments" />
 
-Use the `align` prop on `PopoverContent` to align the popover.
+## With Form
 
-<ComponentPreview name="popover-alignments">
-  <PopoverAlignments />
-</ComponentPreview>
+A popover with form fields inside.
 
-### With Form
-
-Place a small form inside the popover.
-
-<ComponentPreview name="popover-demo">
-  <PopoverDemo />
-</ComponentPreview>
-
-import PopoverRtl from "@/examples/popover-rtl";
+<ComponentPreview name="popover-form" />
 
 ## RTL
 
-To enable right-to-left support, see the [RTL guide](/docs/rtl).
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview name="popover-rtl" direction="rtl">
-  <PopoverRtl />
-</ComponentPreview>
+<ComponentPreview name="popover-rtl" direction="rtl" />
 
 ## API Reference
 
-See the [Base UI](https://base-ui.com/react/components/popover#api-reference)
-documentation for the full API.
+See the [Base UI Popover](https://base-ui.com/react/components/popover#api-reference) documentation.

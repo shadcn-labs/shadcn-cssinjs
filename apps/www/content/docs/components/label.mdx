@@ -1,23 +1,27 @@
 ---
 title: Label
 description: Renders an accessible label associated with controls.
+component: true
+links:
+  doc: https://base-ui.com/react/components/label
+  api: https://base-ui.com/react/components/label#api-reference
 ---
 
-import LabelDemo from "@/examples/label-demo";
+<ComponentPreview name="label-demo" />
 
-<ComponentPreview name="label-demo">
-  <LabelDemo />
-</ComponentPreview>
+<Callout>
+  For form fields, use the [Field](/docs/components/base/field) component which
+  includes built-in label, description, and error handling.
+</Callout>
 
 ## Installation
 
 <Tabs defaultValue="cli">
 
 <TabsList>
-  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="cli">Command</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
-
 <TabsContent value="cli">
 
 ```bash
@@ -33,7 +37,7 @@ npx shadcn@latest add https://shadcn-cssinjs.com/r/label.json
 <Step>Install the following dependencies:</Step>
 
 ```bash
-pnpm add @stylexjs/stylex
+pnpm add @base-ui/react @stylexjs/stylex
 ```
 
 <Step>
@@ -56,22 +60,32 @@ pnpm add @stylexjs/stylex
 ## Usage
 
 ```tsx
-import { Label } from "@/components/ui/label/label";
+import { Label } from "@/components/ui/label";
 ```
 
 ```tsx
 <Label htmlFor="email">Your email address</Label>
 ```
 
-import LabelRtl from "@/examples/label-rtl";
+## Label in Field
+
+For form fields, use the [Field](/docs/components/base/field) component which
+includes built-in `FieldLabel`, `FieldDescription`, and `FieldError` components.
+
+```tsx
+<Field>
+  <FieldLabel htmlFor="email">Your email address</FieldLabel>
+  <Input id="email" />
+</Field>
+```
+
+<ComponentPreview name="field-demo" previewClassName="h-[44rem]" />
 
 ## RTL
 
-To enable right-to-left support, see the [RTL guide](/docs/rtl).
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview name="label-rtl" direction="rtl">
-  <LabelRtl />
-</ComponentPreview>
+<ComponentPreview name="label-rtl" direction="rtl" />
 
 ## API Reference
 

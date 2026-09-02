@@ -1,27 +1,22 @@
 ---
 title: Tabs
 description: A set of layered sections of content—known as tab panels—that are displayed one at a time.
+component: true
 links:
   doc: https://base-ui.com/react/components/tabs
   api: https://base-ui.com/react/components/tabs#api-reference
 ---
 
-import TabsDemo from "@/examples/tabs-demo";
-import TabsDisabled from "@/examples/tabs-disabled";
-
-<ComponentPreview name="tabs-demo">
-  <TabsDemo />
-</ComponentPreview>
+<ComponentPreview name="tabs-demo" previewClassName="h-96" />
 
 ## Installation
 
 <Tabs defaultValue="cli">
 
 <TabsList>
-  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="cli">Command</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
-
 <TabsContent value="cli">
 
 ```bash
@@ -59,23 +54,18 @@ pnpm add @base-ui/react @stylexjs/stylex
 
 ## Usage
 
-```tsx
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs/tabs";
+```tsx showLineNumbers
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 ```
 
-```tsx
-<Tabs defaultValue="account">
+```tsx showLineNumbers
+<Tabs defaultValue="account" className="w-[400px]">
   <TabsList>
     <TabsTrigger value="account">Account</TabsTrigger>
     <TabsTrigger value="password">Password</TabsTrigger>
   </TabsList>
-  <TabsContent value="account">Account settings</TabsContent>
-  <TabsContent value="password">Password settings</TabsContent>
+  <TabsContent value="account">Make changes to your account here.</TabsContent>
+  <TabsContent value="password">Change your password here.</TabsContent>
 </Tabs>
 ```
 
@@ -83,7 +73,7 @@ import {
 
 Use the following composition to build `Tabs`:
 
-```txt
+```text
 Tabs
 ├── TabsList
 │   ├── TabsTrigger
@@ -92,53 +82,32 @@ Tabs
 └── TabsContent
 ```
 
-## Examples
+## Line
 
-import TabsLine from "@/examples/tabs-line";
-import TabsVertical from "@/examples/tabs-vertical";
-import TabsIcons from "@/examples/tabs-icons";
+Use the `variant="line"` prop on `TabsList` for a line style.
 
-### Line
+<ComponentPreview name="tabs-line" />
 
-Use `variant="line"` on `TabsList` for an underlined tab style.
+## Vertical
 
-<ComponentPreview name="tabs-line">
-  <TabsLine />
-</ComponentPreview>
+Use `orientation="vertical"` for vertical tabs.
 
-### Vertical
+<ComponentPreview name="tabs-vertical" />
 
-Use `orientation="vertical"` on `Tabs` to stack the tabs vertically.
+## Disabled
 
-<ComponentPreview name="tabs-vertical">
-  <TabsVertical />
-</ComponentPreview>
+<ComponentPreview name="tabs-disabled" />
 
-### Disabled
+## Icons
 
-Use the `disabled` prop on a `TabsTrigger` to disable a tab.
-
-<ComponentPreview name="tabs-disabled">
-  <TabsDisabled />
-</ComponentPreview>
-
-### Icons
-
-<ComponentPreview name="tabs-icons">
-  <TabsIcons />
-</ComponentPreview>
-
-import TabsRtl from "@/examples/tabs-rtl";
+<ComponentPreview name="tabs-icons" />
 
 ## RTL
 
-To enable right-to-left support, see the [RTL guide](/docs/rtl).
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview name="tabs-rtl" direction="rtl">
-  <TabsRtl />
-</ComponentPreview>
+<ComponentPreview name="tabs-rtl" direction="rtl" />
 
 ## API Reference
 
-See the [Base UI](https://base-ui.com/react/components/tabs#api-reference)
-documentation for the full API.
+See the [Base UI Tabs](https://base-ui.com/react/components/tabs#api-reference) documentation.

@@ -4,108 +4,144 @@ import { Progress as ProgressPrimitive } from "@base-ui/react/progress";
 import * as stylex from "@stylexjs/stylex";
 import type { StyleXStyles } from "@stylexjs/stylex";
 
-import { colors } from "@/registry/bases/stylex/lib/tokens.stylex";
+import { colors, radius } from "@/registry/bases/stylex/lib/tokens.stylex";
 import { customClassName } from "@/registry/bases/stylex/lib/utils.stylex";
 
 const styles = stylex.create({
   indicator: {
     backgroundColor: colors.primary,
     height: "100%",
-    transition: "all 0.2s ease-in-out",
-    width: "100%",
+    transitionDuration: "150ms",
+    transitionProperty: "all",
+    transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
   },
   label: {
     fontSize: "0.875rem",
     fontWeight: 500,
+    lineHeight: "1.25rem",
   },
   root: {
-    backgroundColor: `color-mix(in oklab, ${colors.primary} 20%, transparent)`,
-    borderRadius: "9999px",
-    height: "0.5rem",
-    overflow: "hidden",
-    position: "relative",
-    width: "100%",
-  },
-  rootWrapper: {
     display: "flex",
-    flexDirection: "column",
-    gap: "0.5rem",
-    width: "100%",
+    flexWrap: "wrap",
+    gap: "0.75rem",
   },
   track: {
-    height: "100%",
+    alignItems: "center",
+    backgroundColor: colors.muted,
+    borderRadius: radius.full,
+    display: "flex",
+    height: "0.25rem",
+    overflowX: "hidden",
+    position: "relative",
     width: "100%",
   },
   value: {
     color: colors.mutedForeground,
     fontSize: "0.875rem",
+    fontVariantNumeric: "tabular-nums",
+    lineHeight: "1.25rem",
+    marginLeft: "auto",
   },
 });
 
-const Progress = ({
+export type ProgressTrackProps = Omit<
+  ProgressPrimitive.Track.Props,
+  "style"
+> & {
+  className?: string;
+  style?: StyleXStyles;
+};
+
+const ProgressTrack = ({ className, style, ...props }: ProgressTrackProps) => (
+  <ProgressPrimitive.Track
+    data-slot="progress-track"
+    {...stylex.props(styles.track, customClassName(className), style)}
+    {...props}
+  />
+);
+
+export type ProgressIndicatorProps = Omit<
+  ProgressPrimitive.Indicator.Props,
+  "style"
+> & {
+  className?: string;
+  style?: StyleXStyles;
+};
+
+const ProgressIndicator = ({
   className,
   style,
-  children,
   ...props
-}: Omit<React.ComponentProps<typeof ProgressPrimitive.Root>, "className"> & {
+}: ProgressIndicatorProps) => (
+  <ProgressPrimitive.Indicator
+    data-slot="progress-indicator"
+    {...stylex.props(styles.indicator, customClassName(className), style)}
+    {...props}
+  />
+);
+
+export type ProgressProps = Omit<ProgressPrimitive.Root.Props, "style"> & {
   className?: string;
-}) => (
+  style?: StyleXStyles;
+};
+
+const Progress = ({
+  className,
+  children,
+  value,
+  style,
+  ...props
+}: ProgressProps) => (
   <ProgressPrimitive.Root
-    {...stylex.props(
-      styles.rootWrapper,
-      customClassName(className),
-      style as StyleXStyles
-    )}
+    value={value}
     data-slot="progress"
+    {...stylex.props(styles.root, customClassName(className), style)}
     {...props}
   >
     {children}
-    <ProgressPrimitive.Track
-      className={stylex.props(styles.root).className}
-      data-slot="progress-track"
-    >
-      <ProgressPrimitive.Indicator
-        className={stylex.props(styles.indicator).className}
-        data-slot="progress-indicator"
-      />
-    </ProgressPrimitive.Track>
+    <ProgressTrack>
+      <ProgressIndicator />
+    </ProgressTrack>
   </ProgressPrimitive.Root>
 );
 
-const ProgressLabel = ({
-  className,
-  style,
-  ...props
-}: Omit<React.ComponentProps<typeof ProgressPrimitive.Label>, "className"> & {
+export type ProgressLabelProps = Omit<
+  ProgressPrimitive.Label.Props,
+  "style"
+> & {
   className?: string;
-}) => (
+  style?: StyleXStyles;
+};
+
+const ProgressLabel = ({ className, style, ...props }: ProgressLabelProps) => (
   <ProgressPrimitive.Label
-    {...stylex.props(
-      styles.label,
-      customClassName(className),
-      style as StyleXStyles
-    )}
     data-slot="progress-label"
+    {...stylex.props(styles.label, customClassName(className), style)}
     {...props}
   />
 );
 
-const ProgressValue = ({
-  className,
-  style,
-  ...props
-}: Omit<React.ComponentProps<typeof ProgressPrimitive.Value>, "className"> & {
+export type ProgressValueProps = Omit<
+  ProgressPrimitive.Value.Props,
+  "style"
+> & {
   className?: string;
-}) => (
+  style?: StyleXStyles;
+};
+
+const ProgressValue = ({ className, style, ...props }: ProgressValueProps) => (
   <ProgressPrimitive.Value
-    {...stylex.props(
-      styles.value,
-      customClassName(className),
-      style as StyleXStyles
-    )}
     data-slot="progress-value"
+    {...stylex.props(styles.value, customClassName(className), style)}
     {...props}
   />
 );
 
-export { Progress, ProgressLabel, ProgressValue };
+export {
+  Progress,
+  ProgressTrack,
+  ProgressIndicator,
+  ProgressLabel,
+  ProgressValue,
+  styles as progressStyles,
+};

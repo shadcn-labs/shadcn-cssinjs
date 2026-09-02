@@ -1,23 +1,19 @@
 ---
 title: Textarea
 description: Displays a form textarea or a component that looks like a textarea.
+component: true
 ---
 
-import TextareaDemo from "@/examples/textarea-demo";
-
-<ComponentPreview name="textarea-demo">
-  <TextareaDemo />
-</ComponentPreview>
+<ComponentPreview name="textarea-demo" previewClassName="*:max-w-xs" />
 
 ## Installation
 
 <Tabs defaultValue="cli">
 
 <TabsList>
-  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="cli">Command</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
-
 <TabsContent value="cli">
 
 ```bash
@@ -29,17 +25,6 @@ npx shadcn@latest add https://shadcn-cssinjs.com/r/textarea.json
 <TabsContent value="manual">
 
 <Steps>
-
-<Step>Install the following dependencies:</Step>
-
-```bash
-pnpm add @stylexjs/stylex
-```
-
-<Step>
-  Make sure [StyleX is configured](/docs/installation) and the design tokens are
-  installed.
-</Step>
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -56,50 +41,39 @@ pnpm add @stylexjs/stylex
 ## Usage
 
 ```tsx
-import { Textarea } from "@/components/ui/textarea/textarea";
+import { Textarea } from "@/components/ui/textarea";
 ```
 
 ```tsx
-<Textarea placeholder="Type your message here." />
+<Textarea />
 ```
 
-## Examples
+## Field
 
-import TextareaField from "@/examples/textarea-field";
-import TextareaDisabled from "@/examples/textarea-disabled";
-import TextareaInvalid from "@/examples/textarea-invalid";
-import TextareaButton from "@/examples/textarea-button";
+Use `Field`, `FieldLabel`, and `FieldDescription` to create a textarea with a label and description.
 
-### Field
+<ComponentPreview name="textarea-field" previewClassName="*:max-w-xs" />
 
-<ComponentPreview name="textarea-field">
-  <TextareaField />
-</ComponentPreview>
+## Disabled
 
-### Disabled
+Use the `disabled` prop to disable the textarea. To style the disabled state, add the `data-disabled` attribute to the `Field` component.
 
-<ComponentPreview name="textarea-disabled">
-  <TextareaDisabled />
-</ComponentPreview>
+<ComponentPreview name="textarea-disabled" previewClassName="*:max-w-xs" />
 
-### Invalid
+## Invalid
 
-<ComponentPreview name="textarea-invalid">
-  <TextareaInvalid />
-</ComponentPreview>
+Use the `aria-invalid` prop to mark the textarea as invalid. To style the invalid state, add the `data-invalid` attribute to the `Field` component.
 
-### Button
+<ComponentPreview name="textarea-invalid" previewClassName="*:max-w-xs" />
 
-<ComponentPreview name="textarea-button">
-  <TextareaButton />
-</ComponentPreview>
+## Button
 
-import TextareaRtl from "@/examples/textarea-rtl";
+Pair with `Button` to create a textarea with a submit button.
+
+<ComponentPreview name="textarea-button" previewClassName="*:max-w-xs" />
 
 ## RTL
 
-To enable right-to-left support, see the [RTL guide](/docs/rtl).
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview name="textarea-rtl" direction="rtl">
-  <TextareaRtl />
-</ComponentPreview>
+<ComponentPreview name="textarea-rtl" direction="rtl" />

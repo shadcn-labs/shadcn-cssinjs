@@ -1,26 +1,22 @@
 ---
 title: Sheet
 description: Extends the Dialog component to display content that complements the main content of the screen.
+component: true
 links:
   doc: https://base-ui.com/react/components/dialog
+  api: https://base-ui.com/react/components/dialog#api-reference
 ---
 
-import SheetDemo from "@/examples/sheet-demo";
-import SheetSide from "@/examples/sheet-side";
-
-<ComponentPreview name="sheet-demo">
-  <SheetDemo />
-</ComponentPreview>
+<ComponentPreview name="sheet-demo" />
 
 ## Installation
 
 <Tabs defaultValue="cli">
 
 <TabsList>
-  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="cli">Command</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
-
 <TabsContent value="cli">
 
 ```bash
@@ -58,18 +54,20 @@ pnpm add @base-ui/react @stylexjs/stylex
 
 ## Usage
 
-```tsx
+```tsx showLineNumbers
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetDescription,
+  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet/sheet";
+} from "@/components/ui/sheet";
 ```
 
-```tsx
+```tsx showLineNumbers
 <Sheet>
   <SheetTrigger>Open</SheetTrigger>
   <SheetContent>
@@ -85,7 +83,7 @@ import {
 
 Use the following composition to build a `Sheet`:
 
-```txt
+```text
 Sheet
 ├── SheetTrigger
 └── SheetContent
@@ -93,40 +91,26 @@ Sheet
     │   ├── SheetTitle
     │   └── SheetDescription
     └── SheetFooter
-        └── SheetClose
 ```
 
-## Examples
+## Side
 
-### Side
+Use the `side` prop on `SheetContent` to set the edge of the screen where the sheet appears. Values are `top`, `right`, `bottom`, or `left`.
 
-Use the `side` prop on `SheetContent` to set which edge the sheet slides from:
-`top`, `right`, `bottom`, or `left`.
+<ComponentPreview name="sheet-side" />
 
-<ComponentPreview name="sheet-side">
-  <SheetSide />
-</ComponentPreview>
+## No Close Button
 
-import SheetNoCloseButton from "@/examples/sheet-no-close-button";
+Use `showCloseButton={false}` on `SheetContent` to hide the close button.
 
-### No Close Button
-
-Use `showCloseButton={false}` to hide the default close button.
-
-<ComponentPreview name="sheet-no-close-button">
-  <SheetNoCloseButton />
-</ComponentPreview>
-
-import SheetRtl from "@/examples/sheet-rtl";
+<ComponentPreview name="sheet-no-close-button" />
 
 ## RTL
 
-To enable right-to-left support, see the [RTL guide](/docs/rtl).
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview name="sheet-rtl" direction="rtl">
-  <SheetRtl />
-</ComponentPreview>
+<ComponentPreview name="sheet-rtl" direction="rtl" />
 
 ## API Reference
 
-See the [Base UI Dialog](https://base-ui.com/react/components/dialog#api-reference) documentation for the full API reference.
+See the [Base UI Dialog](https://base-ui.com/react/components/dialog#api-reference) documentation.

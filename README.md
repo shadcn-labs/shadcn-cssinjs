@@ -20,10 +20,6 @@ Built on top of [@base-ui/react](https://base-ui.com) (headless primitives) and 
 
 Visit https://shadcn-cssinjs.com/docs to view the documentation.
 
-## Development
-
-Please refer to the [Development Guide](./DEVELOPMENT.md) for more details.
-
 ## Contributing
 
 Please refer to the [Contributing Guide](./CONTRIBUTING.md) for more details.

@@ -10,7 +10,7 @@ import * as stylex from "@stylexjs/stylex";
  * reference `colors.primary` / `radius.md` instead of stringly-typed
  * `var(--primary)` so token usage is typed and centralized.
  */
-export const colors = stylex.defineVars({
+export const colors = stylex.defineConsts({
   accent: "var(--accent)",
   accentForeground: "var(--accent-foreground)",
   background: "var(--background)",
@@ -39,7 +39,9 @@ export const colors = stylex.defineVars({
   sidebarRing: "var(--sidebar-ring)",
 });
 
-export const radius = stylex.defineVars({
+export const radius = stylex.defineConsts({
+  "2xl": "1rem",
+  full: "9999px",
   lg: "var(--radius)",
   md: "calc(var(--radius) - 2px)",
   sm: "calc(var(--radius) - 4px)",

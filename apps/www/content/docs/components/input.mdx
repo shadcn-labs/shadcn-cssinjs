@@ -1,26 +1,19 @@
 ---
 title: Input
-description: Displays a form input field or a component that looks like an input field.
+description: A text input component for forms and user data entry with built-in styling and accessibility features.
+component: true
 ---
 
-import InputDemo from "@/examples/input-demo";
-import InputLabel from "@/examples/input-label";
-import InputDisabled from "@/examples/input-disabled";
-import InputFile from "@/examples/input-file";
-
-<ComponentPreview name="input-demo">
-  <InputDemo />
-</ComponentPreview>
+<ComponentPreview name="input-demo" previewClassName="*:max-w-xs" />
 
 ## Installation
 
 <Tabs defaultValue="cli">
 
 <TabsList>
-  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="cli">Command</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
-
 <TabsContent value="cli">
 
 ```bash
@@ -32,17 +25,6 @@ npx shadcn@latest add https://shadcn-cssinjs.com/r/input.json
 <TabsContent value="manual">
 
 <Steps>
-
-<Step>Install the following dependencies:</Step>
-
-```bash
-pnpm add @stylexjs/stylex
-```
-
-<Step>
-  Make sure [StyleX is configured](/docs/installation) and the design tokens are
-  installed.
-</Step>
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -59,115 +41,97 @@ pnpm add @stylexjs/stylex
 ## Usage
 
 ```tsx
-import { Input } from "@/components/ui/input/input";
+import { Input } from "@/components/ui/input";
 ```
 
 ```tsx
-<Input type="email" placeholder="Email" />
+<Input />
 ```
 
-## Examples
+## Basic
 
-import InputBasic from "@/examples/input-basic";
-import InputField from "@/examples/input-field";
-import InputFieldGroup from "@/examples/input-fieldgroup";
-import InputInvalid from "@/examples/input-invalid";
-import InputInline from "@/examples/input-inline";
-import InputGrid from "@/examples/input-grid";
-import InputRequired from "@/examples/input-required";
-import InputBadge from "@/examples/input-badge";
-import InputButtonGroup from "@/examples/input-button-group";
+<ComponentPreview name="input-basic" previewClassName="*:max-w-xs" />
 
-### Basic
+## Field
 
-<ComponentPreview name="input-basic">
-  <InputBasic />
-</ComponentPreview>
+Use `Field`, `FieldLabel`, and `FieldDescription` to create an input with a
+label and description.
 
-### Label
+<ComponentPreview name="input-field" previewClassName="*:max-w-xs" />
 
-Pair the input with a `label` element.
+## Field Group
 
-<ComponentPreview name="input-label">
-  <InputLabel />
-</ComponentPreview>
+Use `FieldGroup` to show multiple `Field` blocks and to build forms.
 
-### Field
+<ComponentPreview name="input-fieldgroup" previewClassName="*:max-w-xs" />
 
-Compose the input with a `Field` for labels and descriptions.
+## Disabled
 
-<ComponentPreview name="input-field">
-  <InputField />
-</ComponentPreview>
+Use the `disabled` prop to disable the input. To style the disabled state, add the `data-disabled` attribute to the `Field` component.
 
-### Field Group
+<ComponentPreview name="input-disabled" previewClassName="*:max-w-xs" />
 
-<ComponentPreview name="input-fieldgroup">
-  <InputFieldGroup />
-</ComponentPreview>
+## Invalid
 
-### Disabled
+Use the `aria-invalid` prop to mark the input as invalid. To style the invalid state, add the `data-invalid` attribute to the `Field` component.
 
-<ComponentPreview name="input-disabled">
-  <InputDisabled />
-</ComponentPreview>
+<ComponentPreview name="input-invalid" previewClassName="*:max-w-xs" />
 
-### Invalid
+## File
 
-<ComponentPreview name="input-invalid">
-  <InputInvalid />
-</ComponentPreview>
+Use the `type="file"` prop to create a file input.
 
-### File
+<ComponentPreview name="input-file" previewClassName="*:max-w-xs" />
 
-<ComponentPreview name="input-file">
-  <InputFile />
-</ComponentPreview>
+## Inline
 
-### Inline
+Use `Field` with `orientation="horizontal"` to create an inline input.
+Pair with `Button` to create a search input with a button.
 
-<ComponentPreview name="input-inline">
-  <InputInline />
-</ComponentPreview>
+<ComponentPreview name="input-inline" previewClassName="*:max-w-xs" />
 
-### Grid
+## Grid
 
-<ComponentPreview name="input-grid">
-  <InputGrid />
-</ComponentPreview>
+Use a grid layout to place multiple inputs side by side.
 
-### Required
+<ComponentPreview name="input-grid" previewClassName="p-6" />
 
-<ComponentPreview name="input-required">
-  <InputRequired />
-</ComponentPreview>
+## Required
 
-### Badge
+Use the `required` attribute to indicate required inputs.
 
-<ComponentPreview name="input-badge">
-  <InputBadge />
-</ComponentPreview>
+<ComponentPreview name="input-required" previewClassName="*:max-w-xs" />
 
-### Button Group
+## Badge
 
-<ComponentPreview name="input-button-group">
-  <InputButtonGroup />
-</ComponentPreview>
+Use `Badge` in the label to highlight a recommended field.
 
-import InputInputGroup from "@/examples/input-input-group";
+<ComponentPreview name="input-badge" previewClassName="*:max-w-xs" />
 
-### Input Group
+## Input Group
 
-<ComponentPreview name="input-input-group">
-  <InputInputGroup />
-</ComponentPreview>
+To add icons, text, or buttons inside an input, use the `InputGroup` component. See the [Input Group](/docs/components/input-group) component for more examples.
 
-import InputRtl from "@/examples/input-rtl";
+<ComponentPreview name="input-input-group" previewClassName="*:max-w-xs" />
+
+## Button Group
+
+To add buttons to an input, use the `ButtonGroup` component. See the [Button Group](/docs/components/button-group) component for more examples.
+
+<ComponentPreview name="input-button-group" previewClassName="*:max-w-xs" />
+
+## Form
+
+A full form example with multiple inputs, a select, and a button.
+
+<ComponentPreview name="input-form" previewClassName="h-[32rem]" />
 
 ## RTL
 
-To enable right-to-left support, see the [RTL guide](/docs/rtl).
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview name="input-rtl" direction="rtl">
-  <InputRtl />
-</ComponentPreview>
+<ComponentPreview
+  name="input-rtl"
+  direction="rtl"
+  previewClassName="*:max-w-xs"
+/>

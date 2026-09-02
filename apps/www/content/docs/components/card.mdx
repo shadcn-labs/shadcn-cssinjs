@@ -1,23 +1,19 @@
 ---
 title: Card
 description: Displays a card with header, content, and footer.
+component: true
 ---
 
-import CardDemo from "@/examples/card-demo";
-
-<ComponentPreview name="card-demo">
-  <CardDemo />
-</ComponentPreview>
+<ComponentPreview name="card-demo" previewClassName="h-[30rem]" />
 
 ## Installation
 
 <Tabs defaultValue="cli">
 
 <TabsList>
-  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="cli">Command</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
-
 <TabsContent value="cli">
 
 ```bash
@@ -29,17 +25,6 @@ npx shadcn@latest add https://shadcn-cssinjs.com/r/card.json
 <TabsContent value="manual">
 
 <Steps>
-
-<Step>Install the following dependencies:</Step>
-
-```bash
-pnpm add @stylexjs/stylex
-```
-
-<Step>
-  Make sure [StyleX is configured](/docs/installation) and the design tokens are
-  installed.
-</Step>
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -55,7 +40,7 @@ pnpm add @stylexjs/stylex
 
 ## Usage
 
-```tsx
+```tsx showLineNumbers
 import {
   Card,
   CardAction,
@@ -64,10 +49,10 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card/card";
+} from "@/components/ui/card";
 ```
 
-```tsx
+```tsx showLineNumbers
 <Card>
   <CardHeader>
     <CardTitle>Card Title</CardTitle>
@@ -87,7 +72,7 @@ import {
 
 Use the following composition to build a `Card`:
 
-```txt
+```text
 Card
 ├── CardHeader
 │   ├── CardTitle
@@ -97,45 +82,37 @@ Card
 └── CardFooter
 ```
 
-## Examples
+## Size
 
-import CardSize from "@/examples/card-size";
-import CardSpacing from "@/examples/card-spacing";
-import CardImage from "@/examples/card-image";
+Use the `size="sm"` prop to set the size of the card to small. The small size variant uses smaller spacing.
 
-### Size
+<ComponentPreview name="card-small" previewClassName="h-96" />
 
-Use the `size="sm"` prop for a more compact card.
+## Spacing
 
-<ComponentPreview name="card-size">
-  <CardSize />
-</ComponentPreview>
+In addition to the `size` prop, you can use the `--card-spacing` CSS variable to control the spacing between sections and the inset of card parts.
 
-### Spacing
+<ComponentPreview name="card-spacing" previewClassName="h-[34rem]" />
 
-Customize card spacing by setting the `--card-spacing` variable.
+Use negative margins with `-mx-(--card-spacing)` to make content go edge to edge while keeping it aligned with the card inset. When the edge-to-edge content sits above a footer, use `-mb-(--card-spacing)` on `CardContent` to remove the section gap.
 
-<ComponentPreview name="card-spacing">
-  <CardSpacing />
-</ComponentPreview>
+<ComponentPreview name="card-edge-to-edge" previewClassName="h-[24rem]" />
 
-### Image
+## Image
 
-Add an image to the top of the card.
+Add an image before the card header to create a card with an image.
 
-<ComponentPreview name="card-image">
-  <CardImage />
-</ComponentPreview>
-
-import CardRtl from "@/examples/card-rtl";
+<ComponentPreview name="card-image" previewClassName="h-[32rem]" />
 
 ## RTL
 
-To enable right-to-left support, see the [RTL guide](/docs/rtl).
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview name="card-rtl" direction="rtl">
-  <CardRtl />
-</ComponentPreview>
+<ComponentPreview
+  name="card-rtl"
+  direction="rtl"
+  previewClassName="h-[30rem]"
+/>
 
 ## API Reference
 
@@ -143,9 +120,10 @@ To enable right-to-left support, see the [RTL guide](/docs/rtl).
 
 The `Card` component is the root container for card content.
 
-| Prop        | Type     | Default |
-| ----------- | -------- | ------- |
-| `className` | `string` | -       |
+| Prop        | Type                | Default     |
+| ----------- | ------------------- | ----------- |
+| `size`      | `"default" \| "sm"` | `"default"` |
+| `className` | `string`            | -           |
 
 ### CardHeader
 

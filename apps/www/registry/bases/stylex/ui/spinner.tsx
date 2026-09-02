@@ -1,6 +1,7 @@
 import * as stylex from "@stylexjs/stylex";
 import type { StyleXStyles } from "@stylexjs/stylex";
 import { Loader2Icon } from "lucide-react";
+import * as React from "react";
 
 import { customClassName } from "@/registry/bases/stylex/lib/utils.stylex";
 
@@ -15,26 +16,22 @@ const styles = stylex.create({
     animationIterationCount: "infinite",
     animationName: spin,
     animationTimingFunction: "linear",
-    flexShrink: 0,
     height: "1rem",
     width: "1rem",
   },
 });
 
-const Spinner = ({
-  className,
-  style,
-  ...props
-}: React.ComponentProps<typeof Loader2Icon> & { className?: string }) => (
+export type SpinnerProps = Omit<React.ComponentProps<"svg">, "style"> & {
+  className?: string;
+  style?: StyleXStyles;
+};
+
+const Spinner = ({ className, style, ...props }: SpinnerProps) => (
   <Loader2Icon
-    aria-label="Loading"
-    {...stylex.props(
-      styles.root,
-      customClassName(className),
-      style as StyleXStyles
-    )}
     data-slot="spinner"
     role="status"
+    aria-label="Loading"
+    {...stylex.props(styles.root, customClassName(className), style)}
     {...props}
   />
 );

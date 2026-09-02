@@ -1,26 +1,22 @@
 ---
 title: Switch
 description: A control that allows the user to toggle between checked and not checked.
+component: true
 links:
   doc: https://base-ui.com/react/components/switch
   api: https://base-ui.com/react/components/switch#api-reference
 ---
 
-import SwitchDemo from "@/examples/switch-demo";
-
-<ComponentPreview name="switch-demo">
-  <SwitchDemo />
-</ComponentPreview>
+<ComponentPreview name="switch-demo" />
 
 ## Installation
 
 <Tabs defaultValue="cli">
 
 <TabsList>
-  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="cli">Command</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
-
 <TabsContent value="cli">
 
 ```bash
@@ -59,61 +55,47 @@ pnpm add @base-ui/react @stylexjs/stylex
 ## Usage
 
 ```tsx
-import { Switch } from "@/components/ui/switch/switch";
+import { Switch } from "@/components/ui/switch";
 ```
 
 ```tsx
-<Switch defaultChecked />
+<Switch />
 ```
 
-## Examples
+## Description
 
-import SwitchDescription from "@/examples/switch-description";
-import SwitchChoiceCard from "@/examples/switch-choice-card";
-import SwitchDisabled from "@/examples/switch-disabled";
-import SwitchInvalid from "@/examples/switch-invalid";
-import SwitchSizes from "@/examples/switch-sizes";
+<ComponentPreview name="switch-description" />
 
-### Description
+## Choice Card
 
-<ComponentPreview name="switch-description">
-  <SwitchDescription />
-</ComponentPreview>
+Card-style selection where `FieldLabel` wraps the entire `Field` for a clickable card pattern.
 
-### Choice Card
+<ComponentPreview name="switch-choice-card" />
 
-<ComponentPreview name="switch-choice-card">
-  <SwitchChoiceCard />
-</ComponentPreview>
+## Disabled
 
-### Disabled
+Add the `disabled` prop to the `Switch` component to disable the switch. Add the `data-disabled` prop to the `Field` component for styling.
 
-<ComponentPreview name="switch-disabled">
-  <SwitchDisabled />
-</ComponentPreview>
+<ComponentPreview name="switch-disabled" />
 
-### Invalid
+## Invalid
 
-<ComponentPreview name="switch-invalid">
-  <SwitchInvalid />
-</ComponentPreview>
+Add the `aria-invalid` prop to the `Switch` component to indicate an invalid state. Add the `data-invalid` prop to the `Field` component for styling.
 
-### Size
+<ComponentPreview name="switch-invalid" />
 
-<ComponentPreview name="switch-sizes">
-  <SwitchSizes />
-</ComponentPreview>
+## Size
 
-import SwitchRtl from "@/examples/switch-rtl";
+Use the `size` prop to change the size of the switch.
+
+<ComponentPreview name="switch-sizes" />
 
 ## RTL
 
-To enable right-to-left support, see the [RTL guide](/docs/rtl).
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview name="switch-rtl" direction="rtl">
-  <SwitchRtl />
-</ComponentPreview>
+<ComponentPreview name="switch-rtl" direction="rtl" />
 
 ## API Reference
 
-See the [Base UI](https://base-ui.com/react/components/switch#api-reference) documentation for the full API.
+See the [Base UI Switch](https://base-ui.com/react/components/switch#api-reference) documentation.

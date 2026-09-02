@@ -120,7 +120,7 @@ export const ComponentPreviewTabs = ({
               </PopoverTrigger>
               <PopoverContent
                 align="end"
-                className="w-60 text-xs"
+                className="w-60 text-xs p-2.5"
                 side="bottom"
               >
                 <div>
@@ -160,7 +160,7 @@ export const ComponentPreviewTabs = ({
 
       {!hideCode && (
         <div
-          className="relative overflow-hidden border-t [&_[data-rehype-pretty-code-figure]]:m-0! [&_[data-rehype-pretty-code-figure]]:rounded-none [&_[data-rehype-pretty-code-figure]]:border-0 [&_pre]:max-h-96"
+          className="relative overflow-hidden border-t [&_[data-rehype-pretty-code-figure]]:m-0! [&_[data-rehype-pretty-code-figure]]:rounded-none [&_[data-rehype-pretty-code-figure]]:border-0 [&_pre]:max-h-72"
           data-slot="code"
         >
           {isCodeVisible ? (

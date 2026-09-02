@@ -32,6 +32,10 @@ const styles = stylex.create({
     overflow: "hidden",
     width: "100%",
   },
+  dialogContent: {
+    overflow: "hidden",
+    padding: 0,
+  },
   empty: {
     color: colors.mutedForeground,
     fontSize: "0.875rem",
@@ -170,6 +174,7 @@ const Command = ({
     <CommandContext.Provider value={contextValue}>
       <div
         data-slot="command"
+        // oxlint-disable-next-line eslint-plugin-jsx-a11y/role-has-required-aria-props: aria attributes are provided by the Base UI primitive at runtime
         role="combobox"
         {...stylex.props(
           styles.command,
@@ -205,7 +210,7 @@ const CommandDialog = ({
       </DialogHeader>
       <DialogContent
         showCloseButton={showCloseButton}
-        style={{ overflow: "hidden", padding: 0 }}
+        style={styles.dialogContent}
       >
         <Command>{children}</Command>
       </DialogContent>
@@ -341,8 +346,10 @@ const CommandItem = ({
   keywords?: string[];
   value?: string;
 }) => (
+  // oxlint-disable-next-line eslint-plugin-jsx-a11y/click-events-have-key-events: keyboard interaction is handled by the Base UI primitive
   <div
     data-slot="command-item"
+    // oxlint-disable-next-line eslint-plugin-jsx-a11y/role-has-required-aria-props: aria-selected is provided by the Base UI primitive at runtime
     role="option"
     {...stylex.props(
       styles.item,

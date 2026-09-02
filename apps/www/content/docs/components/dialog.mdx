@@ -1,27 +1,25 @@
 ---
 title: Dialog
-description: A window overlaid on either the primary window or another dialog window.
+description: A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.
+component: true
 links:
   doc: https://base-ui.com/react/components/dialog
   api: https://base-ui.com/react/components/dialog#api-reference
 ---
 
-import DialogDemo from "@/examples/dialog-demo";
-import DialogScrollable from "@/examples/dialog-scrollable";
-
-<ComponentPreview name="dialog-demo">
-  <DialogDemo />
-</ComponentPreview>
+<ComponentPreview
+  name="dialog-demo"
+  description="A dialog for editing profile details."
+/>
 
 ## Installation
 
 <Tabs defaultValue="cli">
 
 <TabsList>
-  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="cli">Command</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
-
 <TabsContent value="cli">
 
 ```bash
@@ -59,25 +57,27 @@ pnpm add @base-ui/react @stylexjs/stylex
 
 ## Usage
 
-```tsx
+```tsx showLineNumbers
 import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog/dialog";
+} from "@/components/ui/dialog";
 ```
 
-```tsx
+```tsx showLineNumbers
 <Dialog>
   <DialogTrigger>Open</DialogTrigger>
   <DialogContent>
     <DialogHeader>
       <DialogTitle>Are you absolutely sure?</DialogTitle>
-      <DialogDescription>This action cannot be undone.</DialogDescription>
+      <DialogDescription>
+        This action cannot be undone. This will permanently delete your account
+        and remove your data from our servers.
+      </DialogDescription>
     </DialogHeader>
   </DialogContent>
 </Dialog>
@@ -87,7 +87,7 @@ import {
 
 Use the following composition to build a `Dialog`:
 
-```txt
+```text
 Dialog
 ├── DialogTrigger
 └── DialogContent
@@ -95,54 +95,38 @@ Dialog
     │   ├── DialogTitle
     │   └── DialogDescription
     └── DialogFooter
-        └── DialogClose
 ```
 
-## Examples
+## Custom Close Button
 
-import DialogCloseButton from "@/examples/dialog-close-button";
-import DialogNoCloseButton from "@/examples/dialog-no-close-button";
-import DialogStickyFooter from "@/examples/dialog-sticky-footer";
+Replace the default close control with your own button.
 
-### Custom Close Button
+<ComponentPreview name="dialog-close-button" />
 
-<ComponentPreview name="dialog-close-button">
-  <DialogCloseButton />
-</ComponentPreview>
+## No Close Button
 
-### No Close Button
+Use `showCloseButton={false}` to hide the close button.
 
-Use `showCloseButton={false}` to hide the default close button.
+<ComponentPreview name="dialog-no-close-button" />
 
-<ComponentPreview name="dialog-no-close-button">
-  <DialogNoCloseButton />
-</ComponentPreview>
+## Sticky Footer
 
-### Sticky Footer
+Keep actions visible while the content scrolls.
 
-<ComponentPreview name="dialog-sticky-footer">
-  <DialogStickyFooter />
-</ComponentPreview>
+<ComponentPreview name="dialog-sticky-footer" />
 
-### Scrollable Content
+## Scrollable Content
 
-Constrain the body height and let it scroll when content overflows.
+Long content can scroll while the header stays in view.
 
-<ComponentPreview name="dialog-scrollable">
-  <DialogScrollable />
-</ComponentPreview>
-
-import DialogRtl from "@/examples/dialog-rtl";
+<ComponentPreview name="dialog-scrollable-content" />
 
 ## RTL
 
-To enable right-to-left support, see the [RTL guide](/docs/rtl).
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview name="dialog-rtl" direction="rtl">
-  <DialogRtl />
-</ComponentPreview>
+<ComponentPreview name="dialog-rtl" direction="rtl" />
 
 ## API Reference
 
-See the [Base UI](https://base-ui.com/react/components/dialog#api-reference)
-documentation for the full API.
+See the [Base UI](https://base-ui.com/react/components/dialog#api-reference) documentation for more information.

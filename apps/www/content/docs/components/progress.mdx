@@ -1,26 +1,22 @@
 ---
 title: Progress
-description: Displays an indicator showing the completion progress of a task.
+description: Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.
+component: true
 links:
   doc: https://base-ui.com/react/components/progress
   api: https://base-ui.com/react/components/progress#api-reference
 ---
 
-import ProgressDemo from "@/examples/progress-demo";
-
-<ComponentPreview name="progress-demo">
-  <ProgressDemo />
-</ComponentPreview>
+<ComponentPreview name="progress-demo" />
 
 ## Installation
 
 <Tabs defaultValue="cli">
 
 <TabsList>
-  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="cli">Command</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
-
 <TabsContent value="cli">
 
 ```bash
@@ -58,43 +54,58 @@ pnpm add @base-ui/react @stylexjs/stylex
 
 ## Usage
 
-```tsx
-import { Progress } from "@/components/ui/progress/progress";
+```tsx showLineNumbers
+import { Progress } from "@/components/ui/progress";
 ```
 
-```tsx
-<Progress value={60} />
+```tsx showLineNumbers
+<Progress value={33} />
 ```
 
-## Examples
+## Composition
 
-import ProgressWithLabel from "@/examples/progress-label";
-import ProgressControlled from "@/examples/progress-controlled";
+### With label and value
 
-### Label
+Use `ProgressLabel` and `ProgressValue` to add a label and value display.
 
-Use `ProgressLabel` and `ProgressValue` to show a label and the current value.
+```tsx showLineNumbers
+import {
+  Progress,
+  ProgressLabel,
+  ProgressValue,
+} from "@/components/ui/progress";
+<Progress value={56} className="w-full max-w-sm">
+  <ProgressLabel>Upload progress</ProgressLabel>
+  <ProgressValue />
+</Progress>;
+```
 
-<ComponentPreview name="progress-label">
-  <ProgressWithLabel />
-</ComponentPreview>
+```text
+Progress
+├── ProgressLabel
+├── ProgressValue
+└── ProgressTrack
+    └── ProgressIndicator
+```
 
-### Controlled
+## Label
 
-<ComponentPreview name="progress-controlled">
-  <ProgressControlled />
-</ComponentPreview>
+Use `ProgressLabel` and `ProgressValue` to add a label and value display.
 
-import ProgressRtl from "@/examples/progress-rtl";
+<ComponentPreview name="progress-label" />
+
+## Controlled
+
+A progress bar that can be controlled by a slider.
+
+<ComponentPreview name="progress-controlled" />
 
 ## RTL
 
-To enable right-to-left support, see the [RTL guide](/docs/rtl).
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview name="progress-rtl" direction="rtl">
-  <ProgressRtl />
-</ComponentPreview>
+<ComponentPreview name="progress-rtl" direction="rtl" />
 
 ## API Reference
 
-See the [Base UI](https://base-ui.com/react/components/progress#api-reference) documentation for the full API.
+See the [Base UI Progress](https://base-ui.com/react/components/progress#api-reference) documentation.

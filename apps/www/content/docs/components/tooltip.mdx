@@ -1,32 +1,49 @@
 ---
 title: Tooltip
 description: A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.
+component: true
 links:
   doc: https://base-ui.com/react/components/tooltip
   api: https://base-ui.com/react/components/tooltip#api-reference
 ---
 
-import TooltipDemo from "@/examples/tooltip-demo";
-import TooltipSides from "@/examples/tooltip-sides";
-
-<ComponentPreview name="tooltip-demo">
-  <TooltipDemo />
-</ComponentPreview>
+<ComponentPreview name="tooltip-demo" />
 
 ## Installation
 
 <Tabs defaultValue="cli">
 
 <TabsList>
-  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="cli">Command</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
-
 <TabsContent value="cli">
+
+<Steps>
+
+<Step>Run the following command:</Step>
 
 ```bash
 npx shadcn@latest add https://shadcn-cssinjs.com/r/tooltip.json
 ```
+
+<Step>Add the `TooltipProvider` to the root of your app.</Step>
+
+```tsx title="app/layout.tsx" showLineNumbers {1,7}
+import { TooltipProvider } from "@/components/ui/tooltip";
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>
+        <TooltipProvider>{children}</TooltipProvider>
+      </body>
+    </html>
+  );
+}
+```
+
+</Steps>
 
 </TabsContent>
 
@@ -51,6 +68,22 @@ pnpm add @base-ui/react @stylexjs/stylex
 
 <Step>Update the import paths to match your project setup.</Step>
 
+<Step>Add the `TooltipProvider` to the root of your app.</Step>
+
+```tsx title="app/layout.tsx" showLineNumbers {1,7}
+import { TooltipProvider } from "@/components/ui/tooltip";
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>
+        <TooltipProvider>{children}</TooltipProvider>
+      </body>
+    </html>
+  );
+}
+```
+
 </Steps>
 
 </TabsContent>
@@ -59,15 +92,15 @@ pnpm add @base-ui/react @stylexjs/stylex
 
 ## Usage
 
-```tsx
+```tsx showLineNumbers
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/components/ui/tooltip/tooltip";
+} from "@/components/ui/tooltip";
 ```
 
-```tsx
+```tsx showLineNumbers
 <Tooltip>
   <TooltipTrigger>Hover</TooltipTrigger>
   <TooltipContent>
@@ -80,50 +113,34 @@ import {
 
 Use the following composition to build a `Tooltip`:
 
-```txt
+```text
 Tooltip
 ├── TooltipTrigger
 └── TooltipContent
 ```
 
-## Examples
+## Side
 
-### Side
+Use the `side` prop to change the position of the tooltip.
 
-Use the `side` prop on `TooltipContent` to position the tooltip.
+<ComponentPreview name="tooltip-sides" />
 
-<ComponentPreview name="tooltip-sides">
-  <TooltipSides />
-</ComponentPreview>
+## With Keyboard Shortcut
 
-import TooltipKeyboard from "@/examples/tooltip-keyboard";
-import TooltipDisabled from "@/examples/tooltip-disabled";
+<ComponentPreview name="tooltip-keyboard" />
 
-### With Keyboard Shortcut
+## Disabled Button
 
-<ComponentPreview name="tooltip-keyboard">
-  <TooltipKeyboard />
-</ComponentPreview>
+Show a tooltip on a disabled button by wrapping it with a span.
 
-### Disabled Button
-
-Wrap a disabled button in a `span` so the tooltip still works.
-
-<ComponentPreview name="tooltip-disabled">
-  <TooltipDisabled />
-</ComponentPreview>
-
-import TooltipRtl from "@/examples/tooltip-rtl";
+<ComponentPreview name="tooltip-disabled" />
 
 ## RTL
 
-To enable right-to-left support, see the [RTL guide](/docs/rtl).
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview name="tooltip-rtl" direction="rtl">
-  <TooltipRtl />
-</ComponentPreview>
+<ComponentPreview name="tooltip-rtl" direction="rtl" />
 
 ## API Reference
 
-See the [Base UI](https://base-ui.com/react/components/tooltip#api-reference)
-documentation for the full API.
+See the [Base UI Tooltip](https://base-ui.com/react/components/tooltip#api-reference) documentation.

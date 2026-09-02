@@ -1,26 +1,22 @@
 ---
 title: Radio Group
-description: A set of checkable buttons—where no more than one can be checked at a time.
+description: A set of checkable buttons—known as radio buttons—where no more than one of the buttons can be checked at a time.
+component: true
 links:
   doc: https://base-ui.com/react/components/radio-group
   api: https://base-ui.com/react/components/radio-group#api-reference
 ---
 
-import RadioGroupDemo from "@/examples/radio-group-demo";
-
-<ComponentPreview name="radio-group-demo">
-  <RadioGroupDemo />
-</ComponentPreview>
+<ComponentPreview name="radio-group-demo" />
 
 ## Installation
 
 <Tabs defaultValue="cli">
 
 <TabsList>
-  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="cli">Command</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
-
 <TabsContent value="cli">
 
 ```bash
@@ -58,78 +54,70 @@ pnpm add @base-ui/react @stylexjs/stylex
 
 ## Usage
 
-```tsx
-import {
-  RadioGroup,
-  RadioGroupItem,
-} from "@/components/ui/radio-group/radio-group";
+```tsx showLineNumbers
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 ```
 
-```tsx
-<RadioGroup defaultValue="comfortable">
-  <RadioGroupItem value="default" />
-  <RadioGroupItem value="comfortable" />
+```tsx showLineNumbers
+<RadioGroup defaultValue="option-one">
+  <div className="flex items-center gap-3">
+    <RadioGroupItem value="option-one" id="option-one" />
+    <Label htmlFor="option-one">Option One</Label>
+  </div>
+  <div className="flex items-center gap-3">
+    <RadioGroupItem value="option-two" id="option-two" />
+    <Label htmlFor="option-two">Option Two</Label>
+  </div>
 </RadioGroup>
 ```
 
 ## Composition
 
-Use the following composition to build a `Radio Group`:
+Use the following composition to build a `RadioGroup`:
 
-```txt
+```text
 RadioGroup
 ├── RadioGroupItem
 └── RadioGroupItem
 ```
 
-## Examples
+## Description
 
-import RadioGroupDescription from "@/examples/radio-group-description";
-import RadioGroupChoiceCard from "@/examples/radio-group-choice-card";
-import RadioGroupFieldset from "@/examples/radio-group-fieldset";
-import RadioGroupDisabled from "@/examples/radio-group-disabled";
-import RadioGroupInvalid from "@/examples/radio-group-invalid";
+Radio group items with a description using the `Field` component.
 
-### Description
+<ComponentPreview name="radio-group-description" />
 
-<ComponentPreview name="radio-group-description">
-  <RadioGroupDescription />
-</ComponentPreview>
+## Choice Card
 
-### Choice Card
+Use `FieldLabel` to wrap the entire `Field` for a clickable card-style selection.
 
-<ComponentPreview name="radio-group-choice-card">
-  <RadioGroupChoiceCard />
-</ComponentPreview>
+<ComponentPreview name="radio-group-choice-card" />
 
-### Fieldset
+## Fieldset
 
-<ComponentPreview name="radio-group-fieldset">
-  <RadioGroupFieldset />
-</ComponentPreview>
+Use `FieldSet` and `FieldLegend` to group radio items with a label and description.
 
-### Disabled
+<ComponentPreview name="radio-group-fieldset" />
 
-<ComponentPreview name="radio-group-disabled">
-  <RadioGroupDisabled />
-</ComponentPreview>
+## Disabled
 
-### Invalid
+Use the `disabled` prop on `RadioGroup` to disable all items.
 
-<ComponentPreview name="radio-group-invalid">
-  <RadioGroupInvalid />
-</ComponentPreview>
+<ComponentPreview name="radio-group-disabled" />
 
-import RadioGroupRtl from "@/examples/radio-group-rtl";
+## Invalid
+
+Use `aria-invalid` on `RadioGroupItem` and `data-invalid` on `Field` to show validation errors.
+
+<ComponentPreview name="radio-group-invalid" />
 
 ## RTL
 
-To enable right-to-left support, see the [RTL guide](/docs/rtl).
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview name="radio-group-rtl" direction="rtl">
-  <RadioGroupRtl />
-</ComponentPreview>
+<ComponentPreview name="radio-group-rtl" direction="rtl" />
 
 ## API Reference
 
-See the [Base UI](https://base-ui.com/react/components/radio-group#api-reference) documentation for the full API.
+See the [Base UI Radio Group](https://base-ui.com/react/components/radio-group#api-reference) documentation.

@@ -1,26 +1,22 @@
 ---
 title: Hover Card
 description: For sighted users to preview content available behind a link.
+component: true
 links:
-  doc: https://base-ui.com/react/components/preview-card
-  api: https://base-ui.com/react/components/preview-card#api-reference
+  doc: https://base-ui.com/react/components/hover-card
+  api: https://base-ui.com/react/components/hover-card#api-reference
 ---
 
-import HoverCardDemo from "@/examples/hover-card-demo";
-
-<ComponentPreview name="hover-card-demo">
-  <HoverCardDemo />
-</ComponentPreview>
+<ComponentPreview name="hover-card-demo" previewClassName="h-80" />
 
 ## Installation
 
 <Tabs defaultValue="cli">
 
 <TabsList>
-  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="cli">Command</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
-
 <TabsContent value="cli">
 
 ```bash
@@ -58,59 +54,78 @@ pnpm add @base-ui/react @stylexjs/stylex
 
 ## Usage
 
-```tsx
+```tsx showLineNumbers
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from "@/components/ui/hover-card/hover-card";
+} from "@/components/ui/hover-card";
 ```
 
-```tsx
+```tsx showLineNumbers
 <HoverCard>
   <HoverCardTrigger>Hover</HoverCardTrigger>
-  <HoverCardContent>Preview content</HoverCardContent>
+  <HoverCardContent>
+    The React Framework – created and maintained by @vercel.
+  </HoverCardContent>
 </HoverCard>
 ```
 
 ## Composition
 
-Use the following composition to build a `Hover Card`:
+Use the following composition to build a `HoverCard`:
 
-```txt
+```text
 HoverCard
 ├── HoverCardTrigger
 └── HoverCardContent
 ```
 
-## Examples
+## Trigger Delays
 
-import HoverCardSides from "@/examples/hover-card-sides";
+Use `delay` and `closeDelay` on the trigger to control when the card opens and
+closes.
 
-### Basic
+```tsx showLineNumbers
+<HoverCard>
+  <HoverCardTrigger delay={100} closeDelay={200}>
+    Hover
+  </HoverCardTrigger>
+  <HoverCardContent>Content</HoverCardContent>
+</HoverCard>
+```
 
-<ComponentPreview name="hover-card-demo">
-  <HoverCardDemo />
-</ComponentPreview>
+## Positioning
 
-### Sides
+Use the `side` and `align` props on `HoverCardContent` to control placement.
 
-Use the `side` prop on `HoverCardContent` to position the card.
+```tsx showLineNumbers
+<HoverCard>
+  <HoverCardTrigger>Hover</HoverCardTrigger>
+  <HoverCardContent side="top" align="start">
+    Content
+  </HoverCardContent>
+</HoverCard>
+```
 
-<ComponentPreview name="hover-card-sides">
-  <HoverCardSides />
-</ComponentPreview>
+## Basic
 
-import HoverCardRtl from "@/examples/hover-card-rtl";
+<ComponentPreview name="hover-card-demo" previewClassName="h-80" />
+
+## Sides
+
+<ComponentPreview name="hover-card-sides" previewClassName="h-[22rem]" />
 
 ## RTL
 
-To enable right-to-left support, see the [RTL guide](/docs/rtl).
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview name="hover-card-rtl" direction="rtl">
-  <HoverCardRtl />
-</ComponentPreview>
+<ComponentPreview
+  name="hover-card-rtl"
+  direction="rtl"
+  previewClassName="h-80"
+/>
 
 ## API Reference
 
-See the [Base UI](https://base-ui.com/react/components/preview-card#api-reference) documentation for the full API.
+See the [Base UI](https://base-ui.com/react/components/hover-card#api-reference) documentation for more information.

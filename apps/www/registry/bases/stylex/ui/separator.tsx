@@ -1,8 +1,9 @@
 "use client";
 
-import { Separator as SeparatorPrimitive } from "@base-ui/react";
+import { Separator as SeparatorPrimitive } from "@base-ui/react/separator";
 import * as stylex from "@stylexjs/stylex";
 import type { StyleXStyles } from "@stylexjs/stylex";
+import * as React from "react";
 
 import { colors } from "@/registry/bases/stylex/lib/tokens.stylex";
 import { customClassName } from "@/registry/bases/stylex/lib/utils.stylex";
@@ -17,19 +18,22 @@ const styles = stylex.create({
     flexShrink: 0,
   },
   vertical: {
-    height: "100%",
+    alignSelf: "stretch",
     width: "1px",
   },
 });
 
+export type SeparatorProps = Omit<SeparatorPrimitive.Props, "style"> & {
+  className?: string;
+  style?: StyleXStyles;
+};
+
 const Separator = ({
   className,
-  style,
   orientation = "horizontal",
+  style,
   ...props
-}: Omit<React.ComponentProps<typeof SeparatorPrimitive>, "className"> & {
-  className?: string;
-}) => (
+}: SeparatorProps) => (
   <SeparatorPrimitive
     data-slot="separator"
     orientation={orientation}
@@ -37,10 +41,10 @@ const Separator = ({
       styles.root,
       orientation === "vertical" ? styles.vertical : styles.horizontal,
       customClassName(className),
-      style as StyleXStyles
+      style
     )}
     {...props}
   />
 );
 
-export { Separator };
+export { Separator, styles as separatorStyles };

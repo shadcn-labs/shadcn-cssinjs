@@ -1,5 +1,8 @@
+"use client";
+
 import * as stylex from "@stylexjs/stylex";
 import type { StyleXStyles } from "@stylexjs/stylex";
+import * as React from "react";
 
 import { colors, radius } from "@/registry/bases/stylex/lib/tokens.stylex";
 import { customClassName } from "@/registry/bases/stylex/lib/utils.stylex";
@@ -12,15 +15,13 @@ const styles = stylex.create({
   },
   root: {
     alignItems: "center",
-    backgroundColor: "color-mix(in oklab, currentColor 5%, transparent)",
-    borderRadius: radius.sm,
-    boxShadow:
-      "inset 0 -1px 2px 0 color-mix(in oklab, currentColor 10%, transparent)",
+    backgroundColor: colors.muted,
+    borderRadius: radius.md,
     color: colors.mutedForeground,
     display: "inline-flex",
     fontFamily: "var(--font-sans)",
     fontSize: "0.75rem",
-    fontWeight: 400,
+    fontWeight: 500,
     gap: "0.25rem",
     height: "1.25rem",
     justifyContent: "center",
@@ -33,7 +34,12 @@ const styles = stylex.create({
   },
 });
 
-const Kbd = ({ className, style, ...props }: React.ComponentProps<"kbd">) => (
+export type KbdProps = Omit<React.ComponentProps<"kbd">, "style"> & {
+  className?: string;
+  style?: StyleXStyles;
+};
+
+const Kbd = ({ className, style, ...props }: KbdProps) => (
   <kbd
     data-slot="kbd"
     {...stylex.props(
@@ -45,12 +51,13 @@ const Kbd = ({ className, style, ...props }: React.ComponentProps<"kbd">) => (
   />
 );
 
-const KbdGroup = ({
-  className,
-  style,
-  ...props
-}: React.ComponentProps<"div">) => (
-  <div
+export type KbdGroupProps = Omit<React.ComponentProps<"kbd">, "style"> & {
+  className?: string;
+  style?: StyleXStyles;
+};
+
+const KbdGroup = ({ className, style, ...props }: KbdGroupProps) => (
+  <kbd
     data-slot="kbd-group"
     {...stylex.props(
       styles.group,
@@ -61,4 +68,4 @@ const KbdGroup = ({
   />
 );
 
-export { Kbd, KbdGroup };
+export { Kbd, KbdGroup, styles as kbdStyles };

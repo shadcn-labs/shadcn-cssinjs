@@ -1,65 +1,47 @@
 "use client";
 
-import { Dialog as DialogPrimitive } from "@base-ui/react/dialog";
-import type { StyleXStyles } from "@stylexjs/stylex";
+import { Dialog as SheetPrimitive } from "@base-ui/react/dialog";
 import * as stylex from "@stylexjs/stylex";
+import type { StyleXStyles } from "@stylexjs/stylex";
 import { XIcon } from "lucide-react";
+import * as React from "react";
 
-import { colors, radius } from "@/registry/bases/stylex/lib/tokens.stylex";
+import { colors } from "@/registry/bases/stylex/lib/tokens.stylex";
 import { customClassName } from "@/registry/bases/stylex/lib/utils.stylex";
+import { Button } from "@/registry/bases/stylex/ui/button";
 
 const styles = stylex.create({
-  backdrop: {
-    backgroundColor: "color-mix(in oklab, black 80%, transparent)",
-    inset: 0,
-    opacity: 1,
-    position: "fixed",
-    transition: "opacity 0.3s ease-in-out",
-    zIndex: 50,
-  },
-  backdropHidden: { opacity: 0 },
-  bottom: {
-    borderTopColor: colors.border,
-    borderTopStyle: "solid",
-    borderTopWidth: "1px",
-    bottom: 0,
-    insetInline: 0,
-    transform: "translateY(0)",
-    width: "100%",
-  },
-  bottomHidden: { transform: "translateY(100%)" },
   closeButton: {
-    alignItems: "center",
-    background: "none",
-    borderRadius: radius.sm,
-    borderWidth: 0,
-    boxShadow: {
-      ":focus-visible": `0 0 0 2px color-mix(in oklab, ${colors.ring} 50%, transparent)`,
-      default: null,
-    },
-    color: colors.foreground,
-    cursor: "pointer",
-    display: "flex",
-    insetInlineEnd: "1rem",
-    justifyContent: "center",
-    opacity: { ":hover": 1, default: 0.7 },
-    outline: "none",
-    padding: "0.25rem",
     position: "absolute",
-    top: "1rem",
-    transition: "opacity 0.15s ease-in-out",
+    right: "0.75rem",
+    top: "0.75rem",
   },
   content: {
-    backgroundColor: colors.background,
+    backgroundClip: "padding-box",
+    backgroundColor: colors.popover,
+    boxShadow:
+      "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1)",
+    color: colors.popoverForeground,
     display: "flex",
     flexDirection: "column",
+    fontSize: "0.875rem",
     gap: "1rem",
+    lineHeight: "1.25rem",
+    opacity: 1,
     outline: "none",
     position: "fixed",
-    transition: "transform 0.3s ease-in-out",
+    transform: "none",
+    transitionDuration: "200ms",
+    transitionProperty: "transform, opacity",
+    transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
     zIndex: 50,
   },
-  description: { color: colors.mutedForeground, fontSize: "0.875rem" },
+  description: {
+    color: colors.mutedForeground,
+    fontSize: "0.875rem",
+    lineHeight: "1.25rem",
+    margin: 0,
+  },
   footer: {
     display: "flex",
     flexDirection: "column",
@@ -70,33 +52,85 @@ const styles = stylex.create({
   header: {
     display: "flex",
     flexDirection: "column",
-    gap: "0.375rem",
+    gap: "0.125rem",
     padding: "1rem",
   },
-  left: {
+  overlay: {
+    WebkitBackdropFilter: "blur(4px)",
+    backdropFilter: "blur(4px)",
+    backgroundColor: "color-mix(in oklab, black 10%, transparent)",
+    inset: 0,
+    opacity: 1,
+    position: "fixed",
+    transitionDuration: "150ms",
+    transitionProperty: "opacity",
+    zIndex: 50,
+  },
+  overlayHidden: {
+    opacity: 0,
+  },
+  sideBottom: {
+    borderTopColor: colors.border,
+    borderTopStyle: "solid",
+    borderTopWidth: "1px",
+    bottom: 0,
+    height: "auto",
+    left: 0,
+    right: 0,
+  },
+  sideBottomHidden: {
+    opacity: 0,
+    transform: "translateY(2.5rem)",
+  },
+  sideLeft: {
     borderRightColor: colors.border,
     borderRightStyle: "solid",
     borderRightWidth: "1px",
+    bottom: 0,
     height: "100%",
-    insetBlock: 0,
     left: 0,
-    maxWidth: "24rem",
-    transform: "translateX(0)",
+    maxWidth: {
+      "@media (min-width: 640px)": "24rem",
+      default: null,
+    },
+    top: 0,
     width: "75%",
   },
-  leftHidden: { transform: "translateX(-100%)" },
-  right: {
+  sideLeftHidden: {
+    opacity: 0,
+    transform: "translateX(-2.5rem)",
+  },
+  sideRight: {
     borderLeftColor: colors.border,
     borderLeftStyle: "solid",
     borderLeftWidth: "1px",
+    bottom: 0,
     height: "100%",
-    insetBlock: 0,
-    maxWidth: "24rem",
+    maxWidth: {
+      "@media (min-width: 640px)": "24rem",
+      default: null,
+    },
     right: 0,
-    transform: "translateX(0)",
+    top: 0,
     width: "75%",
   },
-  rightHidden: { transform: "translateX(100%)" },
+  sideRightHidden: {
+    opacity: 0,
+    transform: "translateX(2.5rem)",
+  },
+  sideTop: {
+    borderBottomColor: colors.border,
+    borderBottomStyle: "solid",
+    borderBottomWidth: "1px",
+    height: "auto",
+    left: 0,
+    right: 0,
+    top: 0,
+  },
+  sideTopHidden: {
+    opacity: 0,
+    transform: "translateY(-2.5rem)",
+  },
   srOnly: {
     borderWidth: 0,
     clip: "rect(0, 0, 0, 0)",
@@ -108,175 +142,206 @@ const styles = stylex.create({
     whiteSpace: "nowrap",
     width: "1px",
   },
-  title: { color: colors.foreground, fontWeight: 600 },
-  top: {
-    borderBottomColor: colors.border,
-    borderBottomStyle: "solid",
-    borderBottomWidth: "1px",
-    insetInline: 0,
-    top: 0,
-    transform: "translateY(0)",
-    width: "100%",
+  title: {
+    color: colors.foreground,
+    fontSize: "1rem",
+    fontWeight: 500,
+    lineHeight: "1.5rem",
+    margin: 0,
   },
-  topHidden: { transform: "translateY(-100%)" },
 });
 
-const hidden = (s: string | undefined) => s === "starting" || s === "ending";
+type SheetSide = "top" | "right" | "bottom" | "left";
 
-type Side = "top" | "right" | "bottom" | "left";
-
-const sideStyle: Record<Side, [StyleXStyles, StyleXStyles]> = {
-  bottom: [styles.bottom, styles.bottomHidden],
-  left: [styles.left, styles.leftHidden],
-  right: [styles.right, styles.rightHidden],
-  top: [styles.top, styles.topHidden],
+const sideStyles: Record<SheetSide, StyleXStyles> = {
+  bottom: styles.sideBottom,
+  left: styles.sideLeft,
+  right: styles.sideRight,
+  top: styles.sideTop,
 };
 
-const Sheet = (props: React.ComponentProps<typeof DialogPrimitive.Root>) => (
-  <DialogPrimitive.Root data-slot="sheet" {...props} />
+const sideHiddenStyles: Record<SheetSide, StyleXStyles> = {
+  bottom: styles.sideBottomHidden,
+  left: styles.sideLeftHidden,
+  right: styles.sideRightHidden,
+  top: styles.sideTopHidden,
+};
+
+type SheetProps = SheetPrimitive.Root.Props;
+
+const Sheet = ({ ...props }: SheetProps) => (
+  <SheetPrimitive.Root data-slot="sheet" {...props} />
 );
 
-const SheetTrigger = (
-  props: React.ComponentProps<typeof DialogPrimitive.Trigger>
-) => <DialogPrimitive.Trigger data-slot="sheet-trigger" {...props} />;
+type SheetTriggerProps = SheetPrimitive.Trigger.Props;
 
-const SheetClose = (
-  props: React.ComponentProps<typeof DialogPrimitive.Close>
-) => <DialogPrimitive.Close data-slot="sheet-close" {...props} />;
+const SheetTrigger = ({ ...props }: SheetTriggerProps) => (
+  <SheetPrimitive.Trigger data-slot="sheet-trigger" {...props} />
+);
+
+type SheetCloseProps = SheetPrimitive.Close.Props;
+
+const SheetClose = ({ ...props }: SheetCloseProps) => (
+  <SheetPrimitive.Close data-slot="sheet-close" {...props} />
+);
+
+type SheetPortalProps = SheetPrimitive.Portal.Props;
+
+const SheetPortal = ({ ...props }: SheetPortalProps) => (
+  <SheetPrimitive.Portal data-slot="sheet-portal" {...props} />
+);
+
+type SheetOverlayProps = Omit<SheetPrimitive.Backdrop.Props, "style"> & {
+  className?: string;
+  style?: StyleXStyles;
+};
+
+const SheetOverlay = ({ className, style, ...props }: SheetOverlayProps) => (
+  <SheetPrimitive.Backdrop
+    data-slot="sheet-overlay"
+    className={(state) =>
+      stylex.props(
+        styles.overlay,
+        (state.transitionStatus === "starting" ||
+          state.transitionStatus === "ending") &&
+          styles.overlayHidden,
+        customClassName(className),
+        style
+      ).className
+    }
+    {...props}
+  />
+);
+
+type SheetContentProps = Omit<SheetPrimitive.Popup.Props, "style"> & {
+  side?: SheetSide;
+  showCloseButton?: boolean;
+  className?: string;
+  style?: StyleXStyles;
+};
 
 const SheetContent = ({
   className,
-  style,
   children,
   side = "right",
   showCloseButton = true,
+  style,
   ...props
-}: Omit<React.ComponentProps<typeof DialogPrimitive.Popup>, "className"> & {
+}: SheetContentProps) => (
+  <SheetPortal>
+    <SheetOverlay />
+    <SheetPrimitive.Popup
+      data-slot="sheet-content"
+      data-side={side}
+      className={(state) =>
+        stylex.props(
+          styles.content,
+          sideStyles[side],
+          (state.transitionStatus === "starting" ||
+            state.transitionStatus === "ending") &&
+            sideHiddenStyles[side],
+          customClassName(className),
+          style
+        ).className
+      }
+      {...props}
+    >
+      {children}
+      {showCloseButton && (
+        <SheetPrimitive.Close
+          data-slot="sheet-close"
+          render={
+            <Button variant="ghost" size="icon-sm" style={styles.closeButton}>
+              <XIcon />
+              <span {...stylex.props(styles.srOnly)}>Close</span>
+            </Button>
+          }
+        />
+      )}
+    </SheetPrimitive.Popup>
+  </SheetPortal>
+);
+
+type SheetHeaderProps = Omit<React.ComponentProps<"div">, "style"> & {
   className?: string;
-  side?: Side;
-  showCloseButton?: boolean;
-}) => {
-  const close = stylex.props(styles.closeButton);
-  const sr = stylex.props(styles.srOnly);
-  const [base, off] = sideStyle[side];
-  return (
-    <DialogPrimitive.Portal>
-      <DialogPrimitive.Backdrop
-        data-slot="sheet-overlay"
-        className={(state) =>
-          stylex.props(
-            styles.backdrop,
-            hidden(state.transitionStatus) && styles.backdropHidden
-          ).className
-        }
-      />
-      <DialogPrimitive.Popup
-        data-slot="sheet-content"
-        className={(state) =>
-          stylex.props(
-            styles.content,
-            base,
-            hidden(state.transitionStatus) && off,
-            customClassName(className)
-          ).className
-        }
-        style={style}
-        {...props}
-      >
-        {children}
-        {showCloseButton && (
-          <DialogPrimitive.Close
-            className={close.className}
-            data-slot="sheet-close"
-            style={close.style}
-          >
-            <XIcon size={16} />
-            <span className={sr.className} style={sr.style}>
-              Close
-            </span>
-          </DialogPrimitive.Close>
-        )}
-      </DialogPrimitive.Popup>
-    </DialogPrimitive.Portal>
-  );
+  style?: StyleXStyles;
 };
 
-const SheetHeader = ({
-  className,
-  style,
-  ...props
-}: React.ComponentProps<"div">) => (
+const SheetHeader = ({ className, style, ...props }: SheetHeaderProps) => (
   <div
     data-slot="sheet-header"
-    {...stylex.props(
-      styles.header,
-      customClassName(className),
-      style as StyleXStyles
-    )}
+    {...stylex.props(styles.header, customClassName(className), style)}
     {...props}
   />
 );
 
-const SheetFooter = ({
-  className,
-  style,
-  ...props
-}: React.ComponentProps<"div">) => (
+type SheetFooterProps = Omit<React.ComponentProps<"div">, "style"> & {
+  className?: string;
+  style?: StyleXStyles;
+};
+
+const SheetFooter = ({ className, style, ...props }: SheetFooterProps) => (
   <div
     data-slot="sheet-footer"
-    {...stylex.props(
-      styles.footer,
-      customClassName(className),
-      style as StyleXStyles
-    )}
+    {...stylex.props(styles.footer, customClassName(className), style)}
     {...props}
   />
 );
 
-const SheetTitle = ({
-  className,
-  style,
-  ...props
-}: Omit<React.ComponentProps<typeof DialogPrimitive.Title>, "className"> & {
+type SheetTitleProps = Omit<SheetPrimitive.Title.Props, "style"> & {
   className?: string;
-}) => (
-  <DialogPrimitive.Title
+  style?: StyleXStyles;
+};
+
+const SheetTitle = ({ className, style, ...props }: SheetTitleProps) => (
+  <SheetPrimitive.Title
     data-slot="sheet-title"
-    {...stylex.props(
-      styles.title,
-      customClassName(className),
-      style as StyleXStyles
-    )}
+    {...stylex.props(styles.title, customClassName(className), style)}
     {...props}
   />
 );
+
+type SheetDescriptionProps = Omit<SheetPrimitive.Description.Props, "style"> & {
+  className?: string;
+  style?: StyleXStyles;
+};
 
 const SheetDescription = ({
   className,
   style,
   ...props
-}: Omit<
-  React.ComponentProps<typeof DialogPrimitive.Description>,
-  "className"
-> & { className?: string }) => (
-  <DialogPrimitive.Description
+}: SheetDescriptionProps) => (
+  <SheetPrimitive.Description
     data-slot="sheet-description"
-    {...stylex.props(
-      styles.description,
-      customClassName(className),
-      style as StyleXStyles
-    )}
+    {...stylex.props(styles.description, customClassName(className), style)}
     {...props}
   />
 );
 
 export {
   Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
   SheetTrigger,
+  SheetClose,
+  SheetPortal,
+  SheetOverlay,
+  SheetContent,
+  SheetHeader,
+  SheetFooter,
+  SheetTitle,
+  SheetDescription,
+  styles as sheetStyles,
+};
+
+export type {
+  SheetProps,
+  SheetTriggerProps,
+  SheetCloseProps,
+  SheetPortalProps,
+  SheetOverlayProps,
+  SheetContentProps,
+  SheetHeaderProps,
+  SheetFooterProps,
+  SheetTitleProps,
+  SheetDescriptionProps,
+  SheetSide,
 };

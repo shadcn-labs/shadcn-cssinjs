@@ -234,6 +234,13 @@ const s = stylex.create({
   menuSubItem: {
     position: "relative",
   },
+  mobileContent: {
+    padding: 0,
+    width: "var(--sidebar-width)",
+  },
+  mobileHeader: {
+    display: "none",
+  },
   rail: {
     background: "transparent",
     borderWidth: 0,
@@ -247,6 +254,20 @@ const s = stylex.create({
     backgroundColor: colors.sidebarBorder,
     marginInline: "0.5rem",
     width: "auto",
+  },
+  sidebarInput: {
+    backgroundColor: colors.background,
+    height: "2rem",
+    width: "100%",
+  },
+  skeletonIcon: {
+    borderRadius: "calc(var(--radius) - 2px)",
+    height: "1rem",
+    width: "1rem",
+  },
+  skeletonText: {
+    flex: 1,
+    height: "1rem",
   },
   wrapper: {
     display: "flex",
@@ -411,9 +432,9 @@ const Sidebar = ({
           data-sidebar="sidebar"
           data-slot="sidebar"
           side={side}
-          style={{ padding: 0, width: "var(--sidebar-width)" }}
+          style={s.mobileContent}
         >
-          <SheetHeader style={{ display: "none" }}>
+          <SheetHeader style={s.mobileHeader}>
             <SheetTitle>Sidebar</SheetTitle>
             <SheetDescription>Displays the mobile sidebar.</SheetDescription>
           </SheetHeader>
@@ -542,15 +563,18 @@ const SidebarInset = ({
   />
 );
 
-const SidebarInput = (props: React.ComponentProps<typeof Input>) => (
+const SidebarInput = ({
+  className,
+  style,
+  ...props
+}: Omit<React.ComponentProps<typeof Input>, "style"> & {
+  className?: string;
+  style?: StyleXStyles;
+}) => (
   <Input
     data-sidebar="input"
     data-slot="sidebar-input"
-    style={{
-      backgroundColor: "var(--background)",
-      height: "2rem",
-      width: "100%",
-    }}
+    {...stylex.props(s.sidebarInput, customClassName(className), style)}
     {...props}
   />
 );
@@ -749,16 +773,10 @@ const SidebarMenuSkeleton = ({
       )}
       {...props}
     >
-      {showIcon && (
-        <Skeleton
-          style={{
-            borderRadius: "calc(var(--radius) - 2px)",
-            height: "1rem",
-            width: "1rem",
-          }}
-        />
-      )}
-      <Skeleton style={{ flex: 1, height: "1rem", maxWidth: width }} />
+      {showIcon && <Skeleton {...stylex.props(s.skeletonIcon)} />}
+      <Skeleton
+        {...stylex.props(s.skeletonText, { maxWidth: width } as StyleXStyles)}
+      />
     </div>
   );
 };
@@ -807,6 +825,7 @@ const SidebarMenuSubButton = ({
   size?: "sm" | "md";
   isActive?: boolean;
 }) => (
+  // oxlint-disable-next-line eslint-plugin-jsx-a11y/anchor-has-content: content is passed by the consumer via children
   <a
     data-active={isActive}
     data-sidebar="menu-sub-button"

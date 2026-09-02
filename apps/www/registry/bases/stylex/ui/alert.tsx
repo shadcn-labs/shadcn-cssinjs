@@ -1,35 +1,37 @@
+"use client";
+
 import * as stylex from "@stylexjs/stylex";
 import type { StyleXStyles } from "@stylexjs/stylex";
-import { Children, isValidElement } from "react";
+import * as React from "react";
 
 import { colors, radius } from "@/registry/bases/stylex/lib/tokens.stylex";
 import { customClassName } from "@/registry/bases/stylex/lib/utils.stylex";
 
 const styles = stylex.create({
   action: {
-    alignSelf: "center",
-    gridColumnStart: "3",
-    gridRowEnd: "3",
-    gridRowStart: "1",
-    justifySelf: "end",
-    marginInlineStart: "1rem",
+    position: "absolute",
+    right: "0.5rem",
+    top: "0.5rem",
   },
   base: {
-    alignItems: "start",
+    ":is(svg)": {
+      flexShrink: 0,
+      height: "1rem",
+      marginTop: "0.125rem",
+      width: "1rem",
+    },
     borderColor: colors.border,
-    borderRadius: radius.lg,
+    borderRadius: radius.md,
     borderStyle: "solid",
     borderWidth: "1px",
-    columnGap: 0,
     display: "grid",
     fontSize: "0.875rem",
-    gridTemplateColumns: "0 1fr",
     lineHeight: "1.25rem",
-    paddingBottom: "0.75rem",
-    paddingInline: "1rem",
-    paddingTop: "0.75rem",
+    paddingBlock: "0.5rem",
+    paddingInline: "0.625rem",
     position: "relative",
     rowGap: "0.125rem",
+    textAlign: "left",
     width: "100%",
   },
   default: {
@@ -38,58 +40,54 @@ const styles = stylex.create({
   },
   description: {
     color: colors.mutedForeground,
-    display: "grid",
     fontSize: "0.875rem",
-    justifyItems: "start",
     lineHeight: "1.25rem",
-    rowGap: "0.25rem",
+    textWrap: "balance",
+  },
+  descriptionDestructive: {
+    color: `color-mix(in oklab, ${colors.destructive} 90%, transparent)`,
   },
   descriptionWithIcon: {
-    gridColumnStart: "2",
+    gridColumnStart: 2,
   },
   destructive: {
     backgroundColor: colors.card,
     color: colors.destructive,
   },
   title: {
-    WebkitBoxOrient: "vertical",
-    WebkitLineClamp: 1,
-    display: "-webkit-box",
     fontWeight: 500,
-    letterSpacing: "-0.025em",
-    minHeight: "1rem",
-    overflow: "hidden",
+    lineHeight: "1rem",
   },
   titleWithIcon: {
-    gridColumnStart: "2",
+    gridColumnStart: 2,
   },
   withIcon: {
-    columnGap: "0.75rem",
-    gridTemplateColumns: "1rem 1fr",
+    columnGap: "0.625rem",
+    gridTemplateColumns: "auto 1fr",
   },
 });
 
-type AlertVariant = "default" | "destructive";
+export type AlertVariant = "default" | "destructive";
 
-const CONTENT_SLOTS = new Set([
-  "alert-title",
-  "alert-description",
-  "alert-action",
-]);
+const AlertContext = React.createContext<{
+  variant?: AlertVariant;
+  hasIcon?: boolean;
+}>({
+  hasIcon: false,
+  variant: "default",
+});
 
-const getSlot = (child: React.ReactNode) =>
-  isValidElement(child)
-    ? (child.props as { "data-slot"?: string })["data-slot"]
-    : undefined;
+const hasDirectSvgChild = (children: React.ReactNode): boolean =>
+  React.Children.toArray(children).some(
+    (child) =>
+      React.isValidElement(child) &&
+      (child.type === "svg" || typeof child.type === "function")
+  );
 
-const hasIcon = (children: React.ReactNode) =>
-  Children.toArray(children).some((child) => {
-    if (!isValidElement(child)) {
-      return false;
-    }
-    const slot = getSlot(child);
-    return !slot || !CONTENT_SLOTS.has(slot);
-  });
+export type AlertProps = Omit<React.ComponentProps<"div">, "style"> & {
+  variant?: AlertVariant;
+  style?: StyleXStyles;
+};
 
 const Alert = ({
   variant = "default",
@@ -97,76 +95,93 @@ const Alert = ({
   style,
   children,
   ...props
-}: React.ComponentProps<"div"> & { variant?: AlertVariant }) => {
-  const icon = hasIcon(children);
+}: AlertProps) => {
+  const hasIcon = hasDirectSvgChild(children);
   return (
-    <div
-      data-slot="alert"
-      data-variant={variant}
-      role="alert"
-      {...stylex.props(
-        styles.base,
-        stylex.defaultMarker(),
-        variant === "destructive" ? styles.destructive : styles.default,
-        icon && styles.withIcon,
-        customClassName(className),
-        style as StyleXStyles
-      )}
-      {...props}
-    >
-      {children}
-    </div>
+    <AlertContext.Provider value={{ hasIcon, variant }}>
+      <div
+        data-slot="alert"
+        data-variant={variant}
+        role="alert"
+        {...stylex.props(
+          styles.base,
+          hasIcon && styles.withIcon,
+          styles[variant],
+          customClassName(className),
+          style
+        )}
+        {...props}
+      >
+        {children}
+      </div>
+    </AlertContext.Provider>
   );
 };
 
-const AlertTitle = ({
-  className,
-  style,
-  ...props
-}: React.ComponentProps<"div">) => (
-  <div
-    data-slot="alert-title"
-    {...stylex.props(
-      styles.title,
-      styles.titleWithIcon,
-      customClassName(className),
-      style as StyleXStyles
-    )}
-    {...props}
-  />
-);
+export type AlertTitleProps = Omit<React.ComponentProps<"div">, "style"> & {
+  style?: StyleXStyles;
+};
+
+const AlertTitle = ({ className, style, ...props }: AlertTitleProps) => {
+  const { hasIcon } = React.useContext(AlertContext);
+  return (
+    <div
+      data-slot="alert-title"
+      {...stylex.props(
+        styles.title,
+        hasIcon && styles.titleWithIcon,
+        customClassName(className),
+        style
+      )}
+      {...props}
+    />
+  );
+};
+
+export type AlertDescriptionProps = Omit<
+  React.ComponentProps<"div">,
+  "style"
+> & {
+  style?: StyleXStyles;
+};
 
 const AlertDescription = ({
   className,
   style,
   ...props
-}: React.ComponentProps<"div">) => (
-  <div
-    data-slot="alert-description"
-    {...stylex.props(
-      styles.description,
-      styles.descriptionWithIcon,
-      customClassName(className),
-      style as StyleXStyles
-    )}
-    {...props}
-  />
-);
+}: AlertDescriptionProps) => {
+  const { variant, hasIcon } = React.useContext(AlertContext);
+  return (
+    <div
+      data-slot="alert-description"
+      {...stylex.props(
+        styles.description,
+        hasIcon && styles.descriptionWithIcon,
+        variant === "destructive" && styles.descriptionDestructive,
+        customClassName(className),
+        style
+      )}
+      {...props}
+    />
+  );
+};
 
-const AlertAction = ({
-  className,
-  style,
-  ...props
-}: React.ComponentProps<"div">) => (
+export type AlertActionProps = Omit<React.ComponentProps<"div">, "style"> & {
+  style?: StyleXStyles;
+};
+
+const AlertAction = ({ className, style, ...props }: AlertActionProps) => (
   <div
     data-slot="alert-action"
-    {...stylex.props(
-      styles.action,
-      customClassName(className),
-      style as StyleXStyles
-    )}
+    {...stylex.props(styles.action, customClassName(className), style)}
     {...props}
   />
 );
 
-export { Alert, AlertAction, AlertDescription, AlertTitle };
+export {
+  Alert,
+  AlertTitle,
+  AlertDescription,
+  AlertAction,
+  styles as alertStyles,
+};

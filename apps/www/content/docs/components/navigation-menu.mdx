@@ -1,26 +1,22 @@
 ---
 title: Navigation Menu
 description: A collection of links for navigating websites.
+component: true
 links:
   doc: https://base-ui.com/react/components/navigation-menu
   api: https://base-ui.com/react/components/navigation-menu#api-reference
 ---
 
-import NavigationMenuDemo from "@/examples/navigation-menu-demo";
-
-<ComponentPreview name="navigation-menu-demo">
-  <NavigationMenuDemo />
-</ComponentPreview>
+<ComponentPreview name="navigation-menu-demo" previewClassName="h-96" />
 
 ## Installation
 
 <Tabs defaultValue="cli">
 
 <TabsList>
-  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="cli">Command</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
-
 <TabsContent value="cli">
 
 ```bash
@@ -58,7 +54,7 @@ pnpm add @base-ui/react @stylexjs/stylex
 
 ## Usage
 
-```tsx
+```tsx showLineNumbers
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -66,16 +62,16 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu/navigation-menu";
+} from "@/components/ui/navigation-menu";
 ```
 
-```tsx
+```tsx showLineNumbers
 <NavigationMenu>
   <NavigationMenuList>
     <NavigationMenuItem>
-      <NavigationMenuTrigger>Item</NavigationMenuTrigger>
+      <NavigationMenuTrigger>Item One</NavigationMenuTrigger>
       <NavigationMenuContent>
-        <NavigationMenuLink href="#">Link</NavigationMenuLink>
+        <NavigationMenuLink>Link</NavigationMenuLink>
       </NavigationMenuContent>
     </NavigationMenuItem>
   </NavigationMenuList>
@@ -84,27 +80,58 @@ import {
 
 ## Composition
 
-Use the following composition to build a `Navigation Menu`:
+Use the following composition to build a `NavigationMenu`:
 
-```txt
+```text
 NavigationMenu
-└── NavigationMenuList
-    └── NavigationMenuItem
-        ├── NavigationMenuTrigger
-        └── NavigationMenuContent
-            └── NavigationMenuLink
+├── NavigationMenuList
+│   ├── NavigationMenuItem
+│   │   ├── NavigationMenuTrigger
+│   │   └── NavigationMenuContent
+│   │       ├── NavigationMenuLink
+│   │       └── NavigationMenuLink
+│   └── NavigationMenuItem
+│       └── NavigationMenuLink
+└── NavigationMenuIndicator
 ```
 
-import NavigationMenuRtl from "@/examples/navigation-menu-rtl";
+## Link Component
+
+Use the `render` prop to compose a custom link component such as Next.js `Link`.
+
+```tsx showLineNumbers
+import Link from "next/link";
+
+import {
+  NavigationMenuItem,
+  NavigationMenuLink,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
+
+export function NavigationMenuDemo() {
+  return (
+    <NavigationMenuItem>
+      <NavigationMenuLink
+        render={<Link href="/docs" />}
+        className={navigationMenuTriggerStyle()}
+      >
+        Documentation
+      </NavigationMenuLink>
+    </NavigationMenuItem>
+  );
+}
+```
 
 ## RTL
 
-To enable right-to-left support, see the [RTL guide](/docs/rtl).
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview name="navigation-menu-rtl" direction="rtl">
-  <NavigationMenuRtl />
-</ComponentPreview>
+<ComponentPreview
+  name="navigation-menu-rtl"
+  direction="rtl"
+  previewClassName="h-96"
+/>
 
 ## API Reference
 
-See the [Base UI](https://base-ui.com/react/components/navigation-menu#api-reference) documentation for the full API.
+See the [Base UI Navigation Menu](https://base-ui.com/react/components/navigation-menu#api-reference) documentation for more information.

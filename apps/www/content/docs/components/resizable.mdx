@@ -1,23 +1,26 @@
 ---
 title: Resizable
 description: Accessible resizable panel groups and layouts with keyboard support.
+component: true
+links:
+  doc: https://github.com/bvaughn/react-resizable-panels
+  api: https://github.com/bvaughn/react-resizable-panels/tree/main/packages/react-resizable-panels
 ---
 
-import ResizableDemo from "@/examples/resizable-demo";
+<ComponentPreview name="resizable-demo" previewClassName="h-80" />
 
-<ComponentPreview name="resizable-demo">
-  <ResizableDemo />
-</ComponentPreview>
+## About
+
+The `Resizable` component is built on top of [react-resizable-panels](https://github.com/bvaughn/react-resizable-panels) by [bvaughn](https://github.com/bvaughn).
 
 ## Installation
 
 <Tabs defaultValue="cli">
 
 <TabsList>
-  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="cli">Command</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
-
 <TabsContent value="cli">
 
 ```bash
@@ -33,13 +36,8 @@ npx shadcn@latest add https://shadcn-cssinjs.com/r/resizable.json
 <Step>Install the following dependencies:</Step>
 
 ```bash
-pnpm add react-resizable-panels @stylexjs/stylex
+npm install react-resizable-panels
 ```
-
-<Step>
-  Make sure [StyleX is configured](/docs/installation) and the design tokens are
-  installed.
-</Step>
 
 <Step>Copy and paste the following code into your project.</Step>
 
@@ -55,15 +53,15 @@ pnpm add react-resizable-panels @stylexjs/stylex
 
 ## Usage
 
-```tsx
+```tsx showLineNumbers
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
-} from "@/components/ui/resizable/resizable";
+} from "@/components/ui/resizable";
 ```
 
-```tsx
+```tsx showLineNumbers
 <ResizablePanelGroup orientation="horizontal">
   <ResizablePanel>One</ResizablePanel>
   <ResizableHandle />
@@ -73,46 +71,33 @@ import {
 
 ## Composition
 
-Use the following composition to build a `Resizable`:
+Use the following composition to build a `ResizablePanelGroup`:
 
-```txt
+```text
 ResizablePanelGroup
 ├── ResizablePanel
 ├── ResizableHandle
 └── ResizablePanel
 ```
 
-## Examples
+## Vertical
 
-import ResizableVertical from "@/examples/resizable-vertical";
-import ResizableHandleDemo from "@/examples/resizable-handle";
+Use `orientation="vertical"` for vertical resizing.
 
-### Vertical
+<ComponentPreview name="resizable-vertical" />
 
-Use `orientation="vertical"` to stack the panels vertically.
+## Handle
 
-<ComponentPreview name="resizable-vertical">
-  <ResizableVertical />
-</ComponentPreview>
+Use the `withHandle` prop on `ResizableHandle` to show a visible handle.
 
-### Handle
-
-Use the `withHandle` prop to show a visible drag handle.
-
-<ComponentPreview name="resizable-handle">
-  <ResizableHandleDemo />
-</ComponentPreview>
-
-import ResizableRtl from "@/examples/resizable-rtl";
+<ComponentPreview name="resizable-handle" />
 
 ## RTL
 
-To enable right-to-left support, see the [RTL guide](/docs/rtl).
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview name="resizable-rtl" direction="rtl">
-  <ResizableRtl />
-</ComponentPreview>
+<ComponentPreview name="resizable-rtl" direction="rtl" />
 
 ## API Reference
 
-See the [react-resizable-panels](https://github.com/bvaughn/react-resizable-panels) documentation for the full API reference.
+See the [react-resizable-panels](https://github.com/bvaughn/react-resizable-panels/tree/main/packages/react-resizable-panels) documentation.

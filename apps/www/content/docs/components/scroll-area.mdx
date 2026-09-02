@@ -1,26 +1,22 @@
 ---
 title: Scroll Area
 description: Augments native scroll functionality for custom, cross-browser styling.
+component: true
 links:
   doc: https://base-ui.com/react/components/scroll-area
   api: https://base-ui.com/react/components/scroll-area#api-reference
 ---
 
-import ScrollAreaDemo from "@/examples/scroll-area-demo";
-
-<ComponentPreview name="scroll-area-demo">
-  <ScrollAreaDemo />
-</ComponentPreview>
+<ComponentPreview name="scroll-area-demo" previewClassName="h-96" />
 
 ## Installation
 
 <Tabs defaultValue="cli">
 
 <TabsList>
-  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="cli">Command</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
-
 <TabsContent value="cli">
 
 ```bash
@@ -58,36 +54,41 @@ pnpm add @base-ui/react @stylexjs/stylex
 
 ## Usage
 
-```tsx
-import { ScrollArea } from "@/components/ui/scroll-area/scroll-area";
+```tsx showLineNumbers
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 ```
 
-```tsx
-<ScrollArea style={{ height: 240 }}>Long content…</ScrollArea>
+```tsx showLineNumbers
+<ScrollArea className="h-[200px] w-[350px] rounded-md border p-4">
+  Your scrollable content here.
+</ScrollArea>
 ```
 
-## Examples
+## Composition
 
-import ScrollAreaHorizontal from "@/examples/scroll-area-horizontal";
+Use the following composition to build a `ScrollArea`:
 
-### Horizontal
+```text
+ScrollArea
+└── ScrollBar
+```
 
-Scroll content horizontally with `whitespace-nowrap`.
+## Horizontal
 
-<ComponentPreview name="scroll-area-horizontal">
-  <ScrollAreaHorizontal />
-</ComponentPreview>
+Use `ScrollBar` with `orientation="horizontal"` for horizontal scrolling.
 
-import ScrollAreaRtl from "@/examples/scroll-area-rtl";
+<ComponentPreview name="scroll-area-horizontal-demo" />
 
 ## RTL
 
-To enable right-to-left support, see the [RTL guide](/docs/rtl).
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview name="scroll-area-rtl" direction="rtl">
-  <ScrollAreaRtl />
-</ComponentPreview>
+<ComponentPreview
+  name="scroll-area-rtl"
+  direction="rtl"
+  previewClassName="h-auto"
+/>
 
 ## API Reference
 
-See the [Base UI](https://base-ui.com/react/components/scroll-area#api-reference) documentation for the full API.
+See the [Base UI Scroll Area](https://base-ui.com/react/components/scroll-area#api-reference) documentation.

@@ -1,5 +1,8 @@
+"use client";
+
 import * as stylex from "@stylexjs/stylex";
 import type { StyleXStyles } from "@stylexjs/stylex";
+import * as React from "react";
 
 import { colors, radius } from "@/registry/bases/stylex/lib/tokens.stylex";
 import { customClassName } from "@/registry/bases/stylex/lib/utils.stylex";
@@ -10,7 +13,7 @@ const styles = stylex.create({
     display: "flex",
     flexDirection: "column",
     fontSize: "0.875rem",
-    gap: "1rem",
+    gap: "0.625rem",
     maxWidth: "24rem",
     minWidth: 0,
     textWrap: "balance",
@@ -18,22 +21,27 @@ const styles = stylex.create({
   },
   description: {
     color: colors.mutedForeground,
+    fontFamily: "inherit",
     fontSize: "0.875rem",
     lineHeight: 1.625,
+    margin: 0,
   },
   empty: {
     alignItems: "center",
-    border: `1px dashed ${colors.border}`,
-    borderRadius: radius.lg,
+    borderColor: colors.border,
+    borderRadius: radius.md,
+    borderStyle: "dashed",
+    borderWidth: "1px",
     display: "flex",
     flex: 1,
     flexDirection: "column",
-    gap: "1.5rem",
+    gap: "1rem",
     justifyContent: "center",
     minWidth: 0,
-    padding: { "@media (min-width: 768px)": "3rem", default: "1.5rem" },
+    padding: "1.5rem",
     textAlign: "center",
     textWrap: "balance",
+    width: "100%",
   },
   header: {
     alignItems: "center",
@@ -41,9 +49,14 @@ const styles = stylex.create({
     flexDirection: "column",
     gap: "0.5rem",
     maxWidth: "24rem",
-    textAlign: "center",
   },
   mediaBase: {
+    ":is(svg)": {
+      flexShrink: 0,
+      height: "1rem",
+      pointerEvents: "none",
+      width: "1rem",
+    },
     alignItems: "center",
     display: "flex",
     flexShrink: 0,
@@ -54,111 +67,148 @@ const styles = stylex.create({
     backgroundColor: "transparent",
   },
   mediaIcon: {
+    ":is(svg)": {
+      flexShrink: 0,
+      height: "1rem",
+      pointerEvents: "none",
+      width: "1rem",
+    },
+    alignItems: "center",
     backgroundColor: colors.muted,
-    borderRadius: radius.lg,
+    borderRadius: radius.md,
     color: colors.foreground,
-    height: "2.5rem",
-    width: "2.5rem",
+    display: "flex",
+    flexShrink: 0,
+    height: "2rem",
+    justifyContent: "center",
+    width: "2rem",
   },
   title: {
-    fontSize: "1.125rem",
+    fontFamily: "inherit",
+    fontSize: "0.875rem",
     fontWeight: 500,
     letterSpacing: "-0.025em",
-    lineHeight: "1.75rem",
+    margin: 0,
   },
 });
 
-const Empty = ({ className, style, ...props }: React.ComponentProps<"div">) => (
+export type EmptyProps = Omit<React.ComponentProps<"div">, "style"> & {
+  className?: string;
+  style?: StyleXStyles;
+};
+
+const Empty = ({ className, style, ...props }: EmptyProps) => (
   <div
+    data-slot="empty"
     {...stylex.props(
       styles.empty,
       customClassName(className),
       style as StyleXStyles
     )}
-    data-slot="empty"
     {...props}
   />
 );
 
-const EmptyHeader = ({
-  className,
-  style,
-  ...props
-}: React.ComponentProps<"div">) => (
+export type EmptyHeaderProps = Omit<React.ComponentProps<"div">, "style"> & {
+  className?: string;
+  style?: StyleXStyles;
+};
+
+const EmptyHeader = ({ className, style, ...props }: EmptyHeaderProps) => (
   <div
+    data-slot="empty-header"
     {...stylex.props(
       styles.header,
       customClassName(className),
       style as StyleXStyles
     )}
-    data-slot="empty-header"
     {...props}
   />
 );
+
+export type EmptyMediaVariant = "default" | "icon";
+
+const mediaVariantStyles: Record<EmptyMediaVariant, StyleXStyles> = {
+  default: styles.mediaDefault,
+  icon: styles.mediaIcon,
+};
+
+export type EmptyMediaProps = Omit<React.ComponentProps<"div">, "style"> & {
+  variant?: EmptyMediaVariant;
+  className?: string;
+  style?: StyleXStyles;
+};
 
 const EmptyMedia = ({
   className,
   style,
   variant = "default",
   ...props
-}: React.ComponentProps<"div"> & { variant?: "default" | "icon" }) => (
+}: EmptyMediaProps) => (
   <div
+    data-slot="empty-icon"
+    data-variant={variant}
     {...stylex.props(
       styles.mediaBase,
-      variant === "icon" ? styles.mediaIcon : styles.mediaDefault,
+      mediaVariantStyles[variant],
       customClassName(className),
       style as StyleXStyles
     )}
-    data-slot="empty-icon"
-    data-variant={variant}
     {...props}
   />
 );
 
-const EmptyTitle = ({
-  className,
-  style,
-  ...props
-}: React.ComponentProps<"div">) => (
+export type EmptyTitleProps = Omit<React.ComponentProps<"div">, "style"> & {
+  className?: string;
+  style?: StyleXStyles;
+};
+
+const EmptyTitle = ({ className, style, ...props }: EmptyTitleProps) => (
   <div
+    data-slot="empty-title"
     {...stylex.props(
       styles.title,
       customClassName(className),
       style as StyleXStyles
     )}
-    data-slot="empty-title"
     {...props}
   />
 );
+
+export type EmptyDescriptionProps = Omit<React.ComponentProps<"p">, "style"> & {
+  className?: string;
+  style?: StyleXStyles;
+};
 
 const EmptyDescription = ({
   className,
   style,
   ...props
-}: React.ComponentProps<"p">) => (
-  <p
+}: EmptyDescriptionProps) => (
+  <div
+    data-slot="empty-description"
     {...stylex.props(
       styles.description,
       customClassName(className),
       style as StyleXStyles
     )}
-    data-slot="empty-description"
     {...props}
   />
 );
 
-const EmptyContent = ({
-  className,
-  style,
-  ...props
-}: React.ComponentProps<"div">) => (
+export type EmptyContentProps = Omit<React.ComponentProps<"div">, "style"> & {
+  className?: string;
+  style?: StyleXStyles;
+};
+
+const EmptyContent = ({ className, style, ...props }: EmptyContentProps) => (
   <div
+    data-slot="empty-content"
     {...stylex.props(
       styles.content,
       customClassName(className),
       style as StyleXStyles
     )}
-    data-slot="empty-content"
     {...props}
   />
 );

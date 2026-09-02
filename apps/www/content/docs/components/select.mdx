@@ -1,26 +1,22 @@
 ---
 title: Select
 description: Displays a list of options for the user to pick from—triggered by a button.
+component: true
 links:
   doc: https://base-ui.com/react/components/select
   api: https://base-ui.com/react/components/select#api-reference
 ---
 
-import SelectDemo from "@/examples/select-demo";
-
-<ComponentPreview name="select-demo">
-  <SelectDemo />
-</ComponentPreview>
+<ComponentPreview name="select-demo" />
 
 ## Installation
 
 <Tabs defaultValue="cli">
 
 <TabsList>
-  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="cli">Command</TabsTrigger>
   <TabsTrigger value="manual">Manual</TabsTrigger>
 </TabsList>
-
 <TabsContent value="cli">
 
 ```bash
@@ -58,24 +54,36 @@ pnpm add @base-ui/react @stylexjs/stylex
 
 ## Usage
 
-```tsx
+```tsx showLineNumbers
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select/select";
+} from "@/components/ui/select";
 ```
 
-```tsx
-<Select>
-  <SelectTrigger>
+```tsx showLineNumbers
+const items = [
+  { label: "Light", value: "light" },
+  { label: "Dark", value: "dark" },
+  { label: "System", value: "system" },
+]
+
+<Select items={items}>
+  <SelectTrigger className="w-[180px]">
     <SelectValue placeholder="Theme" />
   </SelectTrigger>
   <SelectContent>
-    <SelectItem value="light">Light</SelectItem>
-    <SelectItem value="dark">Dark</SelectItem>
+    <SelectGroup>
+      {items.map((item) => (
+        <SelectItem key={item.value} value={item.value}>
+          {item.label}
+        </SelectItem>
+      ))}
+    </SelectGroup>
   </SelectContent>
 </Select>
 ```
@@ -84,68 +92,65 @@ import {
 
 Use the following composition to build a `Select`:
 
-```txt
+```text
 Select
 ├── SelectTrigger
 │   └── SelectValue
 └── SelectContent
+    ├── SelectGroup
+    │   ├── SelectLabel
+    │   ├── SelectItem
+    │   └── SelectItem
+    ├── SelectSeparator
     └── SelectGroup
         ├── SelectLabel
         ├── SelectItem
-        └── SelectSeparator
+        └── SelectItem
 ```
 
-## Examples
+## Align Item With Trigger
 
-import SelectAlignItem from "@/examples/select-align-item";
-import SelectGroups from "@/examples/select-groups";
-import SelectScrollable from "@/examples/select-scrollable";
-import SelectDisabled from "@/examples/select-disabled";
-import SelectInvalid from "@/examples/select-invalid";
+Use `alignItemWithTrigger` on `SelectContent` to control whether the selected item aligns with the trigger. When `true` (default), the popup positions so the selected item appears over the trigger. When `false`, the popup aligns to the trigger edge.
 
-### Align Item With Trigger
+<ComponentPreview name="select-align-item" />
 
-Use `alignItemWithTrigger` on `SelectContent` to align the selected item with
-the trigger.
+## Groups
 
-<ComponentPreview name="select-align-item">
-  <SelectAlignItem />
-</ComponentPreview>
+Use `SelectGroup`, `SelectLabel`, and `SelectSeparator` to organize items.
 
-### Groups
+<ComponentPreview name="select-groups" />
 
-<ComponentPreview name="select-groups">
-  <SelectGroups />
-</ComponentPreview>
+## Scrollable
 
-### Scrollable
+A select with many items that scrolls.
 
-<ComponentPreview name="select-scrollable">
-  <SelectScrollable />
-</ComponentPreview>
+<ComponentPreview name="select-scrollable" />
 
-### Disabled
+## Disabled
 
-<ComponentPreview name="select-disabled">
-  <SelectDisabled />
-</ComponentPreview>
+<ComponentPreview name="select-disabled" />
 
-### Invalid
+## Invalid
 
-<ComponentPreview name="select-invalid">
-  <SelectInvalid />
-</ComponentPreview>
+Add the `data-invalid` attribute to the `Field` component and the `aria-invalid` attribute to the `SelectTrigger` component to show an error state.
 
-import SelectRtl from "@/examples/select-rtl";
+```tsx showLineNumbers /data-invalid/ /aria-invalid/
+<Field data-invalid>
+  <FieldLabel>Fruit</FieldLabel>
+  <SelectTrigger aria-invalid>
+    <SelectValue />
+  </SelectTrigger>
+</Field>
+```
+
+<ComponentPreview name="select-invalid" />
 
 ## RTL
 
-To enable right-to-left support, see the [RTL guide](/docs/rtl).
+To enable RTL support in shadcn/ui, see the [RTL configuration guide](/docs/rtl).
 
-<ComponentPreview name="select-rtl" direction="rtl">
-  <SelectRtl />
-</ComponentPreview>
+<ComponentPreview name="select-rtl" direction="rtl" />
 
 ## API Reference
 
-See the [Base UI](https://base-ui.com/react/components/select#api-reference) documentation for the full API.
+See the [Base UI Select](https://base-ui.com/react/components/select#api-reference) documentation.
