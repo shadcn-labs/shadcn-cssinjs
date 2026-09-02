@@ -1,3 +1,4 @@
+"use client";
 import * as stylex from "@stylexjs/stylex";
 import type { StyleXStyles } from "@stylexjs/stylex";
 import {
@@ -5,52 +6,55 @@ import {
   ChevronRightIcon,
   MoreHorizontalIcon,
 } from "lucide-react";
+import * as React from "react";
 
-import { colors, radius } from "@/registry/bases/stylex/lib/tokens.stylex";
 import { customClassName } from "@/registry/bases/stylex/lib/utils.stylex";
+import { Button } from "@/registry/bases/stylex/ui/button";
 
 const styles = stylex.create({
+  chevronIcon: {
+    flexShrink: 0,
+    height: "1rem",
+    pointerEvents: "none",
+    transform: {
+      ":dir(rtl)": "scaleX(-1)",
+      default: null,
+    },
+    width: "1rem",
+  },
   content: {
     alignItems: "center",
+    boxSizing: "border-box",
     display: "flex",
-    flexDirection: "row",
-    gap: "0.25rem",
+    gap: "0.125rem",
     listStyle: "none",
+    listStyleType: "none",
     margin: 0,
     padding: 0,
   },
   ellipsis: {
     alignItems: "center",
     display: "flex",
-    height: "2.25rem",
+    height: "2rem",
     justifyContent: "center",
-    width: "2.25rem",
+    width: "2rem",
+  },
+  item: {
+    boxSizing: "border-box",
+    listStyle: "none",
+    listStyleType: "none",
+    margin: 0,
+    padding: 0,
   },
   link: {
-    alignItems: "center",
-    backgroundColor: { ":hover": colors.accent, default: "transparent" },
-    borderColor: "transparent",
-    borderRadius: radius.md,
-    borderStyle: "solid",
-    borderWidth: "1px",
-    color: { ":hover": colors.accentForeground, default: colors.foreground },
-    cursor: "pointer",
-    display: "inline-flex",
-    fontSize: "0.875rem",
-    fontWeight: 500,
-    gap: "0.25rem",
-    height: "2.25rem",
-    justifyContent: "center",
-    minWidth: "2.25rem",
-    outline: "none",
-    paddingInline: "0.625rem",
+    textDecoration: "none",
     textDecorationLine: "none",
-    transition: "background-color 0.1s ease, color 0.1s ease",
   },
-  linkActive: {
-    backgroundColor: colors.background,
-    borderColor: colors.input,
-    boxShadow: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+  next: {
+    paddingRight: "0.375rem",
+  },
+  previous: {
+    paddingLeft: "0.375rem",
   },
   root: {
     display: "flex",
@@ -58,104 +62,202 @@ const styles = stylex.create({
     marginInline: "auto",
     width: "100%",
   },
+  srOnly: {
+    borderWidth: 0,
+    clip: "rect(0, 0, 0, 0)",
+    height: "1px",
+    margin: "-1px",
+    overflow: "hidden",
+    padding: 0,
+    position: "absolute",
+    whiteSpace: "nowrap",
+    width: "1px",
+  },
+  text: {
+    display: {
+      "@media (min-width: 640px)": "block",
+      default: "none",
+    },
+  },
 });
 
-const Pagination = ({
-  className,
-  style,
-  ...props
-}: React.ComponentProps<"nav">) => (
-  <nav
-    aria-label="pagination"
-    {...stylex.props(
-      styles.root,
-      customClassName(className),
-      style as StyleXStyles
-    )}
-    data-slot="pagination"
-    {...props}
-  />
-);
+export type PaginationProps = Omit<React.ComponentProps<"nav">, "style"> & {
+  className?: string;
+  style?: StyleXStyles;
+};
+
+const Pagination = ({ className, style, ...props }: PaginationProps) => {
+  const styleProps = stylex.props(
+    styles.root,
+    customClassName(className),
+    style as StyleXStyles
+  );
+  return (
+    <nav
+      aria-label="pagination"
+      data-slot="pagination"
+      {...styleProps}
+      {...props}
+    />
+  );
+};
+
+export type PaginationContentProps = Omit<
+  React.ComponentProps<"ul">,
+  "style"
+> & {
+  className?: string;
+  style?: StyleXStyles;
+};
 
 const PaginationContent = ({
   className,
   style,
   ...props
-}: React.ComponentProps<"ul">) => (
-  <ul
-    {...stylex.props(
-      styles.content,
-      customClassName(className),
-      style as StyleXStyles
-    )}
-    data-slot="pagination-content"
-    {...props}
-  />
-);
+}: PaginationContentProps) => {
+  const styleProps = stylex.props(
+    styles.content,
+    customClassName(className),
+    style as StyleXStyles
+  );
+  return <ul data-slot="pagination-content" {...styleProps} {...props} />;
+};
 
-const PaginationItem = (props: React.ComponentProps<"li">) => (
-  <li data-slot="pagination-item" {...props} />
-);
+export type PaginationItemProps = Omit<React.ComponentProps<"li">, "style"> & {
+  className?: string;
+  style?: StyleXStyles;
+};
+
+const PaginationItem = ({
+  className,
+  style,
+  ...props
+}: PaginationItemProps) => {
+  const styleProps = stylex.props(
+    styles.item,
+    customClassName(className),
+    style as StyleXStyles
+  );
+  return <li data-slot="pagination-item" {...styleProps} {...props} />;
+};
+
+export type PaginationLinkProps = {
+  isActive?: boolean;
+  className?: string;
+  style?: StyleXStyles;
+} & Pick<React.ComponentProps<typeof Button>, "size"> &
+  Omit<React.ComponentProps<"a">, "style">;
 
 const PaginationLink = ({
   className,
   style,
   isActive,
+  size = "icon",
   ...props
-}: React.ComponentProps<"a"> & { isActive?: boolean }) => (
-  // oxlint-disable-next-line eslint-plugin-jsx-a11y/anchor-has-content: content is passed by the consumer via children
-  <a
-    aria-current={isActive ? "page" : undefined}
-    {...stylex.props(
-      styles.link,
-      isActive && styles.linkActive,
-      customClassName(className),
-      style as StyleXStyles
-    )}
-    data-active={isActive}
-    data-slot="pagination-link"
-    {...props}
+}: PaginationLinkProps) => (
+  <Button
+    variant={isActive ? "outline" : "ghost"}
+    size={size}
+    className={className}
+    style={style}
+    nativeButton={false}
+    render={
+      <a
+        aria-current={isActive ? "page" : undefined}
+        data-slot="pagination-link"
+        data-active={isActive}
+        {...stylex.props(styles.link)}
+        {...props}
+      />
+    }
   />
 );
 
+export type PaginationPreviousProps = React.ComponentProps<
+  typeof PaginationLink
+> & {
+  text?: string;
+};
+
 const PaginationPrevious = ({
-  children,
+  className,
+  style,
+  text = "Previous",
   ...props
-}: React.ComponentProps<typeof PaginationLink>) => (
-  <PaginationLink aria-label="Go to previous page" {...props}>
-    <ChevronLeftIcon size={16} />
-    {children ?? <span>Previous</span>}
+}: PaginationPreviousProps) => (
+  <PaginationLink
+    aria-label="Go to previous page"
+    size="default"
+    className={className}
+    style={[styles.previous, style as StyleXStyles]}
+    {...props}
+  >
+    <ChevronLeftIcon
+      data-icon="inline-start"
+      {...stylex.props(styles.chevronIcon)}
+    />
+    <span {...stylex.props(styles.text)}>{text}</span>
   </PaginationLink>
 );
 
+export type PaginationNextProps = React.ComponentProps<
+  typeof PaginationLink
+> & {
+  text?: string;
+};
+
 const PaginationNext = ({
-  children,
+  className,
+  style,
+  text = "Next",
   ...props
-}: React.ComponentProps<typeof PaginationLink>) => (
-  <PaginationLink aria-label="Go to next page" {...props}>
-    {children ?? <span>Next</span>}
-    <ChevronRightIcon size={16} />
+}: PaginationNextProps) => (
+  <PaginationLink
+    aria-label="Go to next page"
+    size="default"
+    className={className}
+    style={[styles.next, style as StyleXStyles]}
+    {...props}
+  >
+    <span {...stylex.props(styles.text)}>{text}</span>
+    <ChevronRightIcon
+      data-icon="inline-end"
+      {...stylex.props(styles.chevronIcon)}
+    />
   </PaginationLink>
 );
+
+export type PaginationEllipsisProps = Omit<
+  React.ComponentProps<"span">,
+  "style"
+> & {
+  className?: string;
+  style?: StyleXStyles;
+};
 
 const PaginationEllipsis = ({
   className,
   style,
   ...props
-}: React.ComponentProps<"span">) => (
-  <span
-    aria-hidden="true"
-    {...stylex.props(
-      styles.ellipsis,
-      customClassName(className),
-      style as StyleXStyles
-    )}
-    data-slot="pagination-ellipsis"
-    {...props}
-  >
-    <MoreHorizontalIcon size={16} />
-  </span>
-);
+}: PaginationEllipsisProps) => {
+  const styleProps = stylex.props(
+    styles.ellipsis,
+    customClassName(className),
+    style as StyleXStyles
+  );
+  const srStyleProps = stylex.props(styles.srOnly);
+  return (
+    <span
+      aria-hidden
+      data-slot="pagination-ellipsis"
+      {...styleProps}
+      {...props}
+    >
+      <MoreHorizontalIcon size={16} />
+      <span {...srStyleProps}>More pages</span>
+    </span>
+  );
+};
 
 export {
   Pagination,

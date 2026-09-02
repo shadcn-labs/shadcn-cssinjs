@@ -1,33 +1,41 @@
+"use client";
 import * as stylex from "@stylexjs/stylex";
 import type { StyleXStyles } from "@stylexjs/stylex";
+import * as React from "react";
 
 import { colors, radius } from "@/registry/bases/stylex/lib/tokens.stylex";
 import { customClassName } from "@/registry/bases/stylex/lib/utils.stylex";
 
-const pulse = stylex.keyframes({
-  "50%": { opacity: 0.5 },
+const pulseKeyframes = stylex.keyframes({
+  "0%, 100%": {
+    opacity: 1,
+  },
+  "50%": {
+    opacity: 0.5,
+  },
 });
 
 const styles = stylex.create({
-  root: {
+  skeleton: {
     animationDuration: "2s",
     animationIterationCount: "infinite",
-    animationName: pulse,
+    animationName: pulseKeyframes,
     animationTimingFunction: "cubic-bezier(0.4, 0, 0.6, 1)",
-    backgroundColor: `color-mix(in oklab, ${colors.muted} 50%, transparent)`,
+    backgroundColor: colors.muted,
     borderRadius: radius.md,
   },
 });
 
-const Skeleton = ({
-  className,
-  style,
-  ...props
-}: React.ComponentProps<"div">) => (
+export type SkeletonProps = Omit<React.ComponentProps<"div">, "style"> & {
+  className?: string;
+  style?: StyleXStyles;
+};
+
+const Skeleton = ({ className, style, ...props }: SkeletonProps) => (
   <div
     data-slot="skeleton"
     {...stylex.props(
-      styles.root,
+      styles.skeleton,
       customClassName(className),
       style as StyleXStyles
     )}

@@ -1,14 +1,19 @@
+"use client";
 import * as stylex from "@stylexjs/stylex";
 import type { StyleXStyles } from "@stylexjs/stylex";
+import * as React from "react";
 
-import { colors } from "@/registry/bases/stylex/lib/tokens.stylex";
 import { customClassName } from "@/registry/bases/stylex/lib/utils.stylex";
 
 const styles = stylex.create({
+  disabled: {
+    cursor: "not-allowed",
+    opacity: 0.5,
+  },
   root: {
     alignItems: "center",
-    color: colors.foreground,
-    display: "inline-flex",
+    color: "inherit",
+    display: "flex",
     fontSize: "0.875rem",
     fontWeight: 500,
     gap: "0.5rem",
@@ -17,21 +22,32 @@ const styles = stylex.create({
   },
 });
 
-const Label = ({
-  className,
-  style,
-  ...props
-}: React.ComponentProps<"label"> & { className?: string }) => (
-  // oxlint-disable-next-line eslint-plugin-jsx-a11y/label-has-associated-control
-  <label
-    {...stylex.props(
-      styles.root,
-      customClassName(className),
-      style as StyleXStyles
-    )}
-    data-slot="label"
-    {...props}
-  />
-);
+export type LabelProps = Omit<React.ComponentProps<"label">, "style"> & {
+  style?: StyleXStyles;
+  "data-disabled"?: boolean | string;
+};
+
+const Label = ({ className, style, ...props }: LabelProps) => {
+  const isDisabled =
+    props["data-disabled"] === true ||
+    props["data-disabled"] === "" ||
+    props["data-disabled"] === "true" ||
+    props["aria-disabled"] === true ||
+    props["aria-disabled"] === "true";
+
+  return (
+    // oxlint-disable-next-line eslint-plugin-jsx-a11y/label-has-associated-control
+    <label
+      data-slot="label"
+      {...stylex.props(
+        styles.root,
+        isDisabled && styles.disabled,
+        customClassName(className),
+        style
+      )}
+      {...props}
+    />
+  );
+};
 
 export { Label };

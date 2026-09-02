@@ -15,7 +15,7 @@
     "check": "ultracite check",
     "fix": "ultracite fix",
     "prepare": "lefthook install",
-    "build:registry": "pnpm --filter=www registry:build",
+    "build:registry": "pnpm --filter=www build:registry",
     "typecheck": "turbo run typecheck"
   },
   "devDependencies": {

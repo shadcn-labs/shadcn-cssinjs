@@ -1,16 +1,24 @@
+"use client";
 import * as stylex from "@stylexjs/stylex";
 import type { StyleXStyles } from "@stylexjs/stylex";
 import { ChevronDownIcon } from "lucide-react";
+import * as React from "react";
 
 import { colors, radius } from "@/registry/bases/stylex/lib/tokens.stylex";
 import { customClassName } from "@/registry/bases/stylex/lib/utils.stylex";
 
 const styles = stylex.create({
+  ariaInvalid: {
+    borderColor: colors.destructive,
+    boxShadow: {
+      ":focus-visible": `0 0 0 3px color-mix(in oklab, ${colors.destructive} 40%, transparent)`,
+      default: `0 0 0 3px color-mix(in oklab, ${colors.destructive} 20%, transparent)`,
+    },
+  },
   icon: {
     color: colors.mutedForeground,
     height: "1rem",
-    insetInlineEnd: "0.875rem",
-    opacity: 0.5,
+    insetInlineEnd: "0.625rem",
     pointerEvents: "none",
     position: "absolute",
     top: "50%",
@@ -18,95 +26,155 @@ const styles = stylex.create({
     userSelect: "none",
     width: "1rem",
   },
-  iconSm: {
-    height: "0.875rem",
-    insetInlineEnd: "0.625rem",
-    width: "0.875rem",
+  option: {
+    backgroundColor: "Canvas",
+    color: "CanvasText",
   },
   select: {
+    "::placeholder": {
+      color: colors.mutedForeground,
+    },
+    "::selection": {
+      backgroundColor: colors.primary,
+      color: colors.primaryForeground,
+    },
+    MozAppearance: "none",
+    WebkitAppearance: "none",
     appearance: "none",
     backgroundColor: "transparent",
-    borderColor: { ":focus-visible": colors.ring, default: colors.input },
+    borderColor: {
+      ":focus-visible": colors.ring,
+      default: colors.input,
+    },
     borderRadius: radius.md,
     borderStyle: "solid",
     borderWidth: "1px",
     boxShadow: {
       ":focus-visible": `0 0 0 3px color-mix(in oklab, ${colors.ring} 50%, transparent)`,
-      default: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+      default: "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
     },
+    boxSizing: "border-box",
     color: colors.foreground,
-    cursor: { ":disabled": "not-allowed", default: "pointer" },
+    cursor: {
+      ":disabled": "not-allowed",
+      default: "pointer",
+    },
+    fontFamily: "inherit",
     fontSize: "0.875rem",
-    height: "2.25rem",
+    height: "2rem",
     lineHeight: "1.25rem",
     minWidth: 0,
-    opacity: { ":disabled": 0.5, default: 1 },
     outline: "none",
-    paddingBottom: "0.5rem",
-    paddingInlineEnd: "2.25rem",
+    paddingBottom: 0,
+    paddingInlineEnd: "2rem",
     paddingInlineStart: "0.75rem",
-    paddingTop: "0.5rem",
-    transition:
-      "color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, border-color 0.15s ease-in-out",
+    paddingTop: 0,
+    pointerEvents: {
+      ":disabled": "none",
+      default: null,
+    },
+    transitionDuration: "150ms",
+    transitionProperty: "color, background-color, border-color, box-shadow",
+    userSelect: "none",
     width: "100%",
   },
   selectSm: {
-    borderRadius: radius.sm,
-    fontSize: "0.75rem",
-    height: "2rem",
-    paddingBottom: "0.25rem",
-    paddingInlineEnd: "1.75rem",
-    paddingInlineStart: "0.625rem",
-    paddingTop: "0.25rem",
+    borderRadius: `min(${radius.md}, 10px)`,
+    height: "1.75rem",
+    paddingBottom: "0.125rem",
+    paddingTop: "0.125rem",
   },
   wrapper: {
+    opacity: {
+      ":has(select:disabled)": 0.5,
+      default: 1,
+    },
     position: "relative",
     width: "fit-content",
   },
 });
 
+export type NativeSelectProps = Omit<
+  React.ComponentProps<"select">,
+  "size" | "style"
+> & {
+  className?: string;
+  size?: "sm" | "default";
+  style?: StyleXStyles;
+};
+
 const NativeSelect = ({
   className,
-  style,
   size = "default",
+  style,
   ...props
-}: Omit<React.ComponentProps<"select">, "size"> & {
-  size?: "sm" | "default";
-}) => {
-  const select = stylex.props(styles.select, size === "sm" && styles.selectSm);
-  const icon = stylex.props(styles.icon, size === "sm" && styles.iconSm);
+}: NativeSelectProps) => {
+  const isInvalid =
+    props["aria-invalid"] === true || props["aria-invalid"] === "true";
+
   return (
     <div
       data-slot="native-select-wrapper"
       data-size={size}
-      {...stylex.props(
-        styles.wrapper,
-        customClassName(className),
-        style as StyleXStyles
-      )}
+      {...stylex.props(styles.wrapper, customClassName(className), style)}
     >
       <select
         data-slot="native-select"
         data-size={size}
-        className={select.className}
-        style={select.style}
         {...props}
+        {...stylex.props(
+          styles.select,
+          size === "sm" && styles.selectSm,
+          isInvalid && styles.ariaInvalid
+        )}
       />
       <ChevronDownIcon
         aria-hidden="true"
         data-slot="native-select-icon"
-        {...icon}
+        {...stylex.props(styles.icon)}
       />
     </div>
   );
 };
 
-const NativeSelectOption = (props: React.ComponentProps<"option">) => (
-  <option data-slot="native-select-option" {...props} />
+export type NativeSelectOptionProps = Omit<
+  React.ComponentProps<"option">,
+  "style"
+> & {
+  className?: string;
+  style?: StyleXStyles;
+};
+
+const NativeSelectOption = ({
+  className,
+  style,
+  ...props
+}: NativeSelectOptionProps) => (
+  <option
+    data-slot="native-select-option"
+    {...props}
+    {...stylex.props(styles.option, customClassName(className), style)}
+  />
 );
 
-const NativeSelectOptGroup = (props: React.ComponentProps<"optgroup">) => (
-  <optgroup data-slot="native-select-optgroup" {...props} />
+export type NativeSelectOptGroupProps = Omit<
+  React.ComponentProps<"optgroup">,
+  "style"
+> & {
+  className?: string;
+  style?: StyleXStyles;
+};
+
+const NativeSelectOptGroup = ({
+  className,
+  style,
+  ...props
+}: NativeSelectOptGroupProps) => (
+  <optgroup
+    data-slot="native-select-optgroup"
+    {...props}
+    {...stylex.props(styles.option, customClassName(className), style)}
+  />
 );
 
 export { NativeSelect, NativeSelectOptGroup, NativeSelectOption };

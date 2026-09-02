@@ -1,7 +1,7 @@
 "use client";
-
 import { PreviewCard as PreviewCardPrimitive } from "@base-ui/react/preview-card";
 import * as stylex from "@stylexjs/stylex";
+import type { StyleXStyles } from "@stylexjs/stylex";
 
 import { colors, radius } from "@/registry/bases/stylex/lib/tokens.stylex";
 import { customClassName } from "@/registry/bases/stylex/lib/utils.stylex";
@@ -9,20 +9,16 @@ import { customClassName } from "@/registry/bases/stylex/lib/utils.stylex";
 const styles = stylex.create({
   popup: {
     backgroundColor: colors.popover,
-    borderColor: colors.border,
     borderRadius: radius.md,
-    borderStyle: "solid",
-    borderWidth: "1px",
-    boxShadow:
-      "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+    boxShadow: `0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1), 0 0 0 1px color-mix(in oklab, ${colors.foreground} 10%, transparent)`,
     color: colors.popoverForeground,
     fontSize: "0.875rem",
-    opacity: 1,
     outline: "none",
-    padding: "1rem",
-    transform: "scale(1)",
+    padding: "0.625rem",
     transformOrigin: "var(--transform-origin)",
-    transition: "opacity 0.15s ease-in-out, transform 0.15s ease-in-out",
+    transitionDuration: "100ms",
+    transitionProperty: "opacity, transform",
+    transitionTimingFunction: "ease-out",
     width: "16rem",
     zIndex: 50,
   },
@@ -30,57 +26,69 @@ const styles = stylex.create({
     opacity: 0,
     transform: "scale(0.95)",
   },
+  positioner: {
+    isolation: "isolate",
+    zIndex: 50,
+  },
 });
 
-const hidden = (s: string | undefined) => s === "starting" || s === "ending";
+type HoverCardProps = PreviewCardPrimitive.Root.Props;
 
-const HoverCard = (
-  props: React.ComponentProps<typeof PreviewCardPrimitive.Root>
-) => <PreviewCardPrimitive.Root data-slot="hover-card" {...props} />;
+const HoverCard = (props: HoverCardProps) => (
+  <PreviewCardPrimitive.Root data-slot="hover-card" {...props} />
+);
 
-const HoverCardTrigger = (
-  props: React.ComponentProps<typeof PreviewCardPrimitive.Trigger>
-) => <PreviewCardPrimitive.Trigger data-slot="hover-card-trigger" {...props} />;
+type HoverCardTriggerProps = PreviewCardPrimitive.Trigger.Props;
+
+const HoverCardTrigger = (props: HoverCardTriggerProps) => (
+  <PreviewCardPrimitive.Trigger data-slot="hover-card-trigger" {...props} />
+);
+
+type HoverCardContentProps = Omit<
+  PreviewCardPrimitive.Popup.Props,
+  "className" | "style"
+> &
+  Pick<
+    PreviewCardPrimitive.Positioner.Props,
+    "align" | "alignOffset" | "side" | "sideOffset"
+  > & {
+    className?: string;
+    style?: StyleXStyles;
+  };
 
 const HoverCardContent = ({
   className,
   style,
+  side = "bottom",
   sideOffset = 4,
   align = "center",
-  side = "bottom",
-  children,
+  alignOffset = 4,
   ...props
-}: Omit<
-  React.ComponentProps<typeof PreviewCardPrimitive.Popup>,
-  "className"
-> & {
-  className?: string;
-  align?: "start" | "center" | "end";
-  side?: "top" | "bottom" | "left" | "right";
-  sideOffset?: number;
-}) => (
-  <PreviewCardPrimitive.Portal>
+}: HoverCardContentProps) => (
+  <PreviewCardPrimitive.Portal data-slot="hover-card-portal">
     <PreviewCardPrimitive.Positioner
       align={align}
+      alignOffset={alignOffset}
       side={side}
       sideOffset={sideOffset}
+      {...stylex.props(styles.positioner)}
     >
       <PreviewCardPrimitive.Popup
+        data-slot="hover-card-content"
         className={(state) =>
           stylex.props(
             styles.popup,
-            hidden(state.transitionStatus) && styles.popupHidden,
-            customClassName(className)
+            (state.transitionStatus === "starting" ||
+              state.transitionStatus === "ending") &&
+              styles.popupHidden,
+            customClassName(className),
+            style as StyleXStyles
           ).className
         }
-        data-slot="hover-card-content"
-        style={style}
         {...props}
-      >
-        {children}
-      </PreviewCardPrimitive.Popup>
+      />
     </PreviewCardPrimitive.Positioner>
   </PreviewCardPrimitive.Portal>
 );
 
-export { HoverCard, HoverCardContent, HoverCardTrigger };
+export { HoverCard, HoverCardTrigger, HoverCardContent };

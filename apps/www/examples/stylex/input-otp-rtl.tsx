@@ -38,14 +38,19 @@ export default function InputOTPRtl() {
   return (
     <Field className="mx-auto max-w-xs">
       <FieldLabel htmlFor="input-otp-rtl">{t.verificationCode}</FieldLabel>
-      <InputOTP length={6} defaultValue="123456" dir={dir} id="input-otp-rtl">
+      <InputOTP
+        maxLength={6}
+        defaultValue="123456"
+        dir={dir}
+        id="input-otp-rtl"
+      >
         <InputOTPGroup>
-          <InputOTPSlot />
-          <InputOTPSlot />
-          <InputOTPSlot />
-          <InputOTPSlot />
-          <InputOTPSlot />
-          <InputOTPSlot />
+          <InputOTPSlot index={0} />
+          <InputOTPSlot index={1} />
+          <InputOTPSlot index={2} />
+          <InputOTPSlot index={3} />
+          <InputOTPSlot index={4} />
+          <InputOTPSlot index={5} />
         </InputOTPGroup>
       </InputOTP>
     </Field>

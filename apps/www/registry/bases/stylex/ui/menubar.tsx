@@ -75,6 +75,11 @@ const styles = stylex.create({
     zIndex: 50,
   },
   popupHidden: { opacity: 0, transform: "scale(0.95)" },
+  radioDot: {
+    fill: "currentColor",
+    height: "0.5rem",
+    width: "0.5rem",
+  },
   separator: {
     backgroundColor: colors.border,
     height: "1px",
@@ -226,7 +231,6 @@ const MenubarCheckboxItem = ({
         styles.item,
         styles.itemInset,
         customClassName(className),
-        { position: "relative" } as StyleXStyles,
         style as StyleXStyles
       )}
       data-slot="menubar-checkbox-item"
@@ -261,7 +265,6 @@ const MenubarRadioItem = ({
         styles.item,
         styles.itemInset,
         customClassName(className),
-        { position: "relative" } as StyleXStyles,
         style as StyleXStyles
       )}
       data-slot="menubar-radio-item"
@@ -269,9 +272,7 @@ const MenubarRadioItem = ({
     >
       <span className={indicator.className} style={indicator.style}>
         <MenuPrimitive.RadioItemIndicator>
-          <CircleIcon
-            style={{ fill: "currentColor", height: "0.5rem", width: "0.5rem" }}
-          />
+          <CircleIcon {...stylex.props(styles.radioDot)} />
         </MenuPrimitive.RadioItemIndicator>
       </span>
       {children}

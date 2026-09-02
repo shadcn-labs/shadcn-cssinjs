@@ -168,6 +168,12 @@ const styles = stylex.create({
   list: {
     overflowY: "auto",
   },
+  separator: {
+    backgroundColor: colors.border,
+    height: "1px",
+    marginBlock: "0.25rem",
+    marginInline: "-0.25rem",
+  },
   trigger: {
     alignItems: "center",
     backgroundColor: "transparent",
@@ -438,17 +444,13 @@ const ComboboxSeparator = ({
   className,
   style,
   ...props
-}: React.ComponentProps<"div">) => (
+}: Omit<React.ComponentProps<"div">, "style"> & {
+  className?: string;
+  style?: StyleXStyles;
+}) => (
   <div
-    className={className}
     data-slot="combobox-separator"
-    style={{
-      backgroundColor: "var(--border)",
-      height: 1,
-      marginBlock: "0.25rem",
-      marginInline: "-0.25rem",
-      ...style,
-    }}
+    {...stylex.props(styles.separator, customClassName(className), style)}
     {...props}
   />
 );

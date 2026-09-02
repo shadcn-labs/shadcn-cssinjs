@@ -7,17 +7,17 @@ import {
 
 export default function InputOTPDisabled() {
   return (
-    <InputOTP id="disabled" length={6} disabled value="123456">
+    <InputOTP maxLength={6} id="disabled" disabled value="123456">
       <InputOTPGroup>
-        <InputOTPSlot />
-        <InputOTPSlot />
-        <InputOTPSlot />
+        <InputOTPSlot index={0} />
+        <InputOTPSlot index={1} />
+        <InputOTPSlot index={2} />
       </InputOTPGroup>
       <InputOTPSeparator />
       <InputOTPGroup>
-        <InputOTPSlot />
-        <InputOTPSlot />
-        <InputOTPSlot />
+        <InputOTPSlot index={0} />
+        <InputOTPSlot index={1} />
+        <InputOTPSlot index={2} />
       </InputOTPGroup>
     </InputOTP>
   );

@@ -1,136 +1,173 @@
 "use client";
-
 import { Toggle as TogglePrimitive } from "@base-ui/react/toggle";
 import { ToggleGroup as ToggleGroupPrimitive } from "@base-ui/react/toggle-group";
 import * as stylex from "@stylexjs/stylex";
 import type { StyleXStyles } from "@stylexjs/stylex";
-import { createContext, useContext } from "react";
+import * as React from "react";
 
-import { colors, radius } from "@/registry/bases/stylex/lib/tokens.stylex";
+import { radius } from "@/registry/bases/stylex/lib/tokens.stylex";
 import { customClassName } from "@/registry/bases/stylex/lib/utils.stylex";
 import { toggleStyles } from "@/registry/bases/stylex/ui/toggle";
 
+export type ToggleVariant = "default" | "outline";
+export type ToggleSize = "default" | "sm" | "lg";
+export type ToggleGroupOrientation = "horizontal" | "vertical";
+
 const styles = stylex.create({
   group: {
-    alignItems: "center",
-    backgroundColor: colors.muted,
     borderRadius: radius.md,
-    display: "inline-flex",
-    gap: "0.25rem",
-    padding: "0.25rem",
+    display: "flex",
     width: "fit-content",
   },
-  groupOutline: {
+  horizontal: {
     alignItems: "center",
-    display: "inline-flex",
-    gap: "0.25rem",
-    width: "fit-content",
+    flexDirection: "row",
   },
   item: {
-    alignItems: "center",
-    backgroundColor: { ":hover": colors.background, default: "transparent" },
-    borderRadius: radius.sm,
-    borderWidth: 0,
-    color: colors.foreground,
-    cursor: { ":disabled": "not-allowed", default: "pointer" },
-    display: "inline-flex",
-    fontSize: "0.875rem",
-    fontWeight: 500,
-    gap: "0.375rem",
-    height: "1.75rem",
-    justifyContent: "center",
-    minWidth: "1.75rem",
-    opacity: { ":disabled": 0.5, default: 1 },
-    outline: "none",
-    paddingInline: "0.625rem",
+    flexShrink: 0,
+    zIndex: {
+      ":focus": 10,
+      ":focus-visible": 10,
+      default: null,
+    },
   },
-  itemPressed: {
-    backgroundColor: colors.background,
-    boxShadow: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+  sizeSm: {
+    borderRadius: `min(${radius.md}, 10px)`,
+  },
+  vertical: {
+    alignItems: "stretch",
+    flexDirection: "column",
   },
 });
 
-type ToggleGroupVariant = "default" | "outline";
-type ToggleGroupSize = "default" | "sm" | "lg";
+const variantStyles: Record<ToggleVariant, StyleXStyles> = {
+  default: toggleStyles.default,
+  outline: toggleStyles.outline,
+};
 
-const ToggleGroupContext = createContext<{
-  variant: ToggleGroupVariant;
-  size: ToggleGroupSize;
-}>({ size: "default", variant: "default" });
-
-const sizeStyles = {
+const sizeStyles: Record<ToggleSize, StyleXStyles> = {
   default: toggleStyles.sizeDefault,
   lg: toggleStyles.sizeLg,
   sm: toggleStyles.sizeSm,
 };
 
+interface ToggleGroupContextValue {
+  variant?: ToggleVariant;
+  size?: ToggleSize;
+  spacing?: number;
+  orientation?: ToggleGroupOrientation;
+}
+
+const ToggleGroupContext = React.createContext<ToggleGroupContextValue>({
+  orientation: "horizontal",
+  size: "default",
+  spacing: 2,
+  variant: "default",
+});
+
+export type ToggleGroupProps = Omit<
+  ToggleGroupPrimitive.Props,
+  "className" | "style"
+> & {
+  className?: string;
+  variant?: ToggleVariant;
+  size?: ToggleSize;
+  spacing?: number;
+  orientation?: ToggleGroupOrientation;
+  style?: StyleXStyles;
+};
+
 const ToggleGroup = ({
   className,
-  style,
-  variant = "default",
-  size = "default",
-  spacing,
+  variant,
+  size,
+  spacing = 2,
   orientation = "horizontal",
+  style,
+  children,
   ...props
-}: Omit<React.ComponentProps<typeof ToggleGroupPrimitive>, "className"> & {
-  className?: string;
-  variant?: ToggleGroupVariant;
-  size?: ToggleGroupSize;
-  spacing?: number;
-}) => {
-  const outline = variant === "outline";
-  const gap = spacing === undefined ? undefined : `${spacing * 0.25}rem`;
-  return (
-    <ToggleGroupContext.Provider value={{ size, variant }}>
-      <ToggleGroupPrimitive
-        {...stylex.props(
-          outline ? styles.groupOutline : styles.group,
-          customClassName(className),
-          {
-            flexDirection: orientation === "vertical" ? "column" : "row",
-            ...(gap === undefined ? {} : { gap }),
-          } as StyleXStyles,
-          style as StyleXStyles
-        )}
-        data-slot="toggle-group"
-        data-variant={variant}
-        orientation={orientation}
-        {...props}
-      />
-    </ToggleGroupContext.Provider>
+}: ToggleGroupProps) => {
+  const styleProps = stylex.props(
+    styles.group,
+    orientation === "vertical" ? styles.vertical : styles.horizontal,
+    size === "sm" && styles.sizeSm,
+    customClassName(className),
+    { gap: `calc(${spacing} * 0.25rem)` } as StyleXStyles,
+    style
   );
+
+  return (
+    <ToggleGroupPrimitive
+      data-slot="toggle-group"
+      data-variant={variant}
+      data-size={size}
+      data-spacing={spacing}
+      data-orientation={orientation}
+      orientation={orientation}
+      {...styleProps}
+      style={
+        {
+          "--gap": spacing,
+          ...styleProps.style,
+        } as React.CSSProperties
+      }
+      {...props}
+    >
+      <ToggleGroupContext.Provider
+        value={{ orientation, size, spacing, variant }}
+      >
+        {children}
+      </ToggleGroupContext.Provider>
+    </ToggleGroupPrimitive>
+  );
+};
+
+export type ToggleGroupItemProps = Omit<
+  TogglePrimitive.Props,
+  "className" | "style"
+> & {
+  className?: string | ((state: TogglePrimitive.State) => string | undefined);
+  variant?: ToggleVariant;
+  size?: ToggleSize;
+  style?: StyleXStyles;
 };
 
 const ToggleGroupItem = ({
   className,
+  children,
+  variant = "default",
+  size = "default",
   style,
   ...props
-}: Omit<React.ComponentProps<typeof TogglePrimitive>, "className"> & {
-  className?: string;
-}) => {
-  const { variant, size } = useContext(ToggleGroupContext);
+}: ToggleGroupItemProps) => {
+  const context = React.useContext(ToggleGroupContext);
+  const itemVariant = context.variant || variant;
+  const itemSize = context.size || size;
+
   return (
     <TogglePrimitive
-      className={(state) =>
-        variant === "outline"
-          ? stylex.props(
-              toggleStyles.base,
-              toggleStyles.outline,
-              sizeStyles[size],
-              state.pressed && toggleStyles.pressed,
-              customClassName(className)
-            ).className
-          : stylex.props(
-              styles.item,
-              state.pressed && styles.itemPressed,
-              customClassName(className)
-            ).className
-      }
       data-slot="toggle-group-item"
-      style={style}
+      data-variant={itemVariant}
+      data-size={itemSize}
+      data-spacing={context.spacing}
+      className={(state) =>
+        stylex.props(
+          toggleStyles.base,
+          variantStyles[itemVariant],
+          sizeStyles[itemSize],
+          styles.item,
+          state.pressed && toggleStyles.pressed,
+          customClassName(
+            typeof className === "function" ? className(state) : className
+          ),
+          style
+        ).className
+      }
       {...props}
-    />
+    >
+      {children}
+    </TogglePrimitive>
   );
 };
 
-export { ToggleGroup, ToggleGroupItem };
+export { ToggleGroup, ToggleGroupItem, styles as toggleGroupStyles };

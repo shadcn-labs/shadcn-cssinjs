@@ -14,17 +14,17 @@ export default function InputOTPControlled() {
   return (
     <div className="space-y-2">
       <InputOTP
-        length={6}
+        maxLength={6}
         value={value}
-        onValueChange={(nextValue) => setValue(nextValue)}
+        onChange={(newValue: string) => setValue(newValue)}
       >
         <InputOTPGroup>
-          <InputOTPSlot />
-          <InputOTPSlot />
-          <InputOTPSlot />
-          <InputOTPSlot />
-          <InputOTPSlot />
-          <InputOTPSlot />
+          <InputOTPSlot index={0} />
+          <InputOTPSlot index={1} />
+          <InputOTPSlot index={2} />
+          <InputOTPSlot index={3} />
+          <InputOTPSlot index={4} />
+          <InputOTPSlot index={5} />
         </InputOTPGroup>
       </InputOTP>
       <div className="text-center text-sm">

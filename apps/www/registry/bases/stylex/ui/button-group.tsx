@@ -1,138 +1,114 @@
 "use client";
-
-import { useRender } from "@base-ui/react";
+import { mergeProps } from "@base-ui/react/merge-props";
+import { useRender } from "@base-ui/react/use-render";
 import * as stylex from "@stylexjs/stylex";
 import type { StyleXStyles } from "@stylexjs/stylex";
-import type { CSSProperties, ReactElement } from "react";
-import { Children, cloneElement, isValidElement } from "react";
+import * as React from "react";
 
 import { colors, radius } from "@/registry/bases/stylex/lib/tokens.stylex";
 import { customClassName } from "@/registry/bases/stylex/lib/utils.stylex";
-import { Input } from "@/registry/bases/stylex/ui/input";
 import { Separator } from "@/registry/bases/stylex/ui/separator";
 
 const styles = stylex.create({
   group: {
     alignItems: "stretch",
     display: "flex",
-    width: "fit-content",
+    zIndex: {
+      ":focus-within": 10,
+      default: null,
+    },
   },
-  nested: {
-    gap: "0.5rem",
+  horizontal: {
+    flexDirection: "row",
   },
   separator: {
     alignSelf: "stretch",
     backgroundColor: colors.input,
-    height: "auto",
-    margin: 0,
     position: "relative",
   },
+  separatorHorizontal: {
+    marginInline: "1px",
+    width: "auto",
+  },
+  separatorVertical: {
+    height: "auto",
+    marginBlock: "1px",
+  },
   text: {
+    ":is(svg)": {
+      flexShrink: 0,
+      height: "1rem",
+      pointerEvents: "none",
+      width: "1rem",
+    },
     alignItems: "center",
     backgroundColor: colors.muted,
     borderColor: colors.border,
     borderRadius: radius.md,
     borderStyle: "solid",
     borderWidth: "1px",
-    boxShadow: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+    color: colors.foreground,
     display: "flex",
     fontSize: "0.875rem",
     fontWeight: 500,
     gap: "0.5rem",
     lineHeight: "1.25rem",
-    paddingInline: "1rem",
+    paddingInline: "0.625rem",
   },
   vertical: {
     flexDirection: "column",
   },
 });
 
-type ButtonGroupOrientation = "horizontal" | "vertical";
+export type ButtonGroupOrientation = "horizontal" | "vertical";
 
-/**
- * StyleX cannot express Tailwind's parent `[&>*]` child selectors, so the
- * corner-squaring and border-collapsing that shadcn's button-group applies
- * through them is replicated here by injecting inline overrides into each
- * direct child — the faithful equivalent of `[&>*:not(:first-child)]:border-l-0`
- * and friends.
- */
-const collapseChild = (
-  index: number,
-  count: number,
-  vertical: boolean
-): CSSProperties => {
-  const overrides: CSSProperties = {};
-  const first = index === 0;
-  const last = index === count - 1;
-  if (vertical) {
-    if (!first) {
-      overrides.borderTopLeftRadius = 0;
-      overrides.borderTopRightRadius = 0;
-      overrides.borderTopWidth = 0;
-    }
-    if (!last) {
-      overrides.borderBottomLeftRadius = 0;
-      overrides.borderBottomRightRadius = 0;
-    }
-    return overrides;
-  }
-  if (!first) {
-    overrides.borderTopLeftRadius = 0;
-    overrides.borderBottomLeftRadius = 0;
-    overrides.borderLeftWidth = 0;
-  }
-  if (!last) {
-    overrides.borderTopRightRadius = 0;
-    overrides.borderBottomRightRadius = 0;
-  }
-  return overrides;
+const buttonGroupVariants = (options?: {
+  orientation?: ButtonGroupOrientation;
+  className?: string;
+  style?: StyleXStyles;
+}) => {
+  const orientation = options?.orientation ?? "horizontal";
+
+  return stylex.props(
+    styles.group,
+    orientation === "vertical" ? styles.vertical : styles.horizontal,
+    customClassName(options?.className),
+    options?.style
+  );
+};
+
+export type ButtonGroupProps = Omit<React.ComponentProps<"div">, "style"> & {
+  orientation?: ButtonGroupOrientation;
+  className?: string;
+  style?: StyleXStyles | React.CSSProperties;
 };
 
 const ButtonGroup = ({
   className,
-  style,
   orientation = "horizontal",
-  children,
+  style,
   ...props
-}: React.ComponentProps<"div"> & {
-  orientation?: ButtonGroupOrientation;
-}) => {
-  const vertical = orientation === "vertical";
-  const items = Children.toArray(children).filter(
-    isValidElement
-  ) as ReactElement<{
-    style?: CSSProperties;
-  }>[];
-  const nested = items.some((child) => child.type === ButtonGroup);
-  const content = nested
-    ? children
-    : items.map((child, index) => {
-        const overrides = collapseChild(index, items.length, vertical);
-        if (child.type === Input) {
-          overrides.flex = "1 1 0%";
-        }
-        return cloneElement(child, {
-          style: { ...child.props.style, ...overrides },
-        });
-      });
+}: ButtonGroupProps) => (
+  <div
+    role="group"
+    data-slot="button-group"
+    data-orientation={orientation}
+    {...stylex.props(
+      styles.group,
+      orientation === "vertical" ? styles.vertical : styles.horizontal,
+      customClassName(className),
+      style as StyleXStyles
+    )}
+    {...props}
+  />
+);
 
-  return (
-    <div
-      {...stylex.props(
-        styles.group,
-        vertical && styles.vertical,
-        nested && styles.nested,
-        customClassName(className),
-        style as StyleXStyles
-      )}
-      data-orientation={orientation}
-      data-slot="button-group"
-      role="group"
-      {...props}
-    >
-      {content}
-    </div>
-  );
+export type ButtonGroupTextProps = Omit<
+  useRender.ComponentProps<"div">,
+  "style"
+> & {
+  className?: string;
+  style?: StyleXStyles;
 };
 
 const ButtonGroupText = ({
@@ -140,31 +116,64 @@ const ButtonGroupText = ({
   style,
   render,
   ...props
-}: React.ComponentProps<"div"> & { render?: useRender.RenderProp }) =>
-  useRender({
-    props: {
-      ...stylex.props(
-        styles.text,
-        customClassName(className),
-        style as StyleXStyles
-      ),
-      "data-slot": "button-group-text",
-      ...props,
+}: ButtonGroupTextProps) => {
+  const styleProps = stylex.props(
+    styles.text,
+    customClassName(className),
+    style
+  );
+
+  return useRender({
+    defaultTagName: "div",
+    props: mergeProps(
+      {
+        className: styleProps.className,
+        style: styleProps.style,
+      },
+      props
+    ),
+    render,
+    state: {
+      slot: "button-group-text",
     },
-    render: render ?? <div />,
   });
+};
+
+export type ButtonGroupSeparatorProps = React.ComponentProps<
+  typeof Separator
+> & {
+  style?: StyleXStyles;
+};
 
 const ButtonGroupSeparator = ({
   className,
   orientation = "vertical",
+  style,
   ...props
-}: React.ComponentProps<typeof Separator>) => (
-  <Separator
-    {...stylex.props(styles.separator, customClassName(className))}
-    data-slot="button-group-separator"
-    orientation={orientation}
-    {...props}
-  />
-);
+}: ButtonGroupSeparatorProps) => {
+  const styleProps = stylex.props(
+    styles.separator,
+    orientation === "horizontal"
+      ? styles.separatorHorizontal
+      : styles.separatorVertical,
+    customClassName(className),
+    style
+  );
 
-export { ButtonGroup, ButtonGroupSeparator, ButtonGroupText };
+  return (
+    <Separator
+      data-slot="button-group-separator"
+      orientation={orientation}
+      {...styleProps}
+      {...props}
+    />
+  );
+};
+
+export {
+  ButtonGroup,
+  ButtonGroupSeparator,
+  ButtonGroupText,
+  buttonGroupVariants,
+  styles as buttonGroupStyles,
+};

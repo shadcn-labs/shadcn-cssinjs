@@ -9,17 +9,17 @@ import {
 
 export default function InputOTPAlphanumeric() {
   return (
-    <InputOTP length={6} validationType="alphanumeric">
+    <InputOTP maxLength={6}>
       <InputOTPGroup>
-        <InputOTPSlot />
-        <InputOTPSlot />
-        <InputOTPSlot />
+        <InputOTPSlot index={0} />
+        <InputOTPSlot index={1} />
+        <InputOTPSlot index={2} />
       </InputOTPGroup>
       <InputOTPSeparator />
       <InputOTPGroup>
-        <InputOTPSlot />
-        <InputOTPSlot />
-        <InputOTPSlot />
+        <InputOTPSlot index={0} />
+        <InputOTPSlot index={1} />
+        <InputOTPSlot index={2} />
       </InputOTPGroup>
     </InputOTP>
   );

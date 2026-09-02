@@ -8,12 +8,12 @@ import {
 
 export default function InputOTPFourDigits() {
   return (
-    <InputOTP length={4} validationType="numeric">
+    <InputOTP maxLength={4}>
       <InputOTPGroup>
-        <InputOTPSlot />
-        <InputOTPSlot />
-        <InputOTPSlot />
-        <InputOTPSlot />
+        <InputOTPSlot index={0} />
+        <InputOTPSlot index={1} />
+        <InputOTPSlot index={2} />
+        <InputOTPSlot index={3} />
       </InputOTPGroup>
     </InputOTP>
   );

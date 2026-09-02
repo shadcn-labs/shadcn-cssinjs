@@ -76,6 +76,11 @@ const styles = stylex.create({
     zIndex: 50,
   },
   popupHidden: { opacity: 0, transform: "scale(0.95)" },
+  radioDot: {
+    fill: "currentColor",
+    height: "0.5rem",
+    width: "0.5rem",
+  },
   separator: {
     backgroundColor: colors.border,
     height: "1px",
@@ -250,9 +255,7 @@ const ContextMenuRadioItem = ({
     >
       <span className={indicator.className} style={indicator.style}>
         <ContextMenuPrimitive.RadioItemIndicator>
-          <CircleIcon
-            style={{ fill: "currentColor", height: "0.5rem", width: "0.5rem" }}
-          />
+          <CircleIcon {...stylex.props(styles.radioDot)} />
         </ContextMenuPrimitive.RadioItemIndicator>
       </span>
       {children}

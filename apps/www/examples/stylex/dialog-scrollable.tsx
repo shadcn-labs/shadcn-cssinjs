@@ -1,3 +1,5 @@
+import * as stylex from "@stylexjs/stylex";
+
 import { Button } from "@/registry/bases/stylex/ui/button";
 import {
   Dialog,
@@ -9,6 +11,24 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/registry/bases/stylex/ui/dialog";
+
+const styles = stylex.create({
+  dialogContent: {
+    maxWidth: "425px",
+  },
+  paragraph: {
+    margin: 0,
+  },
+  sections: {
+    color: "var(--muted-foreground)",
+    display: "flex",
+    flexDirection: "column",
+    fontSize: 14,
+    gap: 8,
+    maxHeight: 200,
+    overflowY: "auto",
+  },
+});
 
 const SECTIONS = [
   "1. The service is provided “as is” without warranty of any kind.",
@@ -29,26 +49,16 @@ export default function DialogScrollable() {
   return (
     <Dialog>
       <DialogTrigger render={<Button variant="outline">Terms</Button>} />
-      <DialogContent style={{ maxWidth: 425 }}>
+      <DialogContent style={styles.dialogContent}>
         <DialogHeader>
           <DialogTitle>Terms of Service</DialogTitle>
           <DialogDescription>
             Please read the terms carefully before continuing.
           </DialogDescription>
         </DialogHeader>
-        <div
-          style={{
-            color: "var(--muted-foreground)",
-            display: "flex",
-            flexDirection: "column",
-            fontSize: 14,
-            gap: 8,
-            maxHeight: 200,
-            overflowY: "auto",
-          }}
-        >
+        <div {...stylex.props(styles.sections)}>
           {SECTIONS.map((section) => (
-            <p key={section} style={{ margin: 0 }}>
+            <p key={section} {...stylex.props(styles.paragraph)}>
               {section}
             </p>
           ))}

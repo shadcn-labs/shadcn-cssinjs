@@ -42,17 +42,17 @@ export default function InputOTPForm() {
               Resend Code
             </Button>
           </div>
-          <InputOTP length={6} id="otp-verification" required>
+          <InputOTP id="otp-verification" required maxLength={6}>
             <InputOTPGroup className="*:data-[slot=input-otp-slot]:h-12 *:data-[slot=input-otp-slot]:w-11 *:data-[slot=input-otp-slot]:text-xl">
-              <InputOTPSlot />
-              <InputOTPSlot />
-              <InputOTPSlot />
+              <InputOTPSlot index={0} />
+              <InputOTPSlot index={1} />
+              <InputOTPSlot index={2} />
             </InputOTPGroup>
             <InputOTPSeparator className="mx-2" />
             <InputOTPGroup className="*:data-[slot=input-otp-slot]:h-12 *:data-[slot=input-otp-slot]:w-11 *:data-[slot=input-otp-slot]:text-xl">
-              <InputOTPSlot />
-              <InputOTPSlot />
-              <InputOTPSlot />
+              <InputOTPSlot index={0} />
+              <InputOTPSlot index={1} />
+              <InputOTPSlot index={2} />
             </InputOTPGroup>
           </InputOTP>
           <FieldDescription>

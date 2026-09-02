@@ -14,23 +14,23 @@ export default function InputOTPInvalid() {
 
   return (
     <InputOTP
-      length={6}
+      maxLength={6}
       value={value}
-      onValueChange={(nextValue) => setValue(nextValue)}
+      onChange={(newValue: string) => setValue(newValue)}
     >
       <InputOTPGroup>
-        <InputOTPSlot aria-invalid />
-        <InputOTPSlot aria-invalid />
+        <InputOTPSlot index={0} aria-invalid />
+        <InputOTPSlot index={1} aria-invalid />
       </InputOTPGroup>
       <InputOTPSeparator />
       <InputOTPGroup>
-        <InputOTPSlot aria-invalid />
-        <InputOTPSlot aria-invalid />
+        <InputOTPSlot index={0} aria-invalid />
+        <InputOTPSlot index={1} aria-invalid />
       </InputOTPGroup>
       <InputOTPSeparator />
       <InputOTPGroup>
-        <InputOTPSlot aria-invalid />
-        <InputOTPSlot aria-invalid />
+        <InputOTPSlot index={0} aria-invalid />
+        <InputOTPSlot index={1} aria-invalid />
       </InputOTPGroup>
     </InputOTP>
   );

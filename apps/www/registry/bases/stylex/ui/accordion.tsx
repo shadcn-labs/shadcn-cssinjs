@@ -8,151 +8,240 @@ import { ChevronDownIcon } from "lucide-react";
 import { colors, radius } from "@/registry/bases/stylex/lib/tokens.stylex";
 import { customClassName } from "@/registry/bases/stylex/lib/utils.stylex";
 
+const accordionDown = stylex.keyframes({
+  from: { height: 0 },
+  to: { height: "var(--accordion-panel-height)" },
+});
+
+const accordionUp = stylex.keyframes({
+  from: { height: "var(--accordion-panel-height)" },
+  to: { height: 0 },
+});
+
 const styles = stylex.create({
-  chevron: {
-    color: colors.mutedForeground,
-    flexShrink: 0,
-    height: "1rem",
-    pointerEvents: "none",
-    transform: "translateY(0.125rem)",
-    transition: "transform 0.2s ease-in-out",
-    width: "1rem",
-  },
-  chevronOpen: {
-    transform: "translateY(0.125rem) rotate(180deg)",
-  },
-  content: {
-    paddingBottom: "1rem",
+  contentBody: {
+    height: "var(--accordion-panel-height)",
+    paddingBottom: "0.625rem",
     paddingTop: 0,
   },
   header: {
     display: "flex",
     margin: 0,
   },
+  icon: {
+    color: colors.mutedForeground,
+    flexShrink: 0,
+    height: "1rem",
+    marginLeft: "auto",
+    pointerEvents: "none",
+    transitionDuration: "200ms",
+    transitionProperty: "transform",
+    transitionTimingFunction: "cubic-bezier(0.87, 0, 0.13, 1)",
+    width: "1rem",
+  },
+  iconOpen: {
+    transform: "rotate(180deg)",
+  },
   item: {
-    borderBottomColor: colors.border,
-    borderBottomStyle: "solid",
-    borderBottomWidth: { ":last-child": 0, default: "1px" },
+    ":not(:last-child)": {
+      borderBottomColor: colors.border,
+      borderBottomStyle: "solid",
+      borderBottomWidth: "1px",
+    },
+  },
+  link: {
+    color: {
+      ":hover": colors.foreground,
+      default: "inherit",
+    },
+    textDecorationLine: "underline",
+    textUnderlineOffset: "3px",
   },
   panel: {
     fontSize: "0.875rem",
     lineHeight: "1.25rem",
     overflow: "hidden",
-    transition: "height 0.2s ease-in-out",
+  },
+  panelClosed: {
+    animationDuration: "0.2s",
+    animationName: accordionUp,
+    animationTimingFunction: "ease-out",
+  },
+  panelOpen: {
+    animationDuration: "0.2s",
+    animationName: accordionDown,
+    animationTimingFunction: "ease-out",
+  },
+  paragraph: {
+    marginBottom: {
+      ":not(:last-child)": "1rem",
+      default: null,
+    },
+  },
+  root: {
+    display: "flex",
+    flexDirection: "column",
+    width: "100%",
   },
   trigger: {
     alignItems: "flex-start",
     backgroundColor: "transparent",
+    borderBottomWidth: 0,
+    borderLeftWidth: 0,
     borderRadius: radius.md,
+    borderRightWidth: 0,
+    borderStyle: "none",
+    borderTopWidth: 0,
     boxShadow: {
       ":focus-visible": `0 0 0 3px color-mix(in oklab, ${colors.ring} 50%, transparent)`,
       default: null,
     },
     color: colors.foreground,
-    cursor: { ":disabled": "not-allowed", default: "pointer" },
+    cursor: "pointer",
     display: "flex",
     flex: 1,
+    fontFamily: "inherit",
     fontSize: "0.875rem",
     fontWeight: 500,
     gap: "1rem",
     justifyContent: "space-between",
     lineHeight: "1.25rem",
-    opacity: { ":disabled": 0.5, default: 1 },
     outline: "none",
-    paddingBottom: "1rem",
-    paddingTop: "1rem",
-    pointerEvents: { ":disabled": "none", default: null },
-    textAlign: "start",
-    textDecorationLine: { ":hover": "underline", default: "none" },
-    transition: "all 0.15s ease-in-out",
-    width: "100%",
+    outlineColor: {
+      ":focus-visible": colors.ring,
+      default: null,
+    },
+    outlineStyle: {
+      ":focus-visible": "solid",
+      default: null,
+    },
+    outlineWidth: {
+      ":focus-visible": "1px",
+      default: null,
+    },
+    paddingBottom: "0.625rem",
+    paddingLeft: 0,
+    paddingRight: 0,
+    paddingTop: "0.625rem",
+    position: "relative",
+    textAlign: "left",
+    textDecorationLine: {
+      ":hover": "underline",
+      default: "none",
+    },
+    transitionDuration: "150ms",
+    transitionProperty: "all",
+    transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+  },
+  triggerDisabled: {
+    opacity: 0.5,
+    pointerEvents: "none",
   },
 });
 
-const Accordion = (
-  props: React.ComponentProps<typeof AccordionPrimitive.Root>
-) => <AccordionPrimitive.Root data-slot="accordion" {...props} />;
-
-const AccordionItem = ({
-  className,
-  style,
-  ...props
-}: Omit<React.ComponentProps<typeof AccordionPrimitive.Item>, "className"> & {
+export type AccordionProps = Omit<AccordionPrimitive.Root.Props, "style"> & {
   className?: string;
-}) => (
-  <AccordionPrimitive.Item
-    data-slot="accordion-item"
-    {...stylex.props(
-      styles.item,
-      customClassName(className),
-      style as StyleXStyles
-    )}
+  style?: StyleXStyles;
+};
+
+const Accordion = ({ className, style, ...props }: AccordionProps) => (
+  <AccordionPrimitive.Root
+    data-slot="accordion"
     {...props}
+    {...stylex.props(styles.root, customClassName(className), style)}
   />
 );
 
+export type AccordionItemProps = Omit<
+  AccordionPrimitive.Item.Props,
+  "style"
+> & {
+  className?: string;
+  style?: StyleXStyles;
+};
+
+const AccordionItem = ({ className, style, ...props }: AccordionItemProps) => (
+  <AccordionPrimitive.Item
+    data-slot="accordion-item"
+    {...props}
+    {...stylex.props(styles.item, customClassName(className), style)}
+  />
+);
+
+export type AccordionTriggerProps = Omit<
+  AccordionPrimitive.Trigger.Props,
+  "style"
+> & {
+  className?: string;
+  style?: StyleXStyles;
+};
+
 const AccordionTrigger = ({
   className,
-  style,
   children,
+  style,
   ...props
-}: Omit<
-  React.ComponentProps<typeof AccordionPrimitive.Trigger>,
-  "className"
-> & { className?: string }) => {
-  const header = stylex.props(styles.header);
-  return (
-    <AccordionPrimitive.Header
-      className={header.className}
-      style={header.style}
-    >
-      <AccordionPrimitive.Trigger
-        data-slot="accordion-trigger"
-        {...stylex.props(
-          styles.trigger,
-          customClassName(className),
-          style as StyleXStyles
-        )}
-        render={(renderProps, state) => (
-          <button type="button" {...renderProps}>
-            {children}
-            <ChevronDownIcon
-              {...stylex.props(
-                styles.chevron,
-                state.open && styles.chevronOpen
-              )}
-            />
-          </button>
-        )}
-        {...props}
-      />
-    </AccordionPrimitive.Header>
-  );
+}: AccordionTriggerProps) => (
+  <AccordionPrimitive.Header {...stylex.props(styles.header)}>
+    <AccordionPrimitive.Trigger
+      data-slot="accordion-trigger"
+      render={(renderProps, state) => (
+        <button
+          type="button"
+          {...renderProps}
+          {...stylex.props(
+            styles.trigger,
+            state.disabled && styles.triggerDisabled,
+            customClassName(className),
+            style
+          )}
+        >
+          {children}
+          <ChevronDownIcon
+            data-slot="accordion-trigger-icon"
+            {...stylex.props(styles.icon, state.open && styles.iconOpen)}
+          />
+        </button>
+      )}
+      {...props}
+    />
+  </AccordionPrimitive.Header>
+);
+
+export type AccordionContentProps = Omit<
+  AccordionPrimitive.Panel.Props,
+  "style"
+> & {
+  className?: string;
+  style?: StyleXStyles;
 };
 
 const AccordionContent = ({
   className,
-  style,
   children,
+  style,
   ...props
-}: Omit<React.ComponentProps<typeof AccordionPrimitive.Panel>, "className"> & {
-  className?: string;
-}) => (
+}: AccordionContentProps) => (
   <AccordionPrimitive.Panel
     data-slot="accordion-content"
-    {...stylex.props(styles.panel)}
+    className={(state) =>
+      stylex.props(
+        styles.panel,
+        state.open ? styles.panelOpen : styles.panelClosed,
+        customClassName(className),
+        style
+      ).className
+    }
     {...props}
   >
-    <div
-      {...stylex.props(
-        styles.content,
-        customClassName(className),
-        style as StyleXStyles
-      )}
-    >
-      {children}
-    </div>
+    <div {...stylex.props(styles.contentBody)}>{children}</div>
   </AccordionPrimitive.Panel>
 );
 
-export { Accordion, AccordionContent, AccordionItem, AccordionTrigger };
+export {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+  styles as accordionStyles,
+};

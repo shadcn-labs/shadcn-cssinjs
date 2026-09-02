@@ -11,14 +11,14 @@ export default function InputOTPPattern() {
   return (
     <Field className="w-fit">
       <FieldLabel htmlFor="digits-only">Digits Only</FieldLabel>
-      <InputOTP id="digits-only" length={6} validationType="numeric">
+      <InputOTP id="digits-only" maxLength={6}>
         <InputOTPGroup>
-          <InputOTPSlot />
-          <InputOTPSlot />
-          <InputOTPSlot />
-          <InputOTPSlot />
-          <InputOTPSlot />
-          <InputOTPSlot />
+          <InputOTPSlot index={0} />
+          <InputOTPSlot index={1} />
+          <InputOTPSlot index={2} />
+          <InputOTPSlot index={3} />
+          <InputOTPSlot index={4} />
+          <InputOTPSlot index={5} />
         </InputOTPGroup>
       </InputOTP>
     </Field>

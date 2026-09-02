@@ -7,20 +7,20 @@ import {
 
 export default function InputOTPWithSeparator() {
   return (
-    <InputOTP length={6}>
+    <InputOTP maxLength={6}>
       <InputOTPGroup>
-        <InputOTPSlot />
-        <InputOTPSlot />
+        <InputOTPSlot index={0} />
+        <InputOTPSlot index={1} />
       </InputOTPGroup>
       <InputOTPSeparator />
       <InputOTPGroup>
-        <InputOTPSlot />
-        <InputOTPSlot />
+        <InputOTPSlot index={0} />
+        <InputOTPSlot index={1} />
       </InputOTPGroup>
       <InputOTPSeparator />
       <InputOTPGroup>
-        <InputOTPSlot />
-        <InputOTPSlot />
+        <InputOTPSlot index={0} />
+        <InputOTPSlot index={1} />
       </InputOTPGroup>
     </InputOTP>
   );

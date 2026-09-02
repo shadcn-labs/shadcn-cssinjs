@@ -1,99 +1,143 @@
 "use client";
-
 import { Switch as SwitchPrimitive } from "@base-ui/react/switch";
 import * as stylex from "@stylexjs/stylex";
+import type { StyleXStyles } from "@stylexjs/stylex";
+import * as React from "react";
 
-import { colors } from "@/registry/bases/stylex/lib/tokens.stylex";
+import { colors, radius } from "@/registry/bases/stylex/lib/tokens.stylex";
 import { customClassName } from "@/registry/bases/stylex/lib/utils.stylex";
 
 const styles = stylex.create({
   root: {
+    "::after": {
+      bottom: "-0.5rem",
+      content: '""',
+      left: "-0.75rem",
+      position: "absolute",
+      right: "-0.75rem",
+      top: "-0.5rem",
+    },
     alignItems: "center",
-    backgroundColor: colors.input,
-    borderRadius: "9999px",
-    borderWidth: 0,
+    backgroundColor: {
+      ":disabled": colors.input,
+      default: colors.input,
+    },
+    borderColor: {
+      ":focus-visible": colors.ring,
+      default: "transparent",
+    },
+    borderRadius: radius.full,
+    borderStyle: "solid",
+    borderWidth: "1px",
     boxShadow: {
       ":focus-visible": `0 0 0 3px color-mix(in oklab, ${colors.ring} 50%, transparent)`,
       default: null,
     },
-    cursor: { ":disabled": "not-allowed", default: "pointer" },
+    cursor: {
+      ":disabled": "not-allowed",
+      default: "pointer",
+    },
     display: "inline-flex",
     flexShrink: 0,
-    height: "1.15rem",
-    opacity: { ":disabled": 0.5, default: 1 },
+    opacity: {
+      ":disabled": 0.5,
+      default: 1,
+    },
     outline: "none",
-    padding: 0,
     position: "relative",
-    transition: "background-color 0.15s ease-in-out",
-    width: "2rem",
+    transitionDuration: "150ms",
+    transitionProperty: "all",
   },
   rootChecked: {
     backgroundColor: colors.primary,
   },
+  rootDefault: {
+    height: "18.4px",
+    width: "32px",
+  },
+  rootInvalid: {
+    borderColor: colors.destructive,
+    boxShadow: {
+      ":focus-visible": `0 0 0 3px color-mix(in oklab, ${colors.destructive} 20%, transparent)`,
+      default: null,
+    },
+  },
   rootSm: {
-    height: "1rem",
-    width: "1.65rem",
+    height: "14px",
+    width: "24px",
   },
   thumb: {
     backgroundColor: colors.background,
-    borderRadius: "9999px",
+    borderRadius: radius.full,
+    boxShadow: "0 0 0 0 transparent",
     display: "block",
-    height: "1rem",
     pointerEvents: "none",
-    transform: "translateX(0.075rem)",
-    transition: "transform 0.15s ease-in-out",
-    width: "1rem",
+    transform: "translateX(0px)",
+    transitionDuration: "150ms",
+    transitionProperty: "transform",
   },
   thumbChecked: {
-    transform: "translateX(0.925rem)",
+    transform: "translateX(calc(100% - 2px))",
+  },
+  thumbDefault: {
+    height: "1rem",
+    width: "1rem",
   },
   thumbSm: {
     height: "0.75rem",
     width: "0.75rem",
   },
-  thumbSmChecked: {
-    transform: "translateX(0.775rem)",
-  },
 });
+
+export type SwitchProps = Omit<
+  SwitchPrimitive.Root.Props,
+  "className" | "style"
+> & {
+  size?: "sm" | "default";
+  className?:
+    | string
+    | ((state: SwitchPrimitive.Root.State) => string | undefined);
+  style?: StyleXStyles;
+};
 
 const Switch = ({
   className,
   style,
   size = "default",
   ...props
-}: Omit<React.ComponentProps<typeof SwitchPrimitive.Root>, "className"> & {
-  className?: string;
-  size?: "default" | "sm";
-}) => {
-  const sm = size === "sm";
+}: SwitchProps) => {
+  const isSm = size === "sm";
+
   return (
     <SwitchPrimitive.Root
+      data-slot="switch"
+      data-size={size}
       className={(state) =>
         stylex.props(
           styles.root,
-          sm && styles.rootSm,
+          isSm ? styles.rootSm : styles.rootDefault,
           state.checked && styles.rootChecked,
-          customClassName(className)
+          state.valid === false && styles.rootInvalid,
+          customClassName(
+            typeof className === "function" ? className(state) : className
+          ),
+          style
         ).className
       }
-      data-size={size}
-      data-slot="switch"
-      style={style}
       {...props}
     >
       <SwitchPrimitive.Thumb
-        className={(state) => {
-          const checkedThumb = sm ? styles.thumbSmChecked : styles.thumbChecked;
-          return stylex.props(
-            styles.thumb,
-            sm && styles.thumbSm,
-            state.checked && checkedThumb
-          ).className;
-        }}
         data-slot="switch-thumb"
+        className={(state) =>
+          stylex.props(
+            styles.thumb,
+            isSm ? styles.thumbSm : styles.thumbDefault,
+            state.checked && styles.thumbChecked
+          ).className
+        }
       />
     </SwitchPrimitive.Root>
   );
 };
 
-export { Switch };
+export { Switch, styles as switchStyles };

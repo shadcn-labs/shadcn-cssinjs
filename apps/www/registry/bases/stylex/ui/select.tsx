@@ -3,259 +3,470 @@
 import { Select as SelectPrimitive } from "@base-ui/react/select";
 import * as stylex from "@stylexjs/stylex";
 import type { StyleXStyles } from "@stylexjs/stylex";
-import { CheckIcon, ChevronDownIcon } from "lucide-react";
+import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react";
+import * as React from "react";
 
 import { colors, radius } from "@/registry/bases/stylex/lib/tokens.stylex";
 import { customClassName } from "@/registry/bases/stylex/lib/utils.stylex";
 
+const isHidden = (status: string | undefined) =>
+  status === "starting" || status === "ending";
+
 const styles = stylex.create({
-  groupLabel: {
-    color: colors.mutedForeground,
-    fontSize: "0.75rem",
-    paddingBottom: "0.375rem",
-    paddingInline: "0.5rem",
-    paddingTop: "0.375rem",
+  content: {
+    backgroundColor: colors.popover,
+    borderRadius: radius.md,
+    boxShadow: `0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1), 0 0 0 1px color-mix(in oklab, ${colors.foreground} 10%, transparent)`,
+    color: colors.popoverForeground,
+    isolation: "isolate",
+    maxHeight: "var(--available-height)",
+    minWidth: "9rem",
+    opacity: 1,
+    outline: "none",
+    overflowX: "hidden",
+    overflowY: "auto",
+    position: "relative",
+    transform: "scale(1)",
+    transformOrigin: "var(--transform-origin)",
+    transitionDuration: "100ms",
+    transitionProperty: "opacity, transform",
+    transitionTimingFunction: "cubic-bezier(0, 0, 0.2, 1)",
+    width: "var(--anchor-width)",
+    zIndex: 50,
+  },
+  contentHidden: {
+    opacity: 0,
+    transform: "scale(0.95)",
+  },
+  group: {
+    scrollMarginBlock: "0.25rem",
   },
   icon: {
-    color: colors.mutedForeground,
+    flexShrink: 0,
     height: "1rem",
-    opacity: 0.5,
     pointerEvents: "none",
     width: "1rem",
   },
   item: {
+    ":is(svg)": {
+      flexShrink: 0,
+      height: "1rem",
+      pointerEvents: "none",
+      width: "1rem",
+    },
     alignItems: "center",
-    backgroundColor: { ":hover": colors.accent, default: "transparent" },
-    borderRadius: radius.sm,
+    backgroundColor: {
+      ":focus": colors.accent,
+      ":hover": colors.accent,
+      default: "transparent",
+    },
+    borderRadius: radius.md,
+    boxSizing: "border-box",
     color: {
+      ":focus": colors.accentForeground,
       ":hover": colors.accentForeground,
-      default: colors.popoverForeground,
+      default: colors.foreground,
     },
     cursor: "default",
     display: "flex",
     fontSize: "0.875rem",
-    gap: "0.5rem",
+    gap: "0.375rem",
+    lineHeight: "1.25rem",
     outline: "none",
-    paddingBlock: "0.375rem",
-    paddingInlineEnd: "2rem",
-    paddingInlineStart: "0.5rem",
+    paddingBottom: "0.25rem",
+    paddingLeft: "0.375rem",
+    paddingRight: "2rem",
+    paddingTop: "0.25rem",
     position: "relative",
     userSelect: "none",
+    width: "100%",
+  },
+  itemDisabled: {
+    cursor: "not-allowed",
+    opacity: 0.5,
+    pointerEvents: "none",
+  },
+  itemHighlighted: {
+    backgroundColor: colors.accent,
+    color: colors.accentForeground,
   },
   itemIndicator: {
     alignItems: "center",
     display: "flex",
-    insetInlineEnd: "0.5rem",
+    height: "1rem",
     justifyContent: "center",
+    pointerEvents: "none",
     position: "absolute",
+    right: "0.5rem",
+    width: "1rem",
   },
-  popup: {
-    backgroundColor: colors.popover,
-    borderColor: colors.border,
-    borderRadius: radius.md,
-    borderStyle: "solid",
-    borderWidth: "1px",
-    boxShadow:
-      "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
-    color: colors.popoverForeground,
-    maxHeight: "var(--available-height)",
-    minWidth: "8rem",
-    opacity: 1,
-    outline: "none",
-    overflowY: "auto",
+  itemText: {
+    display: "flex",
+    flex: 1,
+    flexShrink: 0,
+    gap: "0.5rem",
+    whiteSpace: "nowrap",
+  },
+  label: {
+    color: colors.mutedForeground,
+    fontSize: "0.75rem",
+    fontWeight: 500,
+    lineHeight: "1rem",
+    paddingBottom: "0.375rem",
+    paddingLeft: "0.5rem",
+    paddingRight: "0.5rem",
+    paddingTop: "0.375rem",
+  },
+  list: {
+    boxSizing: "border-box",
     padding: "0.25rem",
-    transformOrigin: "var(--transform-origin)",
-    transition: "opacity 0.15s ease-in-out",
+  },
+  positioner: {
+    isolation: "isolate",
+    outline: "none",
     zIndex: 50,
   },
-  popupHidden: { opacity: 0 },
+  scrollButton: {
+    alignItems: "center",
+    backgroundColor: colors.popover,
+    cursor: "default",
+    display: "flex",
+    justifyContent: "center",
+    paddingBlock: "0.25rem",
+    position: "relative",
+    width: "100%",
+    zIndex: 10,
+  },
+  scrollButtonDown: {
+    bottom: 0,
+  },
+  scrollButtonUp: {
+    top: 0,
+  },
   separator: {
     backgroundColor: colors.border,
     height: "1px",
     marginBlock: "0.25rem",
     marginInline: "-0.25rem",
+    pointerEvents: "none",
   },
   trigger: {
+    ":is(svg)": {
+      flexShrink: 0,
+      height: "1rem",
+      pointerEvents: "none",
+      width: "1rem",
+    },
     alignItems: "center",
     backgroundColor: "transparent",
-    borderColor: { ":focus-visible": colors.ring, default: colors.input },
+    borderColor: {
+      ":focus-visible": colors.ring,
+      default: colors.input,
+    },
     borderRadius: radius.md,
     borderStyle: "solid",
     borderWidth: "1px",
     boxShadow: {
       ":focus-visible": `0 0 0 3px color-mix(in oklab, ${colors.ring} 50%, transparent)`,
-      default: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+      default: null,
     },
-    color: colors.foreground,
-    cursor: { ":disabled": "not-allowed", default: "pointer" },
+    cursor: {
+      ":disabled": "not-allowed",
+      default: "pointer",
+    },
     display: "flex",
     fontSize: "0.875rem",
-    gap: "0.5rem",
-    height: "2.25rem",
+    gap: "0.375rem",
     justifyContent: "space-between",
-    opacity: { ":disabled": 0.5, default: 1 },
+    lineHeight: "1.25rem",
+    opacity: {
+      ":disabled": 0.5,
+      default: 1,
+    },
     outline: "none",
-    paddingInline: "0.75rem",
-    transition: "color 0.15s, box-shadow 0.15s, border-color 0.15s",
-    width: "fit-content",
+    paddingBottom: "0.5rem",
+    paddingLeft: "0.625rem",
+    paddingRight: "0.5rem",
+    paddingTop: "0.5rem",
+    pointerEvents: {
+      ":disabled": "none",
+      default: null,
+    },
+    transitionDuration: "150ms",
+    transitionProperty: "color, background-color, border-color, box-shadow",
+    userSelect: "none",
+    whiteSpace: "nowrap",
+    width: "100%",
+  },
+  triggerAriaInvalid: {
+    borderColor: colors.destructive,
+    boxShadow: {
+      ":focus-visible": `0 0 0 3px color-mix(in oklab, ${colors.destructive} 40%, transparent)`,
+      default: `0 0 0 3px color-mix(in oklab, ${colors.destructive} 20%, transparent)`,
+    },
+  },
+  triggerDefault: {
+    height: "2rem",
+  },
+  triggerIcon: {
+    color: colors.mutedForeground,
+    flexShrink: 0,
+    height: "1rem",
+    pointerEvents: "none",
+    width: "1rem",
+  },
+  triggerSm: {
+    borderRadius: `min(${radius.md}, 10px)`,
+    height: "1.75rem",
   },
   value: {
-    overflow: "hidden",
-    textAlign: "start",
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap",
+    display: "flex",
+    flex: 1,
+    textAlign: "left",
   },
 });
 
-const hidden = (s: string | undefined) => s === "starting" || s === "ending";
+const Select = SelectPrimitive.Root;
 
-const Select = (props: React.ComponentProps<typeof SelectPrimitive.Root>) => (
-  <SelectPrimitive.Root data-slot="select" {...props} />
-);
+type SelectProps<
+  Value = unknown,
+  Multiple extends boolean | undefined = boolean | undefined,
+> = SelectPrimitive.Root.Props<Value, Multiple>;
 
-const SelectGroup = (
-  props: React.ComponentProps<typeof SelectPrimitive.Group>
-) => <SelectPrimitive.Group data-slot="select-group" {...props} />;
-
-const SelectValue = ({
-  className,
-  style,
-  ...props
-}: Omit<React.ComponentProps<typeof SelectPrimitive.Value>, "className"> & {
+type SelectGroupProps = Omit<SelectPrimitive.Group.Props, "style"> & {
   className?: string;
-}) => (
-  <SelectPrimitive.Value
-    {...stylex.props(
-      styles.value,
-      customClassName(className),
-      style as StyleXStyles
-    )}
-    data-slot="select-value"
+  style?: StyleXStyles;
+};
+
+const SelectGroup = ({ className, style, ...props }: SelectGroupProps) => (
+  <SelectPrimitive.Group
+    data-slot="select-group"
+    {...stylex.props(styles.group, customClassName(className), style)}
     {...props}
   />
 );
 
+type SelectValueProps = Omit<SelectPrimitive.Value.Props, "style"> & {
+  className?: string;
+  style?: StyleXStyles;
+};
+
+const SelectValue = ({ className, style, ...props }: SelectValueProps) => (
+  <SelectPrimitive.Value
+    data-slot="select-value"
+    {...stylex.props(styles.value, customClassName(className), style)}
+    {...props}
+  />
+);
+
+type SelectTriggerProps = Omit<SelectPrimitive.Trigger.Props, "style"> & {
+  className?: string;
+  style?: StyleXStyles;
+  size?: "sm" | "default";
+};
+
 const SelectTrigger = ({
   className,
-  style,
+  size = "default",
   children,
+  style,
   ...props
-}: Omit<React.ComponentProps<typeof SelectPrimitive.Trigger>, "className"> & {
+}: SelectTriggerProps) => {
+  const isInvalid =
+    props["aria-invalid"] === true || props["aria-invalid"] === "true";
+
+  return (
+    <SelectPrimitive.Trigger
+      data-slot="select-trigger"
+      data-size={size}
+      {...stylex.props(
+        styles.trigger,
+        size === "sm" ? styles.triggerSm : styles.triggerDefault,
+        isInvalid && styles.triggerAriaInvalid,
+        customClassName(className),
+        style
+      )}
+      {...props}
+    >
+      {children}
+      <SelectPrimitive.Icon
+        render={<ChevronDownIcon {...stylex.props(styles.triggerIcon)} />}
+      />
+    </SelectPrimitive.Trigger>
+  );
+};
+
+type SelectScrollUpButtonProps = Omit<
+  React.ComponentProps<typeof SelectPrimitive.ScrollUpArrow>,
+  "style"
+> & {
   className?: string;
-}) => (
-  <SelectPrimitive.Trigger
+  style?: StyleXStyles;
+};
+
+const SelectScrollUpButton = ({
+  className,
+  style,
+  ...props
+}: SelectScrollUpButtonProps) => (
+  <SelectPrimitive.ScrollUpArrow
+    data-slot="select-scroll-up-button"
     {...stylex.props(
-      styles.trigger,
+      styles.scrollButton,
+      styles.scrollButtonUp,
       customClassName(className),
-      style as StyleXStyles
+      style
     )}
-    data-slot="select-trigger"
     {...props}
   >
-    {children}
-    <SelectPrimitive.Icon className={stylex.props(styles.icon).className}>
-      <ChevronDownIcon size={16} />
-    </SelectPrimitive.Icon>
-  </SelectPrimitive.Trigger>
+    <ChevronUpIcon {...stylex.props(styles.icon)} />
+  </SelectPrimitive.ScrollUpArrow>
 );
+
+type SelectScrollDownButtonProps = Omit<
+  React.ComponentProps<typeof SelectPrimitive.ScrollDownArrow>,
+  "style"
+> & {
+  className?: string;
+  style?: StyleXStyles;
+};
+
+const SelectScrollDownButton = ({
+  className,
+  style,
+  ...props
+}: SelectScrollDownButtonProps) => (
+  <SelectPrimitive.ScrollDownArrow
+    data-slot="select-scroll-down-button"
+    {...stylex.props(
+      styles.scrollButton,
+      styles.scrollButtonDown,
+      customClassName(className),
+      style
+    )}
+    {...props}
+  >
+    <ChevronDownIcon {...stylex.props(styles.icon)} />
+  </SelectPrimitive.ScrollDownArrow>
+);
+
+type SelectContentProps = Omit<SelectPrimitive.Popup.Props, "style"> &
+  Pick<
+    SelectPrimitive.Positioner.Props,
+    "align" | "alignOffset" | "side" | "sideOffset" | "alignItemWithTrigger"
+  > & {
+    className?: string;
+    style?: StyleXStyles;
+  };
 
 const SelectContent = ({
   className,
-  style,
   children,
+  side = "bottom",
   sideOffset = 4,
-  alignItemWithTrigger = false,
+  align = "center",
+  alignOffset = 0,
+  alignItemWithTrigger = true,
+  style,
   ...props
-}: Omit<React.ComponentProps<typeof SelectPrimitive.Popup>, "className"> & {
-  className?: string;
-  sideOffset?: number;
-  alignItemWithTrigger?: boolean;
-}) => (
+}: SelectContentProps) => (
   <SelectPrimitive.Portal>
     <SelectPrimitive.Positioner
-      alignItemWithTrigger={alignItemWithTrigger}
-      side="bottom"
+      side={side}
       sideOffset={sideOffset}
+      align={align}
+      alignOffset={alignOffset}
+      alignItemWithTrigger={alignItemWithTrigger}
+      {...stylex.props(styles.positioner)}
     >
       <SelectPrimitive.Popup
+        data-slot="select-content"
+        data-align-trigger={alignItemWithTrigger}
         className={(state) =>
           stylex.props(
-            styles.popup,
-            hidden(state.transitionStatus) && styles.popupHidden,
-            customClassName(className)
+            styles.content,
+            !alignItemWithTrigger &&
+              isHidden(state.transitionStatus) &&
+              styles.contentHidden,
+            customClassName(className),
+            style
           ).className
         }
-        data-slot="select-content"
-        style={style}
         {...props}
       >
-        {children}
+        <SelectScrollUpButton />
+        <SelectPrimitive.List {...stylex.props(styles.list)}>
+          {children}
+        </SelectPrimitive.List>
+        <SelectScrollDownButton />
       </SelectPrimitive.Popup>
     </SelectPrimitive.Positioner>
   </SelectPrimitive.Portal>
 );
 
-const SelectLabel = ({
-  className,
-  style,
-  ...props
-}: Omit<
-  React.ComponentProps<typeof SelectPrimitive.GroupLabel>,
-  "className"
-> & {
+type SelectLabelProps = Omit<SelectPrimitive.GroupLabel.Props, "style"> & {
   className?: string;
-}) => (
+  style?: StyleXStyles;
+};
+
+const SelectLabel = ({ className, style, ...props }: SelectLabelProps) => (
   <SelectPrimitive.GroupLabel
-    {...stylex.props(
-      styles.groupLabel,
-      customClassName(className),
-      style as StyleXStyles
-    )}
     data-slot="select-label"
+    {...stylex.props(styles.label, customClassName(className), style)}
     {...props}
   />
 );
 
+type SelectItemProps = Omit<SelectPrimitive.Item.Props, "style"> & {
+  className?: string;
+  style?: StyleXStyles;
+};
+
 const SelectItem = ({
   className,
-  style,
   children,
+  style,
   ...props
-}: Omit<React.ComponentProps<typeof SelectPrimitive.Item>, "className"> & {
-  className?: string;
-}) => (
+}: SelectItemProps) => (
   <SelectPrimitive.Item
-    {...stylex.props(
-      styles.item,
-      customClassName(className),
-      style as StyleXStyles
-    )}
     data-slot="select-item"
+    className={(state) =>
+      stylex.props(
+        styles.item,
+        state.highlighted && styles.itemHighlighted,
+        state.disabled && styles.itemDisabled,
+        customClassName(className),
+        style
+      ).className
+    }
     {...props}
   >
-    <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
+    <SelectPrimitive.ItemText {...stylex.props(styles.itemText)}>
+      {children}
+    </SelectPrimitive.ItemText>
     <SelectPrimitive.ItemIndicator
-      className={stylex.props(styles.itemIndicator).className}
-    >
-      <CheckIcon size={16} />
-    </SelectPrimitive.ItemIndicator>
+      render={
+        <span {...stylex.props(styles.itemIndicator)}>
+          <CheckIcon {...stylex.props(styles.icon)} />
+        </span>
+      }
+    />
   </SelectPrimitive.Item>
 );
+
+type SelectSeparatorProps = Omit<SelectPrimitive.Separator.Props, "style"> & {
+  className?: string;
+  style?: StyleXStyles;
+};
 
 const SelectSeparator = ({
   className,
   style,
   ...props
-}: Omit<React.ComponentProps<typeof SelectPrimitive.Separator>, "className"> & {
-  className?: string;
-}) => (
+}: SelectSeparatorProps) => (
   <SelectPrimitive.Separator
-    {...stylex.props(
-      styles.separator,
-      customClassName(className),
-      style as StyleXStyles
-    )}
     data-slot="select-separator"
+    {...stylex.props(styles.separator, customClassName(className), style)}
     {...props}
   />
 );
@@ -266,7 +477,23 @@ export {
   SelectGroup,
   SelectItem,
   SelectLabel,
+  SelectScrollDownButton,
+  SelectScrollUpButton,
   SelectSeparator,
   SelectTrigger,
   SelectValue,
+  styles as selectStyles,
+};
+
+export type {
+  SelectContentProps,
+  SelectGroupProps,
+  SelectItemProps,
+  SelectLabelProps,
+  SelectProps,
+  SelectScrollDownButtonProps,
+  SelectScrollUpButtonProps,
+  SelectSeparatorProps,
+  SelectTriggerProps,
+  SelectValueProps,
 };

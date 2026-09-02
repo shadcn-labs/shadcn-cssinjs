@@ -32,6 +32,10 @@ const styles = stylex.create({
     overflow: "hidden",
     width: "100%",
   },
+  dialogContent: {
+    overflow: "hidden",
+    padding: 0,
+  },
   empty: {
     color: colors.mutedForeground,
     fontSize: "0.875rem",
@@ -206,7 +210,7 @@ const CommandDialog = ({
       </DialogHeader>
       <DialogContent
         showCloseButton={showCloseButton}
-        style={{ overflow: "hidden", padding: 0 }}
+        style={styles.dialogContent}
       >
         <Command>{children}</Command>
       </DialogContent>

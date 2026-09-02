@@ -28,6 +28,11 @@ const styles = stylex.create({
     fontSize: "0.875rem",
     fontWeight: 400,
   },
+  errorList: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "0.25rem",
+  },
   fieldBase: {
     display: "flex",
     gap: "0.75rem",
@@ -300,7 +305,7 @@ const FieldError = ({
       return uniqueErrors[0]?.message;
     }
     return (
-      <ul style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
+      <ul {...stylex.props(styles.errorList)}>
         {uniqueErrors.map((error) =>
           error?.message ? <li key={error.message}>{error.message}</li> : null
         )}

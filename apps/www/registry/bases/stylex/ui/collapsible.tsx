@@ -1,5 +1,4 @@
 "use client";
-
 import { Collapsible as CollapsiblePrimitive } from "@base-ui/react/collapsible";
 import * as stylex from "@stylexjs/stylex";
 import type { StyleXStyles } from "@stylexjs/stylex";
@@ -7,64 +6,70 @@ import type { StyleXStyles } from "@stylexjs/stylex";
 import { customClassName } from "@/registry/bases/stylex/lib/utils.stylex";
 
 const styles = stylex.create({
-  panel: {
-    overflow: "hidden",
-    transition: "height 0.2s ease-in-out",
-  },
   trigger: {
-    alignItems: "center",
-    background: "none",
-    borderWidth: 0,
-    color: "inherit",
-    cursor: "pointer",
-    display: "inline-flex",
-    font: "inherit",
-    gap: "0.25rem",
-    outline: "none",
-    padding: 0,
+    ":is(svg)": {
+      flexShrink: 0,
+      height: "1rem",
+      pointerEvents: "none",
+      width: "1rem",
+    },
   },
 });
 
-const Collapsible = (
-  props: React.ComponentProps<typeof CollapsiblePrimitive.Root>
-) => <CollapsiblePrimitive.Root data-slot="collapsible" {...props} />;
+export type CollapsibleProps = Omit<
+  CollapsiblePrimitive.Root.Props,
+  "style"
+> & {
+  className?: string;
+  style?: StyleXStyles;
+};
+
+const Collapsible = ({ className, style, ...props }: CollapsibleProps) => (
+  <CollapsiblePrimitive.Root
+    data-slot="collapsible"
+    {...stylex.props(customClassName(className), style)}
+    {...props}
+  />
+);
+
+export type CollapsibleTriggerProps = Omit<
+  CollapsiblePrimitive.Trigger.Props,
+  "style"
+> & {
+  className?: string;
+  style?: StyleXStyles;
+};
 
 const CollapsibleTrigger = ({
   className,
   style,
   ...props
-}: Omit<
-  React.ComponentProps<typeof CollapsiblePrimitive.Trigger>,
-  "className"
-> & { className?: string }) => (
+}: CollapsibleTriggerProps) => (
   <CollapsiblePrimitive.Trigger
     data-slot="collapsible-trigger"
-    {...stylex.props(
-      styles.trigger,
-      customClassName(className),
-      style as StyleXStyles
-    )}
+    {...stylex.props(styles.trigger, customClassName(className), style)}
     {...props}
   />
 );
+
+export type CollapsibleContentProps = Omit<
+  CollapsiblePrimitive.Panel.Props,
+  "style"
+> & {
+  className?: string;
+  style?: StyleXStyles;
+};
 
 const CollapsibleContent = ({
   className,
   style,
   ...props
-}: Omit<
-  React.ComponentProps<typeof CollapsiblePrimitive.Panel>,
-  "className"
-> & { className?: string }) => (
+}: CollapsibleContentProps) => (
   <CollapsiblePrimitive.Panel
     data-slot="collapsible-content"
-    {...stylex.props(
-      styles.panel,
-      customClassName(className),
-      style as StyleXStyles
-    )}
+    {...stylex.props(customClassName(className), style)}
     {...props}
   />
 );
 
-export { Collapsible, CollapsibleContent, CollapsibleTrigger };
+export { Collapsible, CollapsibleTrigger, CollapsibleContent };
