@@ -1,0 +1,183 @@
+---
+title: Astro
+description: Install and configure shadcn-cssinjs with StyleX for Astro.
+---
+
+Choose the setup that matches your starting point.
+
+<div className="mt-6 grid gap-4 sm:grid-cols-2 sm:gap-6">
+  <LinkedCard
+    href="#scaffold-with-cli"
+    className="items-start gap-1 p-6 text-sm md:p-6"
+  >
+    <div className="font-medium">Use the CLI</div>
+    <div className="leading-relaxed text-muted-foreground">
+      Scaffold a new Astro project directly from the terminal.
+    </div>
+  </LinkedCard>
+  <LinkedCard
+    href="#existing-project"
+    className="items-start gap-1 p-6 text-sm md:p-6"
+  >
+    <div className="font-medium">Existing Project</div>
+    <div className="leading-relaxed text-muted-foreground">
+      Configure shadcn-cssinjs manually in an existing Astro project.
+    </div>
+  </LinkedCard>
+</div>
+
+<div id="scaffold-with-cli" className="scroll-mt-24" />
+## Use the CLI
+
+<Steps>
+
+### Create Project
+
+Run the `init` command to scaffold a new Astro project. Follow the prompts to configure your project.
+
+```bash
+npx shadcn@latest init -t astro
+```
+
+### Add Components
+
+Add the `Button` component to your project:
+
+```bash
+npx shadcn@latest add button
+```
+
+The command above will add the `Button` component to your project. You can then import it like this:
+
+```astro showLineNumbers title="src/pages/index.astro";
+---
+import { Button } from "@/components/ui/button/button";
+---
+
+<div class="flex min-h-svh items-center justify-center">
+  <Button>Click me</Button>
+</div>
+```
+
+</Steps>
+
+<div id="existing-project" className="scroll-mt-24" />
+## Existing Project
+
+<Steps>
+
+### Create Project
+
+If you need a new Astro project, create one first. Otherwise, skip this step.
+
+```bash
+npm create astro@latest
+```
+
+Add the React integration when prompted, or add it manually:
+
+```bash
+npx astro add react
+```
+
+### Install StyleX and Base UI
+
+```bash
+pnpm add @stylexjs/stylex @base-ui/react
+pnpm add -D @stylexjs/babel-plugin @stylexjs/postcss-plugin @babel/preset-typescript
+```
+
+### Configure Babel
+
+Create a `.babelrc` at the root of your project:
+
+```json title=".babelrc"
+{
+  "presets": ["@babel/preset-typescript"],
+  "plugins": [
+    [
+      "@stylexjs/babel-plugin",
+      {
+        "runtimeInjection": false,
+        "styleResolution": "property-specificity",
+        "unstable_moduleResolution": { "type": "commonJS", "rootDir": "." }
+      }
+    ]
+  ]
+}
+```
+
+### Configure PostCSS
+
+The PostCSS plugin extracts the compiled CSS. It must run **before** Tailwind, and its
+options must match `.babelrc` so the class-name hashes line up.
+
+```js title="postcss.config.mjs"
+const config = {
+  plugins: {
+    "@stylexjs/postcss-plugin": {
+      include: ["src/**/*.{js,jsx,ts,tsx,astro}"],
+      useCSSLayers: true,
+      styleResolution: "property-specificity",
+      runtimeInjection: false,
+      unstable_moduleResolution: { type: "commonJS", rootDir: process.cwd() },
+    },
+    "@tailwindcss/postcss": {},
+  },
+};
+export default config;
+```
+
+### Add the StyleX directive
+
+Add `@stylex;` to your global stylesheet. The PostCSS plugin replaces it with the compiled
+component CSS.
+
+```css title="src/styles/globals.css"
+@import "tailwindcss";
+
+@stylex;
+```
+
+### Update astro.config.mjs
+
+Make sure your Astro config includes the React integration:
+
+```js title="astro.config.mjs" showLineNumbers
+import { defineConfig } from "astro/config";
+import react from "@astrojs/react";
+
+export default defineConfig({
+  integrations: [react()],
+});
+```
+
+### Add the design tokens
+
+Every component references a shared set of design tokens. Install them once:
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/stylex-tokens.json
+```
+
+### Add Components
+
+You can now start adding components to your project.
+
+```bash
+npx shadcn@latest add button
+```
+
+The command above will add the `Button` component to your project. You can then import it like this:
+
+```astro showLineNumbers title="src/pages/index.astro";
+---
+import { Button } from "@/components/ui/button/button";
+---
+
+<div class="flex min-h-svh items-center justify-center">
+  <Button>Click me</Button>
+</div>
+```
+
+</Steps>

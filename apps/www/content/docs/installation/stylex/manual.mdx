@@ -1,0 +1,168 @@
+---
+title: Manual Installation
+description: Add StyleX, Base UI, and shadcn-cssinjs to your project manually.
+---
+
+<Steps>
+
+### Add StyleX and Base UI
+
+Add the following dependencies to your project:
+
+```bash
+pnpm add @stylexjs/stylex @base-ui/react
+pnpm add -D @stylexjs/babel-plugin @stylexjs/postcss-plugin @babel/preset-typescript
+```
+
+### Configure Babel
+
+Create a `.babelrc` at the root of your project:
+
+```json title=".babelrc"
+{
+  "presets": ["@babel/preset-typescript"],
+  "plugins": [
+    [
+      "@stylexjs/babel-plugin",
+      {
+        "runtimeInjection": false,
+        "styleResolution": "property-specificity",
+        "unstable_moduleResolution": { "type": "commonJS", "rootDir": "." }
+      }
+    ]
+  ]
+}
+```
+
+<Callout type="warn">
+  If you're using Next.js, add `"next/babel"` to the presets array. For Vite,
+  you only need `"@babel/preset-typescript"`.
+</Callout>
+
+### Configure PostCSS
+
+The PostCSS plugin extracts the compiled CSS. It must run **before** Tailwind, and its
+options must match `.babelrc` so the class-name hashes line up.
+
+```js title="postcss.config.mjs"
+const config = {
+  plugins: {
+    "@stylexjs/postcss-plugin": {
+      include: [
+        "src/**/*.{js,jsx,ts,tsx}",
+        "app/**/*.{js,jsx,ts,tsx}",
+        "components/**/*.{js,jsx,ts,tsx}",
+      ],
+      useCSSLayers: true,
+      styleResolution: "property-specificity",
+      runtimeInjection: false,
+      unstable_moduleResolution: { type: "commonJS", rootDir: process.cwd() },
+    },
+    "@tailwindcss/postcss": {},
+  },
+};
+export default config;
+```
+
+### Add the StyleX directive
+
+Add `@stylex;` to your global stylesheet. The PostCSS plugin replaces it with the compiled
+component CSS.
+
+```css title="globals.css"
+@import "tailwindcss";
+
+@stylex;
+```
+
+### Configure import aliases
+
+Choose one of the following alias setups.
+
+#### Option A: `tsconfig.json` paths
+
+```json {3-6} title="tsconfig.json" showLineNumbers
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    }
+  }
+}
+```
+
+#### Option B: `package.json#imports`
+
+```json title="package.json" showLineNumbers
+{
+  "imports": {
+    "#components/*": "./src/components/*.tsx",
+    "#lib/*": "./src/lib/*.ts",
+    "#hooks/*": "./src/hooks/*.ts"
+  }
+}
+```
+
+```json title="tsconfig.json" showLineNumbers
+{
+  "compilerOptions": {
+    "moduleResolution": "bundler",
+    "resolvePackageJsonImports": true
+  }
+}
+```
+
+### Create a `components.json` file
+
+Create a `components.json` file in the root of your project.
+
+```json title="components.json" showLineNumbers
+{
+  "$schema": "https://shadcn-cssinjs.com/schema.json",
+  "style": "stylex",
+  "rsc": false,
+  "tsx": true,
+  "aliases": {
+    "components": "@/components",
+    "ui": "@/components/ui",
+    "lib": "@/lib",
+    "hooks": "@/hooks"
+  },
+  "iconLibrary": "lucide"
+}
+```
+
+If you're using `package.json#imports`, use the corresponding `#...` aliases instead:
+
+```json title="components.json" showLineNumbers
+{
+  "aliases": {
+    "components": "#components",
+    "ui": "#components/ui",
+    "lib": "#lib",
+    "hooks": "#hooks"
+  }
+}
+```
+
+### Add the design tokens
+
+Every component references a shared set of design tokens. Install them once:
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/stylex-tokens.json
+```
+
+This drops `components/ui/tokens.stylex.ts`, which maps your CSS variables to typed StyleX
+tokens. You can edit it to point at different variables or add your own.
+
+### That's it
+
+You can now start adding components to your project.
+
+```bash
+npx shadcn@latest add button
+```
+
+</Steps>
