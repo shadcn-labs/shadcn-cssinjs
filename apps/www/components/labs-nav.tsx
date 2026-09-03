@@ -131,7 +131,7 @@ const DesktopSection = ({
             <SiteNavLink item={item}>
               {({ label }) => (
                 <NavigationMenuLink
-                  href={item.href}
+                  href={addQueryParams(item.href, UTM_PARAMS)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={cn(
