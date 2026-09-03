@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { BrandContextMenu } from "@/components/brand-context-menu";
 import { CommandMenu } from "@/components/command-menu";
+import { LabsNav } from "@/components/labs-nav";
 import { LogoMark } from "@/components/logo";
 import { MainNav } from "@/components/main-nav";
 import { MobileNav } from "@/components/mobile-nav";
@@ -24,34 +25,38 @@ export const SiteHeader = () => (
     className="bg-background sticky top-0 z-50 w-full"
     style={{ viewTransitionName: "site-header" }}
   >
-    <div className="container-wrapper 3xl:fixed:px-0 px-6">
-      <div className="3xl:fixed:container flex h-(--header-height) items-center gap-2">
+    <div className="container-wrapper 3xl:fixed:px-0 relative px-6">
+      <div className="3xl:fixed:container relative flex h-(--header-height) items-center">
         <MobileNav
           items={navItems}
           tree={source.pageTree}
-          className="flex lg:hidden"
+          className="flex lg:hidden mr-2"
         />
-        <BrandContextMenu>
-          <Button
-            asChild
-            variant="ghost"
-            size="icon"
-            className="hidden size-8 lg:flex"
-            sound="click"
-          >
-            <Link href={ROUTES.HOME} transitionTypes={["nav-back"]}>
-              <LogoMark className="size-5" />
-              <span className="sr-only">{SITE.NAME}</span>
-            </Link>
-          </Button>
-        </BrandContextMenu>
-        <MainNav items={navItems} className="hidden lg:flex" />
-        <div className="ml-auto flex items-center gap-2 md:flex-1 md:justify-end">
+        <div className="flex items-center">
+          <BrandContextMenu>
+            <Button
+              asChild
+              variant="ghost"
+              size="icon-sm"
+              className="hover:bg-transparent focus-visible:bg-transparent dark:hover:bg-transparent"
+              sound="click"
+            >
+              <Link href={ROUTES.HOME} transitionTypes={["nav-back"]}>
+                <LogoMark className="size-5" />
+                <span className="sr-only">{SITE.NAME}</span>
+              </Link>
+            </Button>
+          </BrandContextMenu>
+          <LabsNav />
+        </div>
+        <MainNav items={navItems} className="hidden lg:flex">
+          <SponsorLink />
+        </MainNav>
+        <div className="ml-auto flex items-center gap-1 md:gap-2 md:flex-1 md:justify-end">
           <div className="hidden w-full flex-1 md:flex md:w-auto md:flex-none">
             <CommandMenu navItems={navItems} tree={source.pageTree} />
           </div>
           <NavItemGithub />
-          <SponsorLink />
           <ThemeCustomizer />
           <SiteSettings />
         </div>

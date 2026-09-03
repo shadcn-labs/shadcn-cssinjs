@@ -15,7 +15,7 @@ export const metadata: Metadata = createPageMetadata({
   description:
     "Support shadcn-cssinjs — a shadcn registry of StyleX-styled Base UI components. Sponsor tiers, stargazers, and how to contribute.",
   path: ROUTES.SPONSOR,
-  title: "Sponsor",
+  title: "Sponsors",
 });
 
 const SponsorPage = async () => {

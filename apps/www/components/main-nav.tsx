@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 export const MainNav = ({
   items,
   className,
+  children,
   ...props
 }: React.ComponentProps<"nav"> & {
   items: { href: string; label: string }[];
@@ -28,6 +29,7 @@ export const MainNav = ({
           </Link>
         </Button>
       ))}
+      {children}
     </nav>
   );
 };
