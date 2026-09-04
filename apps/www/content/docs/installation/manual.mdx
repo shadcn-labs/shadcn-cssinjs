@@ -1,0 +1,153 @@
+---
+title: Manual Installation
+description: Framework-agnostic manual setup for StyleX and shadcn-cssinjs.
+---
+
+This guide covers how to set up shadcn-cssinjs in any React project regardless of your framework or bundler (such as Webpack, Rollup, Vite, or esbuild).
+
+## How StyleX Works
+
+StyleX does not use a runtime style injection mechanism in production. Instead, it relies on a two-phase compile-time build pipeline:
+
+1. **Code Transformation (Babel):** The `@stylexjs/babel-plugin` scans your JavaScript/TypeScript files, evaluates `stylex.create` and `stylex.props` calls, generates deterministic atomic CSS class names, and transforms the calls into lightweight objects containing those hashed class names.
+2. **CSS Extraction (PostCSS):** The `@stylexjs/postcss-plugin` collects all CSS rules generated across your source files and replaces the `@stylex;` directive in your global stylesheet with the compiled, deduplicated atomic CSS.
+
+Because class names are hashed deterministically based on property specificity, the Babel plugin and PostCSS plugin configurations must share matching resolution settings.
+
+## Prerequisites
+
+- [Node.js](https://nodejs.org/) 18.17 or later
+- A package manager: `pnpm`, `npm`, `yarn`, or `bun`
+
+## Manual Installation
+
+<Steps>
+
+<Step>Install dependencies</Step>
+
+Install the StyleX runtime, Base UI primitives, and the build-time plugins:
+
+```bash
+pnpm add @stylexjs/stylex @base-ui/react
+pnpm add -D @stylexjs/babel-plugin @stylexjs/postcss-plugin @babel/preset-typescript
+```
+
+<Step>Configure Babel</Step>
+
+Create `.babelrc` (or `babel.config.js`) at the root of your project:
+
+```json title=".babelrc"
+{
+  "presets": ["@babel/preset-typescript"],
+  "plugins": [
+    [
+      "@stylexjs/babel-plugin",
+      {
+        "runtimeInjection": false,
+        "styleResolution": "property-specificity",
+        "unstable_moduleResolution": {
+          "type": "commonJS",
+          "rootDir": "."
+        }
+      }
+    ]
+  ]
+}
+```
+
+Key configuration options:
+
+- `runtimeInjection: false`: Disables runtime `<style>` injection so all styles are cleanly extracted to static CSS.
+- `styleResolution: "property-specificity"`: Ensures conflicting styles resolve according to property specificity, avoiding order-dependent bugs.
+- `unstable_moduleResolution`: Configures how module paths and cross-file variables are resolved.
+
+<Step>Configure PostCSS</Step>
+
+Create `postcss.config.mjs` at your project root. The StyleX plugin must run **before** Tailwind CSS:
+
+```js title="postcss.config.mjs"
+const config = {
+  plugins: {
+    "@stylexjs/postcss-plugin": {
+      include: ["src/**/*.{js,jsx,ts,tsx}", "app/**/*.{js,jsx,ts,tsx}"],
+      useCSSLayers: true,
+      styleResolution: "property-specificity",
+      runtimeInjection: false,
+      unstable_moduleResolution: {
+        type: "commonJS",
+        rootDir: process.cwd(),
+      },
+    },
+    "@tailwindcss/postcss": {},
+  },
+};
+
+export default config;
+```
+
+<Step>Add the StyleX directive to your global stylesheet</Step>
+
+In your main CSS file (e.g., `globals.css` or `index.css`), add the `@stylex;` marker:
+
+```css title="src/globals.css"
+@import "tailwindcss";
+
+@stylex;
+```
+
+When PostCSS runs, `@stylex;` will be replaced with all extracted component CSS rules.
+
+<Step>Configure TypeScript path aliases</Step>
+
+If using `@/*` imports, ensure `tsconfig.json` contains:
+
+```json title="tsconfig.json"
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}
+```
+
+<Step>Add the design tokens</Step>
+
+Install the shared tokens from the registry into `components/ui/tokens.stylex.ts`:
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/stylex-tokens.json
+```
+
+<Step>Install and use a component</Step>
+
+Add a component with the shadcn CLI:
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/button.json
+```
+
+Import the component into your application:
+
+```tsx
+import { Button } from "@/components/ui/button/button";
+
+export function App() {
+  return <Button>Click me</Button>;
+}
+```
+
+</Steps>
+
+## Existing Project
+
+To retrofit StyleX into any existing application:
+
+1. **Verify your bundler supports PostCSS and Babel.** If your bundler handles CSS through PostCSS (e.g., Webpack with `postcss-loader`, Rollup with `rollup-plugin-postcss`, or Vite), ensure `@stylexjs/postcss-plugin` is listed in your PostCSS configuration.
+2. **Apply the Babel plugin.** Run `@stylexjs/babel-plugin` during your JavaScript/TypeScript transpilation step.
+3. **Insert `@stylex;`** into your root CSS file.
+4. **Install design tokens:**
+   ```bash
+   npx shadcn@latest add https://shadcn-cssinjs.com/r/stylex-tokens.json
+   ```

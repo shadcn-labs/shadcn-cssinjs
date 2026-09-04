@@ -1,0 +1,257 @@
+---
+title: Next.js
+description: Install and configure shadcn-cssinjs for Next.js.
+---
+
+Choose the setup that matches your starting point.
+
+<div className="mt-6 grid gap-4 sm:grid-cols-3 sm:gap-6">
+  <LinkedCard
+    href="#scaffold-with-create"
+    className="items-start gap-1 p-6 text-sm md:p-6"
+  >
+    <div className="font-medium">Use shadcn/create</div>
+    <div className="leading-relaxed text-muted-foreground">
+      Build your preset and generate a Next.js project command.
+    </div>
+  </LinkedCard>
+  <LinkedCard
+    href="#scaffold-with-cli"
+    className="items-start gap-1 p-6 text-sm md:p-6"
+  >
+    <div className="font-medium">Use the CLI</div>
+    <div className="leading-relaxed text-muted-foreground">
+      Scaffold a new Next.js project directly from the terminal.
+    </div>
+  </LinkedCard>
+  <LinkedCard
+    href="#existing-next-project"
+    className="items-start gap-1 p-6 text-sm md:p-6"
+  >
+    <div className="font-medium">Existing Project</div>
+    <div className="leading-relaxed text-muted-foreground">
+      Configure shadcn-cssinjs manually in an existing Next.js project.
+    </div>
+  </LinkedCard>
+</div>
+
+<div id="scaffold-with-create" className="scroll-mt-24" />
+## Use shadcn/create
+
+<Steps>
+
+### Build Your Preset
+
+Open [shadcn/create](/create?template=next) and build your preset visually. Choose your style, colors, fonts, icons, and more.
+
+<Button asChild size="sm">
+  <Link
+    href="/create?template=next"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="mt-6 no-underline!"
+  >
+    Open shadcn/create
+  </Link>
+</Button>
+
+### Create Project
+
+Click `Create Project`, choose your package manager, and copy the generated command:
+
+```bash
+pnpm dlx shadcn@latest init --preset [CODE] --template next
+```
+
+### Add Components
+
+Add a component from the registry:
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/button.json
+```
+
+Import and use it in your page:
+
+```tsx title="app/page.tsx"
+import { Button } from "@/components/ui/button/button";
+
+export default function Home() {
+  return (
+    <main className="flex min-h-screen items-center justify-center">
+      <Button>Click me</Button>
+    </main>
+  );
+}
+```
+
+</Steps>
+
+<div id="scaffold-with-cli" className="scroll-mt-24" />
+## Use the CLI
+
+<Steps>
+
+### Create Project
+
+Run the `init` command to scaffold a new Next.js project with StyleX and Base UI:
+
+```bash
+pnpm dlx shadcn@latest init -t next
+```
+
+### Add Components
+
+Add a component from the registry:
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/button.json
+```
+
+The component is placed in `components/ui/button/`. Import and use it in your page:
+
+```tsx title="app/page.tsx"
+import { Button } from "@/components/ui/button/button";
+
+export default function Home() {
+  return (
+    <main className="flex min-h-screen items-center justify-center">
+      <Button>Click me</Button>
+    </main>
+  );
+}
+```
+
+</Steps>
+
+<div id="existing-next-project" className="scroll-mt-24" />
+## Existing Project
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) 18.17 or later
+- A package manager: `pnpm`, `npm`, `yarn`, or `bun`
+
+<Steps>
+
+### Create Project
+
+If you need a new Next.js project, create one with `create-next-app`. Otherwise, skip this step.
+
+```bash
+pnpm create next-app@latest my-app --typescript --tailwind --eslint --app --src-dir=false --import-alias="@/*"
+cd my-app
+```
+
+### Install dependencies
+
+Install StyleX runtime, Base UI primitives, and the StyleX compilation toolchain:
+
+```bash
+pnpm add @stylexjs/stylex @base-ui/react
+pnpm add -D @stylexjs/babel-plugin @stylexjs/postcss-plugin @babel/preset-typescript
+```
+
+### Configure Babel
+
+StyleX transforms component styles using Babel. Create `.babelrc` at the root of your project:
+
+```json title=".babelrc"
+{
+  "presets": ["next/babel", "@babel/preset-typescript"],
+  "plugins": [
+    [
+      "@stylexjs/babel-plugin",
+      {
+        "runtimeInjection": false,
+        "styleResolution": "property-specificity",
+        "unstable_moduleResolution": { "type": "commonJS", "rootDir": "." }
+      }
+    ]
+  ]
+}
+```
+
+<Callout type="warn">
+  Adding a `.babelrc` opts Next.js out of the Turbopack compiler. Run `next dev`
+  and `next build` without the `--turbopack` flag so the Babel transformation
+  pipeline runs.
+</Callout>
+
+### Configure PostCSS
+
+The PostCSS plugin extracts the compiled CSS. It must run **before** Tailwind, and its options must match `.babelrc` so that generated class names line up:
+
+```js title="postcss.config.mjs"
+const config = {
+  plugins: {
+    "@stylexjs/postcss-plugin": {
+      include: ["app/**/*.{js,jsx,ts,tsx}", "components/**/*.{js,jsx,ts,tsx}"],
+      useCSSLayers: true,
+      styleResolution: "property-specificity",
+      runtimeInjection: false,
+      unstable_moduleResolution: { type: "commonJS", rootDir: process.cwd() },
+    },
+    "@tailwindcss/postcss": {},
+  },
+};
+
+export default config;
+```
+
+### Add the StyleX directive
+
+Add `@stylex;` to your global stylesheet. The PostCSS plugin replaces this directive with the compiled component CSS:
+
+```css title="app/globals.css"
+@import "tailwindcss";
+
+@stylex;
+```
+
+### Configure path aliases
+
+Ensure your `tsconfig.json` has the path alias configured for `@/*`:
+
+```json title="tsconfig.json"
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    }
+  }
+}
+```
+
+### Add the design tokens
+
+Every component references a shared set of design tokens. Install them once into `components/ui/tokens.stylex.ts`:
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/stylex-tokens.json
+```
+
+### Install a component
+
+Add any component from the registry:
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/button.json
+```
+
+Import and render the component:
+
+```tsx title="app/page.tsx"
+import { Button } from "@/components/ui/button/button";
+
+export default function Home() {
+  return (
+    <main className="flex min-h-screen items-center justify-center">
+      <Button>Click me</Button>
+    </main>
+  );
+}
+```
+
+</Steps>

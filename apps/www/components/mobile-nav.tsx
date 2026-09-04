@@ -14,8 +14,7 @@ import {
 } from "@/components/ui/popover";
 import { ROUTES } from "@/constants/routes";
 import { useFeedback } from "@/hooks/use-feedback";
-import { EXCLUDED_SECTIONS, isComponentsFolder } from "@/lib/docs";
-import { getAllPagesFromFolder, getPagesFromFolder } from "@/lib/page-tree";
+import { EXCLUDED_SECTIONS, getPagesForSidebarFolder } from "@/lib/docs";
 import { cn } from "@/lib/utils";
 
 const MobileLink = ({
@@ -151,11 +150,7 @@ export const MobileNav = ({
               return null;
             }
 
-            const pages = isComponentsFolder(item)
-              ? getAllPagesFromFolder(item).filter(
-                  (page) => page.url !== ROUTES.DOCS_COMPONENTS
-                )
-              : getPagesFromFolder(item);
+            const pages = getPagesForSidebarFolder(item);
 
             return (
               <MobileNavGroup
