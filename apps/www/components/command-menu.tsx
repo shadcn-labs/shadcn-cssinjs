@@ -29,16 +29,14 @@ import {
 } from "@/components/ui/dialog";
 import { Kbd } from "@/components/ui/kbd";
 import { Separator } from "@/components/ui/separator";
-import { ROUTES } from "@/constants/routes";
 import { SITE } from "@/constants/site";
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
 import { useFeedback } from "@/hooks/use-feedback";
 import { useIsMac } from "@/hooks/use-is-mac";
 import { useMutationObserver } from "@/hooks/use-mutation-observer";
 import { usePackageManager } from "@/hooks/use-package-manager";
-import { EXCLUDED_SECTIONS, isComponentsFolder } from "@/lib/docs";
+import { EXCLUDED_SECTIONS, getPagesForSidebarFolder } from "@/lib/docs";
 import { trackEvent } from "@/lib/events";
-import { getAllPagesFromFolder, getPagesFromFolder } from "@/lib/page-tree";
 import { cn } from "@/lib/utils";
 
 type DocUrlKind =
@@ -185,13 +183,7 @@ export const CommandMenu = ({
         continue;
       }
 
-      const pages = (
-        isComponentsFolder(item)
-          ? getAllPagesFromFolder(item).filter(
-              (page) => page.url !== ROUTES.DOCS_COMPONENTS
-            )
-          : getPagesFromFolder(item)
-      ).map((p) => ({
+      const pages = getPagesForSidebarFolder(item).map((p) => ({
         name: typeof p.name === "string" ? p.name : String(p.name),
         url: p.url,
       }));
