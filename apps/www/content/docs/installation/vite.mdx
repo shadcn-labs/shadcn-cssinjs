@@ -78,7 +78,7 @@ import { Button } from "@/components/ui/button/button";
 
 export function App() {
   return (
-    <div className="flex min-h-screen items-center justify-center">
+    <div>
       <Button>Click me</Button>
     </div>
   );
@@ -117,7 +117,7 @@ import { Button } from "@/components/ui/button/button";
 
 export function App() {
   return (
-    <div className="flex min-h-screen items-center justify-center">
+    <div>
       <Button>Click me</Button>
     </div>
   );
@@ -149,11 +149,54 @@ cd my-app
 
 ### Install dependencies
 
-Install StyleX, Base UI primitives, path utilities, and build dependencies:
+Install StyleX, Base UI primitives, and the StyleX compiler:
 
 ```bash
 pnpm add @stylexjs/stylex @base-ui/react
-pnpm add -D @stylexjs/babel-plugin @stylexjs/postcss-plugin @babel/preset-typescript @tailwindcss/postcss tailwindcss @types/node
+pnpm add -D @stylexjs/unplugin
+```
+
+### Configure Vite
+
+Update `vite.config.ts` with the StyleX unplugin and path resolution. Keep the StyleX plugin before the React plugin for Fast Refresh compatibility:
+
+```ts title="vite.config.ts"
+import path from "node:path";
+import react from "@vitejs/plugin-react";
+import stylex from "@stylexjs/unplugin";
+import { defineConfig } from "vite";
+
+export default defineConfig({
+  plugins: [stylex.vite({ useCSSLayers: true }), react()],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
+});
+```
+
+### Add the StyleX directive
+
+Create `src/index.css` and add the `@stylex;` marker:
+
+```css title="src/index.css"
+@stylex;
+```
+
+Import this stylesheet in your application entry point:
+
+```tsx title="src/main.tsx"
+import "./index.css";
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App";
+
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);
 ```
 
 ### Configure path aliases in TypeScript
@@ -169,74 +212,6 @@ Update `tsconfig.json` (and `tsconfig.app.json` if using Vite project references
     }
   }
 }
-```
-
-### Configure Vite
-
-Configure `@vitejs/plugin-react` to run `@stylexjs/babel-plugin` during compilation, and resolve the `@/*` path alias:
-
-```ts title="vite.config.ts"
-import path from "node:path";
-import react from "@vitejs/plugin-react";
-import { defineConfig } from "vite";
-
-export default defineConfig({
-  plugins: [
-    react({
-      babel: {
-        plugins: [
-          [
-            "@stylexjs/babel-plugin",
-            {
-              runtimeInjection: false,
-              styleResolution: "property-specificity",
-              unstable_moduleResolution: {
-                type: "commonJS",
-                rootDir: process.cwd(),
-              },
-            },
-          ],
-        ],
-      },
-    }),
-  ],
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-    },
-  },
-});
-```
-
-### Configure PostCSS
-
-Create `postcss.config.mjs` at the root of your project. Place `@stylexjs/postcss-plugin` **before** Tailwind:
-
-```js title="postcss.config.mjs"
-const config = {
-  plugins: {
-    "@stylexjs/postcss-plugin": {
-      include: ["src/**/*.{js,jsx,ts,tsx}"],
-      useCSSLayers: true,
-      styleResolution: "property-specificity",
-      runtimeInjection: false,
-      unstable_moduleResolution: { type: "commonJS", rootDir: process.cwd() },
-    },
-    "@tailwindcss/postcss": {},
-  },
-};
-
-export default config;
-```
-
-### Add the StyleX directive
-
-Add `@stylex;` to your global CSS stylesheet:
-
-```css title="src/index.css"
-@import "tailwindcss";
-
-@stylex;
 ```
 
 ### Add the design tokens
@@ -262,7 +237,7 @@ import { Button } from "@/components/ui/button/button";
 
 export function App() {
   return (
-    <div className="flex min-h-screen items-center justify-center">
+    <div>
       <Button>Click me</Button>
     </div>
   );

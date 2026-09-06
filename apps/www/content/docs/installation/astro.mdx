@@ -80,7 +80,7 @@ import { Button } from "@/components/ui/button/button";
 ---
 
 <Layout>
-  <main class="flex min-h-screen items-center justify-center">
+  <main>
     <Button client:load>Click me</Button>
   </main>
 </Layout>
@@ -140,69 +140,28 @@ pnpm astro add react
 
 ### Install dependencies
 
-Install StyleX, Base UI primitives, and the StyleX compilation toolchain:
+Install StyleX, Base UI primitives, and the StyleX compiler:
 
 ```bash
 pnpm add @stylexjs/stylex @base-ui/react
-pnpm add -D @stylexjs/babel-plugin @stylexjs/postcss-plugin @babel/preset-typescript vite-plugin-babel @tailwindcss/postcss tailwindcss
+pnpm add -D @stylexjs/unplugin
 ```
 
 ### Configure Astro and Vite
 
-Configure `astro.config.mjs` to run the StyleX Babel plugin via Vite:
+Configure `astro.config.mjs` with the StyleX unplugin. Keep the StyleX plugin before the React integration for Fast Refresh compatibility:
 
 ```js title="astro.config.mjs"
 import react from "@astrojs/react";
+import stylex from "@stylexjs/unplugin";
 import { defineConfig } from "astro/config";
-import babel from "vite-plugin-babel";
 
 export default defineConfig({
   integrations: [react()],
   vite: {
-    plugins: [
-      babel({
-        filter: /\.[jt]sx?$/,
-        babelConfig: {
-          presets: ["@babel/preset-typescript"],
-          plugins: [
-            [
-              "@stylexjs/babel-plugin",
-              {
-                runtimeInjection: false,
-                styleResolution: "property-specificity",
-                unstable_moduleResolution: {
-                  type: "commonJS",
-                  rootDir: process.cwd(),
-                },
-              },
-            ],
-          ],
-        },
-      }),
-    ],
+    plugins: [stylex.vite({ useCSSLayers: true })],
   },
 });
-```
-
-### Configure PostCSS
-
-Create `postcss.config.mjs` at the root of your project:
-
-```js title="postcss.config.mjs"
-const config = {
-  plugins: {
-    "@stylexjs/postcss-plugin": {
-      include: ["src/**/*.{astro,html,js,jsx,ts,tsx}"],
-      useCSSLayers: true,
-      styleResolution: "property-specificity",
-      runtimeInjection: false,
-      unstable_moduleResolution: { type: "commonJS", rootDir: process.cwd() },
-    },
-    "@tailwindcss/postcss": {},
-  },
-};
-
-export default config;
 ```
 
 ### Add the StyleX directive
@@ -210,8 +169,6 @@ export default config;
 Create `src/styles/globals.css` and include `@stylex;`:
 
 ```css title="src/styles/globals.css"
-@import "tailwindcss";
-
 @stylex;
 ```
 
@@ -276,7 +233,7 @@ import { Button } from "@/components/ui/button/button";
 ---
 
 <Layout>
-  <main class="flex min-h-screen items-center justify-center">
+  <main>
     <Button client:load>Click me</Button>
   </main>
 </Layout>

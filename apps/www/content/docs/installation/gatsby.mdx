@@ -25,7 +25,7 @@ Install StyleX, Base UI primitives, Gatsby PostCSS plugin, and build dependencie
 
 ```bash
 pnpm add @stylexjs/stylex @base-ui/react
-pnpm add -D @stylexjs/babel-plugin @stylexjs/postcss-plugin gatsby-plugin-postcss @babel/preset-typescript @tailwindcss/postcss tailwindcss
+pnpm add -D @stylexjs/babel-plugin @stylexjs/postcss-plugin postcss gatsby-plugin-postcss @babel/preset-typescript
 ```
 
 ### Configure Gatsby plugins
@@ -67,19 +67,22 @@ Create `.babelrc` at the root of your project:
 
 ### Configure PostCSS
 
-Create `postcss.config.js` at your project root. Place `@stylexjs/postcss-plugin` **before** Tailwind:
+Create `postcss.config.js` at your project root:
 
 ```js title="postcss.config.js"
-export default {
+const babelConfig = require("./.babelrc");
+
+module.exports = {
   plugins: {
     "@stylexjs/postcss-plugin": {
       include: ["src/**/*.{js,jsx,ts,tsx}"],
+      babelConfig: {
+        babelrc: false,
+        parserOpts: { plugins: ["typescript", "jsx"] },
+        plugins: babelConfig.plugins,
+      },
       useCSSLayers: true,
-      styleResolution: "property-specificity",
-      runtimeInjection: false,
-      unstable_moduleResolution: { type: "commonJS", rootDir: process.cwd() },
     },
-    "@tailwindcss/postcss": {},
   },
 };
 ```
@@ -89,8 +92,6 @@ export default {
 Create `src/styles/global.css` and add `@stylex;`:
 
 ```css title="src/styles/global.css"
-@import "tailwindcss";
-
 @stylex;
 ```
 
@@ -158,7 +159,7 @@ import type { HeadFC, PageProps } from "gatsby";
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
-    <main className="flex min-h-screen items-center justify-center">
+    <main>
       <Button>Click me</Button>
     </main>
   );
@@ -176,7 +177,7 @@ export const Head: HeadFC = () => <title>Home Page</title>;
 Follow the steps above to configure StyleX in your existing Gatsby project. The key changes are:
 
 1. Install the StyleX dependencies and `gatsby-plugin-postcss`.
-2. Add the Babel and PostCSS plugins with matching `styleResolution` and `unstable_moduleResolution` settings.
+2. Add the Babel and PostCSS plugins with matching configuration.
 3. Add `@stylex;` to your global stylesheet and import it in `gatsby-browser.js`.
 4. Configure the `@` path alias in both `tsconfig.json` and `gatsby-node.ts`.
 5. Install design tokens:

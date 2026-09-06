@@ -83,7 +83,7 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   return (
-    <main className="flex min-h-screen items-center justify-center">
+    <main>
       <Button>Click me</Button>
     </main>
   );
@@ -136,45 +136,25 @@ cd my-app
 
 ### Install dependencies
 
-Install StyleX, Base UI primitives, and the StyleX compilation toolchain:
+Install StyleX, Base UI primitives, and the StyleX compiler:
 
 ```bash
 pnpm add @stylexjs/stylex @base-ui/react
-pnpm add -D @stylexjs/babel-plugin @stylexjs/postcss-plugin @babel/preset-typescript vite-plugin-babel @tailwindcss/postcss tailwindcss @types/node
+pnpm add -D @stylexjs/unplugin
 ```
 
 ### Configure TanStack Start & Vite
 
-Update `app.config.ts` (or `vite.config.ts`) to configure the StyleX Babel plugin and path resolution:
+Update `app.config.ts` to configure the StyleX unplugin and path resolution:
 
 ```ts title="app.config.ts"
 import path from "node:path";
 import { defineConfig } from "@tanstack/start/config";
-import babel from "vite-plugin-babel";
+import stylex from "@stylexjs/unplugin";
 
 export default defineConfig({
   vite: {
-    plugins: [
-      babel({
-        filter: /\.[jt]sx?$/,
-        babelConfig: {
-          presets: ["@babel/preset-typescript"],
-          plugins: [
-            [
-              "@stylexjs/babel-plugin",
-              {
-                runtimeInjection: false,
-                styleResolution: "property-specificity",
-                unstable_moduleResolution: {
-                  type: "commonJS",
-                  rootDir: process.cwd(),
-                },
-              },
-            ],
-          ],
-        },
-      }),
-    ],
+    plugins: [stylex.vite({ useCSSLayers: true })],
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "./app"),
@@ -184,34 +164,11 @@ export default defineConfig({
 });
 ```
 
-### Configure PostCSS
-
-Create `postcss.config.mjs` at your project root. Place `@stylexjs/postcss-plugin` **before** Tailwind:
-
-```js title="postcss.config.mjs"
-const config = {
-  plugins: {
-    "@stylexjs/postcss-plugin": {
-      include: ["app/**/*.{js,jsx,ts,tsx}"],
-      useCSSLayers: true,
-      styleResolution: "property-specificity",
-      runtimeInjection: false,
-      unstable_moduleResolution: { type: "commonJS", rootDir: process.cwd() },
-    },
-    "@tailwindcss/postcss": {},
-  },
-};
-
-export default config;
-```
-
 ### Add the StyleX directive
 
 Add `@stylex;` to your stylesheet:
 
 ```css title="app/styles/app.css"
-@import "tailwindcss";
-
 @stylex;
 ```
 
@@ -291,7 +248,7 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   return (
-    <main className="flex min-h-screen items-center justify-center">
+    <main>
       <Button>Click me</Button>
     </main>
   );

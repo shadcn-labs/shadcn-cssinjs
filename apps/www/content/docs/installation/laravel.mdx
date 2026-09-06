@@ -94,7 +94,7 @@ import { createRoot } from "react-dom/client";
 
 function App() {
   return (
-    <div className="flex min-h-screen items-center justify-center">
+    <div>
       <Button>Click me</Button>
     </div>
   );
@@ -145,20 +145,21 @@ npx shadcn@latest add https://shadcn-cssinjs.com/r/button.json
 
 ### Install dependencies
 
-Install React, StyleX, Base UI primitives, and the StyleX build tools:
+Install React, StyleX, Base UI primitives, and the StyleX compiler:
 
 ```bash
 pnpm add react react-dom @stylexjs/stylex @base-ui/react
-pnpm add -D @vitejs/plugin-react @stylexjs/babel-plugin @stylexjs/postcss-plugin @babel/preset-typescript @tailwindcss/postcss tailwindcss @types/react @types/react-dom @types/node
+pnpm add -D @vitejs/plugin-react @stylexjs/unplugin @types/react @types/react-dom @types/node
 ```
 
 ### Configure Vite
 
-In `vite.config.js` (or `vite.config.ts`), configure `laravel-vite-plugin` and `@vitejs/plugin-react` with `@stylexjs/babel-plugin`:
+In `vite.config.js` (or `vite.config.ts`), configure `laravel-vite-plugin` and the StyleX unplugin:
 
 ```js title="vite.config.js"
 import react from "@vitejs/plugin-react";
 import laravel from "laravel-vite-plugin";
+import stylex from "@stylexjs/unplugin";
 import path from "node:path";
 import { defineConfig } from "vite";
 
@@ -168,23 +169,8 @@ export default defineConfig({
       input: ["resources/css/app.css", "resources/js/app.tsx"],
       refresh: true,
     }),
-    react({
-      babel: {
-        plugins: [
-          [
-            "@stylexjs/babel-plugin",
-            {
-              runtimeInjection: false,
-              styleResolution: "property-specificity",
-              unstable_moduleResolution: {
-                type: "commonJS",
-                rootDir: process.cwd(),
-              },
-            },
-          ],
-        ],
-      },
-    }),
+    stylex.vite({ useCSSLayers: true }),
+    react(),
   ],
   resolve: {
     alias: {
@@ -194,32 +180,11 @@ export default defineConfig({
 });
 ```
 
-### Configure PostCSS
-
-Create `postcss.config.js` at the root of your Laravel application. Place `@stylexjs/postcss-plugin` **before** Tailwind:
-
-```js title="postcss.config.js"
-export default {
-  plugins: {
-    "@stylexjs/postcss-plugin": {
-      include: ["resources/**/*.{js,jsx,ts,tsx}"],
-      useCSSLayers: true,
-      styleResolution: "property-specificity",
-      runtimeInjection: false,
-      unstable_moduleResolution: { type: "commonJS", rootDir: process.cwd() },
-    },
-    "@tailwindcss/postcss": {},
-  },
-};
-```
-
 ### Add the StyleX directive
 
 Add `@stylex;` to your stylesheet:
 
 ```css title="resources/css/app.css"
-@import "tailwindcss";
-
 @stylex;
 ```
 
@@ -266,7 +231,7 @@ import { createRoot } from "react-dom/client";
 
 function App() {
   return (
-    <div className="flex min-h-screen items-center justify-center">
+    <div>
       <Button>Click me</Button>
     </div>
   );

@@ -78,7 +78,7 @@ import { Button } from "@/components/ui/button/button";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen items-center justify-center">
+    <main>
       <Button>Click me</Button>
     </main>
   );
@@ -115,7 +115,7 @@ import { Button } from "@/components/ui/button/button";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen items-center justify-center">
+    <main>
       <Button>Click me</Button>
     </main>
   );
@@ -139,7 +139,7 @@ export default function Home() {
 If you need a new Next.js project, create one with `create-next-app`. Otherwise, skip this step.
 
 ```bash
-pnpm create next-app@latest my-app --typescript --tailwind --eslint --app --src-dir=false --import-alias="@/*"
+pnpm create next-app@latest my-app --typescript --eslint --app --src-dir=false --import-alias="@/*"
 cd my-app
 ```
 
@@ -149,54 +149,67 @@ Install StyleX runtime, Base UI primitives, and the StyleX compilation toolchain
 
 ```bash
 pnpm add @stylexjs/stylex @base-ui/react
-pnpm add -D @stylexjs/babel-plugin @stylexjs/postcss-plugin @babel/preset-typescript
+pnpm add -D @stylexjs/babel-plugin @stylexjs/postcss-plugin postcss
 ```
 
 ### Configure Babel
 
-StyleX transforms component styles using Babel. Create `.babelrc` at the root of your project:
+StyleX transforms component styles using Babel. Create `babel.config.js` at the root of your project:
 
-```json title=".babelrc"
-{
-  "presets": ["next/babel", "@babel/preset-typescript"],
-  "plugins": [
+```js title="babel.config.js"
+const path = require("path");
+const dev = process.env.NODE_ENV !== "production";
+
+module.exports = {
+  presets: ["next/babel"],
+  plugins: [
     [
       "@stylexjs/babel-plugin",
       {
-        "runtimeInjection": false,
-        "styleResolution": "property-specificity",
-        "unstable_moduleResolution": { "type": "commonJS", "rootDir": "." }
-      }
-    ]
-  ]
-}
+        dev,
+        runtimeInjection: false,
+        enableInlinedConditionalMerge: true,
+        treeshakeCompensation: true,
+        aliases: { "@/*": [path.join(__dirname, "*")] },
+        unstable_moduleResolution: { type: "commonJS" },
+      },
+    ],
+  ],
+};
 ```
 
 <Callout type="warn">
-  Adding a `.babelrc` opts Next.js out of the Turbopack compiler. Run `next dev`
-  and `next build` without the `--turbopack` flag so the Babel transformation
-  pipeline runs.
+  Adding a `babel.config.js` opts Next.js out of the Turbopack compiler. Run
+  `next dev` and `next build` without the `--turbopack` flag so the Babel
+  transformation pipeline runs.
 </Callout>
 
 ### Configure PostCSS
 
-The PostCSS plugin extracts the compiled CSS. It must run **before** Tailwind, and its options must match `.babelrc` so that generated class names line up:
+Create `postcss.config.js` at the root of your project. The PostCSS plugin extracts the compiled CSS:
 
-```js title="postcss.config.mjs"
-const config = {
+```js title="postcss.config.js"
+const babelConfig = require("./babel.config");
+
+module.exports = {
   plugins: {
     "@stylexjs/postcss-plugin": {
-      include: ["app/**/*.{js,jsx,ts,tsx}", "components/**/*.{js,jsx,ts,tsx}"],
+      include: [
+        "src/**/*.{js,jsx,ts,tsx}",
+        "app/**/*.{js,jsx,ts,tsx}",
+        "pages/**/*.{js,jsx,ts,tsx}",
+        "components/**/*.{js,jsx,ts,tsx}",
+      ],
+      babelConfig: {
+        babelrc: false,
+        parserOpts: { plugins: ["typescript", "jsx"] },
+        plugins: babelConfig.plugins,
+      },
       useCSSLayers: true,
-      styleResolution: "property-specificity",
-      runtimeInjection: false,
-      unstable_moduleResolution: { type: "commonJS", rootDir: process.cwd() },
     },
-    "@tailwindcss/postcss": {},
+    autoprefixer: {},
   },
 };
-
-export default config;
 ```
 
 ### Add the StyleX directive
@@ -204,8 +217,6 @@ export default config;
 Add `@stylex;` to your global stylesheet. The PostCSS plugin replaces this directive with the compiled component CSS:
 
 ```css title="app/globals.css"
-@import "tailwindcss";
-
 @stylex;
 ```
 
@@ -247,7 +258,7 @@ import { Button } from "@/components/ui/button/button";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen items-center justify-center">
+    <main>
       <Button>Click me</Button>
     </main>
   );
