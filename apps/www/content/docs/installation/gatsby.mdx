@@ -171,21 +171,15 @@ export const Head: HeadFC = () => <title>Home Page</title>;
 
 </Steps>
 
-## Add to an existing project
+## Existing Project
 
-To integrate shadcn-cssinjs into an existing Gatsby project:
+Follow the steps above to configure StyleX in your existing Gatsby project. The key changes are:
 
-1. **Install dependencies**:
-   ```bash
-   pnpm add @stylexjs/stylex @base-ui/react
-   pnpm add -D @stylexjs/babel-plugin @stylexjs/postcss-plugin gatsby-plugin-postcss @babel/preset-typescript
-   ```
-2. **Add `gatsby-plugin-postcss`** to your plugins array in `gatsby-config.ts`.
-3. **Add `.babelrc`** configuring `@stylexjs/babel-plugin`.
-4. **Configure `postcss.config.js`** with `@stylexjs/postcss-plugin`.
-5. **Add `@stylex;`** to your global stylesheet and import it in `gatsby-browser.js`.
-6. **Configure `gatsby-node.ts`** with the `@` alias.
-7. **Install tokens**:
+1. Install the StyleX dependencies and `gatsby-plugin-postcss`.
+2. Add the Babel and PostCSS plugins with matching `styleResolution` and `unstable_moduleResolution` settings.
+3. Add `@stylex;` to your global stylesheet and import it in `gatsby-browser.js`.
+4. Configure the `@` path alias in both `tsconfig.json` and `gatsby-node.ts`.
+5. Install design tokens:
    ```bash
    npx shadcn@latest add https://shadcn-cssinjs.com/r/stylex-tokens.json
    ```
