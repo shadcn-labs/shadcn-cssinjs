@@ -30,6 +30,10 @@ const SECTION_WIDTH: Partial<Record<SectionId, string>> = {
   skills: "w-72",
 };
 
+const SECTION_LIST: Partial<Record<SectionId, string>> = {
+  registries: "columns-2 gap-x-6 space-y-1",
+};
+
 const latestCardClassName = cn(
   "flex flex-col gap-4 rounded-lg border border-border bg-background p-4",
   "text-base font-normal no-underline transition-colors",
@@ -115,66 +119,39 @@ const DesktopSection = ({
   title,
   items,
   className,
-  grid,
+  listClassName,
 }: {
   title: string;
   items: readonly SiteNavLinkItem[];
   className?: string;
-  grid?: boolean;
+  listClassName?: string;
 }) => (
-  <div className={cn("flex flex-col gap-3", className)}>
+  <div className={cn("flex flex-col gap-3 w-44", className)}>
     <SectionTitle>{title}</SectionTitle>
-    {grid ? (
-      <ul className="grid grid-cols-2 gap-x-6 gap-y-1">
-        {items.map((item) => (
-          <li key={item.href}>
-            <SiteNavLink item={item}>
-              {({ label }) => (
-                <NavigationMenuLink
-                  href={addQueryParams(item.href, UTM_PARAMS)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={cn(
-                    "flex w-full flex-row items-center gap-1 whitespace-nowrap rounded-none",
-                    "bg-transparent p-0 text-base font-normal leading-normal",
-                    "underline-offset-4 decoration-muted-foreground/50 decoration-1",
-                    "hover:bg-transparent hover:underline focus:bg-transparent focus:underline",
-                    "data-[active=true]:bg-transparent"
-                  )}
-                >
-                  {label}
-                </NavigationMenuLink>
-              )}
-            </SiteNavLink>
-          </li>
-        ))}
-      </ul>
-    ) : (
-      <ul className="flex flex-col gap-1">
-        {items.map((item) => (
-          <li key={item.href} className="w-full">
-            <SiteNavLink item={item}>
-              {({ label }) => (
-                <NavigationMenuLink
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={cn(
-                    "flex w-full flex-row items-center gap-1 whitespace-nowrap rounded-none",
-                    "bg-transparent p-0 text-base font-normal leading-normal",
-                    "underline-offset-4 decoration-muted-foreground/50 decoration-1",
-                    "hover:bg-transparent hover:underline focus:bg-transparent focus:underline",
-                    "data-[active=true]:bg-transparent"
-                  )}
-                >
-                  {label}
-                </NavigationMenuLink>
-              )}
-            </SiteNavLink>
-          </li>
-        ))}
-      </ul>
-    )}
+    <ul className={cn("columns-1 gap-1", listClassName)}>
+      {items.map((item) => (
+        <li key={item.href} className="w-full break-inside-avoid">
+          <SiteNavLink item={item}>
+            {({ label }) => (
+              <NavigationMenuLink
+                href={addQueryParams(item.href, UTM_PARAMS)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  "flex w-full flex-row items-center gap-1 whitespace-nowrap rounded-none",
+                  "bg-transparent p-0 text-base font-normal leading-normal",
+                  "underline-offset-4 decoration-muted-foreground/50 decoration-1",
+                  "hover:bg-transparent hover:underline focus:bg-transparent focus:underline",
+                  "data-[active=true]:bg-transparent"
+                )}
+              >
+                {label}
+              </NavigationMenuLink>
+            )}
+          </SiteNavLink>
+        </li>
+      ))}
+    </ul>
   </div>
 );
 
@@ -316,8 +293,8 @@ const LabsNavDesktop = () => {
                       key={section.id}
                       title={section.title}
                       items={section.items}
-                      className={SECTION_WIDTH[section.id] ?? "w-44"}
-                      grid={section.id === "registries"}
+                      className={SECTION_WIDTH[section.id]}
+                      listClassName={SECTION_LIST[section.id]}
                     />
                   ))}
                 </div>

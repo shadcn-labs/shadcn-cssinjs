@@ -5,9 +5,9 @@ export interface SiteNavLink {
 }
 
 export const SITE_LATEST = {
-  description: "Beautiful rich text editors, made simple",
-  href: "https://editorcn.vercel.app",
-  name: "editorcn",
+  description: "Beautiful shaders, made simple",
+  href: "https://shadercn.run",
+  name: "shadercn",
 } as const satisfies SiteNavLink;
 
 export const SITE_REGISTRIES = [
@@ -18,6 +18,7 @@ export const SITE_REGISTRIES = [
   { href: "https://emailcn.run", name: "emailcn" },
   { href: "https://mcpcn.dev", name: "mcpcn" },
   { href: "https://pdfcn.dev", name: "pdfcn" },
+  { href: "https://editorcn.vercel.app", name: "editorcn" },
 ] as const satisfies readonly SiteNavLink[];
 
 export const SITE_TEMPLATES = [
