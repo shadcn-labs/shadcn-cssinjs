@@ -1,0 +1,14 @@
+{
+  "title": "Installation",
+  "pages": [
+    "index",
+    "next",
+    "vite",
+    "laravel",
+    "react-router",
+    "astro",
+    "tanstack",
+    "manual",
+    "gatsby"
+  ]
+}

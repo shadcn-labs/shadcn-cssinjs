@@ -1,0 +1,186 @@
+---
+title: Gatsby
+description: Install and configure shadcn-cssinjs for Gatsby.
+---
+
+<Callout className="mb-6">
+  **Note:** This guide is for Gatsby with StyleX and PostCSS. For new projects,
+  we recommend using Next.js, Vite, or another modern framework.
+</Callout>
+
+<Steps>
+
+### Create project
+
+Start by creating a new Gatsby project with TypeScript:
+
+```bash
+pnpm create gatsby my-app -ts
+cd my-app
+```
+
+### Install dependencies
+
+Install StyleX, Base UI primitives, Gatsby PostCSS plugin, and build dependencies:
+
+```bash
+pnpm add @stylexjs/stylex @base-ui/react
+pnpm add -D @stylexjs/babel-plugin @stylexjs/postcss-plugin postcss gatsby-plugin-postcss @babel/preset-typescript
+```
+
+### Configure Gatsby plugins
+
+Add `gatsby-plugin-postcss` to `gatsby-config.ts`:
+
+```ts title="gatsby-config.ts"
+import type { GatsbyConfig } from "gatsby";
+
+const config: GatsbyConfig = {
+  plugins: ["gatsby-plugin-postcss"],
+};
+
+export default config;
+```
+
+### Configure Babel
+
+Create `.babelrc` at the root of your project:
+
+```json title=".babelrc"
+{
+  "presets": ["babel-preset-gatsby", "@babel/preset-typescript"],
+  "plugins": [
+    [
+      "@stylexjs/babel-plugin",
+      {
+        "runtimeInjection": false,
+        "styleResolution": "property-specificity",
+        "unstable_moduleResolution": {
+          "type": "commonJS",
+          "rootDir": "."
+        }
+      }
+    ]
+  ]
+}
+```
+
+### Configure PostCSS
+
+Create `postcss.config.js` at your project root:
+
+```js title="postcss.config.js"
+const babelConfig = require("./.babelrc");
+
+module.exports = {
+  plugins: {
+    "@stylexjs/postcss-plugin": {
+      include: ["src/**/*.{js,jsx,ts,tsx}"],
+      babelConfig: {
+        babelrc: false,
+        parserOpts: { plugins: ["typescript", "jsx"] },
+        plugins: babelConfig.plugins,
+      },
+      useCSSLayers: true,
+    },
+  },
+};
+```
+
+### Add the StyleX directive
+
+Create `src/styles/global.css` and add `@stylex;`:
+
+```css title="src/styles/global.css"
+@stylex;
+```
+
+Import this stylesheet in `gatsby-browser.js`:
+
+```js title="gatsby-browser.js"
+import "./src/styles/global.css";
+```
+
+### Configure path aliases
+
+Add alias paths to `tsconfig.json`:
+
+```json title="tsconfig.json"
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}
+```
+
+Create `gatsby-node.ts` to configure Webpack path aliases:
+
+```ts title="gatsby-node.ts"
+import * as path from "path";
+import type { GatsbyNode } from "gatsby";
+
+export const onCreateWebpackConfig: GatsbyNode["onCreateWebpackConfig"] = ({
+  actions,
+}) => {
+  actions.setWebpackConfig({
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "src"),
+      },
+    },
+  });
+};
+```
+
+### Add the design tokens
+
+Install the shared tokens into `src/components/ui/tokens.stylex.ts`:
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/stylex-tokens.json
+```
+
+### Install a component
+
+Add a component using the shadcn CLI:
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/button.json
+```
+
+Import and render the component in a Gatsby page:
+
+```tsx title="src/pages/index.tsx"
+import { Button } from "@/components/ui/button/button";
+import type { HeadFC, PageProps } from "gatsby";
+
+const IndexPage: React.FC<PageProps> = () => {
+  return (
+    <main>
+      <Button>Click me</Button>
+    </main>
+  );
+};
+
+export default IndexPage;
+
+export const Head: HeadFC = () => <title>Home Page</title>;
+```
+
+</Steps>
+
+## Existing Project
+
+Follow the steps above to configure StyleX in your existing Gatsby project. The key changes are:
+
+1. Install the StyleX dependencies and `gatsby-plugin-postcss`.
+2. Add the Babel and PostCSS plugins with matching configuration.
+3. Add `@stylex;` to your global stylesheet and import it in `gatsby-browser.js`.
+4. Configure the `@` path alias in both `tsconfig.json` and `gatsby-node.ts`.
+5. Install design tokens:
+   ```bash
+   npx shadcn@latest add https://shadcn-cssinjs.com/r/stylex-tokens.json
+   ```
