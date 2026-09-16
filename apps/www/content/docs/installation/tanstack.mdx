@@ -1,0 +1,301 @@
+---
+title: TanStack Start
+description: Install and configure shadcn-cssinjs for TanStack Start.
+---
+
+Choose the setup that matches your starting point.
+
+<div className="mt-6 grid gap-4 sm:grid-cols-3 sm:gap-6">
+  <LinkedCard
+    href="#scaffold-with-create"
+    className="items-start gap-1 p-6 text-sm md:p-6"
+  >
+    <div className="font-medium">Use shadcn/create</div>
+    <div className="leading-relaxed text-muted-foreground">
+      Build your preset and generate a TanStack Start project.
+    </div>
+  </LinkedCard>
+  <LinkedCard
+    href="#scaffold-with-cli"
+    className="items-start gap-1 p-6 text-sm md:p-6"
+  >
+    <div className="font-medium">Use the CLI</div>
+    <div className="leading-relaxed text-muted-foreground">
+      Scaffold a new TanStack Start project directly from the terminal.
+    </div>
+  </LinkedCard>
+  <LinkedCard
+    href="#existing-tanstack-project"
+    className="items-start gap-1 p-6 text-sm md:p-6"
+  >
+    <div className="font-medium">Existing Project</div>
+    <div className="leading-relaxed text-muted-foreground">
+      Configure shadcn-cssinjs manually in an existing TanStack Start project.
+    </div>
+  </LinkedCard>
+</div>
+
+<div id="scaffold-with-create" className="scroll-mt-24" />
+## Use shadcn/create
+
+<Steps>
+
+### Build Your Preset
+
+Open [shadcn/create](/create?template=start) and build your preset visually. Choose your style, colors, fonts, icons, and more.
+
+<Button asChild size="sm">
+  <Link
+    href="/create?template=start"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="mt-6 no-underline!"
+  >
+    Open shadcn/create
+  </Link>
+</Button>
+
+### Create Project
+
+Click `Create Project`, choose your package manager, and copy the generated command:
+
+```bash
+pnpm dlx shadcn@latest init --preset [CODE] --template start
+```
+
+### Add Components
+
+Add a component from the registry:
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/button.json
+```
+
+Import and render the component in a route:
+
+```tsx title="app/routes/index.tsx"
+import { Button } from "@/components/ui/button/button";
+import { createFileRoute } from "@tanstack/react-router";
+
+export const Route = createFileRoute("/")({
+  component: Home,
+});
+
+function Home() {
+  return (
+    <main className="flex min-h-screen items-center justify-center">
+      <Button>Click me</Button>
+    </main>
+  );
+}
+```
+
+</Steps>
+
+<div id="scaffold-with-cli" className="scroll-mt-24" />
+## Use the CLI
+
+<Steps>
+
+### Create Project
+
+Run the `init` command to scaffold a new TanStack Start project:
+
+```bash
+pnpm dlx shadcn@latest init -t start
+```
+
+### Add Components
+
+Add a component from the registry:
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/button.json
+```
+
+</Steps>
+
+<div id="existing-tanstack-project" className="scroll-mt-24" />
+## Existing Project
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) 18.17 or later
+- A package manager: `pnpm`, `npm`, `yarn`, or `bun`
+
+<Steps>
+
+### Create Project
+
+If you need a new TanStack Start project, run:
+
+```bash
+pnpm create @tanstack/start@latest my-app
+cd my-app
+```
+
+### Install dependencies
+
+Install StyleX, Base UI primitives, and the StyleX compilation toolchain:
+
+```bash
+pnpm add @stylexjs/stylex @base-ui/react
+pnpm add -D @stylexjs/babel-plugin @stylexjs/postcss-plugin @babel/preset-typescript vite-plugin-babel @tailwindcss/postcss tailwindcss @types/node
+```
+
+### Configure TanStack Start & Vite
+
+Update `app.config.ts` (or `vite.config.ts`) to configure the StyleX Babel plugin and path resolution:
+
+```ts title="app.config.ts"
+import path from "node:path";
+import { defineConfig } from "@tanstack/start/config";
+import babel from "vite-plugin-babel";
+
+export default defineConfig({
+  vite: {
+    plugins: [
+      babel({
+        filter: /\.[jt]sx?$/,
+        babelConfig: {
+          presets: ["@babel/preset-typescript"],
+          plugins: [
+            [
+              "@stylexjs/babel-plugin",
+              {
+                runtimeInjection: false,
+                styleResolution: "property-specificity",
+                unstable_moduleResolution: {
+                  type: "commonJS",
+                  rootDir: process.cwd(),
+                },
+              },
+            ],
+          ],
+        },
+      }),
+    ],
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "./app"),
+      },
+    },
+  },
+});
+```
+
+### Configure PostCSS
+
+Create `postcss.config.mjs` at your project root. Place `@stylexjs/postcss-plugin` **before** Tailwind:
+
+```js title="postcss.config.mjs"
+const config = {
+  plugins: {
+    "@stylexjs/postcss-plugin": {
+      include: ["app/**/*.{js,jsx,ts,tsx}"],
+      useCSSLayers: true,
+      styleResolution: "property-specificity",
+      runtimeInjection: false,
+      unstable_moduleResolution: { type: "commonJS", rootDir: process.cwd() },
+    },
+    "@tailwindcss/postcss": {},
+  },
+};
+
+export default config;
+```
+
+### Add the StyleX directive
+
+Add `@stylex;` to your stylesheet:
+
+```css title="app/styles/app.css"
+@import "tailwindcss";
+
+@stylex;
+```
+
+Import `app.css` in your root route:
+
+```tsx title="app/routes/__root.tsx"
+import {
+  createRootRoute,
+  Outlet,
+  ScrollRestoration,
+} from "@tanstack/react-router";
+import appCss from "~/styles/app.css?url";
+
+export const Route = createRootRoute({
+  head: () => ({
+    links: [{ rel: "stylesheet", href: appCss }],
+  }),
+  component: RootComponent,
+});
+
+function RootComponent() {
+  return (
+    <html lang="en">
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </head>
+      <body>
+        <Outlet />
+        <ScrollRestoration />
+      </body>
+    </html>
+  );
+}
+```
+
+### Configure path aliases
+
+Ensure `tsconfig.json` specifies path aliases for `@/*`:
+
+```json title="tsconfig.json"
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./app/*"]
+    }
+  }
+}
+```
+
+### Add the design tokens
+
+Install the design tokens into `app/components/ui/tokens.stylex.ts`:
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/stylex-tokens.json
+```
+
+### Install a component
+
+Add a component using the shadcn CLI:
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/button.json
+```
+
+Import and render the component in a route:
+
+```tsx title="app/routes/index.tsx"
+import { Button } from "@/components/ui/button/button";
+import { createFileRoute } from "@tanstack/react-router";
+
+export const Route = createFileRoute("/")({
+  component: Home,
+});
+
+function Home() {
+  return (
+    <main className="flex min-h-screen items-center justify-center">
+      <Button>Click me</Button>
+    </main>
+  );
+}
+```
+
+</Steps>

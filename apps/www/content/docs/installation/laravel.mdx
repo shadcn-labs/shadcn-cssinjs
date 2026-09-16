@@ -1,0 +1,281 @@
+---
+title: Laravel
+description: Install and configure shadcn-cssinjs for Laravel.
+---
+
+The shadcn CLI does not scaffold a new Laravel app. Start by creating a Laravel app with the React starter kit, then choose how you want to configure shadcn-cssinjs.
+
+<Steps>
+
+### Create Project
+
+Create a new Laravel app using the Laravel installer:
+
+```bash
+laravel new my-app
+```
+
+If you already have a Laravel app with React and Inertia configured, skip this step.
+
+Choose the **React** starter kit when prompted. For more information, see the official [Laravel frontend documentation](https://laravel.com/docs/frontend).
+
+Then move into your project directory:
+
+```bash
+cd my-app
+```
+
+</Steps>
+
+<div className="mt-10 grid gap-4 sm:grid-cols-2 sm:gap-6">
+  <LinkedCard
+    href="#configure-with-create"
+    className="items-start gap-1 p-6 text-sm md:p-6"
+  >
+    <div className="font-medium">Use shadcn/create</div>
+    <div className="leading-relaxed text-muted-foreground">
+      Build your preset visually and generate a Laravel init command.
+    </div>
+  </LinkedCard>
+  <LinkedCard
+    href="#configure-with-cli"
+    className="items-start gap-1 p-6 text-sm md:p-6"
+  >
+    <div className="font-medium">Use the CLI</div>
+    <div className="leading-relaxed text-muted-foreground">
+      Configure shadcn-cssinjs in your Laravel app directly from the terminal.
+    </div>
+  </LinkedCard>
+</div>
+
+<div id="configure-with-create" className="scroll-mt-24" />
+## Use shadcn/create
+
+<Steps>
+
+### Build Your Preset
+
+Open [shadcn/create](/create?template=laravel) and build your preset visually. Choose your style, colors, fonts, icons, and more.
+
+<Button asChild size="sm">
+  <Link
+    href="/create?template=laravel"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="mt-6 no-underline!"
+  >
+    Open shadcn/create
+  </Link>
+</Button>
+
+### Run the Command
+
+Click `Create Project`, choose your package manager, and copy the generated command:
+
+```bash
+pnpm dlx shadcn@latest init --preset [CODE] --template laravel
+```
+
+Run the command from the root of your Laravel app. When asked to overwrite `components.json`, choose `Yes`.
+
+### Add Components
+
+Add a component using the shadcn CLI:
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/button.json
+```
+
+Import and render the component in your React entrypoint:
+
+```tsx title="resources/js/app.tsx"
+import { Button } from "@/components/ui/button/button";
+import { createRoot } from "react-dom/client";
+
+function App() {
+  return (
+    <div className="flex min-h-screen items-center justify-center">
+      <Button>Click me</Button>
+    </div>
+  );
+}
+
+const root = document.getElementById("app");
+if (root) {
+  createRoot(root).render(<App />);
+}
+```
+
+</Steps>
+
+<div id="configure-with-cli" className="scroll-mt-24" />
+## Use the CLI
+
+<Steps>
+
+### Run the CLI
+
+Run the `shadcn` init command from the root of your Laravel app:
+
+```bash
+pnpm dlx shadcn@latest init -t laravel
+```
+
+### Add Components
+
+Add a component using the shadcn CLI:
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/button.json
+```
+
+</Steps>
+
+<div id="manual-setup" className="scroll-mt-24" />
+## Existing Project / Manual Setup
+
+### Prerequisites
+
+- [PHP](https://www.php.net/) 8.2 or later
+- [Composer](https://getcomposer.org/)
+- [Node.js](https://nodejs.org/) 18.17 or later
+- A package manager: `pnpm`, `npm`, `yarn`, or `bun`
+
+<Steps>
+
+### Install dependencies
+
+Install React, StyleX, Base UI primitives, and the StyleX build tools:
+
+```bash
+pnpm add react react-dom @stylexjs/stylex @base-ui/react
+pnpm add -D @vitejs/plugin-react @stylexjs/babel-plugin @stylexjs/postcss-plugin @babel/preset-typescript @tailwindcss/postcss tailwindcss @types/react @types/react-dom @types/node
+```
+
+### Configure Vite
+
+In `vite.config.js` (or `vite.config.ts`), configure `laravel-vite-plugin` and `@vitejs/plugin-react` with `@stylexjs/babel-plugin`:
+
+```js title="vite.config.js"
+import react from "@vitejs/plugin-react";
+import laravel from "laravel-vite-plugin";
+import path from "node:path";
+import { defineConfig } from "vite";
+
+export default defineConfig({
+  plugins: [
+    laravel({
+      input: ["resources/css/app.css", "resources/js/app.tsx"],
+      refresh: true,
+    }),
+    react({
+      babel: {
+        plugins: [
+          [
+            "@stylexjs/babel-plugin",
+            {
+              runtimeInjection: false,
+              styleResolution: "property-specificity",
+              unstable_moduleResolution: {
+                type: "commonJS",
+                rootDir: process.cwd(),
+              },
+            },
+          ],
+        ],
+      },
+    }),
+  ],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./resources/js"),
+    },
+  },
+});
+```
+
+### Configure PostCSS
+
+Create `postcss.config.js` at the root of your Laravel application. Place `@stylexjs/postcss-plugin` **before** Tailwind:
+
+```js title="postcss.config.js"
+export default {
+  plugins: {
+    "@stylexjs/postcss-plugin": {
+      include: ["resources/**/*.{js,jsx,ts,tsx}"],
+      useCSSLayers: true,
+      styleResolution: "property-specificity",
+      runtimeInjection: false,
+      unstable_moduleResolution: { type: "commonJS", rootDir: process.cwd() },
+    },
+    "@tailwindcss/postcss": {},
+  },
+};
+```
+
+### Add the StyleX directive
+
+Add `@stylex;` to your stylesheet:
+
+```css title="resources/css/app.css"
+@import "tailwindcss";
+
+@stylex;
+```
+
+### Include assets in Blade layout
+
+Add the `@viteReactRefresh` and `@vite` directives to your main layout:
+
+```html title="resources/views/app.blade.php"
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ config('app.name', 'Laravel') }}</title>
+    @viteReactRefresh @vite(['resources/css/app.css', 'resources/js/app.tsx'])
+  </head>
+  <body class="antialiased">
+    <div id="app"></div>
+  </body>
+</html>
+```
+
+### Add the design tokens
+
+Install the shared tokens into `resources/js/components/ui/tokens.stylex.ts`:
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/stylex-tokens.json
+```
+
+### Install a component
+
+Add a component:
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/button.json
+```
+
+Import and render it in your React entrypoint:
+
+```tsx title="resources/js/app.tsx"
+import { Button } from "@/components/ui/button/button";
+import { createRoot } from "react-dom/client";
+
+function App() {
+  return (
+    <div className="flex min-h-screen items-center justify-center">
+      <Button>Click me</Button>
+    </div>
+  );
+}
+
+const root = document.getElementById("app");
+if (root) {
+  createRoot(root).render(<App />);
+}
+```
+
+</Steps>

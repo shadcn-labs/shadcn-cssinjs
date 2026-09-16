@@ -1,0 +1,274 @@
+---
+title: Vite
+description: Install and configure shadcn-cssinjs for Vite.
+---
+
+Choose the setup that matches your starting point.
+
+<div className="mt-6 grid gap-4 sm:grid-cols-3 sm:gap-6">
+  <LinkedCard
+    href="#scaffold-with-create"
+    className="items-start gap-1 p-6 text-sm md:p-6"
+  >
+    <div className="font-medium">Use shadcn/create</div>
+    <div className="leading-relaxed text-muted-foreground">
+      Build your preset and generate a Vite project command.
+    </div>
+  </LinkedCard>
+  <LinkedCard
+    href="#scaffold-with-cli"
+    className="items-start gap-1 p-6 text-sm md:p-6"
+  >
+    <div className="font-medium">Use the CLI</div>
+    <div className="leading-relaxed text-muted-foreground">
+      Scaffold a new Vite project directly from the terminal.
+    </div>
+  </LinkedCard>
+  <LinkedCard
+    href="#existing-vite-project"
+    className="items-start gap-1 p-6 text-sm md:p-6"
+  >
+    <div className="font-medium">Existing Project</div>
+    <div className="leading-relaxed text-muted-foreground">
+      Configure shadcn-cssinjs manually in an existing Vite project.
+    </div>
+  </LinkedCard>
+</div>
+
+<div id="scaffold-with-create" className="scroll-mt-24" />
+## Use shadcn/create
+
+<Steps>
+
+### Build Your Preset
+
+Open [shadcn/create](/create?template=vite) and build your preset visually. Choose your style, colors, fonts, icons, and more.
+
+<Button asChild size="sm">
+  <Link
+    href="/create?template=vite"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="mt-6 no-underline!"
+  >
+    Open shadcn/create
+  </Link>
+</Button>
+
+### Create Project
+
+Click `Create Project`, choose your package manager, and copy the generated command:
+
+```bash
+pnpm dlx shadcn@latest init --preset [CODE] --template vite
+```
+
+### Add Components
+
+Add a component from the registry:
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/button.json
+```
+
+Import and render the component:
+
+```tsx title="src/App.tsx"
+import { Button } from "@/components/ui/button/button";
+
+export function App() {
+  return (
+    <div className="flex min-h-screen items-center justify-center">
+      <Button>Click me</Button>
+    </div>
+  );
+}
+
+export default App;
+```
+
+</Steps>
+
+<div id="scaffold-with-cli" className="scroll-mt-24" />
+## Use the CLI
+
+<Steps>
+
+### Create Project
+
+Run the `init` command to scaffold a new Vite + React project:
+
+```bash
+pnpm dlx shadcn@latest init -t vite
+```
+
+### Add Components
+
+Add a component from the registry:
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/button.json
+```
+
+Import and render the component:
+
+```tsx title="src/App.tsx"
+import { Button } from "@/components/ui/button/button";
+
+export function App() {
+  return (
+    <div className="flex min-h-screen items-center justify-center">
+      <Button>Click me</Button>
+    </div>
+  );
+}
+
+export default App;
+```
+
+</Steps>
+
+<div id="existing-vite-project" className="scroll-mt-24" />
+## Existing Project
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) 18.17 or later
+- A package manager: `pnpm`, `npm`, `yarn`, or `bun`
+
+<Steps>
+
+### Create Project
+
+If you need a new Vite React TypeScript project, run:
+
+```bash
+pnpm create vite my-app --template react-ts
+cd my-app
+```
+
+### Install dependencies
+
+Install StyleX, Base UI primitives, path utilities, and build dependencies:
+
+```bash
+pnpm add @stylexjs/stylex @base-ui/react
+pnpm add -D @stylexjs/babel-plugin @stylexjs/postcss-plugin @babel/preset-typescript @tailwindcss/postcss tailwindcss @types/node
+```
+
+### Configure path aliases in TypeScript
+
+Update `tsconfig.json` (and `tsconfig.app.json` if using Vite project references) with path aliases:
+
+```json title="tsconfig.json"
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}
+```
+
+### Configure Vite
+
+Configure `@vitejs/plugin-react` to run `@stylexjs/babel-plugin` during compilation, and resolve the `@/*` path alias:
+
+```ts title="vite.config.ts"
+import path from "node:path";
+import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
+
+export default defineConfig({
+  plugins: [
+    react({
+      babel: {
+        plugins: [
+          [
+            "@stylexjs/babel-plugin",
+            {
+              runtimeInjection: false,
+              styleResolution: "property-specificity",
+              unstable_moduleResolution: {
+                type: "commonJS",
+                rootDir: process.cwd(),
+              },
+            },
+          ],
+        ],
+      },
+    }),
+  ],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
+});
+```
+
+### Configure PostCSS
+
+Create `postcss.config.mjs` at the root of your project. Place `@stylexjs/postcss-plugin` **before** Tailwind:
+
+```js title="postcss.config.mjs"
+const config = {
+  plugins: {
+    "@stylexjs/postcss-plugin": {
+      include: ["src/**/*.{js,jsx,ts,tsx}"],
+      useCSSLayers: true,
+      styleResolution: "property-specificity",
+      runtimeInjection: false,
+      unstable_moduleResolution: { type: "commonJS", rootDir: process.cwd() },
+    },
+    "@tailwindcss/postcss": {},
+  },
+};
+
+export default config;
+```
+
+### Add the StyleX directive
+
+Add `@stylex;` to your global CSS stylesheet:
+
+```css title="src/index.css"
+@import "tailwindcss";
+
+@stylex;
+```
+
+### Add the design tokens
+
+Install the shared tokens from the registry into `src/components/ui/tokens.stylex.ts`:
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/stylex-tokens.json
+```
+
+### Install a component
+
+Add a component using the shadcn CLI:
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/button.json
+```
+
+Import and render the component:
+
+```tsx title="src/App.tsx"
+import { Button } from "@/components/ui/button/button";
+
+export function App() {
+  return (
+    <div className="flex min-h-screen items-center justify-center">
+      <Button>Click me</Button>
+    </div>
+  );
+}
+
+export default App;
+```
+
+</Steps>

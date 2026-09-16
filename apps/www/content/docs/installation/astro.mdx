@@ -1,0 +1,285 @@
+---
+title: Astro
+description: Install and configure shadcn-cssinjs for Astro.
+---
+
+Choose the setup that matches your starting point.
+
+<div className="mt-6 grid gap-4 sm:grid-cols-3 sm:gap-6">
+  <LinkedCard
+    href="#scaffold-with-create"
+    className="items-start gap-1 p-6 text-sm md:p-6"
+  >
+    <div className="font-medium">Use shadcn/create</div>
+    <div className="leading-relaxed text-muted-foreground">
+      Build your preset and generate an Astro project command.
+    </div>
+  </LinkedCard>
+  <LinkedCard
+    href="#scaffold-with-cli"
+    className="items-start gap-1 p-6 text-sm md:p-6"
+  >
+    <div className="font-medium">Use the CLI</div>
+    <div className="leading-relaxed text-muted-foreground">
+      Scaffold a new Astro project directly from the terminal.
+    </div>
+  </LinkedCard>
+  <LinkedCard
+    href="#existing-astro-project"
+    className="items-start gap-1 p-6 text-sm md:p-6"
+  >
+    <div className="font-medium">Existing Project</div>
+    <div className="leading-relaxed text-muted-foreground">
+      Configure shadcn-cssinjs manually in an existing Astro project.
+    </div>
+  </LinkedCard>
+</div>
+
+<div id="scaffold-with-create" className="scroll-mt-24" />
+## Use shadcn/create
+
+<Steps>
+
+### Build Your Preset
+
+Open [shadcn/create](/create?template=astro) and build your preset visually. Choose your style, colors, fonts, icons, and more.
+
+<Button asChild size="sm">
+  <Link
+    href="/create?template=astro"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="mt-6 no-underline!"
+  >
+    Open shadcn/create
+  </Link>
+</Button>
+
+### Create Project
+
+Click `Create Project`, choose your package manager, and copy the generated command:
+
+```bash
+pnpm dlx shadcn@latest init --preset [CODE] --template astro
+```
+
+### Add Components
+
+Add a component from the registry:
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/button.json
+```
+
+Import and use it in your Astro template with a client directive:
+
+```astro title="src/pages/index.astro"
+---
+import Layout from "../layouts/Layout.astro";
+import { Button } from "@/components/ui/button/button";
+---
+
+<Layout>
+  <main class="flex min-h-screen items-center justify-center">
+    <Button client:load>Click me</Button>
+  </main>
+</Layout>
+```
+
+</Steps>
+
+<div id="scaffold-with-cli" className="scroll-mt-24" />
+## Use the CLI
+
+<Steps>
+
+### Create Project
+
+Run the `init` command to scaffold a new Astro project:
+
+```bash
+pnpm dlx shadcn@latest init -t astro
+```
+
+### Add Components
+
+Add a component from the registry:
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/button.json
+```
+
+</Steps>
+
+<div id="existing-astro-project" className="scroll-mt-24" />
+## Existing Project
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) 18.17 or later
+- A package manager: `pnpm`, `npm`, `yarn`, or `bun`
+
+<Steps>
+
+### Create Project
+
+If you need a new Astro project, run:
+
+```bash
+pnpm create astro@latest my-app
+cd my-app
+```
+
+### Add the React integration
+
+Add the official React integration to your Astro project:
+
+```bash
+pnpm astro add react
+```
+
+### Install dependencies
+
+Install StyleX, Base UI primitives, and the StyleX compilation toolchain:
+
+```bash
+pnpm add @stylexjs/stylex @base-ui/react
+pnpm add -D @stylexjs/babel-plugin @stylexjs/postcss-plugin @babel/preset-typescript vite-plugin-babel @tailwindcss/postcss tailwindcss
+```
+
+### Configure Astro and Vite
+
+Configure `astro.config.mjs` to run the StyleX Babel plugin via Vite:
+
+```js title="astro.config.mjs"
+import react from "@astrojs/react";
+import { defineConfig } from "astro/config";
+import babel from "vite-plugin-babel";
+
+export default defineConfig({
+  integrations: [react()],
+  vite: {
+    plugins: [
+      babel({
+        filter: /\.[jt]sx?$/,
+        babelConfig: {
+          presets: ["@babel/preset-typescript"],
+          plugins: [
+            [
+              "@stylexjs/babel-plugin",
+              {
+                runtimeInjection: false,
+                styleResolution: "property-specificity",
+                unstable_moduleResolution: {
+                  type: "commonJS",
+                  rootDir: process.cwd(),
+                },
+              },
+            ],
+          ],
+        },
+      }),
+    ],
+  },
+});
+```
+
+### Configure PostCSS
+
+Create `postcss.config.mjs` at the root of your project:
+
+```js title="postcss.config.mjs"
+const config = {
+  plugins: {
+    "@stylexjs/postcss-plugin": {
+      include: ["src/**/*.{astro,html,js,jsx,ts,tsx}"],
+      useCSSLayers: true,
+      styleResolution: "property-specificity",
+      runtimeInjection: false,
+      unstable_moduleResolution: { type: "commonJS", rootDir: process.cwd() },
+    },
+    "@tailwindcss/postcss": {},
+  },
+};
+
+export default config;
+```
+
+### Add the StyleX directive
+
+Create `src/styles/globals.css` and include `@stylex;`:
+
+```css title="src/styles/globals.css"
+@import "tailwindcss";
+
+@stylex;
+```
+
+Import this stylesheet in your Astro base layout:
+
+```astro title="src/layouts/Layout.astro"
+---
+import "../styles/globals.css";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Astro + shadcn-cssinjs</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+```
+
+### Configure path aliases
+
+Ensure `tsconfig.json` defines the `@/*` alias:
+
+```json title="tsconfig.json"
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  }
+}
+```
+
+### Add the design tokens
+
+Install the shared design tokens:
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/stylex-tokens.json
+```
+
+### Install a component
+
+Add a component from the registry:
+
+```bash
+npx shadcn@latest add https://shadcn-cssinjs.com/r/button.json
+```
+
+In Astro's island architecture, interactive React components must specify a client directive like `client:load` or `client:visible`:
+
+```astro title="src/pages/index.astro"
+---
+import Layout from "../layouts/Layout.astro";
+import { Button } from "@/components/ui/button/button";
+---
+
+<Layout>
+  <main class="flex min-h-screen items-center justify-center">
+    <Button client:load>Click me</Button>
+  </main>
+</Layout>
+```
+
+</Steps>
