@@ -275,13 +275,19 @@ const LabsNavDesktop = () => {
                 <div className="flex gap-8 py-4 pl-3">
                   <div className="flex w-64 flex-col gap-3">
                     <SectionTitle>Latest</SectionTitle>
-                    <LatestCard item={SITE_LATEST} nameClassName="min-h-8">
+                    <LatestCard
+                      item={SITE_LATEST}
+                      nameClassName="min-h-8 flex-1"
+                    >
                       {({ content }) => (
                         <NavigationMenuLink
                           href={addQueryParams(SITE_LATEST.href, UTM_PARAMS)}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className={cn(latestCardClassName, "w-60 gap-2 p-3")}
+                          className={cn(
+                            latestCardClassName,
+                            "w-60 flex-1 gap-2 p-3"
+                          )}
                         >
                           {content}
                         </NavigationMenuLink>

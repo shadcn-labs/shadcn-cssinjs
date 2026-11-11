@@ -5,9 +5,9 @@ export interface SiteNavLink {
 }
 
 export const SITE_LATEST = {
-  description: "Beautiful shaders, made simple",
-  href: "https://shadercn.run",
-  name: "shadercn",
+  description: "Beautiful transitions, made simple",
+  href: "https://transition-kit.space",
+  name: "transition-kit",
 } as const satisfies SiteNavLink;
 
 export const SITE_REGISTRIES = [
@@ -19,6 +19,11 @@ export const SITE_REGISTRIES = [
   { href: "https://mcpcn.dev", name: "mcpcn" },
   { href: "https://pdfcn.dev", name: "pdfcn" },
   { href: "https://editorcn.vercel.app", name: "editorcn" },
+  { href: "https://mdxcn.dev", name: "mdxcn" },
+  { href: "https://snapcn.dev", name: "snapcn" },
+  { href: "https://www.shadcn-form.com", name: "form-builder" },
+  { href: "https://sensory-ui.com", name: "sensory-ui" },
+  { href: "https://pinui.xyz", name: "pin-ui" },
 ] as const satisfies readonly SiteNavLink[];
 
 export const SITE_TEMPLATES = [
