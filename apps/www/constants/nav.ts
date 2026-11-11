@@ -18,6 +18,7 @@ export const SITE_REGISTRIES = [
   { href: "https://emailcn.run", name: "emailcn" },
   { href: "https://mcpcn.dev", name: "mcpcn" },
   { href: "https://pdfcn.dev", name: "pdfcn" },
+  { href: "https://shadercn.run", name: "shadercn" },
   { href: "https://editorcn.vercel.app", name: "editorcn" },
   { href: "https://mdxcn.dev", name: "mdxcn" },
   { href: "https://snapcn.dev", name: "snapcn" },
